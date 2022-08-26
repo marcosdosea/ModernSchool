@@ -6345,7 +6345,7 @@
 											"top": 163.5,
 											"width": 109,
 											"height": 13,
-											"text": "Manter atividades"
+											"text": "Manter avaliação"
 										},
 										{
 											"_type": "LabelView",
@@ -6378,7 +6378,7 @@
 									"font": "Arial;13;0",
 									"left": 438,
 									"top": 156.5,
-									"width": 119.814453125,
+									"width": 119,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGAJZl2oZ/yIA8="
@@ -12051,7 +12051,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFElm6BOFNpegQ="
 					},
-					"name": "Manter atividades",
+					"name": "Manter avaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLInclude",
@@ -29683,7 +29683,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "TelaManterAtividade",
+					"name": "TelaManterAvaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -31268,7 +31268,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "Atividade",
+					"name": "Avaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -40875,7 +40875,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "PersistenciaAtividade",
+					"name": "PersistenciaAvaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -71363,7 +71363,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "ControleAtividade",
+					"name": "ControleAvaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -108583,7 +108583,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "UC - Atividade",
+					"name": "UC - Manter Avaliação",
 					"ownedViews": [
 						{
 							"_type": "UMLClassView",
@@ -108628,7 +108628,7 @@
 											"top": 238,
 											"width": 130.431640625,
 											"height": 13,
-											"text": "Atividade"
+											"text": "Avaliação"
 										},
 										{
 											"_type": "LabelView",
@@ -108907,9 +108907,9 @@
 											"font": "Arial;13;1",
 											"left": 205,
 											"top": 253,
-											"width": 126.1787109375,
+											"width": 127.88623046875,
 											"height": 13,
-											"text": "TelaManterAtividade"
+											"text": "TelaManterAvaliação"
 										},
 										{
 											"_type": "LabelView",
@@ -108938,7 +108938,7 @@
 									"font": "Arial;13;0",
 									"left": 200,
 									"top": 246,
-									"width": 136.1787109375,
+									"width": 137.88623046875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGA3Z3fhm4QByc="
@@ -108989,7 +108989,7 @@
 											"font": "Arial;13;0",
 											"left": 205,
 											"top": 276,
-											"width": 126.1787109375,
+											"width": 127.88623046875,
 											"height": 13,
 											"text": "+Inseir()",
 											"horizontalAlignment": 0
@@ -109006,7 +109006,7 @@
 											"font": "Arial;13;0",
 											"left": 205,
 											"top": 291,
-											"width": 126.1787109375,
+											"width": 127.88623046875,
 											"height": 13,
 											"text": "+Alterar()",
 											"horizontalAlignment": 0
@@ -109015,7 +109015,7 @@
 									"font": "Arial;13;0",
 									"left": 200,
 									"top": 271,
-									"width": 136.1787109375,
+									"width": 137.88623046875,
 									"height": 38
 								},
 								{
@@ -109051,7 +109051,7 @@
 							"containerChangeable": true,
 							"left": 200,
 							"top": 192,
-							"width": 136.1787109375,
+							"width": 137.88623046875,
 							"height": 118,
 							"stereotypeDisplay": "icon",
 							"nameCompartment": {
@@ -109112,9 +109112,9 @@
 											"font": "Arial;13;1",
 											"left": 237,
 											"top": 574,
-											"width": 111.95361328125,
+											"width": 113.6611328125,
 											"height": 13,
-											"text": "ControleAtividade"
+											"text": "ControleAvaliação"
 										},
 										{
 											"_type": "LabelView",
@@ -109143,7 +109143,7 @@
 									"font": "Arial;13;0",
 									"left": 232,
 									"top": 567,
-									"width": 121.95361328125,
+									"width": 123.6611328125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGA3Z3q6245oKw="
@@ -109194,7 +109194,7 @@
 											"font": "Arial;13;0",
 											"left": 237,
 											"top": 597,
-											"width": 111.95361328125,
+											"width": 113.6611328125,
 											"height": 13,
 											"text": "+Inserir()",
 											"horizontalAlignment": 0
@@ -109211,7 +109211,7 @@
 											"font": "Arial;13;0",
 											"left": 237,
 											"top": 612,
-											"width": 111.95361328125,
+											"width": 113.6611328125,
 											"height": 13,
 											"text": "+Alterar()",
 											"horizontalAlignment": 0
@@ -109220,7 +109220,7 @@
 									"font": "Arial;13;0",
 									"left": 232,
 									"top": 592,
-									"width": 121.95361328125,
+									"width": 123.6611328125,
 									"height": 38
 								},
 								{
@@ -109256,7 +109256,7 @@
 							"containerChangeable": true,
 							"left": 232,
 							"top": 528,
-							"width": 121.95361328125,
+							"width": 123.6611328125,
 							"height": 103,
 							"stereotypeDisplay": "icon",
 							"nameCompartment": {
@@ -109305,7 +109305,7 @@
 											"font": "Arial;13;0",
 											"left": 613,
 											"top": 533,
-											"width": 135.1162109375,
+											"width": 136.82373046875,
 											"height": 13,
 											"text": "«entity collection»"
 										},
@@ -109318,9 +109318,9 @@
 											"font": "Arial;13;1",
 											"left": 613,
 											"top": 548,
-											"width": 135.1162109375,
+											"width": 136.82373046875,
 											"height": 13,
-											"text": "PersistenciaAtividade"
+											"text": "PersistenciaAvaliação"
 										},
 										{
 											"_type": "LabelView",
@@ -109349,7 +109349,7 @@
 									"font": "Arial;13;0",
 									"left": 608,
 									"top": 528,
-									"width": 145.1162109375,
+									"width": 146.82373046875,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGA3Z4AiG5jKOE="
@@ -109376,7 +109376,7 @@
 									"font": "Arial;13;0",
 									"left": 608,
 									"top": 566,
-									"width": 145.1162109375,
+									"width": 146.82373046875,
 									"height": 10
 								},
 								{
@@ -109401,7 +109401,7 @@
 											"font": "Arial;13;0",
 											"left": 613,
 											"top": 581,
-											"width": 135.1162109375,
+											"width": 136.82373046875,
 											"height": 13,
 											"text": "+Salvar()",
 											"horizontalAlignment": 0
@@ -109410,7 +109410,7 @@
 									"font": "Arial;13;0",
 									"left": 608,
 									"top": 576,
-									"width": 145.1162109375,
+									"width": 146.82373046875,
 									"height": 23
 								},
 								{
@@ -109446,7 +109446,7 @@
 							"containerChangeable": true,
 							"left": 608,
 							"top": 528,
-							"width": 145.1162109375,
+							"width": 146.82373046875,
 							"height": 71,
 							"nameCompartment": {
 								"$ref": "AAAAAAGA3Z4AiG5iJyE="
@@ -109485,7 +109485,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 294,
+									"left": 295,
 									"top": 410,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -109506,7 +109506,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 309,
+									"left": 310,
 									"top": 409,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -109527,7 +109527,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 265,
+									"left": 266,
 									"top": 413,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -109548,7 +109548,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 288,
+									"left": 289,
 									"top": 328,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -109569,7 +109569,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 302,
+									"left": 303,
 									"top": 330,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -109589,7 +109589,7 @@
 										"$ref": "AAAAAAGA3aNfHW7qEZ4="
 									},
 									"font": "Arial;13;0",
-									"left": 258,
+									"left": 259,
 									"top": 326,
 									"width": 6.5,
 									"height": 13,
@@ -109612,7 +109612,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 301,
+									"left": 302,
 									"top": 493,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -109632,7 +109632,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 314,
+									"left": 315,
 									"top": 490,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -109651,7 +109651,7 @@
 										"$ref": "AAAAAAGA3aNfHW7rRyA="
 									},
 									"font": "Arial;13;0",
-									"left": 270,
+									"left": 271,
 									"top": 500,
 									"width": 7.22998046875,
 									"height": 13,
@@ -109699,7 +109699,7 @@
 								"$ref": "AAAAAAGA3Z3fhm4O3lM="
 							},
 							"lineStyle": 1,
-							"points": "272:310;288:527",
+							"points": "273:310;289:527",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGA3aNfH27uiU4="
@@ -109756,7 +109756,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 479,
+									"left": 480,
 									"top": 550,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -109777,7 +109777,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 478,
+									"left": 479,
 									"top": 535,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -109798,7 +109798,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 480,
+									"left": 481,
 									"top": 579,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -109819,7 +109819,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 379,
+									"left": 381,
 									"top": 553,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -109840,7 +109840,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 381,
+									"left": 383,
 									"top": 540,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -109860,7 +109860,7 @@
 										"$ref": "AAAAAAGA3aOXnm871gs="
 									},
 									"font": "Arial;13;0",
-									"left": 373,
+									"left": 375,
 									"top": 581,
 									"width": 7.22998046875,
 									"height": 13,
@@ -109970,7 +109970,7 @@
 								"$ref": "AAAAAAGA3Z3q6243/0A="
 							},
 							"lineStyle": 1,
-							"points": "354:576;607:566",
+							"points": "356:576;607:566",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGA3aOXoG8/Ki4="
@@ -110027,7 +110027,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 479,
+									"left": 480,
 									"top": 236,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -110048,7 +110048,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 480,
+									"left": 481,
 									"top": 221,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -110069,7 +110069,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 478,
+									"left": 479,
 									"top": 265,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -110088,7 +110088,7 @@
 								"$ref": "AAAAAAGA3Z3fhm4O3lM="
 							},
 							"lineStyle": 1,
-							"points": "336:252;623:263",
+							"points": "338:252;623:263",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGA3aPTRG+dpP8="
@@ -110121,7 +110121,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 478,
+									"left": 479,
 									"top": 407,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -110142,7 +110142,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 469,
+									"left": 470,
 									"top": 395,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -110163,7 +110163,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 497,
+									"left": 498,
 									"top": 430,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -110182,7 +110182,7 @@
 								"$ref": "AAAAAAGA3Z3q6243/0A="
 							},
 							"lineStyle": 1,
-							"points": "354:530;623:320",
+							"points": "356:530;623:320",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGA3aPmLG/A+r0="
@@ -110833,7 +110833,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxnG7qRNvP5M="
 					},
-					"name": "Collaboration Manter Atividade",
+					"name": "Collaboration Manter Avaliação",
 					"ownedElements": [
 						{
 							"_type": "UMLInteraction",
@@ -110868,9 +110868,9 @@
 														"$ref": "AAAAAAGA3aW9WnGDFR0="
 													},
 													"font": "Arial;13;0",
-													"left": 22.55908203125,
+													"left": 24.72998046875,
 													"top": 5,
-													"width": 130.21923828125,
+													"width": 144.79345703125,
 													"height": 13,
 													"text": "SequenceDiagramInserir"
 												},
@@ -110883,7 +110883,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 12.55908203125,
+													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
 												}
@@ -111055,7 +111055,7 @@
 															"top": 87,
 															"width": 186.85595703125,
 															"height": 13,
-															"text": ": TelaManterAtividade"
+															"text": ": TelaManterAvaliação"
 														},
 														{
 															"_type": "LabelView",
@@ -111172,7 +111172,7 @@
 															"top": 195,
 															"width": 119.18994140625,
 															"height": 13,
-															"text": ": Atividade"
+															"text": ": Avaliação"
 														},
 														{
 															"_type": "LabelView",
@@ -111289,7 +111289,7 @@
 															"top": 87,
 															"width": 172.630859375,
 															"height": 13,
-															"text": ": ControleAtividade"
+															"text": ": ControleAvaliação"
 														},
 														{
 															"_type": "LabelView",
@@ -111406,7 +111406,7 @@
 															"top": 47,
 															"width": 205.79345703125,
 															"height": 13,
-															"text": ": PersistenciaAtividade"
+															"text": ": PersistenciaAvaliação"
 														},
 														{
 															"_type": "LabelView",
