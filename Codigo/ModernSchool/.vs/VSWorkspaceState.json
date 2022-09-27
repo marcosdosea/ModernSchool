@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Core",
+    "\\ModernSchool",
+    "\\ModernSchool\\Controllers",
+    "\\ModernSchool\\Models",
+    "\\ModernSchool\\Views"
+  ],
+  "SelectedNode": "\\ModernSchool\\Models\\ErrorViewModel.cs",
+  "PreviewInSolutionExplorer": false
+}
