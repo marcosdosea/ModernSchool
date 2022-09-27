@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchool", "ModernSchool\ModernSchool.csproj", "{EED89634-6670-4ED0-88B7-D52212961A48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchoolWEB", "ModernSchool\ModernSchoolWEB.csproj", "{EED89634-6670-4ED0-88B7-D52212961A48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{5463988C-4A75-4996-B77C-2D349EE05240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{5463988C-4A75-4996-B77C-2D349EE05240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{A43F54EA-20E1-4D62-AB1A-26F148A06BC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5463988C-4A75-4996-B77C-2D349EE05240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5463988C-4A75-4996-B77C-2D349EE05240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5463988C-4A75-4996-B77C-2D349EE05240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A43F54EA-20E1-4D62-AB1A-26F148A06BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A43F54EA-20E1-4D62-AB1A-26F148A06BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A43F54EA-20E1-4D62-AB1A-26F148A06BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A43F54EA-20E1-4D62-AB1A-26F148A06BC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
