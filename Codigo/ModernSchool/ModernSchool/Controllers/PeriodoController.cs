@@ -22,16 +22,16 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
             var listaPeriodos = _periodoService.GetAll();
-            var listaPeriodoModel = _mapper.Map<List<PeriodoViewModel>>(listaPeriodos);
-            return View(listaPeriodoModel);
+            var listaPeriodosModel = _mapper.Map<List<PeriodoViewModel>>(listaPeriodos);
+            return View(listaPeriodosModel);
         }
 
         // GET: PeriodoController/Details/5
         public ActionResult Details(int id)
         {
             Periodo periodo = _periodoService.Get(id);
-            PeriodoViewModel peridoModel = _mapper.Map<PeriodoViewModel>(periodo);
-            return View(peridoModel);
+            PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
+            return View(periodoModel);
         }
 
         // GET: PeriodoController/Create
@@ -45,23 +45,20 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PeriodoViewModel periodoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var periodo = _mapper.Map<Periodo>(periodoModel);
                 _periodoService.Create(periodo);
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: PeriodoController/Edit/5
         public ActionResult Edit(int id)
         {
-            Periodo autor = _periodoService.Get(id);
-            PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(autor);
+            Periodo periodo = _periodoService.Get(id);
+            PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
             return View(periodoModel);
         }
 
@@ -91,15 +88,8 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, PeriodoViewModel periodoViewModel)
         {
-            try
-            {
-                _periodoService.Delete(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _periodoService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
