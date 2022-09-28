@@ -4,7 +4,7 @@ using ModernSchoolWEB.Models;
 
 namespace ModernSchoolWEB.Mappers
 {
-    public class PeriodoProfile: Profile
+    public class PeriodoProfile : Profile
     {
         public PeriodoProfile()
         {
