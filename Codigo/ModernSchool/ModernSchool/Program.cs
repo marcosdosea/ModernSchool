@@ -19,6 +19,18 @@ namespace ModernSchoolWEB
             builder.Services.AddDbContext<ModernSchoolContext>(
                 options => options.UseMySQL(builder.Configuration.GetConnectionString("ModernSchoolDatabase")));
             builder.Services.AddTransient<IPeriodoService, PeriodoService>();
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            //Coloquei na linha abaixo
             builder.Services.AddTransient<IGovernoService, GovernoService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
