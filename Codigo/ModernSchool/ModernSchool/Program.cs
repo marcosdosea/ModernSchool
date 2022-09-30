@@ -3,7 +3,7 @@ using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using Service;
 
-namespace ModernSchoolWEB
+namespace ModernSchool
 {
     public class Program
     {
@@ -20,8 +20,9 @@ namespace ModernSchoolWEB
                 options => options.UseMySQL(builder.Configuration.GetConnectionString("ModernSchoolDatabase")));
             builder.Services.AddTransient<IPeriodoService, PeriodoService>();
             builder.Services.AddTransient<IComponenteService, ComponenteService>();
+            builder.Services.AddTransient<IAnoLetivoService, AnoLetivoService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+            
             var app = builder.Build();
 
 

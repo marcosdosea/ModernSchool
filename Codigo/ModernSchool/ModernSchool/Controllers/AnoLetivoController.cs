@@ -1,20 +1,37 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Core;
+using Core.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModernSchool.Models;
+using ModernSchoolWEB.Models;
+using Service;
 
 namespace ModernSchool.Controllers
 {
     public class AnoLetivoController : Controller
     {
+        private readonly IAnoLetivoService _anoLetivoService;
+        private readonly IMapper _mapper;
+        public AnoLetivoController(IAnoLetivoService anoLetivoService, IMapper mapper)
+        {
+            _anoLetivoService = anoLetivoService;
+            _mapper = mapper;
+        }
         // GET: AnoLetivoController
         public ActionResult Index()
         {
-            return View();
+            var listaAnoLetivos = _anoLetivoService.GetAll();
+            var listaAnoLetivosModel = _mapper.Map<List<AnoLetivoViewModel>>(listaAnoLetivos);
+            return View(listaAnoLetivosModel);
         }
 
         // GET: AnoLetivoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Anoletivo anoLetivo = _anoLetivoService.Get(id);
+            AnoLetivoViewModel AnoLetivoModel = _mapper.Map<AnoLetivoViewModel>(anoLetivo);
+            return View(AnoLetivoModel);
         }
 
         // GET: AnoLetivoController/Create
@@ -26,58 +43,52 @@ namespace ModernSchool.Controllers
         // POST: AnoLetivoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(AnoLetivoViewModel anoLetivoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var anoLetivo = _mapper.Map<Anoletivo>(anoLetivoModel);
+                _anoLetivoService.Create(anoLetivo);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AnoLetivoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Anoletivo anoLetivo = _anoLetivoService.Get(id);
+            AnoLetivoViewModel anoLetivoModel = _mapper.Map<AnoLetivoViewModel>(anoLetivo);
+            return View(anoLetivoModel);
         }
 
         // POST: AnoLetivoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, AnoLetivoViewModel anoLetivoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var anoLetivo = _mapper.Map<Anoletivo>(anoLetivoModel);
+                _anoLetivoService.Edit(anoLetivo);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AnoLetivoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Anoletivo anoLetivo = _anoLetivoService.Get(id);
+            AnoLetivoViewModel anoLetivoModel = _mapper.Map<AnoLetivoViewModel>(anoLetivo);
+            return View(anoLetivoModel);
         }
 
         // POST: AnoLetivoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, AnoLetivoViewModel anoLetivoModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _anoLetivoService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

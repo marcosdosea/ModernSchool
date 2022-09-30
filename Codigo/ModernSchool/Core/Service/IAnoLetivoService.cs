@@ -11,7 +11,7 @@ namespace Core.Service
         int Create(Anoletivo anoletivo);
         void Edit(Anoletivo anoletivo);
         void Delete(int anoletivo);
-        Periodo Get(int anoletivo);
-        IEnumerable<Periodo> GetAll();
+        Anoletivo Get(int anoletivo);
+        IEnumerable<Anoletivo> GetAll();
     }
 }
