@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ModernSchool.Models.CargoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.IdCargo }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdCargo }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdCargo })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
