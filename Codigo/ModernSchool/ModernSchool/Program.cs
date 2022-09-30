@@ -31,6 +31,7 @@ namespace ModernSchoolWEB
             
             
             //Coloquei na linha abaixo
+            builder.Services.AddTransient<IComponenteService, ComponenteService>();
             builder.Services.AddTransient<IGovernoService, GovernoService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
