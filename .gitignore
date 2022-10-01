@@ -17,7 +17,6 @@
 ####################
 # VS Upgrade stuff #
 ####################
-.vs
 UpgradeLog.XML
 _UpgradeReport_Files/
 ###############
@@ -74,3 +73,4 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+/Codigo/ModernSchool/.vs
