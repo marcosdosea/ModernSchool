@@ -1,9 +1,9 @@
 ﻿using ModernSchoolWEB.Models;
 using AutoMapper;
 using Core;
-using ModernSchool.Models;
+using ModernSchoolWEB.Models;
 
-namespace ModernSchool.Mappers
+namespace ModernSchoolWEB.Mappers
 {
     public class AvaliacaoProfile : Profile
     {

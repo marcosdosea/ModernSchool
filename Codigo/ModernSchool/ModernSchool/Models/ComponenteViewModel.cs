@@ -1,4 +1,4 @@
-﻿namespace ModernSchool.Models
+﻿namespace ModernSchoolWEB.Models
 {
     public class ComponenteViewModel
     {

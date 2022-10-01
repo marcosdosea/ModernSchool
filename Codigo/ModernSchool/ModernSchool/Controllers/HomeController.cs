@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ModernSchool.Models;
+using ModernSchoolWEB.Models;
 using System.Diagnostics;
 
-namespace ModernSchool.Controllers
+namespace ModernSchoolWEB.Controllers
 {
     public class HomeController : Controller
     {

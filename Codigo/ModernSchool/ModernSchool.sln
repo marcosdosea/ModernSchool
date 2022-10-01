@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchool", "ModernSchool\ModernSchool.csproj", "{EED89634-6670-4ED0-88B7-D52212961A48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchoolWEB", "ModernSchool\ModernSchoolWEB.csproj", "{EED89634-6670-4ED0-88B7-D52212961A48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{5463988C-4A75-4996-B77C-2D349EE05240}"
 EndProject
