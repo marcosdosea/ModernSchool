@@ -19,10 +19,22 @@ namespace ModernSchoolWEB
             builder.Services.AddDbContext<ModernSchoolContext>(
                 options => options.UseMySQL(builder.Configuration.GetConnectionString("ModernSchoolDatabase")));
             builder.Services.AddTransient<IPeriodoService, PeriodoService>();
-
             builder.Services.AddTransient<IComponenteService, ComponenteService>();
             builder.Services.AddTransient<ICurriculoService, CurriculoService>();
+            builder.Services.AddTransient<IAvaliacaoService, AvaliacaoService>();
             builder.Services.AddTransient<ICargoService, CargoService>();
+            builder.Services.AddTransient<IGovernoService, GovernoService>();
+            //builder.Services.AddTransient<IPessoaService, PessoaService>();
+            //builder.Services.AddTransient<ITurmaService, TurmaService>();
+            //builder.Services.AddTransient<IUnidadeTematica, UnidadeTematica>();
+            //builder.Services.AddTransient<IAnoLetivoService, AnoLetivoService>();
+            //builder.Services.AddTransient<IComunicacaoService, ComunicacaoSevice>();
+            //builder.Services.AddTransient<IDiarioDeClasseService, DiarioDeClasseService>();
+            //builder.Services.AddTransient<IEscolaService, EscolaService>();
+            //builder.Services.AddTransient<IFrequenciaService, FrequenciaService>();
+            //builder.Services.AddTransient<IGradeHorarioService, GradeHorarioService>();
+            //builder.Services.AddTransient<IHabilidadeService, HabilidadeService>();
+            //builder.Services.AddTransient<IObjetoDeConhecimentoService, ObjetoDeConhecimentoService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();

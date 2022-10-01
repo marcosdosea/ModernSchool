@@ -5,7 +5,7 @@ using AutoMapper;
 using ModernSchoolWEB.Models;
 using Core;
 
-namespace ModernSchool.Controllers
+namespace ModernSchoolWEB.Controllers
 {
     public class GovernoController : Controller
     {

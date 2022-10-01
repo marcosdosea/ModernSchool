@@ -34,7 +34,7 @@ namespace Service
         /// <param name="idCargo">Id do cargo</param>
         public void Delete(int idCargo)
         {
-            var _cargo = _context.Curriculos.Find(idCargo);
+            var _cargo = _context.Cargos.Find(idCargo);
             _context.Remove(_cargo);
             _context.SaveChanges();
         }
