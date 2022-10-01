@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ModernSchool.Models.AnoLetivoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoLetivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEscola)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFim)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{
+    if(Model != null)
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoLetivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEscola)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFim)
+                </td>
+                <td>
+                            @Html.ActionLink("Edit", "Edit", new { id=item.AnoLetivo }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.AnoLetivo }) |
+                            @Html.ActionLink("Delete", "Delete", new {  id=item.AnoLetivo })
+                </td>
+            </tr>
+}
+}
+    </tbody>
+</table>
