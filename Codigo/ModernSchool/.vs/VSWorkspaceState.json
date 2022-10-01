@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Core",
+    "\\Core\\bin\\Debug",
+    "\\Core\\bin\\Debug\\net6.0",
     "\\ModernSchool",
     "\\ModernSchool\\Controllers",
-    "\\ModernSchool\\Models",
-    "\\ModernSchool\\Views"
+    "\\ModernSchool\\Views",
+    "\\ModernSchool\\Views\\Periodo"
   ],
-  "SelectedNode": "\\ModernSchool\\Models\\ErrorViewModel.cs",
+  "SelectedNode": "\\ModernSchool.sln",
   "PreviewInSolutionExplorer": false
 }
