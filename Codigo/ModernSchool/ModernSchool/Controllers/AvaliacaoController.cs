@@ -48,16 +48,13 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AvaliacaoViewModel avaliacaoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);
                 _avaliacaoService.Create(avaliacao);
-                return RedirectToAction(nameof(Index));
+
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AvaliacaoController1/Edit/5
@@ -74,17 +71,12 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, AvaliacaoViewModel avaliacaoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);
                 _avaliacaoService.Edit(avaliacao);
-
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AvaliacaoController1/Delete/5
@@ -101,15 +93,13 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, AvaliacaoViewModel avaliacaoModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 _avaliacaoService.Delete(id);
-                return RedirectToAction(nameof(Index));
+                
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }
