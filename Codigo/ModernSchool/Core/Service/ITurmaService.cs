@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    internal interface ITurmaService
+    public interface ITurmaService
     {
-        public interface ITurmaService
-        {
             int Create(Turma turma);
             void Edit(Turma turma);
             void Delete(int id);
             Turma Get(int id);
             IEnumerable<Turma> GetAll();
-        }
     }
 }
