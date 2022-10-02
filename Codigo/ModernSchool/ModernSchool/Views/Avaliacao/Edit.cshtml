@@ -22,6 +22,11 @@
                 <span asp-validation-for="HorarioEntrega" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TipoDeAtividade" class="control-label"></label>
+                <input asp-for="TipoDeAtividade" class="form-control" />
+                <span asp-validation-for="TipoDeAtividade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Peso" class="control-label"></label>
                 <input asp-for="Peso" class="form-control" />
                 <span asp-validation-for="Peso" class="text-danger"></span>
@@ -30,6 +35,21 @@
                 <label asp-for="Avaliativo" class="control-label"></label>
                 <input asp-for="Avaliativo" class="form-control" />
                 <span asp-validation-for="Avaliativo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTurma" class="control-label"></label>
+                <input asp-for="IdTurma" class="form-control" />
+                <span asp-validation-for="IdTurma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdComponente" class="control-label"></label>
+                <input asp-for="IdComponente" class="form-control" />
+                <span asp-validation-for="IdComponente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPeriodo" class="control-label"></label>
+                <input asp-for="IdPeriodo" class="form-control" />
+                <span asp-validation-for="IdPeriodo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
