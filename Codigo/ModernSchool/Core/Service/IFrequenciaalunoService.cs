@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface IFrequenciaService
+    public interface IFrequenciaalunoService
     {
         int Create(Frequenciaaluno frequencia);
         void Edit(Frequenciaaluno frequencia);

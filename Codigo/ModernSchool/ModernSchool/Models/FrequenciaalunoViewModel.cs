@@ -1,6 +1,6 @@
 ﻿namespace ModernSchoolWEB.Models
 {
-    public class FrequenciaViewModel
+    public class FrequenciaalunoViewModel
     {
         public int IdPessoa { get; set; }
         public int IdDiarioDeClasse { get; set; }

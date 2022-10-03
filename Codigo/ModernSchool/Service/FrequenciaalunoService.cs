@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class FrequenciaService : IFrequenciaService
+    public class FrequenciaalunoService : IFrequenciaalunoService
     {
         private readonly ModernSchoolContext _context;
 
-        public FrequenciaService(ModernSchoolContext context)
+        public FrequenciaalunoService(ModernSchoolContext context)
         {
             _context = context;
         }

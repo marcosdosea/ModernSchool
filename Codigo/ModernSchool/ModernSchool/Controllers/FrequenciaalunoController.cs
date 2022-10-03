@@ -7,12 +7,12 @@ using ModernSchoolWEB.Models;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class FrequenciaController : Controller
+    public class FrequenciaalunoController : Controller
     {
-        private readonly IFrequenciaService _frequenciaService;
+        private readonly IFrequenciaalunoService _frequenciaService;
         private readonly IMapper _mapper;
 
-        public FrequenciaController(IFrequenciaService frequenciaService, IMapper mapper)
+        public FrequenciaalunoController(IFrequenciaalunoService frequenciaService, IMapper mapper)
         {
             _frequenciaService = frequenciaService;
             _mapper = mapper;
@@ -22,7 +22,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
             var listaFrequecias = _frequenciaService.GetAll();
-            var listaFrequenciaModel = _mapper.Map<List<FrequenciaViewModel>>(listaFrequecias);
+            var listaFrequenciaModel = _mapper.Map<List<FrequenciaalunoViewModel>>(listaFrequecias);
             return View(listaFrequenciaModel);
         }
 
@@ -30,7 +30,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Details(int id)
         {
             Frequenciaaluno frequencia = _frequenciaService.Get(id);
-            FrequenciaViewModel frequenciaModel = _mapper.Map<FrequenciaViewModel>(frequencia);
+            FrequenciaalunoViewModel frequenciaModel = _mapper.Map<FrequenciaalunoViewModel>(frequencia);
             return View(frequenciaModel);
         }
 
@@ -43,7 +43,7 @@ namespace ModernSchoolWEB.Controllers
         // POST: FrequenciaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FrequenciaViewModel frequeciaModel)
+        public ActionResult Create(FrequenciaalunoViewModel frequeciaModel)
         {
             if (ModelState.IsValid)
             {
@@ -58,14 +58,14 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Edit(int id)
         {
             Frequenciaaluno frequencia = _frequenciaService.Get(id);
-            FrequenciaViewModel frequenciaModel = _mapper.Map<FrequenciaViewModel>(frequencia);
+            FrequenciaalunoViewModel frequenciaModel = _mapper.Map<FrequenciaalunoViewModel>(frequencia);
             return View(frequenciaModel);
         }
 
         // POST: FrequenciaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, FrequenciaViewModel frequenciaViewModel)
+        public ActionResult Edit(int id, FrequenciaalunoViewModel frequenciaViewModel)
         {
             if (ModelState.IsValid)
             {
