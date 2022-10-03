@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ModernSchoolWEB.Models.ComunicacaoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnviarAlunos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnviarResponsaveis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mensagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTurma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdComponente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnviarAlunos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnviarResponsaveis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mensagem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTurma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdComponente)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -41,7 +41,7 @@ namespace Service
         /// <summary>
         /// Editar um cargo no banco de dados
         /// </summary>
-        /// <param name="cargo">Dados do curriculo</param>
+        /// <param name="cargo">Dados do cargo</param>
         public void Edit(Cargo cargo)
         {
             _context.Update(cargo);

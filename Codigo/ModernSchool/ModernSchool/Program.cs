@@ -28,7 +28,7 @@ namespace ModernSchoolWEB
             builder.Services.AddTransient<ITurmaService, TurmaService>();
             //builder.Services.AddTransient<IUnidadeTematica, UnidadeTematica>();
             builder.Services.AddTransient<IAnoLetivoService, AnoLetivoService>();
-            //builder.Services.AddTransient<IComunicacaoService, ComunicacaoSevice>();
+            builder.Services.AddTransient<IComunicacaoService, ComunicacaoService>();
             //builder.Services.AddTransient<IDiarioDeClasseService, DiarioDeClasseService>();
             //builder.Services.AddTransient<IEscolaService, EscolaService>();
             //builder.Services.AddTransient<IFrequenciaService, FrequenciaService>();

@@ -8,7 +8,7 @@ namespace ModernSchoolWEB.Mappers
     {
         public CurriculoProfile()
         {
-            CreateMap<CurriculoViewModel, Periodo>().ReverseMap();
+            CreateMap<CurriculoViewModel, Curriculo>().ReverseMap();
         }
     }
 }
