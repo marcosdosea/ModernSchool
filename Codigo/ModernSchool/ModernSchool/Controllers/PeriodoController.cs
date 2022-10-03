@@ -78,8 +78,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Delete/5
         public ActionResult Delete(int id)
         {
-            Periodo autor = _periodoService.Get(id);
-            PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(autor);
+            Periodo periodo = _periodoService.Get(id);
+            PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
             return View(periodoModel);
         }
 
