@@ -7,10 +7,10 @@ namespace ModernSchoolWEB.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public string Municipio { get; set; }
+        public string? Municipio { get; set; }
         [Required]
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
         [Required]
-        public string DependenciaAdministrativa { get; set; }
+        public string? DependenciaAdministrativa { get; set; }
     }
 }
