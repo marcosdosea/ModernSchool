@@ -16,10 +16,22 @@
                 @Html.DisplayNameFor(model => model.HorarioEntrega)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TipoDeAtividade)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Peso)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Avaliativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTurma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdComponente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPeriodo)
             </th>
             <th></th>
         </tr>
@@ -37,13 +49,25 @@
                 @Html.DisplayFor(modelItem => item.HorarioEntrega)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.TipoDeAtividade)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Peso)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Avaliativo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
+                @Html.DisplayFor(modelItem => item.IdTurma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdComponente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPeriodo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.Id })
             </td>
