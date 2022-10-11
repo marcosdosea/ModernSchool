@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModernSchoolWEB.Models;
+using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -17,13 +20,18 @@ namespace ModernSchoolWEB.Controllers
         // GET: EscolaController
         public ActionResult Index()
         {
-            return View();
+            var listaEscola = _escolaService.GetAll();
+            var listaEscolaModel = _mapper.Map<List<EscolaViewModel>>(listaEscola);
+            return View(listaEscolaModel);
         }
 
         // GET: EscolaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Escola escola = _escolaService.Get(id);
+            EscolaViewModel escolaModel = _mapper.Map<EscolaViewModel>(escola);
+            return View(escolaModel);
+            
         }
 
         // GET: EscolaController/Create
@@ -35,58 +43,52 @@ namespace ModernSchoolWEB.Controllers
         // POST: EscolaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(EscolaViewModel escolaViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var escola = _mapper.Map<Escola>(escolaViewModel);
+                _escolaService.Create(escola);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: EscolaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Escola escola = _escolaService.Get(id);
+            EscolaViewModel escolaModel = _mapper.Map<EscolaViewModel>(escola);
+            return View(escolaModel);
         }
 
         // POST: EscolaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EscolaViewModel escolaViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var escola = _mapper.Map<Escola>(escolaViewModel);
+                _escolaService.Edit(escola);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: EscolaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Escola escola = _escolaService.Get(id);
+            EscolaViewModel escolaViewModel = _mapper.Map<EscolaViewModel>(escola);
+            return View(escolaViewModel);
         }
 
         // POST: EscolaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, EscolaViewModel escolaViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _escolaService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

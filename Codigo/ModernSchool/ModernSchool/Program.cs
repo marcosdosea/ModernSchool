@@ -30,7 +30,7 @@ namespace ModernSchoolWEB
             builder.Services.AddTransient<IAnoLetivoService, AnoLetivoService>();
             builder.Services.AddTransient<IComunicacaoService, ComunicacaoService>();
             //builder.Services.AddTransient<IDiarioDeClasseService, DiarioDeClasseService>();
-            //builder.Services.AddTransient<IEscolaService, EscolaService>();
+            builder.Services.AddTransient<IEscolaService, EscolaService>();
             //builder.Services.AddTransient<IFrequenciaService, FrequenciaService>();
             //builder.Services.AddTransient<IGradeHorarioService, GradeHorarioService>();
             //builder.Services.AddTransient<IHabilidadeService, HabilidadeService>();
