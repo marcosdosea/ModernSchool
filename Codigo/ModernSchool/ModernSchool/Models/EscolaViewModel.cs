@@ -22,7 +22,7 @@ namespace ModernSchoolWEB.Models
         public string? Bairro { get; set; }
         [Display(Name = "numero")]
         public short? Numero { get; set; }
-        [Required(ErrorMessage = "Campo requirido")]
+        [Required(ErrorMessage = "Campo governo é obrigatório")]
         public int IdGoverno { get; set; }
     }
 }
