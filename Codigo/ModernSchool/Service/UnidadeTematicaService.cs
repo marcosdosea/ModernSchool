@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class UnidadeTematicaService : IUnidadeTematica
+    public class UnidadeTematicaService : IUnidadeTematicaService
     {
         private readonly ModernSchoolContext _context;
 
@@ -23,7 +23,7 @@ namespace Service
         /// </summary>
         /// <param name="unidadetematica"></param>
         /// <returns></returns>
-        int IUnidadeTematica.Create(Unidadetematica unidadetematica)
+        int IUnidadeTematicaService.Create(Unidadetematica unidadetematica)
         {
             _context.Add(unidadetematica);
             _context.SaveChanges();
@@ -34,7 +34,7 @@ namespace Service
         /// Deletar uma unidade tematica no banco de dados
         /// </summary>
         /// <param name="id"></param>
-        void IUnidadeTematica.Delete(int id)
+        void IUnidadeTematicaService.Delete(int id)
         {
             var _unidadetematica = _context.Unidadetematicas.Find(id);
             _context.Remove(_unidadetematica);
@@ -45,7 +45,7 @@ namespace Service
         /// Editar uma unidade tematica no banco de dados
         /// </summary>
         /// <param name="unidadetematica"></param>
-        void IUnidadeTematica.Edit(Unidadetematica unidadetematica)
+        void IUnidadeTematicaService.Edit(Unidadetematica unidadetematica)
         {
             _context.Update(unidadetematica);
             _context.SaveChanges();
@@ -56,7 +56,7 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Turma IUnidadeTematica.Get(int id)
+        Turma IUnidadeTematicaService.Get(int id)
         {
             return _context.Turmas.Find(id);
         }
@@ -65,7 +65,7 @@ namespace Service
         /// Consultar todas as unidades tematicas no banco de dados
         /// </summary>
         /// <returns>Dados de todas as unidades tematicas</returns>
-        IEnumerable<Unidadetematica> IUnidadeTematica.GetAll()
+        IEnumerable<Unidadetematica> IUnidadeTematicaService.GetAll()
         {
             return _context.Unidadetematicas.AsNoTracking();
         }

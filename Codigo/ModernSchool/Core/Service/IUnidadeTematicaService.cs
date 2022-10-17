@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface IUnidadeTematica
+    public interface IUnidadeTematicaService
     {
         int Create(Unidadetematica unidadetematica);
         void Edit(Unidadetematica unidadetematica);
