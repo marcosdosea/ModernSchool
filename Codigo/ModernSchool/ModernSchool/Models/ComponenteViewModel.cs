@@ -5,7 +5,7 @@ namespace ModernSchoolWEB.Models
     public class ComponenteViewModel
     {
         [Display(Name = "Código")]
-        [Required(ErrorMessage = "Código do autor é obrigatório")]
+        [Required(ErrorMessage = "Código do componente é obrigatório")]
         [Key]
         public int id { get; set; }
         [Required(ErrorMessage = "Campo requerido")]
