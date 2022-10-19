@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace Core.Service
             void Delete(int id);
             Turma Get(int id);
             IEnumerable<Turma> GetAll();
+            IEnumerable<EscolaProfessorDTO> EscolaVinculadaProfessor();
     }
 }
