@@ -11,7 +11,7 @@ namespace Core.Service
         int Create(Unidadetematica unidadetematica);
         void Edit(Unidadetematica unidadetematica);
         void Delete(int id);
-        Turma Get(int id);
+        Unidadetematica Get(int id);
         IEnumerable<Unidadetematica> GetAll();
     }
 }

@@ -56,9 +56,9 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Turma IUnidadeTematicaService.Get(int id)
+        Unidadetematica IUnidadeTematicaService.Get(int id)
         {
-            return _context.Turmas.Find(id);
+            return _context.Unidadetematicas.Find(id);
         }
 
         /// <summary>
