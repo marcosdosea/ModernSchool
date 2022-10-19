@@ -107,7 +107,13 @@ namespace ModernSchool.Controllers.Tests
 
         private AnoLetivoViewModel GetNewAnoLetivo()
         {
-            throw new NotImplementedException();
+            return new AnoLetivoViewModel
+            {
+                AnoLetivo = 2022,
+                DataInicio = DateTime.Parse("2022-01-01"),
+                DataFim = DateTime.Parse("2022-01-01"),
+                IdEscola = 1
+            };
         }
 
         [TestMethod()]
@@ -128,18 +134,13 @@ namespace ModernSchool.Controllers.Tests
         public void EditTest_Post()
         {
             // Act
-            var result = controller.Edit(GetTargetAnoLetivoViewModel().Id, GetTargetAnoLetivoViewModel());
+            var result = controller.Edit(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
             RedirectToActionResult redirectToActionResult = (RedirectToActionResult)result;
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
-        }
-
-        private object GetTargetAnoLetivoViewModel()
-        {
-            throw new NotImplementedException();
         }
 
         [TestMethod()]
@@ -160,7 +161,7 @@ namespace ModernSchool.Controllers.Tests
         public void DeleteTest_Post()
         {
             // Act
-            var result = controller.Delete(GetTargetAnoLetivoViewModel().Id, GetTargetAnoLetivoViewModel());
+            var result = controller.Delete(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -168,14 +169,55 @@ namespace ModernSchool.Controllers.Tests
             Assert.IsNull(redirectToActionResult.ControllerName);
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
+
         private Anoletivo GetTargetAnoLetivo()
         {
-            throw new NotImplementedException();
+            return new Anoletivo
+            {
+                AnoLetivo = 2022,
+                DataInicio = DateTime.Parse("2022-01-01"),
+                DataFim = DateTime.Parse("2022-11-11"),
+                IdEscola = 1
+            };
         }
 
         private IEnumerable<Anoletivo> GetTestAnosLetivos()
         {
-            throw new NotImplementedException();
+            return new List<Anoletivo>
+            {
+                 new Anoletivo
+                {
+                    AnoLetivo = 2022,
+                    DataInicio =  DateTime.Parse("2022-01-01"),
+                    DataFim =  DateTime.Parse("2022-11-11"),
+                    IdEscola = 1
+                },
+                new Anoletivo
+                {
+                    AnoLetivo = 2023,
+                    DataInicio =  DateTime.Parse("2023-01-01"),
+                    DataFim =  DateTime.Parse("2023-01-01"),
+                    IdEscola = 1
+                },
+                new Anoletivo
+                {
+                    AnoLetivo = 2024,
+                    DataInicio =  DateTime.Parse("2024-01-01"),
+                    DataFim =  DateTime.Parse("2024-11-11"),
+                    IdEscola = 1
+                }
+            };
+        }
+
+         private AnoLetivoViewModel GetTargetAnoLetivoViewModel()
+        {
+            return new AnoLetivoViewModel
+            {
+                AnoLetivo = 2023,
+                DataInicio = DateTime.Parse("2023-01-01"),
+                DataFim = DateTime.Parse("2023-11-11"),
+                IdEscola = 1
+            };
         }
     }
 }
