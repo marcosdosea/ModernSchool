@@ -62,7 +62,7 @@ Sistema de automação de escolas municipais
       <a href="https://github.com/gilmariosantos1" target="_blank">
         <img style="border-radius:100px;" src="https://avatars.githubusercontent.com/u/12619577?v=4" target="_blank"  width="100px;" alt="Foto de Gilmario no GitHub"/><br>
         <sub>
-          <b>Lauro Santana</b>
+          <b>Gilmario</b>
           <p>Desenvolvedor</p>
         </sub>
       </a>
