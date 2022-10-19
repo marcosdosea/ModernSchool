@@ -110,8 +110,8 @@ namespace ModernSchool.Controllers.Tests
             return new AnoLetivoViewModel
             {
                 AnoLetivo = 2022,
-                DataInicio = DateTime.Parse("01/01/2022"),
-                DataFim = DateTime.Parse("11/11/2022"),
+                DataInicio = DateTime.Parse("2022-01-01"),
+                DataFim = DateTime.Parse("2022-01-01"),
                 IdEscola = 1
             };
         }
@@ -175,8 +175,8 @@ namespace ModernSchool.Controllers.Tests
             return new Anoletivo
             {
                 AnoLetivo = 2022,
-                DataInicio = DateTime.Parse("01/01/2022"),
-                DataFim = DateTime.Parse("11/11/2022"),
+                DataInicio = DateTime.Parse("2022-01-01"),
+                DataFim = DateTime.Parse("2022-11-11"),
                 IdEscola = 1
             };
         }
@@ -188,22 +188,22 @@ namespace ModernSchool.Controllers.Tests
                  new Anoletivo
                 {
                     AnoLetivo = 2022,
-                    DataInicio =  DateTime.Parse("01/01/2022"),
-                    DataFim =  DateTime.Parse("11/11/2022"),
+                    DataInicio =  DateTime.Parse("2022-01-01"),
+                    DataFim =  DateTime.Parse("2022-11-11"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
                     AnoLetivo = 2023,
-                    DataInicio =  DateTime.Parse("01/01/2023"),
-                    DataFim =  DateTime.Parse("11/11/2023"),
+                    DataInicio =  DateTime.Parse("2023-01-01"),
+                    DataFim =  DateTime.Parse("2023-01-01"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
                     AnoLetivo = 2024,
-                    DataInicio =  DateTime.Parse("01/01/2024"),
-                    DataFim =  DateTime.Parse("11/11/2024"),
+                    DataInicio =  DateTime.Parse("2024-01-01"),
+                    DataFim =  DateTime.Parse("2024-11-11"),
                     IdEscola = 1
                 }
             };
@@ -214,8 +214,8 @@ namespace ModernSchool.Controllers.Tests
             return new AnoLetivoViewModel
             {
                 AnoLetivo = 2023,
-                DataInicio = DateTime.Parse("01/01/2023"),
-                DataFim = DateTime.Parse("11/11/2023"),
+                DataInicio = DateTime.Parse("2023-01-01"),
+                DataFim = DateTime.Parse("2023-11-11"),
                 IdEscola = 1
             };
         }

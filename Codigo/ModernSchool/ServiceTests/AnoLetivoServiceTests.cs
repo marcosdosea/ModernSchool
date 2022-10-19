@@ -16,7 +16,7 @@ namespace Service.Tests
     {
         private ModernSchoolContext _context;
         private IAnoLetivoService _anoLetivoService;
-        [TestMethod()]
+        [TestInitialize]
         public void Initialize()
         {
             //Arrange
@@ -29,9 +29,9 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var anoletivos = new List<Anoletivo>
                 {
-                    new Anoletivo { AnoLetivo = 2022, DataInicio = DateTime.Parse("01/01/2022"), DataFim = DateTime.Parse("11/11/2022"), IdEscola = 1},
-                    new Anoletivo { AnoLetivo = 2023, DataInicio = DateTime.Parse("01/01/2023"), DataFim = DateTime.Parse("11/11/2023"), IdEscola = 1},
-                    new Anoletivo { AnoLetivo = 2024, DataInicio = DateTime.Parse("01/01/2024"), DataFim = DateTime.Parse("11/11/2024"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2022, DataInicio = DateTime.Parse("2022-01-01"), DataFim = DateTime.Parse("2022-11-11"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2023, DataInicio = DateTime.Parse("2023-01-01"), DataFim = DateTime.Parse("2023-11-11"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2024, DataInicio = DateTime.Parse("2024-11-11"), DataFim = DateTime.Parse("2024-11-11"), IdEscola = 1},
                 };
 
             _context.AddRange(anoletivos);
@@ -47,7 +47,7 @@ namespace Service.Tests
             _anoLetivoService.Create(new Anoletivo() { AnoLetivo = 2025, DataInicio = DateTime.Parse("01/01/2025"), DataFim = DateTime.Parse("11/11/2025"), IdEscola = 1 });
             // Assert
             Assert.AreEqual(4, _anoLetivoService.GetAll().Count());
-            var anoletivo = _anoLetivoService.Get(4);
+            var anoletivo = _anoLetivoService.Get(2025);
             Assert.AreEqual(2025, anoletivo.AnoLetivo);
             Assert.AreEqual(DateTime.Parse("11/11/2025"), anoletivo.DataFim);
         }
@@ -55,47 +55,46 @@ namespace Service.Tests
         [TestMethod()]
         public void DeleteTest()
         {
-            _anoLetivoService.Delete(2);
+            _anoLetivoService.Delete(2023);
             // Assert
             Assert.AreEqual(2, _anoLetivoService.GetAll().Count());
-            var anoletivo = _anoLetivoService.Get(2);
+            var anoletivo = _anoLetivoService.Get(2023);
             Assert.AreEqual(null, anoletivo);
         }
 
         [TestMethod()]
         public void EditTest()
         {
-            var anoletivo = _anoLetivoService.Get(3);
+            var anoletivo = _anoLetivoService.Get(2022);
             anoletivo.AnoLetivo = 2022;
-            anoletivo.DataInicio = DateTime.Parse("01/01/2022");
+            anoletivo.DataInicio = DateTime.Parse("2022-01-01");
             _anoLetivoService.Edit(anoletivo);
             //Assert
-            anoletivo = _anoLetivoService.Get(3);
+            anoletivo = _anoLetivoService.Get(2022);
             Assert.IsNotNull(anoletivo);
             Assert.AreEqual(2022, anoletivo.AnoLetivo);
-            Assert.AreEqual(DateTime.Parse("01/01/2022"), anoletivo.DataInicio);
+            Assert.AreEqual(DateTime.Parse("2022-01-01"), anoletivo.DataInicio);
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            var anoletivo = _anoLetivoService.Get(1);
+            var anoletivo = _anoLetivoService.Get(2022);
             Assert.IsNotNull(anoletivo);
             Assert.AreEqual(2022, anoletivo.AnoLetivo);
-            Assert.AreEqual(DateTime.Parse("01/01/2022"), anoletivo.DataInicio);
+            Assert.AreEqual(DateTime.Parse("2022-01-01"), anoletivo.DataInicio);
         }
 
         [TestMethod()]
         public void GetAllTest()
         {
             // Act
-            var listaAutor = _anoLetivoService.GetAll();
+            var listaAnoLetivo = _anoLetivoService.GetAll();
             // Assert
-            Assert.IsInstanceOfType(listaAutor, typeof(IEnumerable<Anoletivo>));
-            Assert.IsNotNull(listaAutor);
-            Assert.AreEqual(3, listaAutor.Count());
-            Assert.AreEqual(1, listaAutor.First().AnoLetivo);
-            Assert.AreEqual(2022, listaAutor.First().AnoLetivo);
+            Assert.IsInstanceOfType(listaAnoLetivo, typeof(IEnumerable<Anoletivo>));
+            Assert.IsNotNull(listaAnoLetivo);
+            Assert.AreEqual(3, listaAnoLetivo.Count());
+            Assert.AreEqual(2022, listaAnoLetivo.First().AnoLetivo);
         }
     }
 }
