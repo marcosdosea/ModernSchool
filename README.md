@@ -1,5 +1,24 @@
 # ModernSchool
 Sistema de automação de escolas municipais
+ <ul id="nav">
+    <li><a href="#problema">1. Problema</a></li>
+    <li><a href="#solucao">2. Solução</a></li>
+    <li><a href="#equipe">2. Equipe</a></li>
+ <ul/>
+ <h2 id="problema">1. Problema</h2>
+ <p>
+  A modernidade trouxe muitas facilidades para a gestão de empresas, incluindo as escolas, que podem contar com sistemas de automação para facilitar o         cotidiano dos colaboradores.
+
+  Gerir uma escola de pequeno e médio porte é uma tarefa difícil, são inúmeros afazeres e muitas vezes a equipe precisa se desdobrar em diferentes áreas de     atuação para atender à todas as demandas.
+
+  Principalmente quando a gestão possui todos os processos manuais, o que aumenta a demora na realização de atividades do dia a dia da escola, além de         contribuir para uma maior probabilidade de que possíveis erros ocorram.</p>
+ <h2 id="solucao">2. Solução</h2>
+ <p>
+  Facilitar esse cotidiano é uma questão de investimento na qualidade do atendimento aos pais e alunos, além de melhorar o ambiente laboral para todos os       envolvidos.
+  Nossa solução é criar um software que auxilie esses profissionais da educação a tornar suas tarefas diárias ageis.
+ bus
+ </p>
+ <h2 id="equipe">2. Equipe</h2>
 
 <table align="center">
   <tr>
