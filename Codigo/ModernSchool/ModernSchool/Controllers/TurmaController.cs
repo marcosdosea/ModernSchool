@@ -19,12 +19,12 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: TurmaController
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             var listaTurma = _turmaService.GetAll();
             var listaTurmaModel = _mapper.Map<List<TurmaViewModel>>(listaTurma);
             return View(listaTurmaModel);
-        }
+        }*/
 
         // GET: TurmaController/Details/5
         public ActionResult Details(int id)
@@ -90,5 +90,15 @@ namespace ModernSchoolWEB.Controllers
             _turmaService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+
+        // GET: TurmaController
+        public ActionResult Index()
+        {
+            var listaEscolas = _turmaService.EscolaVinculadaProfessor();
+            var listaEscolaProfessorDTOModel = _mapper.Map<List<EscolaProfessorDTOViewModel>>(listaEscolas);
+            return View(listaEscolaProfessorDTOModel);
+        }
+
     }
 }
