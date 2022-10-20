@@ -49,7 +49,7 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var _governo = _mapper.Map<Governo>(governoViewModel);
-                _governoService.Crete(_governo);
+                _governoService.Create(_governo);
             }
             
                 return RedirectToAction(nameof(Index));
@@ -61,8 +61,8 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Edit(int id)
         {
             Governo governo = _governoService.Get(id);
-            _governoService.Edit(governo);
-            return View();
+            GovernoViewModel governoViewModel = _mapper.Map<GovernoViewModel>(governo);
+            return View(governoViewModel);
         }
 
         // POST: GovernoController/Edit/5
@@ -91,7 +91,7 @@ namespace ModernSchoolWEB.Controllers
         // POST: GovernoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, GovernoViewModel collection)
         {
                 _governoService.Delete(id);
             

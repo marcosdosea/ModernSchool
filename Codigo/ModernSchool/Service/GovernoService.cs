@@ -24,7 +24,7 @@ namespace Service
         /// <returns> Id do governo </returns>
         /// <exception cref="NotImplementedException"></exception>
 
-        public int Crete(Governo governo)
+        public int Create(Governo governo)
         {
             _context.Add(governo);
             _context.SaveChanges(); 
