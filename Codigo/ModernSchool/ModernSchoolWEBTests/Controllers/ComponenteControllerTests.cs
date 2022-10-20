@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ModernSchoolWEBTests.Controllers.Tests
+namespace ModernSchoolWEBTest.Controllers.Tests
 {
     [TestClass()]
     public class ComponenteControllerTests
