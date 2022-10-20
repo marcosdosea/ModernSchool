@@ -16,27 +16,27 @@ using System.Threading.Tasks;
 namespace ModernSchoolWEBTest.Controllers.Tests
 {
     [TestClass()]
-    public class AnoLetivoControllerTests
+    public class CargoControllerTests
     {
-        private static AnoLetivoController controller;
+        private static CargoController controller;
 
         [TestInitialize]
         public void Initialize()
         {
-            var mockService = new Mock<IAnoLetivoService>();
+            var mockService = new Mock<ICargoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new AnoLetivoProfile())).CreateMapper();
+                cfg.AddProfile(new CargoProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestAnosLetivos());
+                .Returns(GetTestCargos());
             mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetAnoLetivo());
-            mockService.Setup(service => service.Edit(It.IsAny<Anoletivo>()))
+                .Returns(GetTargetCargos());
+            mockService.Setup(service => service.Edit(It.IsAny<Cargo>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Anoletivo>()))
+            mockService.Setup(service => service.Create(It.IsAny<Cargo>()))
                 .Verifiable();
-            controller = new AnoLetivoController(mockService.Object, mapper);
+            controller = new CargoController(mockService.Object, mapper);
         }
 
         [TestMethod()]
@@ -47,9 +47,9 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<AnoLetivoViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<CargoViewModel>));
 
-            List<AnoLetivoViewModel> lista = (List<AnoLetivoViewModel>)viewResult.ViewData.Model;
+            List<CargoViewModel> lista = (List<CargoViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -61,10 +61,10 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
-            AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
-            Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(CargoViewModel));
+            CargoViewModel CargoViewModel = (CargoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, CargoViewModel.IdCargo);
+            Assert.AreEqual("Faxineiro", CargoViewModel.Descricao);
         }
 
         [TestMethod()]
@@ -80,7 +80,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         public void CreateTest_Post_Valid()
         {
             // Act
-            var result = controller.Create(GetNewAnoLetivo());
+            var result = controller.Create(GetNewCargo());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -95,7 +95,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewAnoLetivo());
+            var result = controller.Create(GetNewCargo());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -105,14 +105,12 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private AnoLetivoViewModel GetNewAnoLetivo()
+        private CargoViewModel GetNewCargo()
         {
-            return new AnoLetivoViewModel
+            return new CargoViewModel
             {
-                AnoLetivo = 2022,
-                DataInicio = DateTime.Parse("2022-01-01"),
-                DataFim = DateTime.Parse("2022-01-01"),
-                IdEscola = 1
+                IdCargo = 1,
+                Descricao = "Faxineiro"
             };
         }
 
@@ -124,17 +122,17 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
-            AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
-            Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(CargoViewModel));
+            CargoViewModel CargoViewModel = (CargoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, CargoViewModel.IdCargo);
+            Assert.AreEqual("Faxineiro", CargoViewModel.Descricao);
         }
 
         [TestMethod()]
         public void EditTest_Post()
         {
             // Act
-            var result = controller.Edit(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
+            var result = controller.Edit(GetTargetCargoViewModel().IdCargo, GetTargetCargoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -151,17 +149,17 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
-            AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
-            Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(CargoViewModel));
+            CargoViewModel CargoViewModel = (CargoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, CargoViewModel.IdCargo);
+            Assert.AreEqual("Faxineiro", CargoViewModel.Descricao);
         }
 
         [TestMethod()]
         public void DeleteTest_Post()
         {
             // Act
-            var result = controller.Delete(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
+            var result = controller.Delete(GetTargetCargoViewModel().IdCargo, GetTargetCargoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -170,53 +168,43 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private Anoletivo GetTargetAnoLetivo()
+        private Cargo GetTargetCargos()
         {
-            return new Anoletivo
+            return new Cargo
             {
-                AnoLetivo = 2022,
-                DataInicio = DateTime.Parse("2022-01-01"),
-                DataFim = DateTime.Parse("2022-11-11"),
-                IdEscola = 1
+                IdCargo = 1,
+                Descricao = "Faxineiro"
             };
         }
 
-        private IEnumerable<Anoletivo> GetTestAnosLetivos()
+        private IEnumerable<Cargo> GetTestCargos()
         {
-            return new List<Anoletivo>
+            return new List<Cargo>
             {
-                 new Anoletivo
+                 new Cargo
                 {
-                    AnoLetivo = 2022,
-                    DataInicio =  DateTime.Parse("2022-01-01"),
-                    DataFim =  DateTime.Parse("2022-11-11"),
-                    IdEscola = 1
+                    IdCargo = 1,
+                    Descricao =  "Faxineiro"
                 },
-                new Anoletivo
+                new Cargo
                 {
-                    AnoLetivo = 2023,
-                    DataInicio =  DateTime.Parse("2023-01-01"),
-                    DataFim =  DateTime.Parse("2023-01-01"),
-                    IdEscola = 1
+                    IdCargo = 2,
+                    Descricao =  "Cozinheira"
                 },
-                new Anoletivo
+                new Cargo
                 {
-                    AnoLetivo = 2024,
-                    DataInicio =  DateTime.Parse("2024-01-01"),
-                    DataFim =  DateTime.Parse("2024-11-11"),
-                    IdEscola = 1
+                    IdCargo = 3,
+                    Descricao =  "Professor"
                 }
             };
         }
 
-         private AnoLetivoViewModel GetTargetAnoLetivoViewModel()
+        private CargoViewModel GetTargetCargoViewModel()
         {
-            return new AnoLetivoViewModel
+            return new CargoViewModel
             {
-                AnoLetivo = 2023,
-                DataInicio = DateTime.Parse("2023-01-01"),
-                DataFim = DateTime.Parse("2023-11-11"),
-                IdEscola = 1
+                IdCargo = 2,
+                Descricao = "Cozinheiro"
             };
         }
     }
