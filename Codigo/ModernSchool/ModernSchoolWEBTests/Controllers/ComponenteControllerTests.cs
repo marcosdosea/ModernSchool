@@ -5,7 +5,6 @@ using ModernSchoolWEB.Models;
 using ModernSchoolWEB.Mappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModernSchoolWEB.Controllers;
-using ModernSchoolWEB.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ModernSchoolWEB.Controllers.Tests
+namespace ModernSchoolWEBTests.Controllers.Tests
 {
     [TestClass()]
     public class ComponenteControllerTests
