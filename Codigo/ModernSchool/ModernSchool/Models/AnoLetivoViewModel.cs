@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ModernSchool.Models
+namespace ModernSchoolWEB.Models
 {
     public class AnoLetivoViewModel
     {

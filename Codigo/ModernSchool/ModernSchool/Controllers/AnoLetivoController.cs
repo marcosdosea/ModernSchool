@@ -3,11 +3,11 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ModernSchool.Models;
+using ModernSchoolWEB.Models;
 using ModernSchoolWEB.Models;
 using Service;
 
-namespace ModernSchool.Controllers
+namespace ModernSchoolWEB.Controllers
 {
     public class AnoLetivoController : Controller
     {

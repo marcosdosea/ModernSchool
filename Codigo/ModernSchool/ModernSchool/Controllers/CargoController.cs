@@ -66,7 +66,7 @@ namespace ModernSchoolWEB.Controllers
         // POST: CargoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CargoViewModel cargoViewModel)
+        public ActionResult Edit(int id, CargoViewModel cargoViewModel)
         {
             if (ModelState.IsValid)
             {
