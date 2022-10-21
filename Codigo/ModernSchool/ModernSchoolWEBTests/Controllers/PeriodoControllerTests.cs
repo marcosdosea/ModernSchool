@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ModernSchoolWEB.Mappers;
 
-namespace ModernSchoolWEB.Controllers.Tests
+namespace ModernSchoolWEBTest.Controllers.Tests
 {
     [TestClass()]
     public class PeriodoControllerTests
