@@ -1,42 +1,43 @@
-using AutoMapper;
-using Core;
+﻿using AutoMapper;
 using Core.Service;
+using Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ModernSchoolWEB.Mappers;
-using ModernSchoolWEB.Models;
 using ModernSchoolWEB.Controllers;
+using ModernSchoolWEB.Models;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModernSchoolWEB.Mappers;
 
 namespace ModernSchoolWEBTest.Controllers.Tests
 {
     [TestClass()]
-    public class ComunicacaoControllerTests
+    public class PeriodoControllerTests
     {
-        private static ComunicacaoController controller;
+
+        private static PeriodoController controller;
 
         [TestInitialize]
         public void Initialize()
         {
-            var mockService = new Mock<IComunicacaoService>();
+            var mockService = new Mock<IPeriodoService>();
 
             IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new ComunicacaoProfile())).CreateMapper();
+                cfg.AddProfile(new PeriodoProfile())).CreateMapper();
 
             mockService.Setup(service => service.GetAll())
-                .Returns(GetTestComunicacaos());
+                .Returns(GetTestPeriodo());
             mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetComunicacaos());
-            mockService.Setup(service => service.Edit(It.IsAny<Comunicacao>()))
+                .Returns(GetTargetPeriodo());
+            mockService.Setup(service => service.Edit(It.IsAny<Periodo>()))
                 .Verifiable();
-            mockService.Setup(service => service.Create(It.IsAny<Comunicacao>()))
+            mockService.Setup(service => service.Create(It.IsAny<Periodo>()))
                 .Verifiable();
-            controller = new ComunicacaoController(mockService.Object, mapper);
+            controller = new PeriodoController(mockService.Object, mapper);
         }
 
         [TestMethod()]
@@ -47,9 +48,9 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<ComunicacaoViewModel>));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(List<PeriodoViewModel>));
 
-            List<ComunicacaoViewModel> lista = (List<ComunicacaoViewModel>)viewResult.ViewData.Model;
+            List<PeriodoViewModel> lista = (List<PeriodoViewModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -61,10 +62,10 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ComunicacaoViewModel));
-            ComunicacaoViewModel comunicacaoViewModel = (ComunicacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(1, comunicacaoViewModel.Id);
-            Assert.AreEqual(1, comunicacaoViewModel.IdTurma);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PeriodoViewModel));
+            PeriodoViewModel periodoViewModel = (PeriodoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, periodoViewModel.Id);
+            Assert.AreEqual("Sexto", periodoViewModel.Nome);
         }
 
         [TestMethod()]
@@ -80,7 +81,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         public void CreateTest_Post_Valid()
         {
             // Act
-            var result = controller.Create(GetNewComunicacao());
+            var result = controller.Create(GetNewPeriodo());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -95,7 +96,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             controller.ModelState.AddModelError("Nome", "Campo requerido");
 
             // Act
-            var result = controller.Create(GetNewComunicacao());
+            var result = controller.Create(GetNewPeriodo());
 
             // Assert
             Assert.AreEqual(1, controller.ModelState.ErrorCount);
@@ -105,20 +106,17 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private ComunicacaoViewModel GetNewComunicacao()
+      
+
+        private PeriodoViewModel GetNewPeriodo()
         {
-            return new ComunicacaoViewModel
+            return new PeriodoViewModel
             {
                 Id = 1,
-                EnviarAlunos = 30,
-                EnviarResponsaveis = 0,
-                Mensagem = "Recuperação amanhã",
-                IdTurma = 1,
-                IdComponente = 2
+                Nome = "Sexto"
             };
         }
 
-        [TestMethod()]
         public void EditTest_Get()
         {
             var result = controller.Edit(1);
@@ -126,17 +124,17 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ComunicacaoViewModel));
-            ComunicacaoViewModel comunicacaoViewModel = (ComunicacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(1, comunicacaoViewModel.Id);
-            Assert.AreEqual(1, comunicacaoViewModel.IdTurma);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PeriodoViewModel));
+            PeriodoViewModel periodoViewModel = ( PeriodoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, periodoViewModel.Id);
+            Assert.AreEqual("Sexto", periodoViewModel.Nome);
         }
 
         [TestMethod()]
         public void EditTest_Post()
         {
             // Act
-            var result = controller.Edit(GetTargetComunicacaoViewModel().Id, GetTargetComunicacaoViewModel());
+            var result = controller.Edit(GetTargetPeriodoViewModel().Id, GetTargetPeriodoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -153,17 +151,16 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(ComunicacaoViewModel));
-            ComunicacaoViewModel comunicacaoViewModel = (ComunicacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(1, comunicacaoViewModel.Id);
-            Assert.AreEqual(1, comunicacaoViewModel.IdTurma);
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PeriodoViewModel));
+            PeriodoViewModel periodoViewModel = (PeriodoViewModel)viewResult.ViewData.Model;
+            Assert.AreEqual(1, periodoViewModel.Id);
+            Assert.AreEqual("Sexto", periodoViewModel.Nome);
         }
 
-        [TestMethod()]
         public void DeleteTest_Post()
         {
             // Act
-            var result = controller.Delete(GetTargetComunicacaoViewModel().Id, GetTargetComunicacaoViewModel());
+            var result = controller.Delete(GetTargetPeriodoViewModel().Id, GetTargetPeriodoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -172,63 +169,56 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             Assert.AreEqual("Index", redirectToActionResult.ActionName);
         }
 
-        private Comunicacao GetTargetComunicacaos()
+        private Periodo GetTargetPeriodo()
         {
-            return new Comunicacao
+            return new Periodo
             {
                 Id = 1,
-                EnviarAlunos = 30,
-                EnviarResponsaveis = 0,
-                Mensagem = "Recuperação amanhã",
-                IdTurma = 1,
-                IdComponente = 2
+                Nome = "Sexto"
             };
         }
 
-        private IEnumerable<Comunicacao> GetTestComunicacaos()
+        private IEnumerable<Periodo> GetTestPeriodo()
         {
-            return new List<Comunicacao>
+            return new List<Periodo>
             {
-                 new Comunicacao
+                 new Periodo
                 {
                     Id = 1,
-                    EnviarAlunos = 30,
-                    EnviarResponsaveis = 0,
-                    Mensagem = "Recuperação amanhã",
-                    IdTurma = 1,
-                    IdComponente = 2
+                    Nome =  "Sexto",
+                    DataInicio = DateTime.Parse("2022-01-01"),
+                    DataFim = DateTime.Parse("2022-12-12"),
+                    AnoLetivo = 2022
+
                 },
-                new Comunicacao
+                new Periodo
                 {
                     Id = 2,
-                    EnviarAlunos = 0,
-                    EnviarResponsaveis = 20,
-                    Mensagem = "Reuniao de pais",
-                    IdTurma = 1,
-                    IdComponente = 2
+                    Nome =  "Quarto",
+                    DataInicio = DateTime.Parse("2021-01-01"),
+                    DataFim = DateTime.Parse("2021-12-12"),
+                    AnoLetivo = 2021
                 },
-                new Comunicacao
+                new Periodo
                 {
                     Id = 3,
-                    EnviarAlunos = 20,
-                    EnviarResponsaveis = 20,
-                    Mensagem = "Festeijo junino acontecerá na escolha contamos com pais e alunos presentes.",
-                    IdTurma = 1,
-                    IdComponente = 2
+                    Nome =  "Segundo",
+                    DataInicio = DateTime.Parse("2020-01-01"),
+                    DataFim = DateTime.Parse("2020-12-12"),
+                    AnoLetivo = 2020
                 }
             };
         }
 
-        private ComunicacaoViewModel GetTargetComunicacaoViewModel()
+        private PeriodoViewModel GetTargetPeriodoViewModel()
         {
-            return new ComunicacaoViewModel
+            return new PeriodoViewModel
             {
                 Id = 2,
-                EnviarAlunos = 0,
-                EnviarResponsaveis = 20,
-                Mensagem = "Reuniao de pais",
-                IdTurma = 1,
-                IdComponente = 2
+                Nome = "Quarto",
+                DataInicio = DateTime.Parse("2021-01-01"),
+                DataFim = DateTime.Parse("2021-12-12"),
+                AnoLetivo = 2021
             };
         }
     }
