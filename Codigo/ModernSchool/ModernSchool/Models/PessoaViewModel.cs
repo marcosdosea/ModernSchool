@@ -13,6 +13,7 @@ namespace ModernSchoolWEB.Models
         public string? Bairro { get; set; }
         public int Numero { get; set; }
         public DateTime? DataNascimento { get; set; }
+
        
     }
 }
