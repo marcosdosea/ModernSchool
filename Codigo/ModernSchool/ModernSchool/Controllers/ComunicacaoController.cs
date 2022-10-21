@@ -65,7 +65,7 @@ namespace ModernSchoolWEB.Controllers
         // POST: ComunicacaoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ComunicacaoViewModel comunicacaoViewModel)
+        public ActionResult Edit(int id,ComunicacaoViewModel comunicacaoViewModel)
         {
             if (ModelState.IsValid)
             {
