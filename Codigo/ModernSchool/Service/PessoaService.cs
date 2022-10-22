@@ -36,7 +36,7 @@ namespace Service
         /// <param name="id"></param>
         void IPessoaService.Delete(int id)
         {
-            var _pessoa = _context.Componentes.Find(id);
+            var _pessoa = _context.Pessoas.Find(id);
             _context.Remove(_pessoa);
             _context.SaveChanges();
         }
@@ -62,7 +62,7 @@ namespace Service
         }
 
         /// <summary>
-        /// Consultar todos os componentes no banco
+        /// Consultar todas as pessoas no banco
         /// </summary>
         /// <returns></returns>
         IEnumerable<Pessoa> IPessoaService.GetAll()
