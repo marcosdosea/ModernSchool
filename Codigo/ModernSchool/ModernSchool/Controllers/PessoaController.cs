@@ -83,10 +83,10 @@ namespace ModernSchoolWEB.Controllers
             return View(pessoaModel);
         }
 
-        // POST: PeriodoController/Delete/5
+        // POST: PessoaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, PeriodoViewModel periodoViewModel)
+        public ActionResult Delete(int id, PessoaViewModel pessoaViewModel)
         {
             _pessoaService.Delete(id);
             return RedirectToAction(nameof(Index));
