@@ -44,7 +44,7 @@ namespace Service
         /// <summary>
         /// Editar uma pessoa no banco de dados
         /// </summary>
-        /// <param name="componente">Dados da pessoa</param>
+        /// <param name="pessoa">Dados da pessoa</param>
         void IPessoaService.Edit(Pessoa pessoa)
         {
             _context.Update(pessoa);
