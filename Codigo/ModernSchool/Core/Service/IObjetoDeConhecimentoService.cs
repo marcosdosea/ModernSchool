@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    public interface IObjetoDeConhecimento
+    public interface IObjetoDeConhecimentoService
     {
         int Create(Objetodeconhecimento objetoDeConhecimento);
         void Edit(Objetodeconhecimento objetoDeConhecimento);
