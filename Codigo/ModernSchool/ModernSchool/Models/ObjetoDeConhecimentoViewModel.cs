@@ -11,7 +11,7 @@ namespace ModernSchoolWEB.Models
         public int Id { get; set; }
         [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Campo descrição é obrigatório")]
-        [StringLength(100, ErrorMessage = "A descrição deve ter no máximo 45 caracteres")]
+        [StringLength(100, ErrorMessage = "A descrição deve ter no máximo 100 caracteres")]
         public string? Descricao { get; set; }
         [Required(ErrorMessage = "Campo unidade temática é obrigatório")]
         [Display(Name = "Unidade Temática")]

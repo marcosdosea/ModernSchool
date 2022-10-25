@@ -79,7 +79,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id)
         {
             Objetodeconhecimento objetoDeConhecimento = _objetoDeConhecimentoService.Get(id);
-            ObjetoDeConhecimentoViewModel objetoDeConhecimentoViewModel = _mapper.Map<ObjetoDeConhecimentoViewModel>(turma);
+            ObjetoDeConhecimentoViewModel objetoDeConhecimentoViewModel = _mapper.Map<ObjetoDeConhecimentoViewModel>(objetoDeConhecimento);
             return View(objetoDeConhecimentoViewModel);
         }
 
