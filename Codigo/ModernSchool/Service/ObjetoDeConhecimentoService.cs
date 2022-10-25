@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class ObjetoDeConhecimentoService : IObjetoDeConhecimentoService
+    public class ObjetoDeConhecimentoService : IObjetoDeConhecimento
     {
 
         private readonly ModernSchoolContext _context;
@@ -24,7 +24,7 @@ namespace Service
         /// </summary>
         /// <param name="objetodeconhecimento"></param>
         /// <returns>ID de ObjetoDeConhecimento</returns>
-        int IObjetoDeConhecimentoService.Create(Objetodeconhecimento objetodeconhecimento)
+        int IObjetoDeConhecimento.Create(Objetodeconhecimento objetodeconhecimento)
         {
             _context.Add(objetodeconhecimento);
             _context.SaveChanges();
@@ -35,7 +35,7 @@ namespace Service
         /// Deletar um ObjetoDeConhecimento no banco de dados
         /// </summary>
         /// <param name="id"></param>
-        void IObjetoDeConhecimentoService.Delete(int id)
+        void IObjetoDeConhecimento.Delete(int id)
         {
             var _objetoDeConhecimento = _context.Objetodeconhecimentos.Find(id);
             _context.Remove(_objetoDeConhecimento);
@@ -46,7 +46,7 @@ namespace Service
         /// Editar um ObjetoDeConhecimento no banco de dados
         /// </summary>
         /// <param name="objetodeconhecimento"></param>
-        void IObjetoDeConhecimentoService.Edit(Objetodeconhecimento objetodeconhecimento)
+        void IObjetoDeConhecimento.Edit(Objetodeconhecimento objetodeconhecimento)
         {
             _context.Update(objetodeconhecimento);
             _context.SaveChanges();
@@ -57,7 +57,7 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Dados do ObjetoDeConhecimento</returns>
-        Objetodeconhecimento IObjetoDeConhecimentoService.Get(int id)
+        Objetodeconhecimento IObjetoDeConhecimento.Get(int id)
         {
             return _context.Objetodeconhecimentos.Find(id);
         }
@@ -66,7 +66,7 @@ namespace Service
         /// Consultar todos os ObjetoDeConhecimento no banco
         /// </summary>
         /// <returns>Dados de todos os ObjetoDeConhecimento</returns>
-        IEnumerable<Objetodeconhecimento> IObjetoDeConhecimentoService.GetAll()
+        IEnumerable<Objetodeconhecimento> IObjetoDeConhecimento.GetAll()
         {
             return _context.Objetodeconhecimentos.AsNoTracking();
         }
