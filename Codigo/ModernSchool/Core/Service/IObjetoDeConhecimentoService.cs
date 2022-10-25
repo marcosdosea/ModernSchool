@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Core.Service
 {
-    internal interface IObjetoDeConhecimento
+    public interface IObjetoDeConhecimento
     {
+        int Create(Objetodeconhecimento objetoDeConhecimento);
+        void Edit(Objetodeconhecimento objetoDeConhecimento);
+        void Delete(int id);
+        Objetodeconhecimento Get(int id);
+        IEnumerable<Objetodeconhecimento> GetAll();
+
     }
 }
