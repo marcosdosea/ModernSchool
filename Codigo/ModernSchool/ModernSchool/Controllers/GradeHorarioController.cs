@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using ModernSchoolWEB.Models;
 using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Core.DTO;
+
 namespace ModernSchool.Controllers
 {
 
@@ -11,11 +14,18 @@ namespace ModernSchool.Controllers
     {
         private readonly IGradeHorarioService _gradehorarioService;
         private readonly IMapper _mapper;
+        private readonly IComponenteService _componenteService;
+        private readonly ITurmaService _turmaService; 
+        private readonly IPessoaService _pessoaService;
 
-        public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper)
+        public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper
+            , IComponenteService componenteService, ITurmaService turmaService,IPessoaService pessoaService)
         {
             _gradehorarioService = gradehorario;
             _mapper = mapper;
+            _componenteService = componenteService;
+            _turmaService = turmaService;
+            _pessoaService = pessoaService;
         }
 
         public ActionResult Index()
@@ -34,7 +44,19 @@ namespace ModernSchool.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            GradehorarioViewModel gradehorarioViewModel = new GradehorarioViewModel();
+
+            IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable< PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            
+            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
+            gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "Codigo", "Nome",null);
+
+
+
+            return View(gradehorarioViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
