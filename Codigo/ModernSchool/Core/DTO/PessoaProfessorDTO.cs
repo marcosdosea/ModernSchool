@@ -10,11 +10,11 @@ namespace Core.DTO
 {
     public class PessoaProfessorDTO
     {
-        [Display(Name ="Codigo")]
+        
         public int IdPessoa { get; set; }
-        [Display(Name ="Nome")]
+        
         public string NomePessoa { get; set; }
-        [Display(Name="Cargo")]
+      
         public string CargoPessoa { get; set; }
     }
 }

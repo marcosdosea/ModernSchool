@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.PessoaViewModel>
+﻿@model IEnumerable<ModernSchoolWEB.Models.ProfessorDTOModel>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,28 +7,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.IdPessoa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.NomePessoa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Idade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
+                @Html.DisplayNameFor(model => model.CargoPessoa)
             </th>
             <th></th>
         </tr>
@@ -37,33 +22,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.IdPessoa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.NomePessoa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
+                @Html.DisplayFor(modelItem => item.CargoPessoa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Idade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rua)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdPessoa }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.IdPessoa}) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdPessoa})
             </td>
         </tr>
 }

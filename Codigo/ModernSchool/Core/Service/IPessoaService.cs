@@ -16,5 +16,7 @@ namespace Core.Service
         IEnumerable<Pessoa> GetAll();
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
 
+        
+
     }
 }

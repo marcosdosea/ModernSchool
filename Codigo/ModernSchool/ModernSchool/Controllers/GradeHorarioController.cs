@@ -52,7 +52,7 @@ namespace ModernSchool.Controllers
             
             gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
             gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
-            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "Codigo", "Nome",null);
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "Nome",null);
 
 
 

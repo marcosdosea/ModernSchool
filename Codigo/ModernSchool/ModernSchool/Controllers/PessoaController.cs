@@ -4,6 +4,7 @@ using Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using Core.DTO;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -19,11 +20,19 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: PessoaController
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             var listaPessoas = _pessoaService.GetAll();
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
             return View(listaPessoasModel);
+        }*/
+
+        public ActionResult Index()
+        {
+            var teste = _pessoaService.GetAllProfessor();
+            var testemodel = _mapper.Map<List<ProfessorDTOModel>>(teste);
+
+            return View(testemodel);
         }
 
         // GET: PessoaController/Details/5

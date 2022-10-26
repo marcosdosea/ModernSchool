@@ -19,6 +19,7 @@ namespace Service
             _context = context;
         }
 
+
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {
             var query = from pessoa in _context.Pessoas
@@ -26,7 +27,8 @@ namespace Service
                         on pessoa.Id equals governo.IdPessoa
                         join cargo in _context.Cargos on governo.IdCargo
                         equals cargo.IdCargo
-                        where cargo.Descricao.StartsWith("professor")
+                        where cargo.Descricao.Equals("professor")    
+                        orderby pessoa.Nome
                         select new PessoaProfessorDTO
                         {
                             CargoPessoa = cargo.Descricao,
