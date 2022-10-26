@@ -50,9 +50,9 @@ namespace ModernSchool.Controllers
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
             IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
             
-            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
-            gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
-            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa");
+            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome",null);
+            gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1",null);
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa",null);
 
 
 
@@ -74,6 +74,15 @@ namespace ModernSchool.Controllers
         {
             Gradehorario gradehorario = _gradehorarioService.Get(id);
             GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(gradehorario);
+
+            IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+
+            gradehorarioModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
+            gradehorarioModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
+            gradehorarioModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa");
+
             return View(gradehorarioModel);
         }
 
