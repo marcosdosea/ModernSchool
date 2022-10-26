@@ -48,11 +48,11 @@ namespace ModernSchool.Controllers
 
             IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
-            IEnumerable< PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
             
             gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
             gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
-            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "Nome",null);
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa");
 
 
 
