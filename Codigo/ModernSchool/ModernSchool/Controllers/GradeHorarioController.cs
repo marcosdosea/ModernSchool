@@ -112,9 +112,9 @@ namespace ModernSchool.Controllers
 
         public ActionResult Delete(int id)
         {
-            Gradehorario gradehorario = _gradehorarioService.Get(id);
-            GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(gradehorario);
-            return View(gradehorarioModel);
+            GradeHorarioDTO? detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
+            GradeHorarioDTOModel model = _mapper.Map<GradeHorarioDTOModel>(detalhesProfessor);
+            return View(model);
         }
 
         [HttpPost]
