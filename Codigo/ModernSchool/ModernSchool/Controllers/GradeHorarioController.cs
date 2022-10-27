@@ -46,7 +46,7 @@ namespace ModernSchool.Controllers
 
         public ActionResult Details(int id)
         {
-            GradeHorarioDTO detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
+            GradeHorarioDTO? detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
             GradeHorarioDTOModel model = _mapper.Map<GradeHorarioDTOModel>(detalhesProfessor);
             return View(model);
         }

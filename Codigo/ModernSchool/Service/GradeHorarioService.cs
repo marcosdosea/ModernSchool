@@ -92,8 +92,22 @@ namespace Service
                         
         }
 
-        public Gradehorario  GetAGradeHorario(int id)
+        public GradeHorarioDTO? GetAGradeHorario(int id)
         {
+            /*var q = _context.Gradehorarios
+                .Where(g => g.Id == id)
+                .Select(g => 
+                    new GradeHorarioDTO
+                    {
+                        Id = id,
+                        Componente = g.IdComponenteNavigation.Nome,
+                        Dia = g.DiaSemana,
+                        HoraFim = g.HoraFim,
+                        HoraInicio = g.HoraInicio,
+                        Professor = g.IdProfessorNavigation.Nome
+                    })
+                .FirstOrDefault();*/
+
             var query = from grade in _context.Gradehorarios
                         join componente in _context.Componentes
                         on grade.IdComponente equals componente.Id
@@ -110,7 +124,7 @@ namespace Service
                             HoraInicio = grade.HoraInicio,
                             Professor = pessoa.Nome
                         };
-            return query.First;
+            return query.FirstOrDefault(); ;
         }
     }
 }
