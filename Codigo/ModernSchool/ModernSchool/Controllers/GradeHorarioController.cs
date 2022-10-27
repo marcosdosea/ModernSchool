@@ -28,18 +28,27 @@ namespace ModernSchool.Controllers
             _pessoaService = pessoaService;
         }
 
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
             var listaGradeHorario = _gradehorarioService.GetAll();
             var listaGradeHorarioModel = _mapper.Map<List<GradehorarioViewModel>>(listaGradeHorario);
+
             return View(listaGradeHorarioModel);
+        }*/
+
+        public ActionResult Index()
+        {
+            var listaGrade = _gradehorarioService.GetAllGradeHorario();
+            var listaModel = _mapper.Map<List<GradeHorarioDTOModel>>(listaGrade);
+            return View(listaModel);
         }
+
 
         public ActionResult Details(int id)
         {
-            Gradehorario listaGradehorario = _gradehorarioService.Get(id);
-            GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(listaGradehorario);
-            return View(gradehorarioModel);
+            GradeHorarioDTO detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
+            GradeHorarioDTOModel model = _mapper.Map<GradeHorarioDTOModel>(detalhesProfessor);
+            return View(model);
         }
 
         public ActionResult Create()

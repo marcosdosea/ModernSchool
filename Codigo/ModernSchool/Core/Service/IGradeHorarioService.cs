@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.DTO;
 
 namespace Core.Service
 {
@@ -16,5 +17,7 @@ namespace Core.Service
         Gradehorario Get(int idGradehorario);
 
         IEnumerable<Gradehorario>GetAll();
+        IEnumerable<GradeHorarioDTO> GetAllGradeHorario();
+        Gradehorario  GetAGradeHorario(int id);
     }
 }

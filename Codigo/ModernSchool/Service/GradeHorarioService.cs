@@ -1,4 +1,5 @@
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,8 +65,52 @@ namespace Service
         /// </summary>
         /// <returns>Dados de todas as grades de horario</returns>
         public IEnumerable<Gradehorario> GetAll()
-        {
+        {   
             return _context.Gradehorarios.AsNoTracking();
+        }
+
+        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario()
+        {
+            var query = from grade in _context.Gradehorarios
+                        join componente in _context.Componentes
+                        on grade.IdComponente equals componente.Id
+                        join pessoa in _context.Pessoas on grade.IdProfessor equals pessoa.Id
+                        join governo in _context.Governoservidors on pessoa.Id equals governo.IdPessoa
+                        join cargo in _context.Cargos on governo.IdCargo equals cargo.IdCargo
+                        where cargo.Descricao.Equals("professor")
+                        select new GradeHorarioDTO
+                        {
+                            Id = grade.Id,
+                            Componente = componente.Nome,
+                            Dia = grade.DiaSemana,
+                            HoraFim = grade.HoraFim,
+                            HoraInicio = grade.HoraInicio,
+                            Professor = pessoa.Nome
+                        };
+            return query;
+                
+                        
+        }
+
+        public Gradehorario  GetAGradeHorario(int id)
+        {
+            var query = from grade in _context.Gradehorarios
+                        join componente in _context.Componentes
+                        on grade.IdComponente equals componente.Id
+                        join pessoa in _context.Pessoas on grade.IdProfessor equals pessoa.Id
+                        join governo in _context.Governoservidors on pessoa.Id equals governo.IdPessoa
+                        join cargo in _context.Cargos on governo.IdCargo equals cargo.IdCargo
+                        where grade.Id == id
+                        select new GradeHorarioDTO
+                        {
+                            Id = grade.Id,
+                            Componente = componente.Nome,
+                            Dia = grade.DiaSemana,
+                            HoraFim = grade.HoraFim,
+                            HoraInicio = grade.HoraInicio,
+                            Professor = pessoa.Nome
+                        };
+            return query.First;
         }
     }
 }
