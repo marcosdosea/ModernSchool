@@ -28,14 +28,6 @@ namespace ModernSchool.Controllers
             _pessoaService = pessoaService;
         }
 
-       /* public ActionResult Index()
-        {
-            var listaGradeHorario = _gradehorarioService.GetAll();
-            var listaGradeHorarioModel = _mapper.Map<List<GradehorarioViewModel>>(listaGradeHorario);
-
-            return View(listaGradeHorarioModel);
-        }*/
-
         public ActionResult Index()
         {
             var listaGrade = _gradehorarioService.GetAllGradeHorario();
