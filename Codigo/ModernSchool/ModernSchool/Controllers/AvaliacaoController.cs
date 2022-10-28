@@ -23,6 +23,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
             var listaAvaliacao = _avaliacaoService.GetAll();
+            
             var listaAvaliacaoModel = _mapper.Map<List<AvaliacaoViewModel>>(listaAvaliacao);
 
             return View(listaAvaliacaoModel);
