@@ -12,6 +12,9 @@ namespace ModernSchoolWEB.Models
         public string? Rua { get; set; }
         public string? Bairro { get; set; }
         public int Numero { get; set; }
+        [Display(Name = "Data de nascimento")]
+        [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DataNascimento { get; set; }
 
        
