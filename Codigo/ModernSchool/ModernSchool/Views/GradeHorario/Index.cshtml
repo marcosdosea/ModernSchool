@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.GradehorarioViewModel>
+﻿@model IEnumerable<ModernSchoolWEB.Models.GradeHorarioDTOModel>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -10,13 +10,10 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdComponente)
+                @Html.DisplayNameFor(model => model.Componente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTurma)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiaSemana)
+                @Html.DisplayNameFor(model => model.Dia)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.HoraInicio)
@@ -25,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.HoraFim)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdProfessor)
+                @Html.DisplayNameFor(model => model.Professor)
             </th>
             <th></th>
         </tr>
@@ -37,13 +34,10 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdComponente)
+                @Html.DisplayFor(modelItem => item.Componente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTurma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaSemana)
+                @Html.DisplayFor(modelItem => item.Dia)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HoraInicio)
@@ -52,12 +46,12 @@
                 @Html.DisplayFor(modelItem => item.HoraFim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdProfessor)
+                @Html.DisplayFor(modelItem => item.Professor)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id})
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new {  id=item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
             </td>
         </tr>
 }

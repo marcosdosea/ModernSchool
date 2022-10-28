@@ -1,10 +1,4 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.EscolaProfessorDTOViewModel>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
+﻿@model IEnumerable<ModernSchoolWEB.Models.TurmaViewModel>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,13 +7,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomeEscola)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeComponente)
+                @Html.DisplayNameFor(model => model.AnoLetivo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeTurma)
+                @Html.DisplayNameFor(model => model.Turma1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vagas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VagasDisponiveis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sala)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Escolaridade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
         </tr>
@@ -28,19 +37,33 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeEscola)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeComponente)
+                @Html.DisplayFor(modelItem => item.AnoLetivo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeTurma)
+                @Html.DisplayFor(modelItem => item.Turma1)
             </td>
             <td>
-                    <button class="br-button primary active mr-3" type="button">@Html.ActionLink("Selecionar", "Edit", new {  id=item.IdTurma  })</button>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.IdTurma  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.IdTurma  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.IdTurma  })
+                @Html.DisplayFor(modelItem => item.Vagas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VagasDisponiveis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sala)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Escolaridade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

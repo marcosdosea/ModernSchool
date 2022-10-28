@@ -1,4 +1,5 @@
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,8 +65,47 @@ namespace Service
         /// </summary>
         /// <returns>Dados de todas as grades de horario</returns>
         public IEnumerable<Gradehorario> GetAll()
-        {
+        {   
             return _context.Gradehorarios.AsNoTracking();
+        }
+
+        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario()
+        {
+
+            var q = _context.Gradehorarios
+                .OrderBy(g => g.IdComponenteNavigation.Nome)
+                .Select(g => 
+                    new GradeHorarioDTO
+                    {
+                        Id = g.Id,
+                        Componente = g.IdComponenteNavigation.Nome,
+                        Dia = g.DiaSemana,
+                        HoraFim = g.HoraFim,
+                        HoraInicio = g.HoraInicio,
+                        Professor = g.IdProfessorNavigation.Nome
+                    });
+            return q;
+                
+                        
+        }
+
+        public GradeHorarioDTO? GetAGradeHorario(int id)
+        {
+            var q = _context.Gradehorarios
+                .Where(g => g.Id == id)
+                .Select(g => 
+                    new GradeHorarioDTO
+                    {
+                        Id = id,
+                        Componente = g.IdComponenteNavigation.Nome,
+                        Dia = g.DiaSemana,
+                        HoraFim = g.HoraFim,
+                        HoraInicio = g.HoraInicio,
+                        Professor = g.IdProfessorNavigation.Nome
+                    })
+                .FirstOrDefault();
+
+            return q;
         }
     }
 }

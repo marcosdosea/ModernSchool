@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace ModernSchoolWEB.Models
@@ -18,5 +19,12 @@ namespace ModernSchoolWEB.Models
         public string? HoraFim { get; set; }
         [Required]
         public int IdProfessor { get; set; }
+
+        public SelectList? ListaComponentes { get; set; }
+
+        public SelectList? ListaTurma { get; set; } 
+
+        public SelectList? ListaProfessor { get;set; }
+
     }
 }
