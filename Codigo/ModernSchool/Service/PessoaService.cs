@@ -22,21 +22,17 @@ namespace Service
 
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {
-            var query = from pessoa in _context.Pessoas
-                        join governo in _context.Governoservidors
-                        on pessoa.Id equals governo.IdPessoa
-                        join cargo in _context.Cargos on governo.IdCargo
-                        equals cargo.IdCargo
-                        where cargo.Descricao.Equals("professor")    
-                        orderby pessoa.Nome
-                        select new PessoaProfessorDTO
+            var q = _context.Governoservidors
+                    .Where(g => g.IdCargoNavigation.Descricao.Equals("professor"))
+                    .Select(g =>
+                        new PessoaProfessorDTO
                         {
-                            CargoPessoa = cargo.Descricao,
-                            IdPessoa = pessoa.Id,
-                            NomePessoa = pessoa.Nome
-                           
-                        };
-            return query;
+                            CargoPessoa = g.IdCargoNavigation.Descricao,
+                            IdPessoa = g.IdPessoa,
+                            NomePessoa = g.IdPessoaNavigation.Nome
+                        });
+
+            return q;
         }
 
         /// <summary>

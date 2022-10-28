@@ -71,30 +71,27 @@ namespace Service
 
         public IEnumerable<GradeHorarioDTO> GetAllGradeHorario()
         {
-            var query = from grade in _context.Gradehorarios
-                        join componente in _context.Componentes
-                        on grade.IdComponente equals componente.Id
-                        join pessoa in _context.Pessoas on grade.IdProfessor equals pessoa.Id
-                        join governo in _context.Governoservidors on pessoa.Id equals governo.IdPessoa
-                        join cargo in _context.Cargos on governo.IdCargo equals cargo.IdCargo
-                        where cargo.Descricao.Equals("professor")
-                        select new GradeHorarioDTO
-                        {
-                            Id = grade.Id,
-                            Componente = componente.Nome,
-                            Dia = grade.DiaSemana,
-                            HoraFim = grade.HoraFim,
-                            HoraInicio = grade.HoraInicio,
-                            Professor = pessoa.Nome
-                        };
-            return query;
+
+            var q = _context.Gradehorarios
+                .OrderBy(g => g.IdComponenteNavigation.Nome)
+                .Select(g => 
+                    new GradeHorarioDTO
+                    {
+                        Id = g.Id,
+                        Componente = g.IdComponenteNavigation.Nome,
+                        Dia = g.DiaSemana,
+                        HoraFim = g.HoraFim,
+                        HoraInicio = g.HoraInicio,
+                        Professor = g.IdProfessorNavigation.Nome
+                    });
+            return q;
                 
                         
         }
 
         public GradeHorarioDTO? GetAGradeHorario(int id)
         {
-            /*var q = _context.Gradehorarios
+            var q = _context.Gradehorarios
                 .Where(g => g.Id == id)
                 .Select(g => 
                     new GradeHorarioDTO
@@ -106,25 +103,9 @@ namespace Service
                         HoraInicio = g.HoraInicio,
                         Professor = g.IdProfessorNavigation.Nome
                     })
-                .FirstOrDefault();*/
+                .FirstOrDefault();
 
-            var query = from grade in _context.Gradehorarios
-                        join componente in _context.Componentes
-                        on grade.IdComponente equals componente.Id
-                        join pessoa in _context.Pessoas on grade.IdProfessor equals pessoa.Id
-                        join governo in _context.Governoservidors on pessoa.Id equals governo.IdPessoa
-                        join cargo in _context.Cargos on governo.IdCargo equals cargo.IdCargo
-                        where grade.Id == id
-                        select new GradeHorarioDTO
-                        {
-                            Id = grade.Id,
-                            Componente = componente.Nome,
-                            Dia = grade.DiaSemana,
-                            HoraFim = grade.HoraFim,
-                            HoraInicio = grade.HoraInicio,
-                            Professor = pessoa.Nome
-                        };
-            return query.FirstOrDefault(); ;
+            return q;
         }
     }
 }
