@@ -1,0 +1,52 @@
+﻿@model ModernSchoolWEB.Models.GovernoServidorModel
+
+<h4>GovernoServidorModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdCargo" class="control-label"></label>
+                <input asp-for="IdCargo" class="form-control" />
+                <span asp-validation-for="IdCargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataInicio" class="control-label"></label>
+                <input asp-for="DataInicio" class="form-control" />
+                <span asp-validation-for="DataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataFim" class="control-label"></label>
+                <input asp-for="DataFim" class="form-control" />
+                <span asp-validation-for="DataFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdGoverno" class="control-label"></label>
+                <input asp-for="IdGoverno" class="form-control" />
+                <span asp-validation-for="IdGoverno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPessoa" class="control-label"></label>
+                <input asp-for="IdPessoa" class="form-control" />
+                <span asp-validation-for="IdPessoa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

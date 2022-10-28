@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ModernSchoolWEB.Models.GovernoServidorModel>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdGoverno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPessoa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdGoverno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPessoa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdGoverno }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdGoverno }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdGoverno })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
