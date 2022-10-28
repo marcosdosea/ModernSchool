@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
-    internal class GovernoServidorService : IGovernoServidorService
+    public class GovernoServidorService : IGovernoServidorService
     {
         private readonly ModernSchoolContext _context;
 
