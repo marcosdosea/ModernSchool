@@ -16,6 +16,7 @@ namespace Service
         {
             _context = context;
         }
+
         /// <summary>
         /// Criar uma comunicacão no banco de dados
         /// </summary>
@@ -25,6 +26,28 @@ namespace Service
         {
             _context.Add(comunicacao);
             _context.SaveChanges();
+
+            if (comunicacao.EnviarAlunos > 0)
+            {
+                Alunocomunicacao alunocomunicacao = new Alunocomunicacao();
+                //necessário buscar id da pessoa que está enviando a comunicação ou é o id da turma.
+                //se for o idPessoa, será necessário fazer um array com a lista de todos os destinatários
+                alunocomunicacao.IdPessoa = comunicacao.IdTurma;
+                alunocomunicacao.IdComunicacao = comunicacao.Id;
+
+                createAlunoComunicacao(alunocomunicacao);
+            }
+            if (comunicacao.EnviarResponsaveis > 0)
+            {
+                Pessoacomunicacao pessoacomunicacao = new Pessoacomunicacao();
+                //necessário buscar id da pessoa que está enviando a comunicação ou é o id da turma.
+                //se for o idPessoa, será necessário fazer um array com a lista de todos os destinatários
+                pessoacomunicacao.IdPessoa = comunicacao.IdTurma;
+                pessoacomunicacao.IdComunicacao = comunicacao.Id;
+
+                createPessoaComunicacao(pessoacomunicacao);
+
+            }
             return comunicacao.Id;
         }
 
@@ -48,7 +71,6 @@ namespace Service
             _context.SaveChanges();
         }
 
-
         /// <summary>
         /// Consultar uma comunicação no banco
         /// </summary>
@@ -65,6 +87,25 @@ namespace Service
         public IEnumerable<Comunicacao> GetAll()
         {
             return _context.Comunicacaos.AsNoTracking();
+        }
+        /// <summary>
+        /// Inserindo os dados das comunicações com aluno no banco, tabela alunocomunicacao, relacionamento (n:n)
+        /// </summary>
+        /// <param name="alunocomunicacao"></param>
+        public void createAlunoComunicacao(Alunocomunicacao  alunocomunicacao)
+        {
+            _context.Add(alunocomunicacao);
+            _context.SaveChanges();
+
+        }
+        /// <summary>
+        /// Inserindo os dados das comunicações com pessoa no banco, tabela pessoacomunicacao, relacionamento (n:n)
+        /// </summary>
+        /// <param name="pessoacomunicacao"></param>
+        private void createPessoaComunicacao(Pessoacomunicacao pessoacomunicacao)
+        {
+            _context.Add(pessoacomunicacao);
+            _context.SaveChanges();
         }
     }
 }
