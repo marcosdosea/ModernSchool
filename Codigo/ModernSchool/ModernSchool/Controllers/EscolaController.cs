@@ -64,7 +64,7 @@ namespace ModernSchoolWEB.Controllers
         // POST: EscolaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EscolaViewModel escolaViewModel)
+        public ActionResult Edit(int id,EscolaViewModel escolaViewModel)
         {
             if (ModelState.IsValid)
             {

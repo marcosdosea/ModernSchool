@@ -4,6 +4,7 @@ using Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using Core.DTO;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -25,6 +26,7 @@ namespace ModernSchoolWEB.Controllers
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
             return View(listaPessoasModel);
         }
+
 
         // GET: PessoaController/Details/5
         public ActionResult Details(int id)

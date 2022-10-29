@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Core.DTO;
 
 namespace Service
 {
@@ -16,6 +17,22 @@ namespace Service
         public PessoaService(ModernSchoolContext context)
         {
             _context = context;
+        }
+
+
+        public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
+        {
+            var q = _context.Governoservidors
+                    .Where(g => g.IdCargoNavigation.Descricao.Equals("professor"))
+                    .Select(g =>
+                        new PessoaProfessorDTO
+                        {
+                            CargoPessoa = g.IdCargoNavigation.Descricao,
+                            IdPessoa = g.IdPessoa,
+                            NomePessoa = g.IdPessoaNavigation.Nome
+                        });
+
+            return q;
         }
 
         /// <summary>
