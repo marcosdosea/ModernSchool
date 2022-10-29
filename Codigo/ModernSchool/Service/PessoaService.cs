@@ -24,6 +24,7 @@ namespace Service
         {
             var q = _context.Governoservidors
                     .Where(g => g.IdCargoNavigation.Descricao.Equals("professor"))
+                    .OrderBy(g => g.IdPessoaNavigation.Nome)
                     .Select(g =>
                         new PessoaProfessorDTO
                         {

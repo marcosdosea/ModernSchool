@@ -8,7 +8,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdCargo" class="control-label"></label>
-                <input asp-for="IdCargo" class="form-control" />
+                <select asp-for="IdCargo" class="form-control" asp-items="@Model.listaCargo" ></select>
                 <span asp-validation-for="IdCargo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,12 +28,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdGoverno" class="control-label"></label>
-                <input asp-for="IdGoverno" class="form-control" />
+                <select asp-for="IdGoverno" class="form-control" asp-items="@Model.listaGoverno" ></select>
                 <span asp-validation-for="IdGoverno" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdPessoa" class="control-label"></label>
-                <input asp-for="IdPessoa" class="form-control" />
+                <select asp-for="IdPessoa" class="form-control" asp-items="@Model.listaPessoa" ></select>
                 <span asp-validation-for="IdPessoa" class="text-danger"></span>
             </div>
             <div class="form-group">

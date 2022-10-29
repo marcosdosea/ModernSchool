@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModernSchoolWEB.Models
 {
@@ -23,7 +24,14 @@ namespace ModernSchoolWEB.Models
         [Display(Name ="Governo")]
         public int IdGoverno { get; set; }
 
-        [Display(Name ="Professor")]
+        [Display(Name ="Pessoa")]
         public int IdPessoa { get; set; }
+
+        public SelectList? listaCargo { get; set; } 
+
+        public SelectList? listaGoverno { get; set; }
+
+        public SelectList? listaPessoa { get; set; }
+
     }
 }

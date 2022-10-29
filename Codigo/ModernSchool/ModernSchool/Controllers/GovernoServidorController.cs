@@ -4,6 +4,7 @@ using Core.Service;
 using AutoMapper;
 using ModernSchoolWEB.Models;
 using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -12,11 +13,19 @@ namespace ModernSchoolWEB.Controllers
 
         private readonly IGovernoServidorService _governoService;
         private readonly IMapper _mapper;
+        private readonly IPessoaService _pessoaService;
+        private readonly ICargoService _cargoService;
+        private readonly IGovernoService _governoServiceG;
 
-        public GovernoServidorController(IGovernoServidorService governoService, IMapper mapper)
+        public GovernoServidorController(IGovernoServidorService governoService,
+            IMapper mapper, IPessoaService pessoaService, ICargoService cargoService,
+            IGovernoService governoServiceG)
         {
             _governoService = governoService;
             _mapper = mapper;
+            _pessoaService = pessoaService;
+            _cargoService = cargoService;
+            _governoServiceG = governoServiceG;
         }
 
 
@@ -42,7 +51,20 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController/Create
         public ActionResult Create()
         {
-            return View();
+            GovernoServidorModel governoServidorModel = new GovernoServidorModel();
+
+            IEnumerable<Governo> listaGoverno = _governoServiceG.GetAll();
+            IEnumerable<Pessoa> listaPessoa = _pessoaService.GetAll();
+            IEnumerable<Cargo> listaCargo = _cargoService.GetAll();
+
+            governoServidorModel.listaGoverno = new SelectList(listaGoverno, "Id", "Municipio",null);
+            governoServidorModel.listaPessoa = new SelectList(listaPessoa, "Id", "Nome", null);
+            governoServidorModel.listaCargo = new SelectList(listaCargo, "IdCargo", "Descricao", null);
+
+
+
+
+            return View(governoServidorModel);
         }
 
         // POST: GovernoServidorController/Create
