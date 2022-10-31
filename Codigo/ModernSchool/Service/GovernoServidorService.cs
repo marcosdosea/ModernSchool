@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,7 +28,7 @@ namespace Service
         {
             _context.Add(governoservidor);
             _context.SaveChanges();
-            return governoservidor.IdGoverno;
+            return governoservidor.IdPessoa;
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(int id)
         {
-            var governoservidor = _context.Governoservidors.Find(id);
+            var governoservidor = _context.Governoservidors.Find(id,1);
             _context.Remove(governoservidor);
             _context.SaveChanges();
         }
@@ -69,6 +70,41 @@ namespace Service
         {
             return _context.Governoservidors.AsNoTracking();
 
+        }
+
+        public IEnumerable<GovernoServidorDTO> GetAllDTO()
+        {
+            var q = _context.Governoservidors
+                    .Select(g =>
+                    new GovernoServidorDTO
+                    {
+                        IdPessoa = g.IdPessoa,
+                        NomeCargo = g.IdCargoNavigation.Descricao,
+                        NomeGoverno = g.IdGovernoNavigation.Municipio,
+                        NomePessoa = g.IdPessoaNavigation.Nome,
+                        DataFim = g.DataFim,
+                        DataInicio = g.DataInicio,
+                        Status = g.Status
+                    });
+            return q;
+        }
+
+        public GovernoServidorDTO? GetDTO(int id)
+        {
+            var q = _context.Governoservidors
+                    .Where(g => g.IdPessoa == id)
+                    .Select(g =>
+                    new GovernoServidorDTO
+                    {
+                        IdPessoa = g.IdPessoa,
+                        NomeCargo = g.IdCargoNavigation.Descricao,
+                        NomeGoverno = g.IdGovernoNavigation.Municipio,
+                        NomePessoa = g.IdPessoaNavigation.Nome,
+                        DataFim = g.DataFim,
+                        DataInicio = g.DataInicio,
+                        Status = g.Status
+                    });
+            return q.FirstOrDefault();
         }
     }
 }

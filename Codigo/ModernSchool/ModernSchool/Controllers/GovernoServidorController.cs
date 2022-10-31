@@ -4,6 +4,7 @@ using Core.Service;
 using AutoMapper;
 using ModernSchoolWEB.Models;
 using Core;
+using Core.DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ModernSchoolWEB.Controllers
@@ -33,8 +34,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController
         public ActionResult Index()
         {
-            var listaGovernoS = _governoService.GetAll();
-            var listaGovernoM = _mapper.Map<List<GovernoServidorModel>>(listaGovernoS);
+            var listaGovernoS = _governoService.GetAllDTO();
+            var listaGovernoM = _mapper.Map<List<GovernoServidorDTOModel>>(listaGovernoS);
 
             return View(listaGovernoM);
         }
@@ -42,8 +43,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController/Details/5
         public ActionResult Details(int id)
         {
-            Governoservidor governoServidor = _governoService.Get(id);
-            var governoServidorM = _mapper.Map<GovernoServidorModel>(governoServidor);
+            GovernoServidorDTO? governoServidor = _governoService.GetDTO(id);
+            var governoServidorM = _mapper.Map<GovernoServidorDTOModel>(governoServidor);
 
             return View(governoServidorM);
         }
@@ -110,8 +111,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController/Delete/5
         public ActionResult Delete(int id)
         {
-            Governoservidor governoS = _governoService.Get(id);
-            GovernoServidorModel model = _mapper.Map<GovernoServidorModel>(governoS);
+            GovernoServidorDTO? governoS = _governoService.GetDTO(id);
+            GovernoServidorDTOModel model = _mapper.Map<GovernoServidorDTOModel>(governoS);
 
             return View(model);
         }

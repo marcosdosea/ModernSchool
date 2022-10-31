@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.DTO
+namespace ModernSchoolWEB.Models
 {
-    public class GovernoServidorDTO
+    public class GovernoServidorDTOModel
     {
+        [Key]
         public int IdPessoa { get; set; }
         public string? NomeCargo { get; set; }
         public DateTime DataInicio { get; set; }
-        public DateTime? DataFim { get; set; }
+        public DateTime DataFim { get; set; }
         public string? Status { get; set; }
         public string? NomeGoverno { get; set; }
         public string? NomePessoa { get; set; }
-        
     }
 }

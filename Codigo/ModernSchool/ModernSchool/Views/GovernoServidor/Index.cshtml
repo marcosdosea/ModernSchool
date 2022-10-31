@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.GovernoServidorModel>
+﻿@model IEnumerable<ModernSchoolWEB.Models.GovernoServidorDTOModel>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,7 +7,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdCargo)
+                @Html.DisplayNameFor(model => model.IdPessoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCargo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataInicio)
@@ -19,10 +22,10 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdGoverno)
+                @Html.DisplayNameFor(model => model.NomeGoverno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdPessoa)
+                @Html.DisplayNameFor(model => model.NomePessoa)
             </th>
             <th></th>
         </tr>
@@ -31,7 +34,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCargo)
+                @Html.DisplayFor(modelItem => item.IdPessoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCargo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataInicio)
@@ -43,15 +49,15 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdGoverno)
+                @Html.DisplayFor(modelItem => item.NomeGoverno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPessoa)
+                @Html.DisplayFor(modelItem => item.NomePessoa)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.IdGoverno }) |
-                @Html.ActionLink("Details", "Details", new { id=item.IdGoverno }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.IdGoverno })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.IdPessoa}) |
+                @Html.ActionLink("Details", "Details", new {  id=item.IdPessoa }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdPessoa })
             </td>
         </tr>
 }
