@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.DTO;
 
 namespace Core.Service
 {
@@ -13,5 +14,9 @@ namespace Core.Service
         void Delete(int id);
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
+        IEnumerable<PessoaProfessorDTO> GetAllProfessor();
+
+        
+
     }
 }

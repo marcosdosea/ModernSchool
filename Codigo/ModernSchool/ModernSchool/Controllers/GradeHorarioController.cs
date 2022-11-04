@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using ModernSchoolWEB.Models;
 using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Core.DTO;
+
 namespace ModernSchool.Controllers
 {
 
@@ -11,30 +14,50 @@ namespace ModernSchool.Controllers
     {
         private readonly IGradeHorarioService _gradehorarioService;
         private readonly IMapper _mapper;
+        private readonly IComponenteService _componenteService;
+        private readonly ITurmaService _turmaService; 
+        private readonly IPessoaService _pessoaService;
 
-        public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper)
+        public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper
+            , IComponenteService componenteService, ITurmaService turmaService,IPessoaService pessoaService)
         {
             _gradehorarioService = gradehorario;
             _mapper = mapper;
+            _componenteService = componenteService;
+            _turmaService = turmaService;
+            _pessoaService = pessoaService;
         }
 
         public ActionResult Index()
         {
-            var listaGradeHorario = _gradehorarioService.GetAll();
-            var listaGradeHorarioModel = _mapper.Map<List<GradehorarioViewModel>>(listaGradeHorario);
-            return View(listaGradeHorarioModel);
+            var listaGrade = _gradehorarioService.GetAllGradeHorario();
+            var listaModel = _mapper.Map<List<GradeHorarioDTOModel>>(listaGrade);
+            return View(listaModel);
         }
+
 
         public ActionResult Details(int id)
         {
-            Gradehorario listaGradehorario = _gradehorarioService.Get(id);
-            GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(listaGradehorario);
-            return View(gradehorarioModel);
+            GradeHorarioDTO? detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
+            GradeHorarioDTOModel model = _mapper.Map<GradeHorarioDTOModel>(detalhesProfessor);
+            return View(model);
         }
 
         public ActionResult Create()
         {
-            return View();
+            GradehorarioViewModel gradehorarioViewModel = new GradehorarioViewModel();
+
+            IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            
+            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome",null);
+            gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1",null);
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa",null);
+
+
+
+            return View(gradehorarioViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,6 +75,15 @@ namespace ModernSchool.Controllers
         {
             Gradehorario gradehorario = _gradehorarioService.Get(id);
             GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(gradehorario);
+
+            IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+
+            gradehorarioModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
+            gradehorarioModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1");
+            gradehorarioModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa");
+
             return View(gradehorarioModel);
         }
 
@@ -72,9 +104,9 @@ namespace ModernSchool.Controllers
 
         public ActionResult Delete(int id)
         {
-            Gradehorario gradehorario = _gradehorarioService.Get(id);
-            GradehorarioViewModel gradehorarioModel = _mapper.Map<GradehorarioViewModel>(gradehorario);
-            return View(gradehorarioModel);
+            GradeHorarioDTO? detalhesProfessor = _gradehorarioService.GetAGradeHorario(id);
+            GradeHorarioDTOModel model = _mapper.Map<GradeHorarioDTOModel>(detalhesProfessor);
+            return View(model);
         }
 
         [HttpPost]

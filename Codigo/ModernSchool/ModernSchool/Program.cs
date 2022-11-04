@@ -32,7 +32,7 @@ namespace ModernSchoolWEB
             //builder.Services.AddTransient<IDiarioDeClasseService, DiarioDeClasseService>();
             builder.Services.AddTransient<IEscolaService, EscolaService>();
             //builder.Services.AddTransient<IFrequenciaService, FrequenciaService>();
-            //builder.Services.AddTransient<IGradeHorarioService, GradeHorarioService>();
+            builder.Services.AddTransient<IGradeHorarioService, GradeHorarioService>();
             //builder.Services.AddTransient<IHabilidadeService, HabilidadeService>();
             //builder.Services.AddTransient<IObjetoDeConhecimentoService, ObjetoDeConhecimentoService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

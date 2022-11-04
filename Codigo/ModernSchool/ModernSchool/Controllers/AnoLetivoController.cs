@@ -4,7 +4,6 @@ using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
-using ModernSchoolWEB.Models;
 using Service;
 
 namespace ModernSchoolWEB.Controllers
