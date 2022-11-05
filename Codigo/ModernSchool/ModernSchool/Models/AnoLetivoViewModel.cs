@@ -15,6 +15,7 @@ namespace ModernSchoolWEB.Models
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DataInicio { get; set; }
+
         [Display(Name = "Data de fim")]
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
