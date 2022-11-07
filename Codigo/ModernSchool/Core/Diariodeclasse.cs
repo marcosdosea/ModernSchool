@@ -24,6 +24,8 @@ namespace Core
         public string TipoAula { get; set; }
 
         public virtual Componente IdComponenteNavigation { get; set; }
+
+        public virtual Diariodeclasse IdDiarioDeClasseNavigation { get; set; }
         public virtual Pessoa IdProfessorNavigation { get; set; }
         public virtual Turma IdTurmaNavigation { get; set; }
         public virtual ICollection<Frequenciaaluno> Frequenciaalunos { get; set; }
