@@ -1,4 +1,6 @@
-﻿namespace ModernSchoolWEB.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace ModernSchoolWEB.Models
 {
     public class AvaliacaoViewModel
     {
@@ -12,5 +14,6 @@
         public int IdTurma { get; set; }
         public int IdComponente { get; set; }
         public int IdPeriodo { get; set;}
+        public SelectList? ListaComponentes { get; set; }
     }
 }
