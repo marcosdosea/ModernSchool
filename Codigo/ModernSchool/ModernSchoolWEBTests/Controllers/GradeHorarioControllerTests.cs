@@ -47,6 +47,10 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 .Returns(GetTestGradeHorarioDTO());
             mockService.Setup(service => service.GetAGradeHorario(1))
                 .Returns(GetTargetGradeHorarioDTO());
+            mockService.Setup(service => service.Get(1))
+                .Returns(GetTargetGradeHorario());
+                
+                
             mockService.Setup(service => service.Edit(It.IsAny<Gradehorario>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Gradehorario>()))
