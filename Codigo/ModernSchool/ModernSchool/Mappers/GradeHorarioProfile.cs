@@ -2,7 +2,7 @@ using AutoMapper;
 using Core;
 using ModernSchoolWEB.Models;
 
-namespace ModernSchool.Mappers
+namespace ModernSchoolWEB.Mappers
 {
     public class GradeHorarioProfile : Profile
     {
