@@ -38,14 +38,15 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 cfg.AddProfile(new PessoaProfile());
                 cfg.AddProfile(new ComponenteProfile());
                 cfg.AddProfile(new TurmaProfile());
+                cfg.AddProfile(new GradeHorarioDTOProfile());
             });
             IMapper mapper = new Mapper(mapperConfig);
 
 
-            mockService.Setup(service => service.GetAll())
-                .Returns(GetTestGradeHorario());
-            mockService.Setup(service => service.Get(1))
-                .Returns(GetTargetGradeHorario());
+            mockService.Setup(service => service.GetAllGradeHorario())
+                .Returns(GetTestGradeHorarioDTO());
+            mockService.Setup(service => service.GetAGradeHorario(1))
+                .Returns(GetTargetGradeHorarioDTO());
             mockService.Setup(service => service.Edit(It.IsAny<Gradehorario>()))
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Gradehorario>()))
@@ -71,8 +72,8 @@ namespace ModernSchoolWEBTest.Controllers.Tests
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model,typeof(List<GradehorarioViewModel>));
-            List<GradehorarioViewModel> lista = (List<GradehorarioViewModel>)viewResult.ViewData.Model;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model,typeof(List<GradeHorarioDTOModel>));
+            List<GradeHorarioDTOModel> lista = (List<GradeHorarioDTOModel>)viewResult.ViewData.Model;
             Assert.AreEqual(3, lista.Count);
         }
 
@@ -83,14 +84,14 @@ namespace ModernSchoolWEBTest.Controllers.Tests
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(GradehorarioViewModel));
-            GradehorarioViewModel gradeHorarioViewModel = (GradehorarioViewModel)viewResult.ViewData.Model;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(GradeHorarioDTOModel));
+            GradeHorarioDTOModel gradeHorarioViewModel = (GradeHorarioDTOModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, gradeHorarioViewModel.Id);
-            Assert.AreEqual("SEG", gradeHorarioViewModel.DiaSemana);
+            Assert.AreEqual("SEG", gradeHorarioViewModel.Dia);
             Assert.AreEqual("7", gradeHorarioViewModel.HoraInicio);
             Assert.AreEqual("10", gradeHorarioViewModel.HoraFim);
-            Assert.AreEqual(1, gradeHorarioViewModel.IdComponente);
-            Assert.AreEqual(1, gradeHorarioViewModel.IdProfessor);
+            Assert.AreEqual("matematica", gradeHorarioViewModel.Componente);
+            Assert.AreEqual("matheus", gradeHorarioViewModel.Professor);
         }
 
         [TestMethod()]
@@ -181,14 +182,14 @@ namespace ModernSchoolWEBTest.Controllers.Tests
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(GradehorarioViewModel));
-            GradehorarioViewModel gradeHorarioViewModel = (GradehorarioViewModel)viewResult.ViewData.Model;
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(GradeHorarioDTOModel));
+            GradeHorarioDTOModel gradeHorarioViewModel = (GradeHorarioDTOModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, gradeHorarioViewModel.Id);
-            Assert.AreEqual("SEG", gradeHorarioViewModel.DiaSemana);
+            Assert.AreEqual("SEG", gradeHorarioViewModel.Dia);
             Assert.AreEqual("7", gradeHorarioViewModel.HoraInicio);
             Assert.AreEqual("10", gradeHorarioViewModel.HoraFim);
-            Assert.AreEqual(1, gradeHorarioViewModel.IdComponente);
-            Assert.AreEqual(1, gradeHorarioViewModel.IdProfessor);
+            Assert.AreEqual("matematica", gradeHorarioViewModel.Componente);
+            Assert.AreEqual("matheus", gradeHorarioViewModel.Professor);
         }
 
         [TestMethod()]
@@ -216,6 +217,20 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 IdTurma = 1
             };
         }
+
+        private GradeHorarioDTO GetTargetGradeHorarioDTO()
+        {
+            return new GradeHorarioDTO
+            {
+                Id = 1,
+                Dia = "SEG",
+                HoraInicio = "7",
+                HoraFim = "10",
+                Componente = "matematica",
+                Professor = "matheus",
+            };
+        }
+
 
 
         private IEnumerable<Pessoa> GetTestPessoa()
@@ -329,6 +344,54 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             };
         }
 
+        private GradeHorarioDTOModel GetTargetGradeHorarioViewModelDTO()
+        {
+            return new GradeHorarioDTOModel
+            {
+                Id = 2,
+                Dia = "SEG",
+                HoraInicio = "10",
+                HoraFim = "12",
+                Componente = "portugues",
+                Professor = "souza",
+            };
+        }
+
+
+        private IEnumerable<GradeHorarioDTO> GetTestGradeHorarioDTO()
+        {
+            return new List<GradeHorarioDTO>
+            {
+                new GradeHorarioDTO
+                {
+                    Id = 1,
+                    Dia= "SEG",
+                    HoraInicio= "7",
+                    HoraFim = "10",
+                    Componente = "matematica",
+                    Professor = "matheus",
+                   
+                },
+                new GradeHorarioDTO
+                {
+                    Id = 2,
+                    Dia= "SEG",
+                    HoraInicio= "10",
+                    HoraFim = "12",
+                    Componente = "portugues",
+                    Professor = "souza",
+                },
+                new GradeHorarioDTO
+                {
+                    Id = 3,
+                    Dia= "SEG",
+                    HoraInicio= "12",
+                    HoraFim = "14",
+                    Componente = "geografia",
+                    Professor = "cruz",
+                }
+            };
+        }
 
     }
 }
