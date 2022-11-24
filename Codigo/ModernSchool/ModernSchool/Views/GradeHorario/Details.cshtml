@@ -1,15 +1,9 @@
 ﻿@model ModernSchoolWEB.Models.GradeHorarioDTOModel
 
 <div>
-    <h4>GradeHorarioDTOModel</h4>
+    <h4>Detalhes</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Componente)
         </dt>
@@ -44,5 +38,5 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
