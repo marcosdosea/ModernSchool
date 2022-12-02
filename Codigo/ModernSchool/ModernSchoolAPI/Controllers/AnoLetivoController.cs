@@ -41,7 +41,7 @@ namespace ModernSchoolAPI.Controllers
 
         // POST api/<AnoLetivoController>
         [HttpPost]
-        public ActionResult Post([FromBody] AnoLetivoViewModel anoLetivo)
+        public ActionResult Post([FromBody] Anoletivo anoLetivo)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Dados inválidos.");
@@ -53,7 +53,7 @@ namespace ModernSchoolAPI.Controllers
         }
         // PUT api/<AnoLetivoController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] AnoLetivoViewModel anoLetivo)
+        public ActionResult Put(int id, [FromBody] Anoletivo anoLetivo)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Dados inválidos.");
