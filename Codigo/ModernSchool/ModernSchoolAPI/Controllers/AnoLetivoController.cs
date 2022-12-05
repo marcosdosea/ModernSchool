@@ -2,8 +2,7 @@
 using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
-using ModernSchoolWEB.Models;
-using Org.BouncyCastle.Crypto;
+using ModernSchoolAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,10 +21,10 @@ namespace ModernSchoolAPI.Controllers
         }
         // GET: api/<AnoLetivoController>
         [HttpGet]
-        public ActionResult <List<Anoletivo>>Get()
+        public ActionResult Get()
         {
             var listaAnoLetivo = _anoLetivoService.GetAll();
-            var listaAnoLetivosModel = _mapper.Map<List<Anoletivo>>(listaAnoLetivo);
+            var listaAnoLetivosModel = _mapper.Map<List<AnoLetivoViewModel>>(listaAnoLetivo);
             return Ok(listaAnoLetivosModel);
         }
 
