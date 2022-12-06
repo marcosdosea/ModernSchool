@@ -14,6 +14,9 @@ namespace Core.Service
         void Delete(int id);
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
+
+        PessoaProfessorDTO? GetProfessorDTO(int id);
+
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
 
         

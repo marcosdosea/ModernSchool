@@ -20,6 +20,22 @@ namespace Service
         }
 
 
+        public PessoaProfessorDTO? GetProfessorDTO(int id)
+        {
+            var q = _context.Governoservidors
+                    .Where(g => g.IdCargoNavigation.Descricao.Equals("professor") && g.IdPessoa == id)
+                    .Select(g =>
+                        new PessoaProfessorDTO
+                        {
+                            CargoPessoa = g.IdCargoNavigation.Descricao,
+                            IdPessoa = g.IdPessoa,
+                            NomePessoa = g.IdPessoaNavigation.Nome
+                        });
+
+            return q.FirstOrDefault();
+        }
+
+
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {
             var q = _context.Governoservidors

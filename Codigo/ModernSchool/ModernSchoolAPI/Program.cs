@@ -27,7 +27,7 @@ namespace ModernSchoolAPI
             //builder.Services.AddTransient<IAvaliacaoService, AvaliacaoService>();
             //builder.Services.AddTransient<ICargoService, CargoService>();
             //builder.Services.AddTransient<IGovernoService, GovernoService>();
-            //builder.Services.AddTransient<IPessoaService, PessoaService>();
+            builder.Services.AddTransient<IPessoaService, PessoaService>();
             //builder.Services.AddTransient<ITurmaService, TurmaService>();
             //builder.Services.AddTransient<IUnidadeTematicaService, UnidadeTematicaService>();
             //builder.Services.AddTransient<IComunicacaoService, ComunicacaoService>();
