@@ -44,6 +44,8 @@
     </dl>
     
     <form asp-action="Delete">
+        <input type="hidden" name="idGoverno" value="@Model.IdGoverno"/>
+        <input type="hidden" name="idPessoa" value="@Model.IdPessoa"/>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

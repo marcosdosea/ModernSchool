@@ -47,7 +47,7 @@ namespace Service
         /// <param name="id"></param>
         public void Delete(int idPessoa, int idGoverno)
         {
-            var governoservidor = _context.Governoservidors.Find(idPessoa,idGoverno);
+            var governoservidor = _context.Governoservidors.Find(idGoverno, idPessoa);
             _context.Remove(governoservidor);
             _context.SaveChanges();
         }
@@ -69,7 +69,7 @@ namespace Service
         /// <returns>Um Governo Servidor</returns>
         public Governoservidor Get(int idPessoa, int idGoverno)
         {
-            return _context.Governoservidors.Find(idPessoa,idGoverno);
+            return _context.Governoservidors.Find(idGoverno,idPessoa);
         }
 
         /// <summary>
@@ -93,8 +93,6 @@ namespace Service
                         NomeCargo = g.IdCargoNavigation.Descricao,
                         NomeGoverno = g.IdGovernoNavigation.Municipio,
                         NomePessoa = g.IdPessoaNavigation.Nome,
-                        DataFim = g.DataFim,
-                        DataInicio = g.DataInicio,
                         Status = g.Status
                     });
             return q.AsNoTracking();

@@ -35,8 +35,8 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
 
-            var listaGovernoS = _governoService.GetAll();
-            var listaGovernoM = _mapper.Map<List<GovernoServidorModel>>(listaGovernoS);
+            var listaGovernoS = _governoService.GetAllDTO();
+            var listaGovernoM = _mapper.Map<List<GovernoServidorDTOModel>>(listaGovernoS);
 
             return View(listaGovernoM);
         }
@@ -86,12 +86,20 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: GovernoServidorController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int idGoverno, int idPessoa)
         {
-           // Governoservidor governoservidor = _governoService.Get(id);
-            //GovernoServidorModel governoModel = _mapper.Map<GovernoServidorModel>(governoservidor);
+            var governoServidor = _governoService.Get(idPessoa, idGoverno);
+            GovernoServidorModel governoServidorModel = _mapper.Map<GovernoServidorModel>(governoServidor);
 
-             return View();
+            IEnumerable<Governo> listaGoverno = _governoServiceG.GetAll();
+            IEnumerable<Pessoa> listaPessoa = _pessoaService.GetAll();
+            IEnumerable<Cargo> listaCargo = _cargoService.GetAll();
+
+            governoServidorModel.listaGoverno = new SelectList(listaGoverno, "Id", "Municipio", null);
+            governoServidorModel.listaPessoa = new SelectList(listaPessoa, "Id", "Nome", null);
+            governoServidorModel.listaCargo = new SelectList(listaCargo, "IdCargo", "Descricao", null);
+            
+            return View(governoServidorModel);
         }
 
         // POST: GovernoServidorController/Edit/5
@@ -112,7 +120,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController/Delete/5
         public ActionResult Delete(int idPessoa, int idGoverno)
         {
-            Governoservidor governo = _governoService.Get(idPessoa,idGoverno);
+            var governo = _governoService.Get(idPessoa,idGoverno);
             GovernoServidorModel model = _mapper.Map<GovernoServidorModel>(governo);
 
             return View(model);
