@@ -19,6 +19,29 @@ namespace Service
             _context = context;
         }
 
+        public IEnumerable<PessoaProfessorDTO> GetAllAPI()
+        {
+            var q = _context.Governoservidors
+                    .Where(g => g.IdCargoNavigation.Descricao.Equals("professor"))
+                    .OrderBy(g => g.IdPessoaNavigation.Nome)
+                    .Select(g =>
+                        new PessoaProfessorDTO
+                        {
+                            CargoPessoa = g.IdCargoNavigation.Descricao,
+                            IdPessoa = g.IdPessoa,
+                            NomePessoa = g.IdPessoaNavigation.Nome,
+                            CPF = g.IdPessoaNavigation.Cpf,
+                            Bairro = g.IdPessoaNavigation.Bairro,
+                            DataNascimento = g.IdPessoaNavigation.DataNascimento,
+                            Idade = g.IdPessoaNavigation.Idade,
+                            Numero = g.IdPessoaNavigation.Numero,
+                            Rua = g.IdPessoaNavigation.Rua,
+                        });
+
+            return q;
+        }
+
+
 
         public PessoaProfessorDTO? GetProfessorDTO(int id)
         {
@@ -29,7 +52,13 @@ namespace Service
                         {
                             CargoPessoa = g.IdCargoNavigation.Descricao,
                             IdPessoa = g.IdPessoa,
-                            NomePessoa = g.IdPessoaNavigation.Nome
+                            NomePessoa = g.IdPessoaNavigation.Nome,
+                            CPF = g.IdPessoaNavigation.Cpf,
+                            Bairro = g.IdPessoaNavigation.Bairro,
+                            DataNascimento = g.IdPessoaNavigation.DataNascimento,
+                            Idade = g.IdPessoaNavigation.Idade,
+                            Numero = g.IdPessoaNavigation.Numero,
+                            Rua = g.IdPessoaNavigation.Rua,
                         });
 
             return q.FirstOrDefault();

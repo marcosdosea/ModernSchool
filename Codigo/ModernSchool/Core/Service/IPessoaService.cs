@@ -19,7 +19,9 @@ namespace Core.Service
 
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
 
-        
+        IEnumerable<PessoaProfessorDTO> GetAllAPI();
+
+
 
     }
 }

@@ -26,7 +26,7 @@ namespace ModernSchoolAPI.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            var lista = _pessoaService.GetAllProfessor();
+            var lista = _pessoaService.GetAllAPI();
             var model = _mapper.Map<List<ProfessorViewModel>>(lista);
 
             return Ok(lista);
@@ -36,7 +36,7 @@ namespace ModernSchoolAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            PessoaProfessorDTO professor = _pessoaService.GetProfessorDTO(id);
+            PessoaProfessorDTO? professor = _pessoaService.GetProfessorDTO(id);
 
             if (professor == null)
                 return NotFound();
