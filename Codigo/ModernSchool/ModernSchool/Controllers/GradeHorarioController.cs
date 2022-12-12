@@ -7,7 +7,7 @@ using Core;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.DTO;
 
-namespace ModernSchool.Controllers
+namespace ModernSchoolWEB.Controllers
 {
 
     public class GradeHorarioController : Controller

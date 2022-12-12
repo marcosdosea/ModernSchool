@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.Service
+{
+    public interface IDiarioDeClasseService
+    {
+        int Create(Diariodeclasse diariodeclasse);
+        void Edit(Diariodeclasse diariodeclasse);
+        void Delete(int diariodeclasse);
+        Anoletivo Get(int diariodeclasse);
+        IEnumerable<Diariodeclasse> GetAll();
+    }
+}

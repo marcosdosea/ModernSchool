@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
+using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -11,11 +14,16 @@ namespace ModernSchoolWEB.Controllers
     {
 
         private readonly IAvaliacaoService _avaliacaoService;
+        private readonly IComponenteService _componenteService;
+        //private readonly ITurmaService _turmaService;
+        //private readonly IPessoaService _pessoaService;
+
         private readonly IMapper _mapper;
 
-        public AvaliacaoController(IAvaliacaoService avaliacaoService, IMapper mapper)
+        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, IMapper mapper)
         {
             _avaliacaoService = avaliacaoService;
+            _componenteService = componenteService;
             _mapper = mapper;
         }
 
@@ -23,6 +31,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
             var listaAvaliacao = _avaliacaoService.GetAll();
+            
             var listaAvaliacaoModel = _mapper.Map<List<AvaliacaoViewModel>>(listaAvaliacao);
 
             return View(listaAvaliacaoModel);
@@ -40,7 +49,16 @@ namespace ModernSchoolWEB.Controllers
         // GET: AvaliacaoController1/Create
         public ActionResult Create()
         {
-            return View();
+            AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
+
+            //IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            
+
+            avaliacaoViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
+            //avaliacaoViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
+           
+            return View(avaliacaoViewModel);
         }
 
         // POST: AvaliacaoController1/Create
