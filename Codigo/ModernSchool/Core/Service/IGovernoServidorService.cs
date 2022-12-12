@@ -9,11 +9,11 @@ namespace Core.Service
 {
     public interface IGovernoServidorService
     {
-        int Create(Governoservidor governoservidor);
+        int Create(int idPessoa,int idGoverno,Governoservidor governoservidor);
         void Edit(Governoservidor governoservidor);
-        void Delete(int id);
-        Governoservidor Get(int id);
-        GovernoServidorDTO? GetDTO(int id);
+        void Delete(int idPessoa, int idGoverno);
+        Governoservidor Get(int idPessoa, int idGoverno);
+        GovernoServidorDTO? GetDTO(int idPessoa, int idGoverno);
         IEnumerable<Governoservidor> GetAll();
         IEnumerable<GovernoServidorDTO> GetAllDTO();
     }

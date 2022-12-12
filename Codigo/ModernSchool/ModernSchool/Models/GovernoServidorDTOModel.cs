@@ -4,8 +4,11 @@ namespace ModernSchoolWEB.Models
 {
     public class GovernoServidorDTOModel
     {
-        [Key]
+        
         public int IdPessoa { get; set; }
+        
+        public int IdGoverno { get; set; }
+
         public string? NomeCargo { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }

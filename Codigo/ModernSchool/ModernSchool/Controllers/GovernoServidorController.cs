@@ -34,17 +34,18 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController
         public ActionResult Index()
         {
-            var listaGovernoS = _governoService.GetAllDTO();
-            var listaGovernoM = _mapper.Map<List<GovernoServidorDTOModel>>(listaGovernoS);
+
+            var listaGovernoS = _governoService.GetAll();
+            var listaGovernoM = _mapper.Map<List<GovernoServidorModel>>(listaGovernoS);
 
             return View(listaGovernoM);
         }
 
         // GET: GovernoServidorController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int idPEssoa, int idGoverno)
         {
-            GovernoServidorDTO? governoServidor = _governoService.GetDTO(id);
-            var governoServidorM = _mapper.Map<GovernoServidorDTOModel>(governoServidor);
+            Governoservidor governoServidor = _governoService.Get(idPEssoa,idGoverno);
+            var governoServidorM = _mapper.Map<GovernoServidorModel>(governoServidor);
 
             return View(governoServidorM);
         }
@@ -76,7 +77,7 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var governoServidor = _mapper.Map<Governoservidor>(governoservidorM);
-                _governoService.Create(governoServidor);
+                _governoService.Create(governoservidorM.IdPessoa,governoservidorM.IdGoverno,governoServidor);
             }
 
             return RedirectToAction(nameof(Index));
@@ -87,10 +88,10 @@ namespace ModernSchoolWEB.Controllers
         // GET: GovernoServidorController/Edit/5
         public ActionResult Edit(int id)
         {
-            Governoservidor governoservidor = _governoService.Get(id);
-            GovernoServidorModel governoModel = _mapper.Map<GovernoServidorModel>(governoservidor);
+           // Governoservidor governoservidor = _governoService.Get(id);
+            //GovernoServidorModel governoModel = _mapper.Map<GovernoServidorModel>(governoservidor);
 
-            return View(governoModel);
+             return View();
         }
 
         // POST: GovernoServidorController/Edit/5
@@ -109,10 +110,10 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: GovernoServidorController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idPessoa, int idGoverno)
         {
-            GovernoServidorDTO? governoS = _governoService.GetDTO(id);
-            GovernoServidorDTOModel model = _mapper.Map<GovernoServidorDTOModel>(governoS);
+            Governoservidor governo = _governoService.Get(idPessoa,idGoverno);
+            GovernoServidorModel model = _mapper.Map<GovernoServidorModel>(governo);
 
             return View(model);
         }
@@ -120,9 +121,9 @@ namespace ModernSchoolWEB.Controllers
         // POST: GovernoServidorController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, GovernoServidorModel governoServidorModel)
+        public ActionResult Delete(int idPessoa, int idGoverno, GovernoServidorModel governoServidorModel)
         {
-            _governoService.Delete(id);
+            _governoService.Delete(idPessoa, idGoverno);
 
             return RedirectToAction(nameof(Index));
 

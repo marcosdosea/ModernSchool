@@ -17,27 +17,37 @@ namespace Service
         public GovernoServidorService(ModernSchoolContext context)
         {
             _context = context;
-        }   
+        }
 
         /// <summary>
         /// Criar um novo Governo Servidor
         /// </summary>
         /// <param name="governoservidor"></param>
         /// <returns>Id Governo</returns>
-        public int Create(Governoservidor governoservidor)
+        public int Create(int idPessoa, int idGoverno, Governoservidor governoservidor)
         {
-            _context.Add(governoservidor);
+            Governoservidor _governo = new()
+            {
+                IdGoverno = idGoverno,
+                IdPessoa = idPessoa,
+                DataFim = governoservidor.DataFim,
+                DataInicio = governoservidor.DataInicio,
+                IdCargo = governoservidor.IdCargo,
+                Status = governoservidor.Status
+            };
+           
+            _context.Add(_governo);
             _context.SaveChanges();
-            return governoservidor.IdPessoa;
+            return idPessoa;
         }
 
         /// <summary>
         /// Deleta um Governo Servidor
         /// </summary>
         /// <param name="id"></param>
-        public void Delete(int id)
+        public void Delete(int idPessoa, int idGoverno)
         {
-            var governoservidor = _context.Governoservidors.Find(id,1);
+            var governoservidor = _context.Governoservidors.Find(idPessoa,idGoverno);
             _context.Remove(governoservidor);
             _context.SaveChanges();
         }
@@ -57,9 +67,9 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Um Governo Servidor</returns>
-        public Governoservidor Get(int id)
+        public Governoservidor Get(int idPessoa, int idGoverno)
         {
-            return _context.Governoservidors.Find(id);
+            return _context.Governoservidors.Find(idPessoa,idGoverno);
         }
 
         /// <summary>
@@ -79,6 +89,7 @@ namespace Service
                     new GovernoServidorDTO
                     {
                         IdPessoa = g.IdPessoa,
+                        IdGoverno = g.IdGoverno,
                         NomeCargo = g.IdCargoNavigation.Descricao,
                         NomeGoverno = g.IdGovernoNavigation.Municipio,
                         NomePessoa = g.IdPessoaNavigation.Nome,
@@ -86,13 +97,13 @@ namespace Service
                         DataInicio = g.DataInicio,
                         Status = g.Status
                     });
-            return q;
+            return q.AsNoTracking();
         }
 
-        public GovernoServidorDTO? GetDTO(int id)
+        public GovernoServidorDTO? GetDTO(int idPessoa,int idGoverno)
         {
             var q = _context.Governoservidors
-                    .Where(g => g.IdPessoa == id)
+                    .Where(g => g.IdPessoa == idPessoa && g.IdGoverno == idGoverno)
                     .Select(g =>
                     new GovernoServidorDTO
                     {
@@ -106,5 +117,6 @@ namespace Service
                     });
             return q.FirstOrDefault();
         }
+
     }
 }
