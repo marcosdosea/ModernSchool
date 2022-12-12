@@ -3,7 +3,7 @@ Sistema de automação de escolas municipais
  <ul id="nav">
     <li><a href="#problema">1. Problema</a></li>
     <li><a href="#solucao">2. Solução</a></li>
-    <li><a href="#equipe">2. Equipe</a></li>
+    <li><a href="#equipe">3. Equipe</a></li>
  <ul/>
  <h2 id="problema">1. Problema</h2>
  <p>
@@ -18,7 +18,7 @@ Sistema de automação de escolas municipais
   Nossa solução é criar um software que auxilie esses profissionais da educação a tornar suas tarefas diárias ageis.
  bus
  </p>
- <h2 id="equipe">2. Equipe</h2>
+ <h2 id="equipe">3. Equipe</h2>
 
 <table align="center">
   <tr>
