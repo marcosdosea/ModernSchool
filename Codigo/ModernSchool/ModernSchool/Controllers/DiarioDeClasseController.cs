@@ -43,27 +43,22 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DiarioDeClasseViewModel diarioDeClasseModel)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    var diarioDeClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
-                    _diarioDeClasseService.Create(diarioDeClasse);
-                }
-                return RedirectToAction(nameof(Index));
+                var diarioClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
+                _diarioDeClasseService.Create(diarioClasse);
+
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: DiarioDeClasseController/Edit/5
         public ActionResult Edit(int id)
         {
-           // Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
-            //DiarioDeClasseViewModel diarioDeclasseModel= _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
-            return View();
+            Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
+            DiarioDeClasseViewModel diarioDeclasseModel= _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
+            return View(diarioDeclasseModel);
 
         }
 
@@ -91,9 +86,9 @@ namespace ModernSchoolWEB.Controllers
         // GET: DiarioDeClasseController/Delete/5
         public ActionResult Delete(int id)
         {
-            //Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
-            //DiarioDeClasseViewModel diarioDeclasseModel = _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
-            return View();
+            Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
+            DiarioDeClasseViewModel diarioDeclasseModel = _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
+            return View(diarioDeclasseModel);
 
         }
 

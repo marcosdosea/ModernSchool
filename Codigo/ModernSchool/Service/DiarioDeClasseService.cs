@@ -18,29 +18,58 @@ namespace Service
             _context = context;
         }
 
+        /// <summary>
+        /// Criar um novo Diário de classe 
+        /// </summary>
+        /// <param name="diariodeclasse"></param>
+        /// <returns> Id de diário de classe </returns>
+        /// <exception cref="NotImplementedException"></exception>
         public int Create(Diariodeclasse diariodeclasse)
         {
-            throw new NotImplementedException();
+            _context.Add(diariodeclasse);
+            _context.SaveChanges();
+            return diariodeclasse.Id;
         }
 
+        /// <summary>
+        /// Deletar um diário de classe 
+        /// </summary>
+        /// <param name="diariodeclasse"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Delete(int diariodeclasse)
         {
-            throw new NotImplementedException();
+            var diarioClasse = _context.Diariodeclasses.Find(diariodeclasse);
+            _context.Remove(diarioClasse);
+            _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Editar um Diario de classe
+        /// </summary>
+        /// <param name="diariodeclasse"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Edit(Diariodeclasse diariodeclasse)
         {
-            throw new NotImplementedException();
+            _context.Update(diariodeclasse);
+            _context.SaveChanges();
         }
 
-        public Anoletivo Get(int diariodeclasse)
+        /// <summary>
+        /// Pegar um diario de classe 
+        /// </summary>
+        /// <param name="diariodeclasse"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Diariodeclasse Get(int diariodeclasse)
         {
-            throw new NotImplementedException();
+            var diarioClasse = _context.Diariodeclasses.Find(diariodeclasse);
+            return diarioClasse;
         }
 
         public IEnumerable<Diariodeclasse> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Diariodeclasses.AsNoTracking();
         }
+
     }
 }
