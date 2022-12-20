@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace Core
 {
-    public partial class Alunocomunicacao
+    public partial class Alunoturma
     {
         public int IdAluno { get; set; }
-        public int IdComunicacao { get; set; }
+        public int IdTurma { get; set; }
 
         public virtual Pessoa IdAlunoNavigation { get; set; }
-        public virtual Comunicacao IdComunicacaoNavigation { get; set; }
+        public virtual Turma IdTurmaNavigation { get; set; }
     }
 }

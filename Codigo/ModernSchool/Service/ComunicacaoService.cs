@@ -32,7 +32,7 @@ namespace Service
                 Alunocomunicacao alunocomunicacao = new Alunocomunicacao();
                 //necessário buscar id da pessoa que está enviando a comunicação ou é o id da turma.
                 //se for o idPessoa, será necessário fazer um array com a lista de todos os destinatários
-                alunocomunicacao.IdPessoa = comunicacao.IdTurma;
+                alunocomunicacao.IdAluno = comunicacao.IdTurma;
                 alunocomunicacao.IdComunicacao = comunicacao.Id;
 
                 createAlunoComunicacao(alunocomunicacao);
