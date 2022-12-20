@@ -36,7 +36,7 @@ namespace Service
                 Status = governoservidor.Status
             };
            
-            _context.Add(_governo);
+            _context.Add(governoservidor);
             _context.SaveChanges();
             return idPessoa;
         }
@@ -79,7 +79,6 @@ namespace Service
         public IEnumerable<Governoservidor> GetAll()
         {
             return _context.Governoservidors.AsNoTracking();
-
         }
 
         public IEnumerable<GovernoServidorDTO> GetAllDTO()
