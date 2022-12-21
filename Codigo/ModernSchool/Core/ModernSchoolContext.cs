@@ -159,14 +159,14 @@ namespace Core
 
             modelBuilder.Entity<Anoletivo>(entity =>
             {
-                entity.HasKey(e => e.AnoLetivo1)
+                entity.HasKey(e => e.AnoLetivo)
                     .HasName("PRIMARY");
 
                 entity.ToTable("anoletivo");
 
                 entity.HasIndex(e => e.IdEscola, "fk_AnoLetivo_Escola1_idx");
 
-                entity.Property(e => e.AnoLetivo1)
+                entity.Property(e => e.AnoLetivo)
                     .HasColumnType("int unsigned")
                     .HasColumnName("anoLetivo");
 

@@ -42,9 +42,9 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: GovernoServidorController/Details/5
-        public ActionResult Details(int idPEssoa, int idGoverno)
+        public ActionResult Details(int idPessoa, int idGoverno)
         {
-            Governoservidor governoServidor = _governoService.Get(idPEssoa,idGoverno);
+            Governoservidor governoServidor = _governoService.Get(idPessoa,idGoverno);
             var governoServidorM = _mapper.Map<GovernoServidorModel>(governoServidor);
 
             return View(governoServidorM);
