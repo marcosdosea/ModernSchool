@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 using Service;
 
@@ -12,10 +14,16 @@ namespace ModernSchoolWEB.Controllers
     {
         private readonly IDiarioDeClasseService _diarioDeClasseService;
         private readonly IMapper _mapper;
-        public DiarioDeClasseController(IDiarioDeClasseService diarioDeClasseService, IMapper mapper)
+        private readonly IComponenteService _componenteService;
+        private readonly IPessoaService _pessoaService;
+        readonly ITurmaService _turmaService;
+        public DiarioDeClasseController(IDiarioDeClasseService diarioDeClasseService, IMapper mapper, IComponenteService componenteService, IPessoaService pessoaService, ITurmaService turmaService)
         {
             _diarioDeClasseService = diarioDeClasseService;
             _mapper = mapper;
+            _componenteService = componenteService;
+            _pessoaService = pessoaService;
+            _turmaService = turmaService;
         }
 
         // GET: DiarioDeClasseController
@@ -35,7 +43,20 @@ namespace ModernSchoolWEB.Controllers
         // GET: DiarioDeClasseController/Create
         public ActionResult Create()
         {
-            return View();
+            DiarioDeClasseViewModel diarioModel = new DiarioDeClasseViewModel();
+
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            IEnumerable<Componente> listaComponente = _componenteService.GetAll();
+            IEnumerable<Turma> listaTurma = _turmaService.GetAll();
+
+            diarioModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
+            diarioModel.listaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa", null);
+            diarioModel.listaComponente = new SelectList(listaComponente, "Id", "Nome", null);
+
+
+
+
+            return View(diarioModel);
         }
 
         // POST: DiarioDeClasseController/Create
