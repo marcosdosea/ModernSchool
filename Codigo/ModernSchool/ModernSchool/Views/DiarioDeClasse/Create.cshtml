@@ -7,11 +7,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DataShow" class="control-label"></label>
                 <input asp-for="DataShow" class="form-control" />
                 <span asp-validation-for="DataShow" class="text-danger"></span>
@@ -33,17 +28,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdTurma" class="control-label"></label>
-                <input asp-for="IdTurma" class="form-control" />
+                <select asp-for="IdTurma" class="form-control" asp-items="Model.listaTurma" ></select>
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdComponente" class="control-label"></label>
-                <input asp-for="IdComponente" class="form-control" />
+                <select asp-for="IdComponente" class="form-control" asp-items="Model.listaComponente" ></select>
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdProfessor" class="control-label"></label>
-                <input asp-for="IdProfessor" class="form-control" />
+                <select asp-for="IdProfessor" class="form-control" asp-items="Model.listaProfessor" ></select>
                 <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
             <div class="form-group">

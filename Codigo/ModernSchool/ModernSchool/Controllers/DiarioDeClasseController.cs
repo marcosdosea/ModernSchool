@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 using Service;
 
@@ -12,10 +14,16 @@ namespace ModernSchoolWEB.Controllers
     {
         private readonly IDiarioDeClasseService _diarioDeClasseService;
         private readonly IMapper _mapper;
-        public DiarioDeClasseController(IDiarioDeClasseService diarioDeClasseService, IMapper mapper)
+        private readonly IComponenteService _componenteService;
+        private readonly IPessoaService _pessoaService;
+        readonly ITurmaService _turmaService;
+        public DiarioDeClasseController(IDiarioDeClasseService diarioDeClasseService, IMapper mapper, IComponenteService componenteService, IPessoaService pessoaService, ITurmaService turmaService)
         {
             _diarioDeClasseService = diarioDeClasseService;
             _mapper = mapper;
+            _componenteService = componenteService;
+            _pessoaService = pessoaService;
+            _turmaService = turmaService;
         }
 
         // GET: DiarioDeClasseController
@@ -35,7 +43,20 @@ namespace ModernSchoolWEB.Controllers
         // GET: DiarioDeClasseController/Create
         public ActionResult Create()
         {
-            return View();
+            DiarioDeClasseViewModel diarioModel = new DiarioDeClasseViewModel();
+
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            IEnumerable<Componente> listaComponente = _componenteService.GetAll();
+            IEnumerable<Turma> listaTurma = _turmaService.GetAll();
+
+            diarioModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
+            diarioModel.listaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa", null);
+            diarioModel.listaComponente = new SelectList(listaComponente, "Id", "Nome", null);
+
+
+
+
+            return View(diarioModel);
         }
 
         // POST: DiarioDeClasseController/Create
@@ -43,27 +64,31 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DiarioDeClasseViewModel diarioDeClasseModel)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    var diarioDeClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
-                    _diarioDeClasseService.Create(diarioDeClasse);
-                }
-                return RedirectToAction(nameof(Index));
+                var diarioClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
+                _diarioDeClasseService.Create(diarioClasse);
+
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: DiarioDeClasseController/Edit/5
         public ActionResult Edit(int id)
         {
-           // Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
-            //DiarioDeClasseViewModel diarioDeclasseModel= _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
-            return View();
+            Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
+            DiarioDeClasseViewModel diarioModel = _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
+
+            IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
+            IEnumerable<Componente> listaComponente = _componenteService.GetAll();
+            IEnumerable<Turma> listaTurma = _turmaService.GetAll();
+
+            diarioModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
+            diarioModel.listaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa", null);
+            diarioModel.listaComponente = new SelectList(listaComponente, "Id", "Nome", null);
+
+            return View(diarioModel);
 
         }
 
@@ -72,28 +97,25 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, DiarioDeClasseViewModel diarioDeClasseModel)
         {
-            try
-            {
+            
 
-                if (ModelState.IsValid)
-                {
-                    var diarioDeClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
-                    _diarioDeClasseService.Edit(diarioDeClasse);
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                var diarioDeClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
+                _diarioDeClasseService.Edit(diarioDeClasse);
             }
+            return RedirectToAction(nameof(Index));
+
+
+
         }
 
         // GET: DiarioDeClasseController/Delete/5
         public ActionResult Delete(int id)
         {
-            //Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
-            //DiarioDeClasseViewModel diarioDeclasseModel = _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
-            return View();
+            Diariodeclasse diarioDeClasse = _diarioDeClasseService.Get(id);
+            DiarioDeClasseViewModel diarioDeclasseModel = _mapper.Map<DiarioDeClasseViewModel>(diarioDeClasse);
+            return View(diarioDeclasseModel);
 
         }
 
@@ -102,8 +124,8 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, DiarioDeClasseViewModel diarioDeClasseModel)
         {
-                _diarioDeClasseService.Delete(id);
-                return RedirectToAction(nameof(Index));
+            _diarioDeClasseService.Delete(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

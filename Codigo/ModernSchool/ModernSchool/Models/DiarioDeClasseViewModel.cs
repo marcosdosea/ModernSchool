@@ -1,4 +1,5 @@
 ﻿using Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -6,26 +7,30 @@ namespace ModernSchoolWEB.Models
 {
     public class DiarioDeClasseViewModel
     {
+        
         public int Id { get; set; }
+        [Display(Name ="Data Show")]
         public bool? DataShow { get; set; }
+        [Display(Name ="Livos")]
         public bool? Livros { get; set; }
+        [Display(Name = "Livros Seduc")]
         public bool? LivrosSeduc { get; set; }
-        [Display(Name = "Resumo da Aula")]
-        [Required(ErrorMessage = "Campo resumo da aula é obrigatório")]
-        public string ResumoAula { get; set; }
-        [Display(Name = "Turma")]
-        [Required(ErrorMessage = "Campo turma é obrigatório")]
+        [Display(Name = "Resumo da aula")]
+        public string? ResumoAula { get; set; }
+        [Display(Name ="Turma")]
         public int IdTurma { get; set; }
-        [Display(Name = "Componente")]
-        [Required(ErrorMessage = "Campo componente é obrigatório")]
+        [Display(Name ="Componente")]
         public int IdComponente { get; set; }
-        [Display(Name = "Professor")]
-        [Required(ErrorMessage = "Campo professor é obrigatório")]
+        [Display(Name ="Professor")]
         public int IdProfessor { get; set; }
-        public string TipoAula { get; set; }
-        public virtual Componente IdComponenteNavigation { get; set; }
-        public virtual Pessoa IdProfessorNavigation { get; set; }
-        public virtual Turma IdTurmaNavigation { get; set; }
+        [Display(Name ="Tipo de aula")]
+        public string? TipoAula { get; set; }
+
+        public SelectList? listaTurma { get; set; }
+
+        public SelectList? listaProfessor { get; set; }
+
+        public SelectList? listaComponente { get; set; }
 
     }
 }

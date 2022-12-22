@@ -11,7 +11,7 @@ namespace Core.Service
         int Create(Diariodeclasse diariodeclasse);
         void Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
-        Anoletivo Get(int diariodeclasse);
+        Diariodeclasse Get(int diariodeclasse);
         IEnumerable<Diariodeclasse> GetAll();
     }
 }
