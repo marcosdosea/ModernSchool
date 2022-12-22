@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ModernSchoolWEB.Models.AlunoAvaliacaoViewModel>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAvaliacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arquivo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAvaliacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arquivo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
