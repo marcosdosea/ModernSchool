@@ -19,6 +19,7 @@ namespace Core
 
         public virtual DbSet<Alunoavaliacao> Alunoavaliacaos { get; set; }
         public virtual DbSet<Alunocomunicacao> Alunocomunicacaos { get; set; }
+        public virtual DbSet<Alunoturma> Alunoturmas { get; set; }
         public virtual DbSet<Anoletivo> Anoletivos { get; set; }
         public virtual DbSet<Avaliacao> Avaliacaos { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
@@ -44,7 +45,7 @@ namespace Core
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=ModernSchool");
             }
         }
@@ -53,18 +54,18 @@ namespace Core
         {
             modelBuilder.Entity<Alunoavaliacao>(entity =>
             {
-                entity.HasKey(e => new { e.IdPessoa, e.IdAvaliacao })
+                entity.HasKey(e => new { e.IdAluno, e.IdAvaliacao })
                     .HasName("PRIMARY");
 
                 entity.ToTable("alunoavaliacao");
 
                 entity.HasIndex(e => e.IdAvaliacao, "fk_PessoaAvaliacao_Avaliacao1_idx");
 
-                entity.HasIndex(e => e.IdPessoa, "fk_PessoaAvaliacao_Pessoa1_idx");
+                entity.HasIndex(e => e.IdAluno, "fk_PessoaAvaliacao_Pessoa1_idx");
 
-                entity.Property(e => e.IdPessoa)
+                entity.Property(e => e.IdAluno)
                     .HasColumnType("int unsigned")
-                    .HasColumnName("idPessoa");
+                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdAvaliacao)
                     .HasColumnType("int unsigned")
@@ -81,61 +82,91 @@ namespace Core
                     .HasColumnType("decimal(10,2)")
                     .HasColumnName("nota");
 
+                entity.HasOne(d => d.IdAlunoNavigation)
+                    .WithMany(p => p.Alunoavaliacaos)
+                    .HasForeignKey(d => d.IdAluno)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_PessoaAvaliacao_Pessoa1");
+
                 entity.HasOne(d => d.IdAvaliacaoNavigation)
                     .WithMany(p => p.Alunoavaliacaos)
                     .HasForeignKey(d => d.IdAvaliacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_PessoaAvaliacao_Avaliacao1");
-
-                entity.HasOne(d => d.IdPessoaNavigation)
-                    .WithMany(p => p.Alunoavaliacaos)
-                    .HasForeignKey(d => d.IdPessoa)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaAvaliacao_Pessoa1");
             });
 
             modelBuilder.Entity<Alunocomunicacao>(entity =>
             {
-                entity.HasKey(e => new { e.IdPessoa, e.IdComunicacao })
+                entity.HasKey(e => new { e.IdAluno, e.IdComunicacao })
                     .HasName("PRIMARY");
 
                 entity.ToTable("alunocomunicacao");
 
                 entity.HasIndex(e => e.IdComunicacao, "fk_PessoaComunicacao_Comunicacao1_idx");
 
-                entity.HasIndex(e => e.IdPessoa, "fk_PessoaComunicacao_Pessoa1_idx");
+                entity.HasIndex(e => e.IdAluno, "fk_PessoaComunicacao_Pessoa1_idx");
 
-                entity.Property(e => e.IdPessoa)
+                entity.Property(e => e.IdAluno)
                     .HasColumnType("int unsigned")
-                    .HasColumnName("idPessoa");
+                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdComunicacao)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idComunicacao");
+
+                entity.HasOne(d => d.IdAlunoNavigation)
+                    .WithMany(p => p.Alunocomunicacaos)
+                    .HasForeignKey(d => d.IdAluno)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_PessoaComunicacao_Pessoa1");
 
                 entity.HasOne(d => d.IdComunicacaoNavigation)
                     .WithMany(p => p.Alunocomunicacaos)
                     .HasForeignKey(d => d.IdComunicacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_PessoaComunicacao_Comunicacao1");
+            });
 
-                entity.HasOne(d => d.IdPessoaNavigation)
-                    .WithMany(p => p.Alunocomunicacaos)
-                    .HasForeignKey(d => d.IdPessoa)
+            modelBuilder.Entity<Alunoturma>(entity =>
+            {
+                entity.HasKey(e => new { e.IdAluno, e.IdTurma })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("alunoturma");
+
+                entity.HasIndex(e => e.IdAluno, "fk_PessoaTurma_Pessoa1_idx");
+
+                entity.HasIndex(e => e.IdTurma, "fk_PessoaTurma_Turma1_idx");
+
+                entity.Property(e => e.IdAluno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idAluno");
+
+                entity.Property(e => e.IdTurma).HasColumnName("idTurma");
+
+                entity.HasOne(d => d.IdAlunoNavigation)
+                    .WithMany(p => p.Alunoturmas)
+                    .HasForeignKey(d => d.IdAluno)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaComunicacao_Pessoa1");
+                    .HasConstraintName("fk_PessoaTurma_Pessoa1");
+
+                entity.HasOne(d => d.IdTurmaNavigation)
+                    .WithMany(p => p.Alunoturmas)
+                    .HasForeignKey(d => d.IdTurma)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_PessoaTurma_Turma1");
             });
 
             modelBuilder.Entity<Anoletivo>(entity =>
             {
-                entity.HasKey(e => e.AnoLetivo1)
+                entity.HasKey(e => e.AnoLetivo)
                     .HasName("PRIMARY");
 
                 entity.ToTable("anoletivo");
 
                 entity.HasIndex(e => e.IdEscola, "fk_AnoLetivo_Escola1_idx");
 
-                entity.Property(e => e.AnoLetivo1)
+                entity.Property(e => e.AnoLetivo)
                     .HasColumnType("int unsigned")
                     .HasColumnName("anoLetivo");
 
@@ -421,18 +452,18 @@ namespace Core
 
             modelBuilder.Entity<Frequenciaaluno>(entity =>
             {
-                entity.HasKey(e => new { e.IdPessoa, e.IdDiarioDeClasse })
+                entity.HasKey(e => new { e.IdAluno, e.IdDiarioDeClasse })
                     .HasName("PRIMARY");
 
                 entity.ToTable("frequenciaaluno");
 
                 entity.HasIndex(e => e.IdDiarioDeClasse, "fk_PessoaDiarioDeClasse_DiarioDeClasse1_idx");
 
-                entity.HasIndex(e => e.IdPessoa, "fk_PessoaDiarioDeClasse_Pessoa1_idx");
+                entity.HasIndex(e => e.IdAluno, "fk_PessoaDiarioDeClasse_Pessoa1_idx");
 
-                entity.Property(e => e.IdPessoa)
+                entity.Property(e => e.IdAluno)
                     .HasColumnType("int unsigned")
-                    .HasColumnName("idPessoa");
+                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdDiarioDeClasse)
                     .HasColumnType("int unsigned")
@@ -440,17 +471,17 @@ namespace Core
 
                 entity.Property(e => e.Faltas).HasColumnName("faltas");
 
+                entity.HasOne(d => d.IdAlunoNavigation)
+                    .WithMany(p => p.Frequenciaalunos)
+                    .HasForeignKey(d => d.IdAluno)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_PessoaDiarioDeClasse_Pessoa1");
+
                 entity.HasOne(d => d.IdDiarioDeClasseNavigation)
                     .WithMany(p => p.Frequenciaalunos)
                     .HasForeignKey(d => d.IdDiarioDeClasse)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_PessoaDiarioDeClasse_DiarioDeClasse1");
-
-                entity.HasOne(d => d.IdPessoaNavigation)
-                    .WithMany(p => p.Frequenciaalunos)
-                    .HasForeignKey(d => d.IdPessoa)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaDiarioDeClasse_Pessoa1");
             });
 
             modelBuilder.Entity<Governo>(entity =>
@@ -483,6 +514,8 @@ namespace Core
                 entity.ToTable("governoservidor");
 
                 entity.HasIndex(e => e.IdCargo, "fk_GovernoServidor_Cargo1_idx");
+
+                entity.HasIndex(e => e.IdGoverno, "fk_GovernoServidor_Governo1_idx");
 
                 entity.HasIndex(e => e.IdPessoa, "fk_GovernoServidor_Pessoa1_idx");
 

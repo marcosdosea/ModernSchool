@@ -11,6 +11,7 @@ namespace Core
         {
             Alunoavaliacaos = new HashSet<Alunoavaliacao>();
             Alunocomunicacaos = new HashSet<Alunocomunicacao>();
+            Alunoturmas = new HashSet<Alunoturma>();
             Diariodeclasses = new HashSet<Diariodeclasse>();
             Frequenciaalunos = new HashSet<Frequenciaaluno>();
             Governoservidors = new HashSet<Governoservidor>();
@@ -29,6 +30,7 @@ namespace Core
 
         public virtual ICollection<Alunoavaliacao> Alunoavaliacaos { get; set; }
         public virtual ICollection<Alunocomunicacao> Alunocomunicacaos { get; set; }
+        public virtual ICollection<Alunoturma> Alunoturmas { get; set; }
         public virtual ICollection<Diariodeclasse> Diariodeclasses { get; set; }
         public virtual ICollection<Frequenciaaluno> Frequenciaalunos { get; set; }
         public virtual ICollection<Governoservidor> Governoservidors { get; set; }

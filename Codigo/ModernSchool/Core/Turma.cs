@@ -9,6 +9,7 @@ namespace Core
     {
         public Turma()
         {
+            Alunoturmas = new HashSet<Alunoturma>();
             Avaliacaos = new HashSet<Avaliacao>();
             Comunicacaos = new HashSet<Comunicacao>();
             Diariodeclasses = new HashSet<Diariodeclasse>();
@@ -25,6 +26,7 @@ namespace Core
         public string Status { get; set; }
 
         public virtual Anoletivo AnoLetivoNavigation { get; set; }
+        public virtual ICollection<Alunoturma> Alunoturmas { get; set; }
         public virtual ICollection<Avaliacao> Avaliacaos { get; set; }
         public virtual ICollection<Comunicacao> Comunicacaos { get; set; }
         public virtual ICollection<Diariodeclasse> Diariodeclasses { get; set; }
