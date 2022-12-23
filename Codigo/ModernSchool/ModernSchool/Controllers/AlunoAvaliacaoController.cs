@@ -3,6 +3,7 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModernSchoolWEB.Models;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -12,10 +13,20 @@ namespace ModernSchoolWEB.Controllers
         private readonly IAvaliacaoService _avaliacaoService;
         private readonly IAlunoAvaliacaoService _alunoAvaliacaoService;
         private readonly IPessoaService _pessoaService;
+
+        public AlunoAvaliacaoController(IMapper mapper, IAvaliacaoService avaliacaoService, IAlunoAvaliacaoService alunoAvaliacaoService, IPessoaService pessoaService)
+        {
+            _mapper = mapper;
+            _avaliacaoService = avaliacaoService;
+            _alunoAvaliacaoService = alunoAvaliacaoService;
+            _pessoaService = pessoaService;
+        }
         // GET: AlunoAvaliacaoController
         public ActionResult Index()
         {
-            return View();
+            var lista = _alunoAvaliacaoService.GetAllDTO();
+            var model = _mapper.Map<List<AlunoAvaliacaoDTOModel>>(lista);
+            return View(model);
         }
 
         // GET: AlunoAvaliacaoController/Details/5
