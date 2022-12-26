@@ -4,18 +4,27 @@ using Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
     public class TurmaController : Controller
     {
         private readonly ITurmaService _turmaService;
+
+        private readonly IAlunoTurma _alunoTurma;
+        private readonly IPessoaService _pessoaService;
         private readonly IMapper _mapper;
 
-        public TurmaController(ITurmaService turmaService, IMapper mapper)
+        public TurmaController(ITurmaService turmaService, IMapper mapper,IAlunoTurma alunoTurma
+            ,IPessoaService pessoaService)
         {
             _turmaService = turmaService;
             _mapper = mapper;
+            _alunoTurma = alunoTurma;
+            _pessoaService = pessoaService;
+
         }
 
         // GET: TurmaController
@@ -88,6 +97,35 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id, TurmaViewModel turmaViewModel)
         {
             _turmaService.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public ActionResult AdicionarAluno(int id)
+        {
+            AlunoTurmaViewModel model = new AlunoTurmaViewModel();
+            model.IdTurma = id;
+
+            IEnumerable<Pessoa> listaPessoa = _pessoaService.GetAll();
+
+            model.listaAluno = new SelectList(listaPessoa, "Id", "Nome");
+
+            return View(model);
+        }
+
+        // POST: AlunoTurmaController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdicionarAluno(AlunoTurmaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var alunoTurma = _mapper.Map<Alunoturma>(model);
+                _alunoTurma.Matricular(alunoTurma);
+            }
+
+
+
             return RedirectToAction(nameof(Index));
         }
 

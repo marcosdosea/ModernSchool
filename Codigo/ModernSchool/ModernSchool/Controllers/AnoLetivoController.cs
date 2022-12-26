@@ -49,7 +49,7 @@ namespace ModernSchoolWEB.Controllers
                 var anoLetivo = _mapper.Map<Anoletivo>(anoLetivoModel);
                 _anoLetivoService.Create(anoLetivo);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("","Turma");
         }
 
         // GET: AnoLetivoController/Edit/5

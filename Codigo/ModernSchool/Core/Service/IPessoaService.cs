@@ -15,8 +15,6 @@ namespace Core.Service
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
-
-        
-
+ 
     }
 }
