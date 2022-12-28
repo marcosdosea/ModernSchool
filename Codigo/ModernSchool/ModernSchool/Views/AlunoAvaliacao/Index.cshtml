@@ -1,41 +1,45 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.AlunoAvaliacaoDTOModel>
+﻿@model List<ModernSchoolWEB.Models.AlunoAvaliacaoDTOModel>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAluno)
+                @Html.DisplayNameFor(model => model[0].IdAluno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeAluno)
+                @Html.DisplayNameFor(model => model[0].NomeAluno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nota)
+                @Html.DisplayNameFor(model => model[0].Nota)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nota)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.IdAluno, idAvaliacao = item.IdAvaliacao  }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.IdAluno, idAvaliacao = item.IdAvaliacao }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdAluno, idAvaliacao = item.IdAvaliacao  })
+        <form asp-controller="Aluno" asp-action="CadastrarNotas" method="post">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].IdAluno)
+                    <input type="hidden" asp-for="@Model[i].IdAluno" value="@Model[i].IdAluno">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].NomeAluno)
+                    <input type="hidden" asp-for="@Model[i].NomeAluno" value="@Model[i].NomeAluno">
+                </td>
+                <td>
+                    <input type="number" asp-for="@Model[i].Nota">
+                </td>
+            </tr>
+            }
+            <tr>
+            <td style="border-bottom:none;">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </td>
         </tr>
-}
+        </form>
     </tbody>
 </table>
+

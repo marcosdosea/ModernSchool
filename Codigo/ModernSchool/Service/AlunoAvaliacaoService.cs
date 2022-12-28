@@ -47,6 +47,7 @@ namespace Service
         public IEnumerable<AlunoAvaliacaoDTO> GetAllDTO()
         {
             var query = _context.Alunoavaliacaos
+                .Where(g => g.IdAvaliacaoNavigation.IdTurma == 1)
                 .Select(g =>
                  new AlunoAvaliacaoDTO { 
                      IdAluno = g.IdAluno,
