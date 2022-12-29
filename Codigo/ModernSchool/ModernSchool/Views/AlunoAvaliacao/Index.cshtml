@@ -10,6 +10,7 @@
             <th>
                 @Html.DisplayNameFor(model => model[0].NomeAluno)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model[0].Nota)
             </th>
@@ -29,12 +30,13 @@
                         @Html.DisplayFor(modelItem => Model[i].NomeAluno)
                     <input type="hidden" asp-for="@Model[i].NomeAluno" value="@Model[i].NomeAluno">
                 </td>
+                <td>       
+                    <input asp-for="@Model[i].Nota" value="@Model[i].Nota">
+                </td>
                 <td>
                     <input type="hidden" asp-for="@Model[i].IdAvaliacao" value="@Model[i].IdAvaliacao">
                 </td>
-                <td>
-                    <input type="number" asp-for="@Model[i].Nota" value="@Model[i].Nota">
-                </td>
+              
             </tr>
             }
         <tr>
@@ -45,4 +47,6 @@
         </form>
     </tbody>
 </table>
+
+
 
