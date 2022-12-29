@@ -17,24 +17,27 @@
         </tr>
     </thead>
     <tbody>
-        <form asp-controller="Aluno" asp-action="CadastrarNotas" method="post">
+        <form asp-controller="AlunoAvaliacao" asp-action="Edit" method="post">
             @for (int i = 0; i < Model.Count(); i++)
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model[i].IdAluno)
+                        @Html.DisplayFor(modelItem => Model[i].IdAluno)
                     <input type="hidden" asp-for="@Model[i].IdAluno" value="@Model[i].IdAluno">
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => Model[i].NomeAluno)
+                        @Html.DisplayFor(modelItem => Model[i].NomeAluno)
                     <input type="hidden" asp-for="@Model[i].NomeAluno" value="@Model[i].NomeAluno">
                 </td>
                 <td>
-                    <input type="number" asp-for="@Model[i].Nota">
+                    <input type="hidden" asp-for="@Model[i].IdAvaliacao" value="@Model[i].IdAvaliacao">
+                </td>
+                <td>
+                    <input type="number" asp-for="@Model[i].Nota" value="@Model[i].Nota">
                 </td>
             </tr>
             }
-            <tr>
+        <tr>
             <td style="border-bottom:none;">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </td>

@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using MessagePack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using System.Text;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -65,16 +67,35 @@ namespace ModernSchoolWEB.Controllers
         // POST: AlunoAvaliacaoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(List<AlunoAvaliacaoDTOModel> alunos)
         {
-            try
+            Alunoavaliacao alunoAvaliacao = new ();
+
+
+            foreach(var aluno in alunos)
             {
-                return RedirectToAction(nameof(Index));
+                alunoAvaliacao = _alunoAvaliacaoService.Get(aluno.IdAluno, aluno.IdAvaliacao);
+
+                if(alunoAvaliacao ==  null)
+                {
+                    alunoAvaliacao = new();
+                    alunoAvaliacao.IdAluno = aluno.IdAluno;
+                    alunoAvaliacao.IdAvaliacao = aluno.IdAvaliacao;
+                    alunoAvaliacao.DataEntrega = DateTime.Now;
+                    alunoAvaliacao.Arquivo = Encoding.ASCII.GetBytes("t");
+                    alunoAvaliacao.Nota = aluno.Nota;
+                    _alunoAvaliacaoService.Create(aluno.IdAluno, aluno.IdAvaliacao, alunoAvaliacao);
+                }
+                else
+                {
+                    alunoAvaliacao.Nota = aluno.Nota;
+                    _alunoAvaliacaoService.Edit(alunoAvaliacao);
+
+                }
+
+
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AlunoAvaliacaoController/Delete/5

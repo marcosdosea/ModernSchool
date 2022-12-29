@@ -21,7 +21,9 @@ namespace Service
 
         public int Create(int idAluno, int idAvaliacao, Alunoavaliacao alunoavaliacao)
         {
-            throw new NotImplementedException();
+            _context.Add(alunoavaliacao);
+            _context.SaveChanges();
+            return alunoavaliacao.IdAluno;
         }
 
         public void Delete(int idAluno, int idAvaliacao)
@@ -31,12 +33,13 @@ namespace Service
 
         public void Edit(Alunoavaliacao alunoavaliacao)
         {
-            throw new NotImplementedException();
+            _context.Update(alunoavaliacao);
+            _context.SaveChanges();
         }
 
         public Alunoavaliacao Get(int idAluno, int idAvaliacao)
         {
-            throw new NotImplementedException();
+            return _context.Alunoavaliacaos.Find(idAluno, idAvaliacao);
         }
 
         public IEnumerable<Alunoavaliacao> GetAll()
@@ -51,6 +54,7 @@ namespace Service
                 .Select(g =>
                  new AlunoAvaliacaoDTO { 
                      IdAluno = g.IdAluno,
+                     IdAvaliacao = g.IdAvaliacao,
                      NomeAluno = g.IdAlunoNavigation.Nome,
                      Nota = g.Nota
                  });
