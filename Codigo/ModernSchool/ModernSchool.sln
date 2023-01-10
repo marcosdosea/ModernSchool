@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{9E8E86F5-E285-4D38-854D-5800B5809515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernSchoolWEBTests", "ModernSchoolWEBTests\ModernSchoolWEBTests.csproj", "{EA229A36-9D4E-4C9C-BC7F-67C64FAFB238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchoolWEBTests", "ModernSchoolWEBTests\ModernSchoolWEBTests.csproj", "{EA229A36-9D4E-4C9C-BC7F-67C64FAFB238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTests", "ServiceTests\ServiceTests.csproj", "{5B641063-F8F0-414B-92A4-08DDE891D461}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceTests", "ServiceTests\ServiceTests.csproj", "{5B641063-F8F0-414B-92A4-08DDE891D461}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernSchoolAPI", "ModernSchoolAPI\ModernSchoolAPI.csproj", "{DCB3C5C9-AEE4-48A8-AA6E-28B4368AC958}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5B641063-F8F0-414B-92A4-08DDE891D461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B641063-F8F0-414B-92A4-08DDE891D461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B641063-F8F0-414B-92A4-08DDE891D461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB3C5C9-AEE4-48A8-AA6E-28B4368AC958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB3C5C9-AEE4-48A8-AA6E-28B4368AC958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB3C5C9-AEE4-48A8-AA6E-28B4368AC958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB3C5C9-AEE4-48A8-AA6E-28B4368AC958}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
