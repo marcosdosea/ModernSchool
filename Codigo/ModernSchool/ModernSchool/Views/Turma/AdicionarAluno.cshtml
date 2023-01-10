@@ -12,8 +12,7 @@
                 <span asp-validation-for="IdAluno" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <input asp-for="IdTurma" class="form-control" value="@Model.IdTurma" />
+                <input type="hidden" asp-for="IdTurma" class="form-control" value="@Model.IdTurma" />
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">

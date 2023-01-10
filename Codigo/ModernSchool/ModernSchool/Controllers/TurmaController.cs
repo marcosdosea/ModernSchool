@@ -108,7 +108,7 @@ namespace ModernSchoolWEB.Controllers
 
             IEnumerable<Pessoa> listaPessoa = _pessoaService.GetAll();
 
-            model.listaAluno = new SelectList(listaPessoa, "Id", "Nome");
+            model.listaAluno = new SelectList(listaPessoa, "Id", "Cpf");
 
             return View(model);
         }
