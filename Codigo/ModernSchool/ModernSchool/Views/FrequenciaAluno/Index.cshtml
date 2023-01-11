@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ModernSchoolWEB.Models.FrequenciaAlunoDTOViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idDiarioDeClasse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.faltas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.turma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.componente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.idDiarioDeClasse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.faltas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.turma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.componente)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.idAluno  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.idAluno  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.idAluno  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
