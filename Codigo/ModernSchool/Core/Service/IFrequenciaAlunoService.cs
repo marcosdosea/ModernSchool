@@ -10,9 +10,9 @@ namespace Core.Service
     public interface IFrequenciaAlunoService
     {
         int Create(Frequenciaaluno frequenciaaluno);
-        int Edit(Frequenciaaluno frequenciaaluno);
+        void Edit(Frequenciaaluno frequenciaaluno);
         void Delete(Frequenciaaluno frequenciaaluno);
-        Frequenciaaluno Get(int Frequenciaaluno);
+        Frequenciaaluno Get(int idAluno, int idDiario);
         IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO();
 
     }

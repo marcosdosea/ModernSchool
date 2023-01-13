@@ -28,15 +28,21 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public int Edit(Frequenciaaluno frequenciaaluno)
+        public void Edit(Frequenciaaluno frequenciaaluno)
         {
-            throw new NotImplementedException();
+            if (frequenciaaluno == Get(frequenciaaluno.IdAluno, frequenciaaluno.IdDiarioDeClasse))
+            {
+                frequenciaaluno.Faltas++;
+                _context.Update(frequenciaaluno);
+            }
+            _context.SaveChanges();
         }
 
-        public Frequenciaaluno Get(int Frequenciaaluno)
+        public Frequenciaaluno Get(int idAluno, int idDiario)
         {
-            throw new NotImplementedException();
+            return _context.Frequenciaalunos.Find(idAluno, idDiario);
         }
+
 
         public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
         {
@@ -49,7 +55,7 @@ namespace Service
                         faltas = q.Faltas,
                         nomeAluno = q.IdAlunoNavigation.Nome,
                         turma = q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Turma1,
-                        componente = q.IdDiarioDeClasseNavigation.IdComponenteNavigation.Nome
+                        componente = q.IdDiarioDeClasseNavigation.IdComponenteNavigation.Nome,
                     });
 
             return query.AsNoTracking();

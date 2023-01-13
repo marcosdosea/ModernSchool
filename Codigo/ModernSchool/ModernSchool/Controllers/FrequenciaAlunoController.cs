@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ModernSchoolWEB.Models;
 using Service;
 
@@ -61,16 +64,18 @@ namespace ModernSchoolWEB.Controllers
         // POST: FrequenciaAlunoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(List<FrequenciaAlunoDTOViewModel> frequenciaAlunos)
         {
-            try
+            Frequenciaaluno frequenciaaluno = new();
+            foreach(var frequenciaAlunoDTO in frequenciaAlunos)
             {
-                return RedirectToAction(nameof(Index));
+                frequenciaaluno = _frequenciaAlunoService.Get(frequenciaAlunoDTO.idAluno,frequenciaAlunoDTO.idDiarioDeClasse);
+                if (frequenciaAlunoDTO != null) 
+                {
+                    _frequenciaAlunoService.Edit(frequenciaaluno);
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: FrequenciaAlunoController/Delete/5
