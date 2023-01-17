@@ -43,7 +43,7 @@ namespace Service
         public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
         {
             var query = _context.Frequenciaalunos
-                .Where(q => q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Id == 1)
+                .Where(q => q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Id == 2)
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {
