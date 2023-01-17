@@ -21,7 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model[0].faltas)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].presente)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -49,7 +51,7 @@
                     @Html.DisplayFor(modelItem => Model[i].faltas)
                 </td>
                 <td>
-                    <input type="checkbox" value="@Model[i].faltas++">
+                    <input type="checkbox" asp-for="@Model[i].presente" value=true>
                 </td>
                 <td>
                     <input type="hidden" asp-for="@Model[i].idDiarioDeClasse" value="@Model[i].idDiarioDeClasse">

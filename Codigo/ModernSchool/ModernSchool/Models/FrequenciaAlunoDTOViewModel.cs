@@ -16,6 +16,8 @@ namespace ModernSchoolWEB.Models
         public string? nomeAluno { get; set; }
         [Display(Name = "Turma")]
         public string? turma { get; set; }
+        [Display(Name = "Presença")]
+        public Boolean presente { get; set; }
         [Display(Name = "Componente")]
         public string? componente { get; set; }
     }

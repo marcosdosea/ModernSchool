@@ -13,6 +13,7 @@ namespace Core.DTO
         public int faltas { get; set; }
         public string? nomeAluno { get; set; }
         public string? turma { get; set; }
+        public Boolean presente {get; set;}
         public string? componente  { get; set; }
     }
 }

@@ -72,6 +72,11 @@ namespace ModernSchoolWEB.Controllers
                 frequenciaaluno = _frequenciaAlunoService.Get(frequenciaAlunoDTO.idAluno,frequenciaAlunoDTO.idDiarioDeClasse);
                 if (frequenciaAlunoDTO != null) 
                 {
+                    if(frequenciaAlunoDTO.presente == true)
+                    {
+                        frequenciaaluno.Faltas++;
+                    }
+                    
                     _frequenciaAlunoService.Edit(frequenciaaluno);
                 }
             }

@@ -30,11 +30,7 @@ namespace Service
 
         public void Edit(Frequenciaaluno frequenciaaluno)
         {
-            if (frequenciaaluno == Get(frequenciaaluno.IdAluno, frequenciaaluno.IdDiarioDeClasse))
-            {
-                frequenciaaluno.Faltas++;
-                _context.Update(frequenciaaluno);
-            }
+            _context.Update(frequenciaaluno);
             _context.SaveChanges();
         }
 
@@ -47,6 +43,7 @@ namespace Service
         public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
         {
             var query = _context.Frequenciaalunos
+                .Where(q => q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Id == 1)
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {
