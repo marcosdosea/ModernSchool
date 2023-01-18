@@ -84,6 +84,7 @@ namespace ModernSchoolWEB
             builder.Services.AddTransient<IGovernoServidorService, GovernoServidorService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IAlunoAvaliacaoService, AlunoAvaliacaoService>();
+            builder.Services.AddTransient<IFrequenciaAlunoService, FrequenciaAlunoService>();
 
             var app = builder.Build();
 
