@@ -12,7 +12,6 @@ namespace ModernSchoolWEB.Controllers
     {
         private readonly IComponenteService _componenteService;
         private readonly IMapper _mapper;
-
         public ComponenteController(IComponenteService componenteService, IMapper mapper)
         {
             _componenteService = componenteService;
