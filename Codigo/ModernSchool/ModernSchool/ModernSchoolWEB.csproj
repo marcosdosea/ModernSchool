@@ -5,9 +5,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Microsoft\**" />
+    <Content Remove="Microsoft\**" />
+    <EmbeddedResource Remove="Microsoft\**" />
+    <None Remove="Microsoft\**" />
+  </ItemGroup>
 	
   <ItemGroup>
-	<Folder Include="Microsoft\AspNetCore\Identity\" />
 	<Folder Include="wwwroot\assets\" />
   </ItemGroup>
 
