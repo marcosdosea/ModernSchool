@@ -66,7 +66,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         public void DetailsTest()
         {
             var result = controller.Details(1);
-            DateTime date = new DateTime(2022, 01, 01);
+            
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
@@ -74,8 +74,8 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AvaliacaoViewModel));
             AvaliacaoViewModel AvaliacaoViewModel = (AvaliacaoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, AvaliacaoViewModel.Id);
-            Assert.AreEqual(date, AvaliacaoViewModel.DataEntrega);
-            Assert.AreEqual(date, AvaliacaoViewModel.HorarioEntrega);
+            Assert.AreEqual(new DateTime(2022, 01, 01), AvaliacaoViewModel.DataEntrega);
+            Assert.AreEqual(new DateTime(2022, 01, 01), AvaliacaoViewModel.HorarioEntrega);
             Assert.AreEqual("Projeto", AvaliacaoViewModel.TipoDeAtividade);
             Assert.AreEqual(3, AvaliacaoViewModel.Peso);
             Assert.AreEqual(1, AvaliacaoViewModel.Avaliativo);
