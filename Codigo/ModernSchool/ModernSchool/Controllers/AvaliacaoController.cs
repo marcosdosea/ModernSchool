@@ -111,11 +111,10 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, AvaliacaoViewModel avaliacaoModel)
         {
-            if (ModelState.IsValid)
-            {
+
                 _avaliacaoService.Delete(id);
                 
-            }
+            
             return RedirectToAction(nameof(Index));
 
         }
