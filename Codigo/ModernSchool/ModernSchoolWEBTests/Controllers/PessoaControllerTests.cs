@@ -228,7 +228,7 @@ namespace ModernSchoolWEBTests.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
             PessoaViewModel pessoaViewModel = (PessoaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(1, pessoaViewModel.Id);
+            Assert.AreEqual(3, pessoaViewModel.Id);
             Assert.AreEqual("Reinan de Jesus Santoa", pessoaViewModel.Nome);
             Assert.AreEqual("65627407034", pessoaViewModel.Cpf);
         }
