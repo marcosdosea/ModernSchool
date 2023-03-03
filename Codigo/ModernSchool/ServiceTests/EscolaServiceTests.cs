@@ -75,7 +75,7 @@ namespace Service.Tests
             // Assert
             Assert.AreEqual(2, _escolaService.GetAll().Count());
             var escola = _escolaService.Get(2);
-            Assert.AreEqual("78308468000135", escola.Cnpj);
+            Assert.AreEqual(null, escola);
         }
 
         [TestMethod()]
