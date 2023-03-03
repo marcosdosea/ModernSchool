@@ -20,11 +20,20 @@ namespace ModernSchoolWEB.Controllers
 
         private readonly IMapper _mapper;
 
+        public IAvaliacaoService Object { get; }
+        public IMapper Mapper { get; }
+
         public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, IMapper mapper)
         {
             _avaliacaoService = avaliacaoService;
             _componenteService = componenteService;
             _mapper = mapper;
+        }
+
+        public AvaliacaoController(IAvaliacaoService @object, IMapper mapper)
+        {
+            Object = @object;
+            Mapper = mapper;
         }
 
         // GET: AvaliacaoController1
