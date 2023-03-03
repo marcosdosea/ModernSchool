@@ -36,7 +36,7 @@ namespace ModernSchoolWEBTests.Controllers
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Avaliacao>()))
                 .Verifiable();
-            //controller = new AvaliacaoController(mockService.Object, mapper);
+            controller = new AvaliacaoController(mockService.Object, mapper);
         }
 
         [TestMethod()]
