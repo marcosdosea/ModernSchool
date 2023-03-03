@@ -114,7 +114,7 @@ namespace ModernSchoolWEBTests.Controllers.Tests
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PessoaViewModel));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(Pessoa));
             PessoaViewModel pessoaViewModel = (PessoaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, pessoaViewModel.Id);
             Assert.AreEqual("86413068035", pessoaViewModel.Cpf);
@@ -177,16 +177,16 @@ namespace ModernSchoolWEBTests.Controllers.Tests
         [TestMethod()]
         public void EditTest_Get()
         {
-            var result = controller.Edit(2);
+            var result = controller.Edit(1);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PessoaViewModel));
             PessoaViewModel pessoaViewModel = (PessoaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2, pessoaViewModel.Id);
-            Assert.AreEqual("74432021055", pessoaViewModel.Cpf);
-            Assert.AreEqual("Mateus da cruz souza", pessoaViewModel.Nome);
+            Assert.AreEqual(1, pessoaViewModel.Id);
+            Assert.AreEqual("86413068035", pessoaViewModel.Cpf);
+            Assert.AreEqual("Moises Junio Fagundes Dos Santos", pessoaViewModel.Nome);
 
         }
 
@@ -221,16 +221,17 @@ namespace ModernSchoolWEBTests.Controllers.Tests
         [TestMethod()]
         public void DeleteTest_Get()
         {
-            var result = controller.Delete(3);
+            var result = controller.Delete(1);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
-            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
+            Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(PessoaViewModel));
             PessoaViewModel pessoaViewModel = (PessoaViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(3, pessoaViewModel.Id);
-            Assert.AreEqual("Reinan de Jesus Santoa", pessoaViewModel.Nome);
-            Assert.AreEqual("65627407034", pessoaViewModel.Cpf);
+            Assert.AreEqual(1, pessoaViewModel.Id);
+            Assert.AreEqual("Moises Junio Fagundes Dos Santos", pessoaViewModel.Nome);
+            Assert.AreEqual("86413068035", pessoaViewModel.Cpf);
+            Assert.AreEqual(DateTime.Parse("2008/02/02"), pessoaViewModel.DataNascimento);
         }
 
         [TestMethod()]
