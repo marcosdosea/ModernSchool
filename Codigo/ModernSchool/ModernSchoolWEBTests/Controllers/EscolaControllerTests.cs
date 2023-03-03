@@ -46,7 +46,12 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             return new Escola
             {
                 Id = 1,
-                Nome = "colegio estadual prof nestor carvalho"
+                Nome = "colegio estadual prof nestor carvalho",
+                Cnpj = "34047391000111",
+                Bairro = "centro",
+                Rua = "Elizio Araujo",
+                Numero = 132,
+                IdGoverno =1
             };
         }
 
@@ -58,16 +63,32 @@ namespace ModernSchoolWEBTest.Controllers.Tests
              {
                  Id = 1,
                  Nome = "colegio estadual prof nestor carvalho",
+                 Cnpj = "34047391000111",
+                 Bairro = "centro",
+                 Rua = "Elizio Araujo",
+                 Numero = 132,
+                 IdGoverno =1
+
              },
              new Escola
              {
                  Id = 2,
-                 Nome = "colegio estadual murilo braga"
+                 Nome = "colegio estadual murilo braga",
+                 Cnpj = "78308468000135",
+                 Bairro = "Marianga",
+                 Rua = "Gumercindo de oliveira",
+                 Numero = 51,
+                 IdGoverno = 1
              },
              new Escola
              {
                  Id = 3,
-                 Nome = "colegio estadual benedito figueiredo"
+                 Nome = "colegio estadual benedito figueiredo",
+                 Cnpj = "33286151000107",
+                 Bairro = "Centro",
+                 Rua = "Percilio Andrade",
+                 Numero = 1011,
+                 IdGoverno = 2
              }  
             };
         }
@@ -98,6 +119,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             EscolaViewModel escolaViewModel = (EscolaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, escolaViewModel.Id);
             Assert.AreEqual("colegio estadual prof nestor carvalho", escolaViewModel.Nome);
+            Assert.AreEqual("34047391000111", escolaViewModel.Cnpj);
         }
 
         [TestMethod()]
@@ -143,7 +165,12 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             return new EscolaViewModel
             {
                 Id = 1,
-                Nome = "colegio estadual prof nestor carvalho"
+                Nome = "colegio estadual prof nestor carvalho",
+                Cnpj = "34047391000111",
+                Bairro = "centro",
+                Rua = "Elizio Araujo",
+                Numero = 132,
+                IdGoverno = 1
             };
         }
 
@@ -159,6 +186,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             EscolaViewModel escolaViewModel = (EscolaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, escolaViewModel.Id);
             Assert.AreEqual("colegio estadual prof nestor carvalho", escolaViewModel.Nome);
+            Assert.AreEqual("34047391000111", escolaViewModel.Cnpj);
         }
 
         [TestMethod()]
@@ -178,7 +206,12 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             return new EscolaViewModel
             {
                 Id = 2,
-                Nome = "colegio estadual murilo braga"
+                Nome = "colegio estadual murilo braga",
+                Cnpj = "78308468000135",
+                Bairro = "Marianga",
+                Rua = "Gumercindo de oliveira",
+                Numero = 51,
+                IdGoverno = 1
             };
         }
 
@@ -194,6 +227,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             EscolaViewModel escolaViewModel = (EscolaViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, escolaViewModel.Id);
             Assert.AreEqual("colegio estadual prof nestor carvalho", escolaViewModel.Nome);
+            Assert.AreEqual("34047391000111", escolaViewModel.Cnpj);
         }
 
         [TestMethod()]
