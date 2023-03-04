@@ -112,7 +112,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 Id = 1,
                 EnviarAlunos = 30,
                 EnviarResponsaveis = 0,
-                Mensagem = "Recuperação amanhã",
+                Mensagem = "Recuperação paralela de matemática amanhã",
                 IdTurma = 1,
                 IdComponente = 2
             };
@@ -179,7 +179,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 Id = 1,
                 EnviarAlunos = 30,
                 EnviarResponsaveis = 0,
-                Mensagem = "Recuperação amanhã",
+                Mensagem = "Recuperação paralela de matemática amanhã",
                 IdTurma = 1,
                 IdComponente = 2
             };
@@ -194,7 +194,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Id = 1,
                     EnviarAlunos = 30,
                     EnviarResponsaveis = 0,
-                    Mensagem = "Recuperação amanhã",
+                    Mensagem = "Recuperação paralela de matemática amanhã",
                     IdTurma = 1,
                     IdComponente = 2
                 },
@@ -203,7 +203,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Id = 2,
                     EnviarAlunos = 0,
                     EnviarResponsaveis = 20,
-                    Mensagem = "Reuniao de pais",
+                    Mensagem = "Prezados pais, haverá reuniao de pais e mestre no dia 09/03/2023",
                     IdTurma = 1,
                     IdComponente = 2
                 },
@@ -212,7 +212,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Id = 3,
                     EnviarAlunos = 20,
                     EnviarResponsaveis = 20,
-                    Mensagem = "Festeijo junino acontecerá na escolha contamos com pais e alunos presentes.",
+                    Mensagem = "Prezados pais, venho avisar que a festa de festeijo junino acontecerá na escolha. Contamos com pais e alunos presentes.",
                     IdTurma = 1,
                     IdComponente = 2
                 }
@@ -225,8 +225,8 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             {
                 Id = 2,
                 EnviarAlunos = 0,
-                EnviarResponsaveis = 20,
-                Mensagem = "Reuniao de pais",
+                EnviarResponsaveis = 50,
+                Mensagem = "Prezados pais no dia 06/03/2023, haverá reunião para tratar de desempenho dos alunos na escola.",
                 IdTurma = 1,
                 IdComponente = 2
             };
