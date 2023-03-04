@@ -29,9 +29,9 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var comunicacaos = new List<Comunicacao>
                 {
-                    new Comunicacao { Id = 1, EnviarResponsaveis = 0, EnviarAlunos = 30, Mensagem = "Recuperação amanhã", IdTurma = 1, IdComponente = 2},
-                    new Comunicacao { Id = 2, EnviarResponsaveis = 30, EnviarAlunos = 30, Mensagem = "Festeijo junino será adiado para dia 28", IdTurma = 1, IdComponente = 2},
-                    new Comunicacao { Id = 3, EnviarResponsaveis = 1, EnviarAlunos = 0, Mensagem = "Seu filho tomou uma adivertência", IdTurma = 1, IdComponente = 2},
+                    new Comunicacao { Id = 1, EnviarResponsaveis = 0, EnviarAlunos = 30, Mensagem = "Recuperação paralela de matemática será amanhã", IdTurma = 1, IdComponente = 2},
+                    new Comunicacao { Id = 2, EnviarResponsaveis = 30, EnviarAlunos = 30, Mensagem = "Prezados pais, a festa em celebração dos festeijo junino será adiado para dia 28", IdTurma = 1, IdComponente = 2},
+                    new Comunicacao { Id = 3, EnviarResponsaveis = 1, EnviarAlunos = 0, Mensagem = "Prezado, seu filho tomou uma adivertência, por brigar com outra criança. Desejamos que comapareça na escola.", IdTurma = 1, IdComponente = 2},
                 };
 
             _context.AddRange(comunicacaos);
