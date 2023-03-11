@@ -1,0 +1,136 @@
+{
+  "id": "16977633-1220-4a17-a9e3-e7f03803fc5e",
+  "version": "2.0",
+  "name": "Testes",
+  "url": "https://localhost:7154",
+  "tests": [{
+    "id": "9e8b1f42-7042-4d04-aad4-18a96aacc16c",
+    "name": "Alterar período inválido",
+    "commands": [{
+      "id": "c4b1d2fa-ff2b-4754-a0d9-2141d6406afd",
+      "comment": "",
+      "command": "open",
+      "target": "/periodo",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "34c18fed-2385-40d1-955b-b297896aeeaf",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "efe91d50-9dfe-4944-9d57-0d7bb32bcb4c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) a:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(2) a:nth-child(1)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Edit')])[2]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Periodo/Edit/3')]", "xpath:href"],
+        ["xpath=//tr[2]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1da6d460-8b17-4566-ba59-76e764a4efc3",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "80ad7d3e-2f83-4632-a9c1-17824b0e4f69",
+      "comment": "",
+      "command": "type",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "2º Período"
+    }, {
+      "id": "695355a8-e878-4609-a24a-c65d9536ee10",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataInicio",
+      "targets": [
+        ["id=DataInicio", "id"],
+        ["name=DataInicio", "name"],
+        ["css=#DataInicio", "css:finder"],
+        ["xpath=//input[@id='DataInicio']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "20a3fb26-88d3-4e4c-a632-3d080195cf64",
+      "comment": "",
+      "command": "type",
+      "target": "id=DataInicio",
+      "targets": [
+        ["id=DataInicio", "id"],
+        ["name=DataInicio", "name"],
+        ["css=#DataInicio", "css:finder"],
+        ["xpath=//input[@id='DataInicio']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2023-01-01"
+    }, {
+      "id": "428e5703-3031-4726-a873-bd681f0f06aa",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataFim",
+      "targets": [
+        ["id=DataFim", "id"],
+        ["name=DataFim", "name"],
+        ["css=#DataFim", "css:finder"],
+        ["xpath=//input[@id='DataFim']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a473e47c-f8a2-4fe6-9b49-845feeb0139f",
+      "comment": "",
+      "command": "type",
+      "target": "id=DataFim",
+      "targets": [
+        ["id=DataFim", "id"],
+        ["name=DataFim", "name"],
+        ["css=#DataFim", "css:finder"],
+        ["xpath=//input[@id='DataFim']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "2023-12-31"
+    }, {
+      "id": "5b4f8802-a4b0-4141-85bf-67086f2806a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Save']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "9736cd88-98ca-4caf-b671-091f9a53c43a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://localhost:7154/"],
+  "plugins": []
+}

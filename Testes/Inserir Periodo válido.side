@@ -1,0 +1,137 @@
+{
+  "id": "16977633-1220-4a17-a9e3-e7f03803fc5e",
+  "version": "2.0",
+  "name": "Testes",
+  "url": "https://localhost:7154",
+  "tests": [{
+    "id": "05c676c4-14ce-4862-958e-6c4d20901e1c",
+    "name": "Inserir período válido",
+    "commands": [{
+      "id": "9c40696f-6eba-4f31-943e-872a18c7a5f2",
+      "comment": "",
+      "command": "open",
+      "target": "/Periodo/Create",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b3d642fa-ed1e-4f3b-a4fb-017452eba51c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "39ccc5c7-837e-4a6c-be44-c0db7284a3d9",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "44666715-3407-42f5-827e-1c16bdf11786",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataInicio",
+      "targets": [
+        ["id=DataInicio", "id"],
+        ["name=DataInicio", "name"],
+        ["css=#DataInicio", "css:finder"],
+        ["xpath=//input[@id='DataInicio']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fbd52d49-7dd0-4199-b0ab-8a2f760dc496",
+      "comment": "",
+      "command": "type",
+      "target": "id=DataInicio",
+      "targets": [
+        ["id=DataInicio", "id"],
+        ["name=DataInicio", "name"],
+        ["css=#DataInicio", "css:finder"],
+        ["xpath=//input[@id='DataInicio']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "2023-02-01"
+    }, {
+      "id": "9cf76df4-fa67-4a46-befe-6b5e45aae628",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataFim",
+      "targets": [
+        ["id=DataFim", "id"],
+        ["name=DataFim", "name"],
+        ["css=#DataFim", "css:finder"],
+        ["xpath=//input[@id='DataFim']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8c3ec3d-ef4c-40d9-babc-1b80671fa460",
+      "comment": "",
+      "command": "type",
+      "target": "id=DataFim",
+      "targets": [
+        ["id=DataFim", "id"],
+        ["name=DataFim", "name"],
+        ["css=#DataFim", "css:finder"],
+        ["xpath=//input[@id='DataFim']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2023-04-01"
+    }, {
+      "id": "1a3cc3bd-39bf-44a0-aef9-62367cf4dc0a",
+      "comment": "",
+      "command": "click",
+      "target": "id=AnoLetivo",
+      "targets": [
+        ["id=AnoLetivo", "id"],
+        ["name=AnoLetivo", "name"],
+        ["css=#AnoLetivo", "css:finder"],
+        ["xpath=//input[@id='AnoLetivo']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "430ff14e-a4c4-4d5f-a795-3d7fce205d96",
+      "comment": "",
+      "command": "type",
+      "target": "id=AnoLetivo",
+      "targets": [
+        ["id=AnoLetivo", "id"],
+        ["name=AnoLetivo", "name"],
+        ["css=#AnoLetivo", "css:finder"],
+        ["xpath=//input[@id='AnoLetivo']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "2023"
+    }, {
+      "id": "203cfdd4-9bf2-46cc-969c-4b5f1ec210a6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "9736cd88-98ca-4caf-b671-091f9a53c43a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["05c676c4-14ce-4862-958e-6c4d20901e1c"]
+  }],
+  "urls": ["https://localhost:7154/"],
+  "plugins": []
+}
