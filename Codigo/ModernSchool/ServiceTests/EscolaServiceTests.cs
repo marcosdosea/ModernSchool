@@ -31,9 +31,23 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var escolas = new List<Escola>
                 {
-                    new Escola { Id = 1, Nome = "colegio estadual prof nestor carvalho", Numero = 120},
-                    new Escola { Id = 2, Nome = "colegio estadual murilo braga", Numero = 20},
-                    new Escola { Id = 3, Nome = "colegio estadual benedito figueiredo", Numero = 2111},
+                    new Escola { Id = 1, Nome = "colegio estadual prof nestor carvalho",  Cnpj = "34047391000111",
+                 Bairro = "centro",
+                 Rua = "Elizio Araujo",
+                 Numero = 132,
+                 IdGoverno =1},
+
+                    new Escola { Id = 2, Nome = "colegio estadual murilo braga",  Cnpj = "78308468000135",
+                 Bairro = "Marianga",
+                 Rua = "Gumercindo de oliveira",
+                 Numero = 51,
+                 IdGoverno = 1},
+                    new Escola { Id = 3, Nome = "colegio estadual benedito figueiredo",
+                 Cnpj = "33286151000107",
+                 Bairro = "Centro",
+                 Rua = "Percilio Andrade",
+                 Numero = 1011,
+                 IdGoverno = 2},
                 };
 
             _context.AddRange(escolas);
@@ -45,12 +59,13 @@ namespace Service.Tests
         [TestMethod()]
         public void CreateTest()
         {
-            _escolaService.Create(new Escola { Id = 4, Nome = "colegio estadual cesar leite", Numero = 130 });
+            _escolaService.Create(new Escola { Id = 4, Nome = "colegio estadual cesar leite", Numero = 130, Cnpj = "47506202000173" });
             // Assert
             Assert.AreEqual(4, _escolaService.GetAll().Count());
             var escola = _escolaService.Get(4);
             Assert.AreEqual(4, escola.Id);
             Assert.AreEqual("colegio estadual cesar leite", escola.Nome);
+            Assert.AreEqual("47506202000173", escola.Cnpj);
         }
 
         [TestMethod()]
@@ -59,8 +74,8 @@ namespace Service.Tests
             _escolaService.Delete(2);
             // Assert
             Assert.AreEqual(2, _escolaService.GetAll().Count());
-            var anoletivo = _escolaService.Get(2);
-            Assert.AreEqual(null, anoletivo);
+            var escola = _escolaService.Get(2);
+            Assert.AreEqual(null, escola);
         }
 
         [TestMethod()]
@@ -75,6 +90,7 @@ namespace Service.Tests
             Assert.IsNotNull(escola);
             Assert.AreEqual(1, escola.Id);
             Assert.AreEqual("colegio estadual prof nestor carvalho", escola.Nome);
+            Assert.AreEqual("34047391000111", escola.Cnpj);
         }
 
         [TestMethod()]
@@ -84,6 +100,7 @@ namespace Service.Tests
             Assert.IsNotNull(escola);
             Assert.AreEqual(2, escola.Id);
             Assert.AreEqual("colegio estadual murilo braga", escola.Nome);
+            Assert.AreEqual("78308468000135", escola.Cnpj);
         }
 
         [TestMethod()]

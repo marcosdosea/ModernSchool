@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModernSchoolWEBTests.Controllers
+namespace ModernSchoolWEBTest.Controllers.Tests
 {
     [TestClass()]
     public class AvaliacaoControllerTests
@@ -24,9 +24,16 @@ namespace ModernSchoolWEBTests.Controllers
         public void Initialize()
         {
             var mockService = new Mock<IAvaliacaoService>();
+            var mockServiceComponente = new Mock<IComponenteService>();
 
-            IMapper mapper = new MapperConfiguration(cfg =>
-                cfg.AddProfile(new AvaliacaoProfile())).CreateMapper();
+            MapperConfiguration mapperConfig = new MapperConfiguration(
+                cfg => 
+                {
+                    cfg.AddProfile(new ComponenteProfile());
+                    cfg.AddProfile(new AvaliacaoProfile());
+                });
+
+            IMapper mapper = new Mapper(mapperConfig);
 
             mockService.Setup(service => service.GetAll())
                 .Returns(GetTestAvaliacao());
@@ -36,7 +43,9 @@ namespace ModernSchoolWEBTests.Controllers
                 .Verifiable();
             mockService.Setup(service => service.Create(It.IsAny<Avaliacao>()))
                 .Verifiable();
-            controller = new AvaliacaoController(mockService.Object, mapper);
+            mockServiceComponente.Setup(service => service.GetAll());
+
+            controller = new AvaliacaoController(mockService.Object,mockServiceComponente.Object, mapper);
         }
 
         [TestMethod()]
@@ -57,6 +66,7 @@ namespace ModernSchoolWEBTests.Controllers
         public void DetailsTest()
         {
             var result = controller.Details(1);
+            
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
@@ -64,8 +74,8 @@ namespace ModernSchoolWEBTests.Controllers
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AvaliacaoViewModel));
             AvaliacaoViewModel AvaliacaoViewModel = (AvaliacaoViewModel)viewResult.ViewData.Model;
             Assert.AreEqual(1, AvaliacaoViewModel.Id);
-            Assert.AreEqual("20220608", AvaliacaoViewModel.DataEntrega);
-            Assert.AreEqual("20220610", AvaliacaoViewModel.HorarioEntrega);
+            Assert.AreEqual(new DateTime(2022, 01, 01), AvaliacaoViewModel.DataEntrega);
+            Assert.AreEqual(new DateTime(2022, 01, 01), AvaliacaoViewModel.HorarioEntrega);
             Assert.AreEqual("Projeto", AvaliacaoViewModel.TipoDeAtividade);
             Assert.AreEqual(3, AvaliacaoViewModel.Peso);
             Assert.AreEqual(1, AvaliacaoViewModel.Avaliativo);
@@ -117,10 +127,10 @@ namespace ModernSchoolWEBTests.Controllers
             {
                 Id= 1,
                 DataEntrega = DateTime.Parse("2022-01-01"),
-                HorarioEntrega = DateTime.Parse("20:00:00:00"),
+                HorarioEntrega = DateTime.Parse("2022-01-01"),
                 TipoDeAtividade = "Projeto",
                 Peso = 3,
-                Avaliativo = 0,
+                Avaliativo = 1,
                 IdTurma = 1,
                 IdComponente = 1,
                 IdPeriodo = 1
@@ -131,40 +141,42 @@ namespace ModernSchoolWEBTests.Controllers
         public void EditTest_Get()
         {
             var result = controller.Edit(1);
+            DateTime date = new DateTime(2022, 01, 01);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AvaliacaoViewModel));
             AvaliacaoViewModel avaliacaoViewModel = (AvaliacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(20220203, avaliacaoViewModel.DataEntrega);
-            Assert.AreEqual(202202, avaliacaoViewModel.HorarioEntrega);
+            Assert.AreEqual(date, avaliacaoViewModel.DataEntrega);
+            Assert.AreEqual(date, avaliacaoViewModel.HorarioEntrega);
             Assert.AreEqual("Projeto", avaliacaoViewModel.TipoDeAtividade);
-            Assert.AreEqual(0, avaliacaoViewModel.Avaliativo); //verificar, tipo de dados Bool
+            Assert.AreEqual(1, avaliacaoViewModel.Avaliativo); //verificar, tipo de dados Bool
             Assert.AreEqual(1, avaliacaoViewModel.IdTurma);
             Assert.AreEqual(1, avaliacaoViewModel.IdComponente);
             Assert.AreEqual(1, avaliacaoViewModel.IdComponente);
-            Assert.AreEqual(3, avaliacaoViewModel.IdPeriodo);
+            Assert.AreEqual(1, avaliacaoViewModel.IdPeriodo);
             Assert.AreEqual(1, avaliacaoViewModel.Id);
         }
         [TestMethod()]
         public void DeleteTest_Get()
         {
             var result = controller.Delete(1);
+            DateTime date = new DateTime(2022, 01, 01);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AvaliacaoViewModel));
             AvaliacaoViewModel avaliacaoViewModel = (AvaliacaoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(20220203, avaliacaoViewModel.DataEntrega);
-            Assert.AreEqual(202202, avaliacaoViewModel.HorarioEntrega);
+            Assert.AreEqual(date, avaliacaoViewModel.DataEntrega);
+            Assert.AreEqual(date, avaliacaoViewModel.HorarioEntrega);
             Assert.AreEqual("Projeto", avaliacaoViewModel.TipoDeAtividade);
-            Assert.AreEqual(0, avaliacaoViewModel.Avaliativo);
+            Assert.AreEqual(1, avaliacaoViewModel.Avaliativo);
             Assert.AreEqual(1, avaliacaoViewModel.IdTurma);
             Assert.AreEqual(1, avaliacaoViewModel.IdComponente);
             Assert.AreEqual(1, avaliacaoViewModel.IdComponente);
-            Assert.AreEqual(3, avaliacaoViewModel.IdPeriodo);
+            Assert.AreEqual(1, avaliacaoViewModel.IdPeriodo);
             Assert.AreEqual(1, avaliacaoViewModel.Id);
         }
 
@@ -187,10 +199,10 @@ namespace ModernSchoolWEBTests.Controllers
             {
                 Id = 1,
                 DataEntrega = DateTime.Parse("2022-01-01"),
-                HorarioEntrega = DateTime.Parse("20:00:00:00"),
+                HorarioEntrega = DateTime.Parse("2022-01-01"),
                 TipoDeAtividade = "Projeto",
                 Peso = 3,
-                Avaliativo = false,
+                Avaliativo = true,
                 IdTurma = 1,
                 IdComponente = 1,
                 IdPeriodo = 1
@@ -205,10 +217,10 @@ namespace ModernSchoolWEBTests.Controllers
                 {
                    Id = 1,
                     DataEntrega = DateTime.Parse("2022-01-01"),
-                    HorarioEntrega = DateTime.Parse("20:00:00:00"),
+                    HorarioEntrega = DateTime.Parse("2022-01-01"),
                     TipoDeAtividade = "Projeto",
                     Peso = 3,
-                    Avaliativo = false,
+                    Avaliativo = true,
                     IdTurma = 1,
                     IdComponente = 1,
                     IdPeriodo = 1
@@ -217,7 +229,7 @@ namespace ModernSchoolWEBTests.Controllers
                 {
                     Id = 2,
                     DataEntrega = DateTime.Parse("2022-01-01"),
-                    HorarioEntrega = DateTime.Parse("20:00:00:00"),
+                    HorarioEntrega = DateTime.Parse("2022-01-01"),
                     TipoDeAtividade = "Projeto",
                     Peso = 3,
                     Avaliativo = false,
@@ -229,7 +241,7 @@ namespace ModernSchoolWEBTests.Controllers
                 {
                     Id = 3,
                     DataEntrega = DateTime.Parse("2022-01-11"),
-                    HorarioEntrega = DateTime.Parse("23:00:00:00"),
+                    HorarioEntrega = DateTime.Parse("2022-01-01"),
                     TipoDeAtividade = "Prova",
                     Peso = 7,
                     Avaliativo = true,
@@ -245,7 +257,7 @@ namespace ModernSchoolWEBTests.Controllers
             return new AvaliacaoViewModel
             {
                 DataEntrega = DateTime.Parse("2022-01-11"),
-                HorarioEntrega = DateTime.Parse("23:00:00:00"),
+                HorarioEntrega = DateTime.Parse("2022-01-01"),
                 TipoDeAtividade = "Prova",
                 Peso = 7,
                 Avaliativo = 1,
