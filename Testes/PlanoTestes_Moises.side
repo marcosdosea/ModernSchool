@@ -1,0 +1,1096 @@
+{
+  "id": "9eabbbe5-db24-4757-a215-c44de40a5834",
+  "version": "2.0",
+  "name": "PlanoTestes_Moises",
+  "url": "https://localhost:7154/escola",
+  "tests": [{
+    "id": "339200a9-7e2c-4bce-80ec-f404d42b19fa",
+    "name": "Inserir Aluno Válido",
+    "commands": [{
+      "id": "f9e768b4-7b99-4e8c-a127-d7da15064244",
+      "comment": "",
+      "command": "open",
+      "target": "/Pessoa",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "90f671d2-944e-40eb-808f-a176c810aa86",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0e41ffc7-91ed-431f-9f96-7b0cdac86e95",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Create New",
+      "targets": [
+        ["linkText=Create New", "linkText"],
+        ["css=p > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Create New')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Pessoa/Create')]", "xpath:href"],
+        ["xpath=//p/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Create New')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5609e1f6-2df3-4b57-b7dd-3ab5cb06e55f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(2)",
+      "targets": [
+        ["css=.form-group:nth-child(2)", "css:finder"],
+        ["xpath=//form/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "94f2aa7f-c66e-4685-813c-2091c9c15b1b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9336057a-67ba-400e-9b3b-a65d908d864b",
+      "comment": "",
+      "command": "type",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "445a0efe-5492-44f6-b92f-9ce88eb8f60b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5188b09b-206f-4897-8e64-a1783806cde0",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34977fdd-f44b-4125-ba6a-f4d03c9533dc",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d09ebac-fbe4-44b9-bb1a-44afdba0a645",
+      "comment": "",
+      "command": "type",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "João das Graças"
+    }, {
+      "id": "28dfb2b5-935e-4cbb-8dcf-5b0b593b80ef",
+      "comment": "",
+      "command": "click",
+      "target": "id=Cpf",
+      "targets": [
+        ["id=Cpf", "id"],
+        ["name=Cpf", "name"],
+        ["css=#Cpf", "css:finder"],
+        ["xpath=//input[@id='Cpf']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab50d606-e057-42e9-96b7-eb86843ff649",
+      "comment": "",
+      "command": "type",
+      "target": "id=Cpf",
+      "targets": [
+        ["id=Cpf", "id"],
+        ["name=Cpf", "name"],
+        ["css=#Cpf", "css:finder"],
+        ["xpath=//input[@id='Cpf']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "65519964018"
+    }, {
+      "id": "3412882d-7e22-44c6-9118-5438ba0e25ac",
+      "comment": "",
+      "command": "click",
+      "target": "id=Idade",
+      "targets": [
+        ["id=Idade", "id"],
+        ["name=Idade", "name"],
+        ["css=#Idade", "css:finder"],
+        ["xpath=//input[@id='Idade']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf9de8ed-ad84-4b87-a642-4a983308f87f",
+      "comment": "",
+      "command": "type",
+      "target": "id=Idade",
+      "targets": [
+        ["id=Idade", "id"],
+        ["name=Idade", "name"],
+        ["css=#Idade", "css:finder"],
+        ["xpath=//input[@id='Idade']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "38"
+    }, {
+      "id": "6ec64dd5-82d6-42fc-9349-420bea2fd9fb",
+      "comment": "",
+      "command": "click",
+      "target": "id=Rua",
+      "targets": [
+        ["id=Rua", "id"],
+        ["name=Rua", "name"],
+        ["css=#Rua", "css:finder"],
+        ["xpath=//input[@id='Rua']", "xpath:attributes"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14e02bc4-ef57-45b7-a434-db9c1bf55f88",
+      "comment": "",
+      "command": "type",
+      "target": "id=Rua",
+      "targets": [
+        ["id=Rua", "id"],
+        ["name=Rua", "name"],
+        ["css=#Rua", "css:finder"],
+        ["xpath=//input[@id='Rua']", "xpath:attributes"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "Tuiuti"
+    }, {
+      "id": "659385bd-d541-4440-b31a-616d6abf3a28",
+      "comment": "",
+      "command": "click",
+      "target": "id=Bairro",
+      "targets": [
+        ["id=Bairro", "id"],
+        ["name=Bairro", "name"],
+        ["css=#Bairro", "css:finder"],
+        ["xpath=//input[@id='Bairro']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "132f9536-f115-4c6b-a759-192e16759183",
+      "comment": "",
+      "command": "type",
+      "target": "id=Bairro",
+      "targets": [
+        ["id=Bairro", "id"],
+        ["name=Bairro", "name"],
+        ["css=#Bairro", "css:finder"],
+        ["xpath=//input[@id='Bairro']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": "Jardins"
+    }, {
+      "id": "454f9062-2886-4145-b72e-91504fd1abf0",
+      "comment": "",
+      "command": "click",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "07a0a8c2-7866-4789-b3eb-1ae1dc7200a2",
+      "comment": "",
+      "command": "type",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": "376"
+    }, {
+      "id": "c038fc99-325e-41ca-b140-ba8d9a5fea27",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataNascimento",
+      "targets": [
+        ["id=DataNascimento", "id"],
+        ["name=DataNascimento", "name"],
+        ["css=#DataNascimento", "css:finder"],
+        ["xpath=//input[@id='DataNascimento']", "xpath:attributes"],
+        ["xpath=//div[8]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b0d8c91-95bf-4ae2-87e6-2090940962dc",
+      "comment": "",
+      "command": "type",
+      "target": "id=DataNascimento",
+      "targets": [
+        ["id=DataNascimento", "id"],
+        ["name=DataNascimento", "name"],
+        ["css=#DataNascimento", "css:finder"],
+        ["xpath=//input[@id='DataNascimento']", "xpath:attributes"],
+        ["xpath=//div[8]/input", "xpath:position"]
+      ],
+      "value": "1985-01-22"
+    }, {
+      "id": "634b49a1-eca0-4f5a-bb13-975cdbe0cbcf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[9]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "21c30142-7e6e-440f-ad27-e543f209416f",
+    "name": "Inserir Aluno Inválido",
+    "commands": [{
+      "id": "46a3730a-0f0d-46e1-8825-f69eed708346",
+      "comment": "",
+      "command": "open",
+      "target": "/pessoa",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "31391c06-dccf-49e4-a238-171c9337d250",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "68e70507-e0cc-4d00-bbcf-219877811d05",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Create New",
+      "targets": [
+        ["linkText=Create New", "linkText"],
+        ["css=p > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Create New')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Pessoa/Create')]", "xpath:href"],
+        ["xpath=//p/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Create New')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "01051ed2-3c35-41f6-ac60-b813fc171916",
+      "comment": "",
+      "command": "click",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8d940bd-0dda-4219-a280-051f9cf3580a",
+      "comment": "",
+      "command": "type",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "47"
+    }, {
+      "id": "69811ced-6a77-482c-bc63-89c157d52cd7",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9250c397-6bba-450c-b13e-2305697c91c7",
+      "comment": "",
+      "command": "type",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Joao"
+    }, {
+      "id": "05f9a2e7-5eca-446c-b991-6ff83627fd77",
+      "comment": "",
+      "command": "click",
+      "target": "id=DataNascimento",
+      "targets": [
+        ["id=DataNascimento", "id"],
+        ["name=DataNascimento", "name"],
+        ["css=#DataNascimento", "css:finder"],
+        ["xpath=//input[@id='DataNascimento']", "xpath:attributes"],
+        ["xpath=//div[8]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3897cc12-4bee-4343-8712-d73ea521efb6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[9]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7cf6711f-58f4-4c03-b55e-40ec7e238a54",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[9]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "19a81915-b0eb-473a-89ce-1f814846d2ed",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4",
+      "targets": [
+        ["css=.col-md-4", "css:finder"],
+        ["xpath=//main/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "de2c7335-3230-40b3-981d-1e662d80323f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row",
+      "targets": [
+        ["css=.row", "css:finder"],
+        ["xpath=//main/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d93df231-bc6f-4c53-8bdb-4dfb52d2a5c7",
+    "name": "Inserir Escola Válido",
+    "commands": [{
+      "id": "ca68f253-3c5f-4d8e-828a-134568243d7a",
+      "comment": "",
+      "command": "open",
+      "target": "/escola",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "348d7d37-e8e6-4aba-a28c-3392486727cf",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6204d60e-5741-4aca-b53d-c33fd4a42bcd",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Create New",
+      "targets": [
+        ["linkText=Create New", "linkText"],
+        ["css=p > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Create New')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Escola/Create')]", "xpath:href"],
+        ["xpath=//p/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Create New')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a45148b-546c-4977-b936-40fb06830bc2",
+      "comment": "",
+      "command": "click",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0aa4337-98b8-476c-93a4-bea3508faa5b",
+      "comment": "",
+      "command": "type",
+      "target": "id=Id",
+      "targets": [
+        ["id=Id", "id"],
+        ["name=Id", "name"],
+        ["css=#Id", "css:finder"],
+        ["xpath=//input[@id='Id']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "b442b90d-fa9b-4131-9c50-60b476f2e63a",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "006a28d5-983a-47f8-9f70-6620cd816b68",
+      "comment": "",
+      "command": "click",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8e19e45-63a7-4429-9316-2a51d592c3c2",
+      "comment": "",
+      "command": "type",
+      "target": "id=Nome",
+      "targets": [
+        ["id=Nome", "id"],
+        ["name=Nome", "name"],
+        ["css=#Nome", "css:finder"],
+        ["xpath=//input[@id='Nome']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Colegio Estadual Professor Nestor Carvalho Lima"
+    }, {
+      "id": "444a5e57-5b2b-4a32-8c53-a3e40667441b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Cnpj",
+      "targets": [
+        ["id=Cnpj", "id"],
+        ["name=Cnpj", "name"],
+        ["css=#Cnpj", "css:finder"],
+        ["xpath=//input[@id='Cnpj']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "59839432-c767-4ee5-ba57-06d4fb80070d",
+      "comment": "",
+      "command": "type",
+      "target": "id=Cnpj",
+      "targets": [
+        ["id=Cnpj", "id"],
+        ["name=Cnpj", "name"],
+        ["css=#Cnpj", "css:finder"],
+        ["xpath=//input[@id='Cnpj']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "7261659000101"
+    }, {
+      "id": "e31af640-333d-4548-8792-1d6ebc9e9e45",
+      "comment": "",
+      "command": "click",
+      "target": "id=Rua",
+      "targets": [
+        ["id=Rua", "id"],
+        ["name=Rua", "name"],
+        ["css=#Rua", "css:finder"],
+        ["xpath=//input[@id='Rua']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7b06a37f-60ac-4f0d-81a9-465c7d56f047",
+      "comment": "",
+      "command": "type",
+      "target": "id=Rua",
+      "targets": [
+        ["id=Rua", "id"],
+        ["name=Rua", "name"],
+        ["css=#Rua", "css:finder"],
+        ["xpath=//input[@id='Rua']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "Manoel Francisco Teles"
+    }, {
+      "id": "b84bb017-8b8c-45b0-a18d-4827873fad66",
+      "comment": "",
+      "command": "click",
+      "target": "id=Cnpj",
+      "targets": [
+        ["id=Cnpj", "id"],
+        ["name=Cnpj", "name"],
+        ["css=#Cnpj", "css:finder"],
+        ["xpath=//input[@id='Cnpj']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a06bbfbe-0f25-4824-ab8c-4b31888455b3",
+      "comment": "",
+      "command": "click",
+      "target": "id=Cnpj",
+      "targets": [
+        ["id=Cnpj", "id"],
+        ["name=Cnpj", "name"],
+        ["css=#Cnpj", "css:finder"],
+        ["xpath=//input[@id='Cnpj']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "88d5c5f2-efd9-48c8-b39c-ecc6210f33cc",
+      "comment": "",
+      "command": "type",
+      "target": "id=Cnpj",
+      "targets": [
+        ["id=Cnpj", "id"],
+        ["name=Cnpj", "name"],
+        ["css=#Cnpj", "css:finder"],
+        ["xpath=//input[@id='Cnpj']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "7261659/000101"
+    }, {
+      "id": "070f6d45-cf17-48f1-a907-b0cb5c67f7bc",
+      "comment": "",
+      "command": "click",
+      "target": "id=Bairro",
+      "targets": [
+        ["id=Bairro", "id"],
+        ["name=Bairro", "name"],
+        ["css=#Bairro", "css:finder"],
+        ["xpath=//input[@id='Bairro']", "xpath:attributes"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca5a91c6-9edf-4533-8a2c-d560d399dbb4",
+      "comment": "",
+      "command": "type",
+      "target": "id=Bairro",
+      "targets": [
+        ["id=Bairro", "id"],
+        ["name=Bairro", "name"],
+        ["css=#Bairro", "css:finder"],
+        ["xpath=//input[@id='Bairro']", "xpath:attributes"],
+        ["xpath=//div[5]/input", "xpath:position"]
+      ],
+      "value": "Sao cristovao"
+    }, {
+      "id": "8415cc49-11c2-4d54-9120-aa25f0840150",
+      "comment": "",
+      "command": "click",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c285302-9c92-4f27-9ef6-97cbe43c59b8",
+      "comment": "",
+      "command": "type",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[6]/input", "xpath:position"]
+      ],
+      "value": "142"
+    }, {
+      "id": "9241be26-9783-4ae4-8c8e-6197b0086156",
+      "comment": "",
+      "command": "click",
+      "target": "id=IdGoverno",
+      "targets": [
+        ["id=IdGoverno", "id"],
+        ["name=IdGoverno", "name"],
+        ["css=#IdGoverno", "css:finder"],
+        ["xpath=//input[@id='IdGoverno']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2cb7fcff-7f76-4c67-9d09-ecacc7356954",
+      "comment": "",
+      "command": "type",
+      "target": "id=IdGoverno",
+      "targets": [
+        ["id=IdGoverno", "id"],
+        ["name=IdGoverno", "name"],
+        ["css=#IdGoverno", "css:finder"],
+        ["xpath=//input[@id='IdGoverno']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "d928f00a-672f-4c1e-a5c4-2e9fb036cbb1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[8]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "319d9980-2acc-4ca5-8d62-d02ea679f7fe",
+    "name": "Inserir Escola Inválido",
+    "commands": [{
+      "id": "c9ecf752-a63e-4a25-86cd-01aa5f901334",
+      "comment": "",
+      "command": "open",
+      "target": "/escola",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2cb41002-32f1-486a-96eb-25db0f18422f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ae0a57b2-a0f4-438b-9b86-47cf32b89005",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Create New",
+      "targets": [
+        ["linkText=Create New", "linkText"],
+        ["css=p > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Create New')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Escola/Create')]", "xpath:href"],
+        ["xpath=//p/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Create New')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d07caad-4bd0-47a4-a1a0-f13b21b0010e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Create']", "xpath:attributes"],
+        ["xpath=//div[8]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8608940a-ac64-4ac3-aa80-0c5e0575ac6e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-md-4",
+      "targets": [
+        ["css=.col-md-4", "css:finder"],
+        ["xpath=//main/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d663b5a-126f-4231-85f2-c06d8a6cd05c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container",
+      "targets": [
+        ["css=.container", "css:finder"],
+        ["xpath=//body/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "292ac6dc-e4db-41de-9efc-4f8fc4f35042",
+    "name": "Excluir Escola Válido",
+    "commands": [{
+      "id": "8e2964d0-154a-4692-aaff-5d6abd419059",
+      "comment": "",
+      "command": "open",
+      "target": "/escola",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "955af34e-0324-4503-9c99-2821c4edc3ba",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bb0c8f33-519b-4172-9945-a0b8cb1f4487",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[2]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Colegio Estadual Professor Nestor Carvalho Lima')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f75e8081-d81b-41ff-9b61-f2e0fa2e678c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) a:nth-child(3)",
+      "targets": [
+        ["css=tr:nth-child(2) a:nth-child(3)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Delete')])[2]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Escola/Delete/3')]", "xpath:href"],
+        ["xpath=//tr[2]/td[8]/a[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6d1a383-8a6a-42de-92c4-d8c786626c4e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pb-3",
+      "targets": [
+        ["css=.pb-3", "css:finder"],
+        ["xpath=//main", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aad87865-6bc9-4631-a560-34d1b2fe3ba4",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Are you sure you want to delete this?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a0926d83-c2cf-4f40-a480-2bc1dfbbb61f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container",
+      "targets": [
+        ["css=.container", "css:finder"],
+        ["xpath=//body/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29e011fc-b12b-4f02-8d11-5d9824947cbb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pb-3",
+      "targets": [
+        ["css=.pb-3", "css:finder"],
+        ["xpath=//main", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "006f3787-6bef-4cb7-83aa-d705c239f698",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pb-3",
+      "targets": [
+        ["css=.pb-3", "css:finder"],
+        ["xpath=//main", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c90ab3f9-f7e6-4b62-a2b4-db5b1bb13d94",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container",
+      "targets": [
+        ["css=.container", "css:finder"],
+        ["xpath=//body/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d6089690-ae40-42ec-bc0e-f7d7c1d2568f",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Are you sure you want to delete this?')]", "xpath:innerText"]
+      ],
+      "value": "Are you sure you want to delete this?"
+    }, {
+      "id": "26dc52ed-e2ad-4881-a770-7255f7d01025",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Delete']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "98a3fd3f-2a43-4d97-b037-2a2c6c276844",
+    "name": "Alterar Aluno válido",
+    "commands": [{
+      "id": "b6142203-3fd6-4a76-8796-8239d75ef677",
+      "comment": "",
+      "command": "open",
+      "target": "/Pessoa",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7f71a3df-0f6b-4559-8d12-66fb18d7ab5a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b2118880-7833-410e-acc0-228c189a3fb8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-down-01",
+      "targets": [
+        ["css=.text-down-01", "css:finder"],
+        ["xpath=//footer/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06634988-786b-474b-aa95-abb777f5c3de",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(8) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(8) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[8]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Reinan de Jesus')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff661a1a-5080-447e-b10d-e6b9853619b3",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=tr:nth-child(8) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(8) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[8]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Reinan de Jesus')]", "xpath:innerText"]
+      ],
+      "value": "Reinan de Jesus"
+    }, {
+      "id": "ceb42bbf-4282-4338-a328-2fa1651c8c4c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(8) > td:nth-child(9)",
+      "targets": [
+        ["css=tr:nth-child(8) > td:nth-child(9)", "css:finder"],
+        ["xpath=//tr[8]/td[9]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "364ea8dd-847c-4b3a-83fd-a566d581ad64",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=tr:nth-child(8) a:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(8) a:nth-child(1)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Edit')])[8]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Pessoa/Edit/81')]", "xpath:href"],
+        ["xpath=//tr[8]/td[9]/a", "xpath:position"]
+      ],
+      "value": "Edit"
+    }, {
+      "id": "2808c669-f790-4590-b843-ab02c2a29846",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(8) a:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(8) a:nth-child(1)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Edit')])[8]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Pessoa/Edit/81')]", "xpath:href"],
+        ["xpath=//tr[8]/td[9]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c0d2bb4-1dfa-4bf2-b158-75803c62f6d5",
+      "comment": "",
+      "command": "click",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bf35ab9-37c3-4fde-aee9-f8bddddb0a10",
+      "comment": "",
+      "command": "type",
+      "target": "id=Numero",
+      "targets": [
+        ["id=Numero", "id"],
+        ["name=Numero", "name"],
+        ["css=#Numero", "css:finder"],
+        ["xpath=//input[@id='Numero']", "xpath:attributes"],
+        ["xpath=//div[7]/input", "xpath:position"]
+      ],
+      "value": "25"
+    }, {
+      "id": "e36d2aca-53f5-4a45-9995-546a097a377d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Save']", "xpath:attributes"],
+        ["xpath=//div[9]/input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "2971ad65-91ee-4631-9ac6-6f2dd9d9694d",
+    "name": "Alterar Aluno Inválido",
+    "commands": [{
+      "id": "85f9ef03-cb40-414b-a979-c0bbcf9a9273",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:7154/pessoa",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fd33ca11-35a5-46d7-819c-ab224e6ee25e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1340x700",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c2d28c3-c797-40c8-b73f-b53fc80fbe24",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'MATHEUS DA CRUZ SOUZA')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "94324411-91e9-46a5-989e-1a58195daedf",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=tr:nth-child(1) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'MATHEUS DA CRUZ SOUZA')]", "xpath:innerText"]
+      ],
+      "value": "MATHEUS DA CRUZ SOUZA"
+    }, {
+      "id": "7d15a282-639b-4b95-ab82-dc32690f7d3f",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2)", "css:finder"],
+        ["xpath=//tr[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "77e96d31-8a45-4166-849a-6b966fe671a1",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[2]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'João das Graças')]", "xpath:innerText"]
+      ],
+      "value": "João das Graças"
+    }]
+  }],
+  "suites": [{
+    "id": "7703bee7-95ca-48cb-b001-fb1eaefd50ac",
+    "name": "Suite Aluno",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["339200a9-7e2c-4bce-80ec-f404d42b19fa", "21c30142-7e6e-440f-ad27-e543f209416f", "98a3fd3f-2a43-4d97-b037-2a2c6c276844"]
+  }, {
+    "id": "59b175ef-13ab-4822-bd6a-606f103af69f",
+    "name": "Suíte Escola",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["319d9980-2acc-4ca5-8d62-d02ea679f7fe", "d93df231-bc6f-4c53-8bdb-4dfb52d2a5c7", "292ac6dc-e4db-41de-9efc-4f8fc4f35042"]
+  }],
+  "urls": ["https://localhost:7154/", "https://localhost:7154/escola", "https://localhost:7154/pessoa"],
+  "plugins": []
+}
