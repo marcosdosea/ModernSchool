@@ -6,7 +6,8 @@ Vídeo de apresentação do modernSchool: [Apresentação do projeto ModernSchoo
  <ul id="nav">
     <li><a href="#problema">1. Problema</a></li>
     <li><a href="#solucao">2. Solução</a></li>
-    <li><a href="#equipe">3. Equipe</a></li>
+    <li><a href="#manual">3. Manual de uso</a></li>
+    <li><a href="#equipe">4. Equipe</a></li>  
  <ul/>
  <h2 id="problema">1. Problema</h2>
  <p>
@@ -21,7 +22,9 @@ Vídeo de apresentação do modernSchool: [Apresentação do projeto ModernSchoo
   Nossa solução é criar um software que auxilie esses profissionais da educação a tornar suas tarefas diárias ageis.
  bus
  </p>
- <h2 id="equipe">3. Equipe</h2>
+ <h2 id="manual">3. manual</h2>
+ <a href="Gerenciamento/Manual de uso.pdf" target="_blank">
+ <h2 id="equipe">4. Equipe</h2>
 
 <table align="center">
   <tr>
