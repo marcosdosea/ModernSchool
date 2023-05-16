@@ -23,7 +23,7 @@ Vídeo de apresentação do modernSchool: [Apresentação do projeto ModernSchoo
  bus
  </p>
  <h2 id="manual">3. manual</h2>
- <a href="Gerenciamento/Manual de uso.pdf" target="_blank">
+ <a href="Gerenciamento/Manual de uso.pdf">Manual de uso</a>
  <h2 id="equipe">4. Equipe</h2>
 
 <table align="center">
