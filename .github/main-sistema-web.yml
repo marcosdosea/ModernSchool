@@ -1,0 +1,60 @@
+name: ModernSchool-web CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+
+    environment:
+      name: MODERNSCHOOL
+
+    env:
+      work-directory: Codigo/ModernSchool/ModernSchool
+
+    steps:
+    - name: Execute checkout in repository
+      uses: actions/checkout@v2
+
+    - name: Configure .NET version
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1
+
+    - name: Replace variables
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{env.work-directory}}/appsettings.json'
+      env:
+        ConnectionStrings.MySqlConnection: ${{secrets.CONNECTION_STRING}}
+
+    - name: Restore dependencies
+      run: |
+        cd ${{env.work-directory}}
+        dotnet restore
+    - name: Build Application
+      run: |
+        cd ${{env.work-directory}}
+        dotnet build --no-restore
+      
+    - name: Publish Application
+      run: |
+        cd ${{env.work-directory}}
+        dotnet publish -c --configuration Release --no-restore --output ./publishWEB
+    
+    - name: Upload via FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USER_WEB }}
+        password: ${{ secrets.FTP_PASS_WEB }}
+        local-dir: '${{env.work-directory}}/publishWEB/'
+        remote-dir: ./
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/AnaliseProjeto
