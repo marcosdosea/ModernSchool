@@ -7,8 +7,8 @@ namespace Core
 {
     public partial class Pessoacomunicacao
     {
-        public int IdPessoa { get; set; }
         public int IdComunicacao { get; set; }
+        public int IdPessoa { get; set; }
 
         public virtual Comunicacao IdComunicacaoNavigation { get; set; }
         public virtual Pessoa IdPessoaNavigation { get; set; }

@@ -174,7 +174,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         {
             return new Anoletivo
             {
-                AnoLetivo = 2022,
+                AnoLetivo1 = 2022,
                 DataInicio = DateTime.Parse("2022-01-01"),
                 DataFim = DateTime.Parse("2022-11-11"),
                 IdEscola = 1
@@ -187,21 +187,21 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             {
                  new Anoletivo
                 {
-                    AnoLetivo = 2022,
+                    AnoLetivo1 = 2022,
                     DataInicio =  DateTime.Parse("2022-01-01"),
                     DataFim =  DateTime.Parse("2022-11-11"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
-                    AnoLetivo = 2023,
+                    AnoLetivo1 = 2023,
                     DataInicio =  DateTime.Parse("2023-01-01"),
                     DataFim =  DateTime.Parse("2023-01-01"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
-                    AnoLetivo = 2024,
+                    AnoLetivo1 = 2024,
                     DataInicio =  DateTime.Parse("2024-01-01"),
                     DataFim =  DateTime.Parse("2024-11-11"),
                     IdEscola = 1
