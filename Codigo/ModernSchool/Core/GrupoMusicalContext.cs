@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Core
 {
-    public partial class ModernSchoolContext : DbContext
+    public partial class GrupoMusicalContext : DbContext
     {
-        public ModernSchoolContext()
+        public GrupoMusicalContext()
         {
         }
 
-        public ModernSchoolContext(DbContextOptions<ModernSchoolContext> options)
+        public GrupoMusicalContext(DbContextOptions<GrupoMusicalContext> options)
             : base(options)
         {
         }
@@ -21,12 +21,20 @@ namespace Core
         public virtual DbSet<Alunocomunicacao> Alunocomunicacaos { get; set; }
         public virtual DbSet<Alunoturma> Alunoturmas { get; set; }
         public virtual DbSet<Anoletivo> Anoletivos { get; set; }
+        public virtual DbSet<Aspnetrole> Aspnetroles { get; set; }
+        public virtual DbSet<Aspnetroleclaim> Aspnetroleclaims { get; set; }
+        public virtual DbSet<Aspnetuser> Aspnetusers { get; set; }
+        public virtual DbSet<Aspnetuserclaim> Aspnetuserclaims { get; set; }
+        public virtual DbSet<Aspnetuserlogin> Aspnetuserlogins { get; set; }
+        public virtual DbSet<Aspnetuserrole> Aspnetuserroles { get; set; }
+        public virtual DbSet<Aspnetusertoken> Aspnetusertokens { get; set; }
         public virtual DbSet<Avaliacao> Avaliacaos { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<Componente> Componentes { get; set; }
         public virtual DbSet<Comunicacao> Comunicacaos { get; set; }
         public virtual DbSet<Curriculo> Curriculos { get; set; }
         public virtual DbSet<Diariodeclasse> Diariodeclasses { get; set; }
+        public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
         public virtual DbSet<Escola> Escolas { get; set; }
         public virtual DbSet<Frequenciaaluno> Frequenciaalunos { get; set; }
         public virtual DbSet<Governo> Governos { get; set; }
@@ -45,7 +53,7 @@ namespace Core
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=ModernSchool");
             }
         }
@@ -54,22 +62,22 @@ namespace Core
         {
             modelBuilder.Entity<Alunoavaliacao>(entity =>
             {
-                entity.HasKey(e => new { e.IdAluno, e.IdAvaliacao })
+                entity.HasKey(e => new { e.IdAvaliacao, e.IdAluno })
                     .HasName("PRIMARY");
 
                 entity.ToTable("alunoavaliacao");
 
+                entity.HasIndex(e => e.IdAluno, "fk_AlunoAvaliacao_Pessoa1_idx");
+
                 entity.HasIndex(e => e.IdAvaliacao, "fk_PessoaAvaliacao_Avaliacao1_idx");
-
-                entity.HasIndex(e => e.IdAluno, "fk_PessoaAvaliacao_Pessoa1_idx");
-
-                entity.Property(e => e.IdAluno)
-                    .HasColumnType("int unsigned")
-                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdAvaliacao)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idAvaliacao");
+
+                entity.Property(e => e.IdAluno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.Arquivo)
                     .IsRequired()
@@ -86,7 +94,7 @@ namespace Core
                     .WithMany(p => p.Alunoavaliacaos)
                     .HasForeignKey(d => d.IdAluno)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaAvaliacao_Pessoa1");
+                    .HasConstraintName("fk_AlunoAvaliacao_Pessoa1");
 
                 entity.HasOne(d => d.IdAvaliacaoNavigation)
                     .WithMany(p => p.Alunoavaliacaos)
@@ -97,28 +105,28 @@ namespace Core
 
             modelBuilder.Entity<Alunocomunicacao>(entity =>
             {
-                entity.HasKey(e => new { e.IdAluno, e.IdComunicacao })
+                entity.HasKey(e => new { e.IdComunicacao, e.IdAluno })
                     .HasName("PRIMARY");
 
                 entity.ToTable("alunocomunicacao");
 
+                entity.HasIndex(e => e.IdAluno, "fk_AlunoComunicacao_Pessoa1_idx");
+
                 entity.HasIndex(e => e.IdComunicacao, "fk_PessoaComunicacao_Comunicacao1_idx");
-
-                entity.HasIndex(e => e.IdAluno, "fk_PessoaComunicacao_Pessoa1_idx");
-
-                entity.Property(e => e.IdAluno)
-                    .HasColumnType("int unsigned")
-                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdComunicacao)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idComunicacao");
 
+                entity.Property(e => e.IdAluno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idAluno");
+
                 entity.HasOne(d => d.IdAlunoNavigation)
                     .WithMany(p => p.Alunocomunicacaos)
                     .HasForeignKey(d => d.IdAluno)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaComunicacao_Pessoa1");
+                    .HasConstraintName("fk_AlunoComunicacao_Pessoa1");
 
                 entity.HasOne(d => d.IdComunicacaoNavigation)
                     .WithMany(p => p.Alunocomunicacaos)
@@ -129,26 +137,26 @@ namespace Core
 
             modelBuilder.Entity<Alunoturma>(entity =>
             {
-                entity.HasKey(e => new { e.IdAluno, e.IdTurma })
+                entity.HasKey(e => new { e.IdTurma, e.IdAluno })
                     .HasName("PRIMARY");
 
                 entity.ToTable("alunoturma");
 
-                entity.HasIndex(e => e.IdAluno, "fk_PessoaTurma_Pessoa1_idx");
+                entity.HasIndex(e => e.IdAluno, "fk_AlunoTurma_Pessoa1_idx");
 
                 entity.HasIndex(e => e.IdTurma, "fk_PessoaTurma_Turma1_idx");
+
+                entity.Property(e => e.IdTurma).HasColumnName("idTurma");
 
                 entity.Property(e => e.IdAluno)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idAluno");
 
-                entity.Property(e => e.IdTurma).HasColumnName("idTurma");
-
                 entity.HasOne(d => d.IdAlunoNavigation)
                     .WithMany(p => p.Alunoturmas)
                     .HasForeignKey(d => d.IdAluno)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaTurma_Pessoa1");
+                    .HasConstraintName("fk_AlunoTurma_Pessoa1");
 
                 entity.HasOne(d => d.IdTurmaNavigation)
                     .WithMany(p => p.Alunoturmas)
@@ -187,6 +195,130 @@ namespace Core
                     .HasForeignKey(d => d.IdEscola)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_AnoLetivo_Escola1");
+            });
+
+            modelBuilder.Entity<Aspnetrole>(entity =>
+            {
+                entity.ToTable("aspnetroles");
+
+                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Aspnetroleclaim>(entity =>
+            {
+                entity.ToTable("aspnetroleclaims");
+
+                entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
+
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Aspnetroleclaims)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_AspNetRoleClaims_AspNetRoles_RoleId");
+            });
+
+            modelBuilder.Entity<Aspnetuser>(entity =>
+            {
+                entity.ToTable("aspnetusers");
+
+                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.EmailConfirmed).HasColumnType("bit(1)");
+
+                entity.Property(e => e.LockoutEnabled).HasColumnType("bit(1)");
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.PhoneNumberConfirmed).HasColumnType("bit(1)");
+
+                entity.Property(e => e.TwoFactorEnabled).HasColumnType("bit(1)");
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<Aspnetuserclaim>(entity =>
+            {
+                entity.ToTable("aspnetuserclaims");
+
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Aspnetuserclaims)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AspNetUserClaims_AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<Aspnetuserlogin>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("aspnetuserlogins");
+
+                entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Aspnetuserlogins)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AspNetUserLogins_AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<Aspnetuserrole>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("aspnetuserroles");
+
+                entity.HasIndex(e => e.RoleId, "IX_AspNetUserRoles_RoleId");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Aspnetuserroles)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_AspNetUserRoles_AspNetRoles_RoleId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Aspnetuserroles)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AspNetUserRoles_AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<Aspnetusertoken>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("aspnetusertokens");
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.Name).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Aspnetusertokens)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AspNetUserTokens_AspNetUsers_UserId");
             });
 
             modelBuilder.Entity<Avaliacao>(entity =>
@@ -408,6 +540,20 @@ namespace Core
                     .HasConstraintName("fk_DiarioDeClasse_Turma1");
             });
 
+            modelBuilder.Entity<Efmigrationshistory>(entity =>
+            {
+                entity.HasKey(e => e.MigrationId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("__efmigrationshistory");
+
+                entity.Property(e => e.MigrationId).HasMaxLength(150);
+
+                entity.Property(e => e.ProductVersion)
+                    .IsRequired()
+                    .HasMaxLength(32);
+            });
+
             modelBuilder.Entity<Escola>(entity =>
             {
                 entity.ToTable("escola");
@@ -452,22 +598,22 @@ namespace Core
 
             modelBuilder.Entity<Frequenciaaluno>(entity =>
             {
-                entity.HasKey(e => new { e.IdAluno, e.IdDiarioDeClasse })
+                entity.HasKey(e => new { e.IdDiarioDeClasse, e.IdAluno })
                     .HasName("PRIMARY");
 
                 entity.ToTable("frequenciaaluno");
 
+                entity.HasIndex(e => e.IdAluno, "fk_FrequenciaAluno_Pessoa1_idx");
+
                 entity.HasIndex(e => e.IdDiarioDeClasse, "fk_PessoaDiarioDeClasse_DiarioDeClasse1_idx");
-
-                entity.HasIndex(e => e.IdAluno, "fk_PessoaDiarioDeClasse_Pessoa1_idx");
-
-                entity.Property(e => e.IdAluno)
-                    .HasColumnType("int unsigned")
-                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.IdDiarioDeClasse)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idDiarioDeClasse");
+
+                entity.Property(e => e.IdAluno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idAluno");
 
                 entity.Property(e => e.Faltas).HasColumnName("faltas");
 
@@ -475,7 +621,7 @@ namespace Core
                     .WithMany(p => p.Frequenciaalunos)
                     .HasForeignKey(d => d.IdAluno)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaDiarioDeClasse_Pessoa1");
+                    .HasConstraintName("fk_FrequenciaAluno_Pessoa1");
 
                 entity.HasOne(d => d.IdDiarioDeClasseNavigation)
                     .WithMany(p => p.Frequenciaalunos)
@@ -508,7 +654,7 @@ namespace Core
 
             modelBuilder.Entity<Governoservidor>(entity =>
             {
-                entity.HasKey(e => new { e.IdGoverno, e.IdPessoa })
+                entity.HasKey(e => new { e.IdPessoa, e.IdGoverno })
                     .HasName("PRIMARY");
 
                 entity.ToTable("governoservidor");
@@ -519,11 +665,11 @@ namespace Core
 
                 entity.HasIndex(e => e.IdPessoa, "fk_GovernoServidor_Pessoa1_idx");
 
-                entity.Property(e => e.IdGoverno).HasColumnName("idGoverno");
-
                 entity.Property(e => e.IdPessoa)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idPessoa");
+
+                entity.Property(e => e.IdGoverno).HasColumnName("idGoverno");
 
                 entity.Property(e => e.DataFim)
                     .HasColumnType("date")
@@ -775,22 +921,22 @@ namespace Core
 
             modelBuilder.Entity<Pessoacomunicacao>(entity =>
             {
-                entity.HasKey(e => new { e.IdPessoa, e.IdComunicacao })
+                entity.HasKey(e => new { e.IdComunicacao, e.IdPessoa })
                     .HasName("PRIMARY");
 
                 entity.ToTable("pessoacomunicacao");
 
                 entity.HasIndex(e => e.IdComunicacao, "fk_PessoaComunicacao_Comunicacao2_idx");
 
-                entity.HasIndex(e => e.IdPessoa, "fk_PessoaComunicacao_Pessoa2_idx");
-
-                entity.Property(e => e.IdPessoa)
-                    .HasColumnType("int unsigned")
-                    .HasColumnName("idPessoa");
+                entity.HasIndex(e => e.IdPessoa, "fk_PessoaComunicacao_Pessoa1_idx");
 
                 entity.Property(e => e.IdComunicacao)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idComunicacao");
+
+                entity.Property(e => e.IdPessoa)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idPessoa");
 
                 entity.HasOne(d => d.IdComunicacaoNavigation)
                     .WithMany(p => p.Pessoacomunicacaos)
@@ -802,7 +948,7 @@ namespace Core
                     .WithMany(p => p.Pessoacomunicacaos)
                     .HasForeignKey(d => d.IdPessoa)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_PessoaComunicacao_Pessoa2");
+                    .HasConstraintName("fk_PessoaComunicacao_Pessoa1");
             });
 
             modelBuilder.Entity<Turma>(entity =>

@@ -26,7 +26,7 @@ namespace Service
         {
             _context.Add(anoLetivo);
             _context.SaveChanges();
-            return anoLetivo.AnoLetivo;
+            return anoLetivo.AnoLetivo1;
         }
         /// <summary>
         /// Deletar um ano letivo no banco de dados
