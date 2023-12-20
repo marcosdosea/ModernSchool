@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.DiarioDeClasseViewModel>
+﻿@model IEnumerable<Core.DTO.DiarioDeClasseDTO>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,31 +7,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Escola)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataShow)
+                @Html.DisplayNameFor(model => model.Turma)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Livros)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LivrosSeduc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResumoAula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTurma)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdComponente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProfessor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoAula)
+                @Html.DisplayNameFor(model => model.Componente)
             </th>
             <th></th>
         </tr>
@@ -40,36 +22,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.Escola)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataShow)
+                @Html.DisplayFor(modelItem => item.Turma)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Livros)
+                @Html.DisplayFor(modelItem => item.Componente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LivrosSeduc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResumoAula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTurma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdComponente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProfessor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoAula)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
             </td>
         </tr>
 }

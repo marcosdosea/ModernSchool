@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -71,5 +72,18 @@ namespace Service
             return _context.Diariodeclasses.AsNoTracking();
         }
 
+        public IEnumerable<DiarioDeClasseDTO> GetAllDTOs()
+        {
+            var query = _context.Diariodeclasses
+                .Select(g => new DiarioDeClasseDTO
+                {
+                    Id = g.Id,
+                    Escola = g.IdTurmaNavigation.AnoLetivoNavigation.IdEscolaNavigation.Nome,
+                    Turma = g.IdTurmaNavigation.Turma1,
+                    Componente = g.IdComponenteNavigation.Nome
+                });
+            return query.AsNoTracking().ToList();
+                
+        }
     }
 }
