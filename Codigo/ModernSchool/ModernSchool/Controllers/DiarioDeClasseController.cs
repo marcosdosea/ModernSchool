@@ -29,8 +29,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: DiarioDeClasseController
         public ActionResult Index()
         {
-            var listaDiarioDeClasse = _diarioDeClasseService.GetAllDTOs();
-            return View(listaDiarioDeClasse);
+           return View();
         }
 
         // GET: DiarioDeClasseController/Details/5

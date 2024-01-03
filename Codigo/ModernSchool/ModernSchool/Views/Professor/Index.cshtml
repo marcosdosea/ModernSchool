@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Core.DTO.GradeHorarioProfessor>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Escola)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Turma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Componente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Escola)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Componente)
+            </td>
+            <td>
+                    <a role="button" class="btn btn-secondary btn-sm" asp-controller="Professor" asp-action="DiarioDeClasse" asp-route-idTurma="@item.IdTurma"
+                    asp-route-idComponente="@item.IdComponente"> Selecionar </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -32,5 +32,9 @@ namespace ModernSchoolWEB.Models
 
         public SelectList? listaComponente { get; set; }
 
+        public IEnumerable
     }
+
+
+
 }

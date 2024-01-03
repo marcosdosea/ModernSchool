@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Core.DTO.ObjetodeconhecimentodiariodeclasseDTO>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UnidadeTematica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                <label> Frequência </label>
+            </th>
+            <th>
+                <label> Registro </label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnidadeTematica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })
+                </td>
+                <td>
+                    @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

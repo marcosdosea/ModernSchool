@@ -15,4 +15,15 @@ namespace Core.DTO
         public string? HoraFim { get; set; }
         public string? Professor { get; set; }
     }
+
+    public class GradeHorarioProfessor
+    {
+        public int Id { get; set; }
+        public int IdComponente {  get; set; }
+        public int IdTurma{ get; set; }
+        public string Escola { get; set; } = string.Empty;
+        public string Turma { get; set; } = string.Empty;
+        public string Componente { get; set; } = string.Empty;
+    }
+
 }

@@ -67,14 +67,26 @@ namespace Service
             return diarioClasse;
         }
 
-        public IEnumerable<Diariodeclasse> GetAll()
+        public IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAll()
         {
-            return _context.Diariodeclasses.AsNoTracking();
+            var query = _context.Objetodeconhecimentodiariodeclasses
+                .Select(g => new ObjetodeconhecimentodiariodeclasseDTO
+                {
+                    Data = "20/05/2024",
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
+                    IdDiarioClasse = g.IdDiarioDeClasse,
+                    IdObjeto = g.IdObjetoDeConhecimento
+
+
+                });
+            return query.ToList();
         }
 
         public IEnumerable<DiarioDeClasseDTO> GetAllDTOs()
         {
+
             var query = _context.Diariodeclasses
+                .Where(g => g.IdProfessor == 3)
                 .Select(g => new DiarioDeClasseDTO
                 {
                     Id = g.Id,

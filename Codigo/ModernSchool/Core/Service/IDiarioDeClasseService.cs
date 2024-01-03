@@ -13,7 +13,6 @@ namespace Core.Service
         void Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
         Diariodeclasse Get(int diariodeclasse);
-        IEnumerable<Diariodeclasse> GetAll();
-        IEnumerable<DiarioDeClasseDTO> GetAllDTOs();
+        IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAll();
     }
 }
