@@ -97,5 +97,18 @@ namespace Service
             return query.AsNoTracking().ToList();
                 
         }
+
+        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade()
+        {
+            var query = _context.Habilidades
+                .Select(g => new DiarioClasseHabilidade
+                {
+                    Data = "20/05/2024",
+                    Habilidade = g.Descricao,
+                    ObjetoConhecimento = g.IdObjetoDeConhecimentoNavigation.Descricao,
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao
+                });
+            return query.AsNoTracking().ToList();
+        }
     }
 }

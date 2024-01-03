@@ -2,6 +2,7 @@
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModernSchoolWEB.Models;
 using Service;
 
 namespace ModernSchoolWEB.Controllers
@@ -37,6 +38,30 @@ namespace ModernSchoolWEB.Controllers
             var view = _diarioDeClasseService.GetAll();
 
             return View(view);
+        }
+
+        // GET: ProfessorController1/Create
+        public ActionResult CreateDiarioClasse()
+        {
+            DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
+
+            diario.Habilidade = _diarioDeClasseService.GetAllHabilidade();
+            return View();
+        }
+
+        // POST: ProfessorController1/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateDiarioClasse(DiarioDeClasseViewModel DiarioDeClasse)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
 

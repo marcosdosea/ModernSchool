@@ -13,4 +13,13 @@ namespace Core.DTO
         public string Turma {  get; set; } = string.Empty;
         public string Componente {  get; set; } = string.Empty;
     }
+
+    public class DiarioClasseHabilidade
+    {
+        public string UnidadeTematica { get; set; } = string.Empty;
+        public string Data { get; set;} = string.Empty;
+        public string ObjetoConhecimento {  get; set; } = string.Empty;
+        public string Habilidade {  get; set; } = string.Empty;
+    }
+
 }
