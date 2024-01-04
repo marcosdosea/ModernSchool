@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.DTO
 {
-    public class FrequenciaAlunoDTO
+    internal class AlunoTurmaDTO
     {
-        public int IdAluno { get; set; }
-        public string? NomeAluno { get; set; }
-
     }
 }

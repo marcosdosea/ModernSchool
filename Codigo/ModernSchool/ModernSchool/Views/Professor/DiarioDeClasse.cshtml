@@ -31,7 +31,7 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })
+                    <a role="button"  asp-action="Frequencia" class="btn btn-secondary btn-sm" asp-route-IdDiario="@item.IdDiarioClasse"> MORE</a>
                 </td>
                 <td>
                     @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +14,17 @@ namespace ModernSchoolWEB.Controllers
 
         private readonly IGradeHorarioService _gradeHorario;
         private readonly IDiarioDeClasseService _diarioDeClasseService;
+        private readonly IFrequenciaAlunoService _frequenciaAlunoService;
         private readonly IMapper _mappers;
 
-        public ProfessorController(IGradeHorarioService gradeHorario, IMapper mappers,IDiarioDeClasseService diarioDeClasseService)
+        public ProfessorController(IGradeHorarioService gradeHorario,
+            IMapper mappers, IDiarioDeClasseService diarioDeClasseService,
+            IFrequenciaAlunoService frequenciaAlunoService)
         {
             _gradeHorario = gradeHorario;
             _mappers = mappers;
             _diarioDeClasseService = diarioDeClasseService;
+            _frequenciaAlunoService = frequenciaAlunoService;
         }
 
 
@@ -30,7 +36,7 @@ namespace ModernSchoolWEB.Controllers
             var gradeHorario = _gradeHorario.GetAllGradeProfessor();
             return View(gradeHorario);
         }
-        
+
 
         public ActionResult DiarioDeClasse(int idTurma, int idComponente)
         {
@@ -64,6 +70,42 @@ namespace ModernSchoolWEB.Controllers
             }
         }
 
+
+
+        public ActionResult Frequencia(int IdDiario)
+        {
+
+            var listAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO();
+            var listModel = _mappers.Map<List<FrequenciaAlunoDTOViewModel>>(listAluno);
+
+            foreach (var item in listModel)
+            {
+                item.IdDiario = IdDiario;
+            }
+
+            return View(listModel);
+        }
+
+        [HttpPost]
+        public ActionResult SalvarFrequencia(List<FrequenciaAlunoDTOViewModel> frequenciaAluno)
+        {
+
+
+            foreach (var item in frequenciaAluno)
+            {
+                Frequenciaaluno freuqencia = new Frequenciaaluno
+                {
+                    Faltas = item.Faltas,
+                    IdAluno = item.IdAluno,
+                    IdDiarioDeClasse = item.IdDiario
+                };
+
+                _frequenciaAlunoService.Create(freuqencia);
+
+            }
+
+            return View(frequenciaAluno);
+        }
 
 
         // GET: ProfessorController1/Details/5

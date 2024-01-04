@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using Core;
-using Core.DTO;
 using Core.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ModernSchoolWEB.Models;
-using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -66,20 +61,20 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(List<FrequenciaAlunoDTOViewModel> frequenciaAlunos)
         {
-            Frequenciaaluno frequenciaaluno = new();
-            foreach(var frequenciaAlunoDTO in frequenciaAlunos)
-            {
-                frequenciaaluno = _frequenciaAlunoService.Get(frequenciaAlunoDTO.idAluno,frequenciaAlunoDTO.idDiarioDeClasse);
-                if (frequenciaAlunoDTO != null) 
-                {
-                    if(frequenciaAlunoDTO.presente == true)
-                    {
-                        frequenciaaluno.Faltas++;
-                    }
-                    
-                    _frequenciaAlunoService.Edit(frequenciaaluno);
-                }
-            }
+            //Frequenciaaluno frequenciaaluno = new();
+            //foreach (var frequenciaAlunoDTO in frequenciaAlunos)
+            //{
+            //    frequenciaaluno = _frequenciaAlunoService.Get(frequenciaAlunoDTO.idAluno, frequenciaAlunoDTO.idDiarioDeClasse);
+            //    if (frequenciaAlunoDTO != null)
+            //    {
+            //        if (frequenciaAlunoDTO.presente == true)
+            //        {
+            //            frequenciaaluno.Faltas++;
+            //        }
+
+            //        _frequenciaAlunoService.Edit(frequenciaaluno);
+            //    }
+            //}
             return RedirectToAction(nameof(Index));
         }
 

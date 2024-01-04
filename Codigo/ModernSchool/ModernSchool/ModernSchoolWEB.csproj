@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\FrequenciaAluno\Index.cshtml" />
+  </ItemGroup>
 	
   <ItemGroup>
 	<Folder Include="Microsoft\AspNetCore\Identity\" />

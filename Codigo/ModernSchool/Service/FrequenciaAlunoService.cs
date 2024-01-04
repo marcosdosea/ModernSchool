@@ -20,7 +20,9 @@ namespace Service
 
         public int Create(Frequenciaaluno frequenciaaluno)
         {
-            throw new NotImplementedException();
+            _context.Add(frequenciaaluno);
+            _context.SaveChanges();
+            return frequenciaaluno.IdAluno;
         }
 
         public void Delete(Frequenciaaluno frequenciaaluno)
@@ -42,17 +44,13 @@ namespace Service
 
         public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
         {
-            var query = _context.Frequenciaalunos
-                .Where(q => q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Id == 2)
+            var query = _context.Alunoturmas
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {
-                        idAluno = q.IdAluno,
-                        idDiarioDeClasse = q.IdDiarioDeClasse,
-                        faltas = q.Faltas,
-                        nomeAluno = q.IdAlunoNavigation.Nome,
-                        turma = q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Turma1,
-                        componente = q.IdDiarioDeClasseNavigation.IdComponenteNavigation.Nome,
+                        IdAluno = q.IdAluno,
+                        NomeAluno = q.IdAlunoNavigation.Nome,
+
                     });
 
             return query.AsNoTracking();
