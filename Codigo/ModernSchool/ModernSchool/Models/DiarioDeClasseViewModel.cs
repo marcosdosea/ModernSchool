@@ -32,7 +32,7 @@ namespace ModernSchoolWEB.Models
         public SelectList? listaProfessor { get; set; }
 
         public SelectList? listaComponente { get; set; }
-        public IEnumerable<DiarioClasseHabilidade> Habilidade { get; set;}
+        public List<DiarioClasseHabilidade> Habilidade { get; set;}
     }
 
 

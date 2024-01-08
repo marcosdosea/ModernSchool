@@ -9,7 +9,7 @@ namespace Core.Service
 {
     public interface IDiarioDeClasseService
     {
-        int Create(Diariodeclasse diariodeclasse);
+        int CreateDiarioClasse(Diariodeclasse diariodeclasse,DiarioClasseHabilidade listHabilidade);
         void Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
         Diariodeclasse Get(int diariodeclasse);

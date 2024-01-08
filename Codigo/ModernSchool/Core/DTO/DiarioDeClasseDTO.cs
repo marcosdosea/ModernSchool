@@ -20,6 +20,8 @@ namespace Core.DTO
         public string Data { get; set;} = string.Empty;
         public string ObjetoConhecimento {  get; set; } = string.Empty;
         public string Habilidade {  get; set; } = string.Empty;
+        public bool Selecionado { get; set; } = false;
+        public int IdObjeto { get; set; }
     }
 
 }

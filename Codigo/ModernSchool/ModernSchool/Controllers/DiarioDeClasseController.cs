@@ -66,7 +66,7 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var diarioClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
-                _diarioDeClasseService.Create(diarioClasse);
+                //_diarioDeClasseService.Create(diarioClasse);
 
             }
             return RedirectToAction(nameof(Index));

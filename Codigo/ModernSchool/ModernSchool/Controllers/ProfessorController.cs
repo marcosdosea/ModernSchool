@@ -51,18 +51,43 @@ namespace ModernSchoolWEB.Controllers
         {
             DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
 
-            diario.Habilidade = _diarioDeClasseService.GetAllHabilidade();
-            return View();
+            diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
+            return View(diario);
         }
 
         // POST: ProfessorController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDiarioClasse(DiarioDeClasseViewModel DiarioDeClasse)
+        public ActionResult CreateDiarioClasse(DiarioDeClasseViewModel diarioDeClasse)
         {
+
+            foreach(var list in diarioDeClasse.Habilidade)
+            {
+                if (list.Selecionado)
+                {
+                    Diariodeclasse diario = new Diariodeclasse
+                    {
+                        DataShow = diarioDeClasse.DataShow,
+                        IdComponente = diarioDeClasse.IdComponente,
+                        IdProfessor = diarioDeClasse.IdProfessor,
+                        Livros = diarioDeClasse.Livros,
+                        LivrosSeduc = diarioDeClasse.LivrosSeduc,
+                        IdTurma = diarioDeClasse.IdTurma,
+                        ResumoAula = diarioDeClasse.ResumoAula,
+                        TipoAula = diarioDeClasse.TipoAula,
+                    };
+
+                    _diarioDeClasseService.CreateDiarioClasse(diario, list);
+                }
+            }
+
+
+
+
+            
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(DiarioDeClasse));
             }
             catch
             {

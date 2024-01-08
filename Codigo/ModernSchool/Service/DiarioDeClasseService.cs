@@ -12,7 +12,7 @@ namespace Service
 {
     public class DiarioDeClasseService : IDiarioDeClasseService
     {
-         private readonly ModernSchoolContext _context;
+        private readonly ModernSchoolContext _context;
 
         public DiarioDeClasseService(ModernSchoolContext context)
         {
@@ -25,11 +25,25 @@ namespace Service
         /// <param name="diariodeclasse"></param>
         /// <returns> Id de diário de classe </returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int Create(Diariodeclasse diariodeclasse)
+        public int CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade)
         {
+
+
             _context.Add(diariodeclasse);
             _context.SaveChanges();
-            return diariodeclasse.Id;
+
+            Objetodeconhecimentodiariodeclasse newObject = new Objetodeconhecimentodiariodeclasse
+            {
+                IdDiarioDeClasse = diariodeclasse.Id,
+                IdObjetoDeConhecimento = listHabilidade.IdObjeto
+            };
+
+
+            _context.Add(newObject );
+            _context.SaveChanges(); 
+
+
+            return 1;
         }
 
         /// <summary>
@@ -43,6 +57,9 @@ namespace Service
             _context.Remove(diarioClasse);
             _context.SaveChanges();
         }
+
+
+
 
         /// <summary>
         /// Editar um Diario de classe
@@ -95,7 +112,7 @@ namespace Service
                     Componente = g.IdComponenteNavigation.Nome
                 });
             return query.AsNoTracking().ToList();
-                
+
         }
 
         public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade()
@@ -106,7 +123,8 @@ namespace Service
                     Data = "20/05/2024",
                     Habilidade = g.Descricao,
                     ObjetoConhecimento = g.IdObjetoDeConhecimentoNavigation.Descricao,
-                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
+                    IdObjeto = g.IdObjetoDeConhecimentoNavigation.Id
                 });
             return query.AsNoTracking().ToList();
         }
