@@ -100,7 +100,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Frequencia(int IdDiario)
         {
 
-            var listAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO();
+            var listAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO(IdDiario);
             var listModel = _mappers.Map<List<FrequenciaAlunoDTOViewModel>>(listAluno);
 
             foreach (var item in listModel)
@@ -116,6 +116,8 @@ namespace ModernSchoolWEB.Controllers
         {
 
 
+            bool createNew = _frequenciaAlunoService.ExistFrequencia(frequenciaAluno[0].IdDiario);
+
             foreach (var item in frequenciaAluno)
             {
                 Frequenciaaluno freuqencia = new Frequenciaaluno
@@ -124,12 +126,18 @@ namespace ModernSchoolWEB.Controllers
                     IdAluno = item.IdAluno,
                     IdDiarioDeClasse = item.IdDiario
                 };
-
-                _frequenciaAlunoService.Create(freuqencia);
-
+                if (!createNew)
+                {
+                    _frequenciaAlunoService.Create(freuqencia);
+                }
+                else
+                {
+                    _frequenciaAlunoService.Edit(freuqencia);
+                }
             }
 
-            return View(frequenciaAluno);
+
+            return RedirectToAction(nameof(DiarioDeClasse));
         }
 
 

@@ -18,9 +18,9 @@ namespace ModernSchoolWEB.Controllers
         // GET: FrequenciaAlunoController
         public ActionResult Index()
         {
-            var listaFrequenciaAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO();
-            var listaFrequenciaAlunoModel = _mapper.Map<List<FrequenciaAlunoDTOViewModel>>(listaFrequenciaAluno);
-            return View(listaFrequenciaAlunoModel);
+            //var listaFrequenciaAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO();
+            //var listaFrequenciaAlunoModel = _mapper.Map<List<FrequenciaAlunoDTOViewModel>>(listaFrequenciaAluno);
+            return View();
         }
 
         // GET: FrequenciaAlunoController/Details/5

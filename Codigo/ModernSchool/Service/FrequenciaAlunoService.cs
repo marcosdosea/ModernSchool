@@ -36,24 +36,59 @@ namespace Service
             _context.SaveChanges();
         }
 
+        public bool ExistFrequencia(int idDiario)
+        {
+              var queryFrequencia = _context.Frequenciaalunos
+             .Where(g => g.IdDiarioDeClasse == idDiario)
+             .Select(g => new FrequenciaAlunoDTO
+             {
+                 IdAluno = g.IdAluno,
+                 NomeAluno = g.IdAlunoNavigation.Nome,
+                 Faltas = g.Faltas
+             }).ToList();
+
+            if (queryFrequencia.Count() != 0)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
         public Frequenciaaluno Get(int idAluno, int idDiario)
         {
             return _context.Frequenciaalunos.Find(idAluno, idDiario);
         }
 
 
-        public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
+        public List<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO(int idDiario)
         {
+            var queryFrequencia = _context.Frequenciaalunos
+                 .Where(g => g.IdDiarioDeClasse == idDiario)
+                 .Select(g => new FrequenciaAlunoDTO
+                 {
+                     IdAluno = g.IdAluno,
+                     NomeAluno = g.IdAlunoNavigation.Nome,
+                     Faltas = g.Faltas
+                 }).ToList();
+
+            if (queryFrequencia.Count() != 0)
+            {
+                return queryFrequencia;
+            }
+
             var query = _context.Alunoturmas
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {
                         IdAluno = q.IdAluno,
                         NomeAluno = q.IdAlunoNavigation.Nome,
-
+                        Faltas = 0
                     });
 
-            return query.AsNoTracking();
+            return query.ToList();
         }
+
+
     }
 }

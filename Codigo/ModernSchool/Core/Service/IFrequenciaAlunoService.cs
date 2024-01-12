@@ -13,7 +13,8 @@ namespace Core.Service
         void Edit(Frequenciaaluno frequenciaaluno);
         void Delete(Frequenciaaluno frequenciaaluno);
         Frequenciaaluno Get(int idAluno, int idDiario);
-        IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO();
+        List<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO(int idDiario);
+        bool ExistFrequencia(int idDiario);
 
     }
 }

@@ -11,5 +11,6 @@ namespace Core.DTO
         public int IdAluno { get; set; }
         public string? NomeAluno { get; set; }
 
+        public int Faltas { get; set; } 
     }
 }
