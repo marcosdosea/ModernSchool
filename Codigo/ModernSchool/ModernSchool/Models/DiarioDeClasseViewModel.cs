@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
@@ -31,6 +32,9 @@ namespace ModernSchoolWEB.Models
         public SelectList? listaProfessor { get; set; }
 
         public SelectList? listaComponente { get; set; }
-
+        public List<DiarioClasseHabilidade> Habilidade { get; set;}
     }
+
+
+
 }

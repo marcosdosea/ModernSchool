@@ -89,6 +89,9 @@ namespace Service
                         
         }
 
+
+
+
         public GradeHorarioDTO? GetAGradeHorario(int id)
         {
             var q = _context.Gradehorarios
@@ -106,6 +109,24 @@ namespace Service
                 .FirstOrDefault();
 
             return q;
+        }
+
+        public IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor()
+        {
+            var query = _context.Gradehorarios
+               .Where(g => g.IdProfessor == 5)
+               .Select(g => new GradeHorarioProfessor
+               {
+                   Id = g.Id,
+                   Escola = g.IdTurmaNavigation.AnoLetivoNavigation.IdEscolaNavigation.Nome,
+                   Turma = g.IdTurmaNavigation.Turma1,
+                   Componente = g.IdComponenteNavigation.Nome,
+                   IdComponente = g.IdComponente,
+                   IdTurma = g.IdTurma
+                   
+               });
+            return query.AsNoTracking().ToList();
+
         }
     }
 }

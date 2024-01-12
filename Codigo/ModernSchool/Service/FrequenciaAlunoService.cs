@@ -20,7 +20,9 @@ namespace Service
 
         public int Create(Frequenciaaluno frequenciaaluno)
         {
-            throw new NotImplementedException();
+            _context.Add(frequenciaaluno);
+            _context.SaveChanges();
+            return frequenciaaluno.IdAluno;
         }
 
         public void Delete(Frequenciaaluno frequenciaaluno)
@@ -34,28 +36,59 @@ namespace Service
             _context.SaveChanges();
         }
 
+        public bool ExistFrequencia(int idDiario)
+        {
+              var queryFrequencia = _context.Frequenciaalunos
+             .Where(g => g.IdDiarioDeClasse == idDiario)
+             .Select(g => new FrequenciaAlunoDTO
+             {
+                 IdAluno = g.IdAluno,
+                 NomeAluno = g.IdAlunoNavigation.Nome,
+                 Faltas = g.Faltas
+             }).ToList();
+
+            if (queryFrequencia.Count() != 0)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
         public Frequenciaaluno Get(int idAluno, int idDiario)
         {
             return _context.Frequenciaalunos.Find(idAluno, idDiario);
         }
 
 
-        public IEnumerable<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO()
+        public List<FrequenciaAlunoDTO> GetAllFrequenciaAlunoDTO(int idDiario)
         {
-            var query = _context.Frequenciaalunos
-                .Where(q => q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Id == 2)
+            var queryFrequencia = _context.Frequenciaalunos
+                 .Where(g => g.IdDiarioDeClasse == idDiario)
+                 .Select(g => new FrequenciaAlunoDTO
+                 {
+                     IdAluno = g.IdAluno,
+                     NomeAluno = g.IdAlunoNavigation.Nome,
+                     Faltas = g.Faltas
+                 }).ToList();
+
+            if (queryFrequencia.Count() != 0)
+            {
+                return queryFrequencia;
+            }
+
+            var query = _context.Alunoturmas
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {
-                        idAluno = q.IdAluno,
-                        idDiarioDeClasse = q.IdDiarioDeClasse,
-                        faltas = q.Faltas,
-                        nomeAluno = q.IdAlunoNavigation.Nome,
-                        turma = q.IdDiarioDeClasseNavigation.IdTurmaNavigation.Turma1,
-                        componente = q.IdDiarioDeClasseNavigation.IdComponenteNavigation.Nome,
+                        IdAluno = q.IdAluno,
+                        NomeAluno = q.IdAlunoNavigation.Nome,
+                        Faltas = 0
                     });
 
-            return query.AsNoTracking();
+            return query.ToList();
         }
+
+
     }
 }

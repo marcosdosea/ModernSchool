@@ -29,9 +29,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: DiarioDeClasseController
         public ActionResult Index()
         {
-            var listaDiarioDeClasse = _diarioDeClasseService.GetAll();
-            var listaDiarioDeClasseModel = _mapper.Map<List<DiarioDeClasseViewModel>>(listaDiarioDeClasse);
-            return View(listaDiarioDeClasseModel);
+           return View();
         }
 
         // GET: DiarioDeClasseController/Details/5
@@ -68,7 +66,7 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var diarioClasse = _mapper.Map<Diariodeclasse>(diarioDeClasseModel);
-                _diarioDeClasseService.Create(diarioClasse);
+                //_diarioDeClasseService.Create(diarioClasse);
 
             }
             return RedirectToAction(nameof(Index));

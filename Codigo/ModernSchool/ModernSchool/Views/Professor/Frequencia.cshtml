@@ -1,0 +1,46 @@
+﻿@model List<ModernSchoolWEB.Models.FrequenciaAlunoDTOViewModel>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].IdAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].NomeAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Faltas)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <form asp-action="SalvarFrequencia" method="post">
+            @for (int i = 0; i < Model.Count(); i++) 
+            {
+            
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].IdAluno)
+                    <input asp-for="@Model[i].IdAluno" type="hidden" value="@Model[i].IdAluno" />
+                    <input asp-for="@Model[i].IdDiario" type="hidden" value="@Model[i].IdDiario"/>
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => @Model[i].NomeAluno)
+                </td>
+                <td>
+                    <input asp-for="@Model[i].Faltas" />
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+        </form>
+    </tbody>
+</table>

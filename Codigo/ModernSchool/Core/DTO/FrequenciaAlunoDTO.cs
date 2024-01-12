@@ -8,12 +8,9 @@ namespace Core.DTO
 {
     public class FrequenciaAlunoDTO
     {
-        public int idAluno { get; set; }
-        public int idDiarioDeClasse { get; set; }
-        public int faltas { get; set; }
-        public string? nomeAluno { get; set; }
-        public string? turma { get; set; }
-        public Boolean presente {get; set;}
-        public string? componente  { get; set; }
+        public int IdAluno { get; set; }
+        public string? NomeAluno { get; set; }
+
+        public int Faltas { get; set; } 
     }
 }

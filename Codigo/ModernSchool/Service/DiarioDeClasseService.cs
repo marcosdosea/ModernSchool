@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ namespace Service
 {
     public class DiarioDeClasseService : IDiarioDeClasseService
     {
-         private readonly ModernSchoolContext _context;
+        private readonly ModernSchoolContext _context;
 
         public DiarioDeClasseService(ModernSchoolContext context)
         {
@@ -24,11 +25,25 @@ namespace Service
         /// <param name="diariodeclasse"></param>
         /// <returns> Id de diário de classe </returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int Create(Diariodeclasse diariodeclasse)
+        public int CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade)
         {
+
+
             _context.Add(diariodeclasse);
             _context.SaveChanges();
-            return diariodeclasse.Id;
+
+            Objetodeconhecimentodiariodeclasse newObject = new Objetodeconhecimentodiariodeclasse
+            {
+                IdDiarioDeClasse = diariodeclasse.Id,
+                IdObjetoDeConhecimento = listHabilidade.IdObjeto
+            };
+
+
+            _context.Add(newObject );
+            _context.SaveChanges(); 
+
+
+            return 1;
         }
 
         /// <summary>
@@ -42,6 +57,9 @@ namespace Service
             _context.Remove(diarioClasse);
             _context.SaveChanges();
         }
+
+
+
 
         /// <summary>
         /// Editar um Diario de classe
@@ -66,10 +84,49 @@ namespace Service
             return diarioClasse;
         }
 
-        public IEnumerable<Diariodeclasse> GetAll()
+        public IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAll()
         {
-            return _context.Diariodeclasses.AsNoTracking();
+            var query = _context.Objetodeconhecimentodiariodeclasses
+                .Select(g => new ObjetodeconhecimentodiariodeclasseDTO
+                {
+                    Data = "20/05/2024",
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
+                    IdDiarioClasse = g.IdDiarioDeClasse,
+                    IdObjeto = g.IdObjetoDeConhecimento
+
+
+                });
+            return query.ToList();
         }
 
+        public IEnumerable<DiarioDeClasseDTO> GetAllDTOs()
+        {
+
+            var query = _context.Diariodeclasses
+                .Where(g => g.IdProfessor == 3)
+                .Select(g => new DiarioDeClasseDTO
+                {
+                    Id = g.Id,
+                    Escola = g.IdTurmaNavigation.AnoLetivoNavigation.IdEscolaNavigation.Nome,
+                    Turma = g.IdTurmaNavigation.Turma1,
+                    Componente = g.IdComponenteNavigation.Nome
+                });
+            return query.AsNoTracking().ToList();
+
+        }
+
+        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade()
+        {
+            var query = _context.Habilidades
+                .Select(g => new DiarioClasseHabilidade
+                {
+                    Data = "20/05/2024",
+                    Habilidade = g.Descricao,
+                    ObjetoConhecimento = g.IdObjetoDeConhecimentoNavigation.Descricao,
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
+                    IdObjeto = g.IdObjetoDeConhecimentoNavigation.Id
+                });
+            return query.AsNoTracking().ToList();
+        }
     }
 }
