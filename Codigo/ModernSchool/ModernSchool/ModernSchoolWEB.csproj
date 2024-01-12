@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Content Remove="Views\FrequenciaAluno\Index.cshtml" />
+    <Content Remove="wwwroot\icon.png" />
   </ItemGroup>
 	
   <ItemGroup>
