@@ -11,9 +11,13 @@
     <Content Remove="Views\FrequenciaAluno\Index.cshtml" />
     <Content Remove="wwwroot\icon.png" />
   </ItemGroup>
-	
+
+
   <ItemGroup>
-	<Folder Include="wwwroot\assets\" />
+    <None Include="wwwroot\lib\fontawesome-free-6.4.0-web\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome-free-6.4.0-web\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome-free-6.4.0-web\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\lib\simple-sidebar\dist\js\scripts.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,16 @@
+﻿.tamDivHeader{
+    height:81px;
+}
+.posDivLogo{
+    position: relative;
+    bottom: 4px;
+    left: 10px;
+}
+.posLogo {
+    position: relative;
+    bottom: 5px;
+}
+
+.gray-login {
+    background-color: var(--bs-gray-200);
+}
