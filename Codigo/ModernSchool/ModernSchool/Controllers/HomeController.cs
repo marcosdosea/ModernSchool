@@ -15,6 +15,8 @@ namespace ModernSchoolWEB.Controllers
 
         public IActionResult Index()
         {
+            //pegar o usuario logado do identity e fazer as condições para passar a viewdata
+            ViewData["Layout"] = "_LayoutProfessor";
             return View();
         }
 
