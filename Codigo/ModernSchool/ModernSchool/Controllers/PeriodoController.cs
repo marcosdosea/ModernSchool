@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core;
 using Core.Service;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
@@ -21,6 +22,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController
         public ActionResult Index()
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             var listaPeriodos = _periodoService.GetAll();
             var listaPeriodosModel = _mapper.Map<List<PeriodoViewModel>>(listaPeriodos);
             return View(listaPeriodosModel);
@@ -29,6 +31,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Details/5
         public ActionResult Details(int id)
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             Periodo periodo = _periodoService.Get(id);
             PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
             return View(periodoModel);
@@ -37,6 +40,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Create
         public ActionResult Create()
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             return View();
         }
 
@@ -57,6 +61,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             Periodo periodo = _periodoService.Get(id);
             PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
             return View(periodoModel);
@@ -78,6 +83,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Delete/5
         public ActionResult Delete(int id)
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             Periodo periodo = _periodoService.Get(id);
             PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
             return View(periodoModel);
@@ -88,6 +94,7 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, PeriodoViewModel periodoViewModel)
         {
+            ViewData["Layout"] = "_LayoutDirecao";
             _periodoService.Delete(id);
             return RedirectToAction(nameof(Index));
         }

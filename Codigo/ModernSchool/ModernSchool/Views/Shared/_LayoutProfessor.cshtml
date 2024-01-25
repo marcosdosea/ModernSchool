@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/core.min.css" />
     <link rel="stylesheet" href="~/css/headerLayout.css" asp-append-version="true" />
+    @RenderSection("Scripts", required: false)
     <link rel="icon" href="~/assets/favicon.png" type="image/png">
 
 </head>
@@ -27,8 +28,9 @@
 
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Diário de Classe <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Avaliações <i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
-                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Comunicados <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Notas <i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
+                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Frequência <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Comunicado <i class="fa-sharp fa-solid fa-angle-right"></i></a>
             </div>
         </div>
         <div id="page-content-wrapper">
