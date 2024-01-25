@@ -7,12 +7,13 @@ using ModernSchoolWEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ModernSchoolWEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using ModernSchoolWEB.Service;
 
 namespace ModernSchoolWEB
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
 
 
@@ -26,7 +27,7 @@ namespace ModernSchoolWEB
             builder.Services.AddDbContext<IdentityContext>(
                 options => options.UseMySQL(builder.Configuration.GetConnectionString("ModernSchoolDatabase")));
 
-            builder.Services.AddDefaultIdentity<UsuarioIdentity>(options =>
+            builder.Services.AddIdentity<UsuarioIdentity, IdentityRole>(options =>
             {
                 // SignIn settings
                 options.SignIn.RequireConfirmedAccount = false;
@@ -85,7 +86,9 @@ namespace ModernSchoolWEB
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IAlunoAvaliacaoService, AlunoAvaliacaoService>();
             builder.Services.AddTransient<IFrequenciaAlunoService, FrequenciaAlunoService>();
-
+            
+            
+            builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
             var app = builder.Build();
 
 
@@ -101,17 +104,33 @@ namespace ModernSchoolWEB
             app.UseStaticFiles();
 
             app.UseRouting();
-                        app.UseAuthentication();;
+            await CriarPerfilUsuarioAsync(app);
+            app.UseAuthentication(); ;
 
             app.UseAuthorization();
 
-            app.MapRazorPages();
+            //app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+
+            async Task CriarPerfilUsuarioAsync(WebApplication app)
+            {
+                var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+                using (var scope = scopedFactory.CreateScope())
+                {
+                    var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+                    await service.SeedRolesAsync();
+                    await service.SeedUsersAsync();
+                }
+            }
         }
+
+
     }
 }

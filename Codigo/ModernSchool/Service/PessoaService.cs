@@ -19,6 +19,12 @@ namespace Service
             _context = context;
         }
 
+        public bool AdicionarCargo(Pessoa pessoa, int idCargo)
+        {
+
+            return true;
+            
+        }
 
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace Core.Service
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
+
+        bool AdicionarCargo(Pessoa pessoa, int idCargo);
 
         
 

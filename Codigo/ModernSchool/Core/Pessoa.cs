@@ -27,6 +27,7 @@ namespace Core
         public string Bairro { get; set; }
         public short? Numero { get; set; }
         public DateTime DataNascimento { get; set; }
+        public string Email { get; set; }
 
         public virtual ICollection<Alunoavaliacao> Alunoavaliacaos { get; set; }
         public virtual ICollection<Alunocomunicacao> Alunocomunicacaos { get; set; }

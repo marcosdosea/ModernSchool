@@ -5,19 +5,34 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
 using Core.DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using ModernSchoolWEB.Areas.Identity.Data;
+using ModernSchoolWEB.Service;
 
 namespace ModernSchoolWEB.Controllers
 {
     public class PessoaController : Controller
     {
         private readonly IPessoaService _pessoaService;
+        private readonly ICargoService _cargoService;
         private readonly IMapper _mapper;
+        private readonly UserManager<UsuarioIdentity> _userManager;
+        private readonly IUserStore<UsuarioIdentity> _userStore;
 
-        public PessoaController(IPessoaService pessoaService, IMapper mapper)
+        private readonly ISeedUserRoleInitial _userRole;
+        public PessoaController(IPessoaService pessoaService, ICargoService cargoService,
+            IMapper mapper, UserManager<UsuarioIdentity> userManager, IUserStore<UsuarioIdentity> userStore, ISeedUserRoleInitial userRole)
         {
             _pessoaService = pessoaService;
+            _cargoService = cargoService;
             _mapper = mapper;
+            _userManager = userManager;
+            _userStore = userStore;
+            _userRole = userRole;
         }
+
+
 
         // GET: PessoaController
         public ActionResult Index()
@@ -56,6 +71,22 @@ namespace ModernSchoolWEB.Controllers
 
         }
 
+        public ActionResult AddPessoaCargo()
+        {
+            AddPessoaCargoModel pessoaCargo = new AddPessoaCargoModel();
+            IEnumerable<Cargo> cargos = _cargoService.GetAll();
+
+            pessoaCargo.ListCargo = new SelectList(cargos, "IdCargo", "Descricao", null);
+
+            return View(pessoaCargo);
+        }
+        [HttpPost]
+        public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
+        {
+            await _userRole.SeedRolesAsync();
+
+            return View();
+        }
         // GET: PessoaController/Edit/5
         public ActionResult Edit(int id)
         {
