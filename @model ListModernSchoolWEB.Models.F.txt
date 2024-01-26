@@ -1,0 +1,69 @@
+@model List<ModernSchoolWEB.Models.FrequenciaAlunoDTOViewModel>
+
+
+<h1>Lista de Frequência</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].idAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].nomeAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].turma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].componente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].faltas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].presente)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <form asp-controller="FrequenciaAluno" asp-action="Edit" method="post">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].idAluno)
+                    <input type="hidden" asp-for="@Model[i].idAluno" value="@Model[i].idAluno">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].nomeAluno)
+                    <input type="hidden" asp-for="@Model[i].nomeAluno" value="@Model[i].nomeAluno">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].turma)
+                    <input type="hidden" asp-for="@Model[i].turma" value="@Model[i].turma">               
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].componente)
+                    <input type="hidden" asp-for="@Model[i].componente" value="@Model[i].componente">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].faltas)
+                </td>
+                <td>
+                    <input type="checkbox" asp-for="@Model[i].presente" value=true>
+                </td>
+                <td>
+                    <input type="hidden" asp-for="@Model[i].idDiarioDeClasse" value="@Model[i].idDiarioDeClasse">
+                </td>
+
+            </tr>
+            }
+        <tr>
+            <td style="border-bottom:none;">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </td>
+        </tr>
+        </form>
+    </tbody>
+</table>

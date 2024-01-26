@@ -104,7 +104,7 @@ namespace ModernSchoolWEB
             app.UseStaticFiles();
 
             app.UseRouting();
-            await CriarPerfilUsuarioAsync(app);
+            //await CriarPerfilUsuarioAsync(app);
             app.UseAuthentication(); ;
 
             app.UseAuthorization();
@@ -118,17 +118,17 @@ namespace ModernSchoolWEB
             app.Run();
 
 
-            async Task CriarPerfilUsuarioAsync(WebApplication app)
-            {
-                var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+            //async Task CriarPerfilUsuarioAsync(WebApplication app)
+            //{
+            //    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
-                using (var scope = scopedFactory.CreateScope())
-                {
-                    var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
-                    await service.SeedRolesAsync();
-                    await service.SeedUsersAsync();
-                }
-            }
+            //    using (var scope = scopedFactory.CreateScope())
+            //    {
+            //        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+            //        await service.SeedRolesAsync();
+            //        await service.SeedUsersAsync();
+            //    }
+            //}
         }
 
 

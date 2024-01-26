@@ -1,8 +1,11 @@
-﻿namespace ModernSchoolWEB.Service
+﻿using Core;
+
+namespace ModernSchoolWEB.Service
 {
     public interface ISeedUserRoleInitial
     {
-        Task SeedRolesAsync();
-        Task SeedUsersAsync();
+        Task SeedRolesAsync(string cargo);
+        Task SeedUsersAsync(Pessoa pessoa, string cargo);
+
     }
 }

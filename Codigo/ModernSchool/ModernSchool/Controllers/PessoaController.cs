@@ -83,9 +83,18 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
         {
-            await _userRole.SeedRolesAsync();
 
-            return View();
+            Pessoa pessoa = new Pessoa
+            {
+                Email = model.Email
+            };
+
+            Cargo cargo = _cargoService.Get(model.IdCargo);
+
+
+            await _userRole.SeedUsersAsync(pessoa, cargo.Descricao);
+
+            return RedirectToAction(nameof(Index));
         }
         // GET: PessoaController/Edit/5
         public ActionResult Edit(int id)
