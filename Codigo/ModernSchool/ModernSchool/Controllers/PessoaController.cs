@@ -9,9 +9,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using ModernSchoolWEB.Areas.Identity.Data;
 using ModernSchoolWEB.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ModernSchoolWEB.Controllers
 {
+
+    [Authorize(Roles = "PROFESSOR")]
     public class PessoaController : Controller
     {
         private readonly IPessoaService _pessoaService;
