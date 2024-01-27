@@ -10,14 +10,14 @@ namespace Core.Service
 {
     public interface IPessoaService
     {
-        bool Create(Pessoa pessoa);
+        int Create(Pessoa pessoa);
         void Edit(Pessoa pessoa);
         void Delete(int id);
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
         IEnumerable<PessoaProfessorDTO> GetAllProfessor();
 
-        bool AdicionarCargo(Pessoa pessoa, int idCargo);
+        bool AdicionarCargo(Pessoa pessoa, int idCargo,int idGoverno);
 
         
 

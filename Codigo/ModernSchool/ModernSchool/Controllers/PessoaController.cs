@@ -14,25 +14,23 @@ using Microsoft.AspNetCore.Authorization;
 namespace ModernSchoolWEB.Controllers
 {
 
-    [Authorize(Roles = "PROFESSOR")]
+    //[Authorize(Roles = "PROFESSOR")]
     public class PessoaController : Controller
     {
         private readonly IPessoaService _pessoaService;
         private readonly ICargoService _cargoService;
         private readonly IMapper _mapper;
-        private readonly UserManager<UsuarioIdentity> _userManager;
-        private readonly IUserStore<UsuarioIdentity> _userStore;
+        private readonly IGovernoService _governoService;
 
         private readonly ISeedUserRoleInitial _userRole;
         public PessoaController(IPessoaService pessoaService, ICargoService cargoService,
-            IMapper mapper, UserManager<UsuarioIdentity> userManager, IUserStore<UsuarioIdentity> userStore, ISeedUserRoleInitial userRole)
+            IMapper mapper, ISeedUserRoleInitial userRole, IGovernoService governoService)
         {
             _pessoaService = pessoaService;
             _cargoService = cargoService;
             _mapper = mapper;
-            _userManager = userManager;
-            _userStore = userStore;
             _userRole = userRole;
+            _governoService = governoService;
         }
 
 
@@ -78,8 +76,9 @@ namespace ModernSchoolWEB.Controllers
         {
             AddPessoaCargoModel pessoaCargo = new AddPessoaCargoModel();
             IEnumerable<Cargo> cargos = _cargoService.GetAll();
-
+            IEnumerable<Governo> governo = _governoService.GetAll();
             pessoaCargo.ListCargo = new SelectList(cargos, "IdCargo", "Descricao", null);
+            pessoaCargo.ListaGoverno = new SelectList(governo, "Id", "Municipio", null);
 
             return View(pessoaCargo);
         }
@@ -89,15 +88,24 @@ namespace ModernSchoolWEB.Controllers
 
             Pessoa pessoa = new Pessoa
             {
-                Email = model.Email
+                Cpf = model.Cpf,
+                Email = model.Email,
+                Nome = model.Nome,
+                DataNascimento = model.DataDeNascimento
             };
 
-            Cargo cargo = _cargoService.Get(model.IdCargo);
+            if (_pessoaService.AdicionarCargo(pessoa, model.IdCargo, model.IdGoverno))
+            {
 
+                Cargo cargo = _cargoService.Get(model.IdCargo);
 
-            await _userRole.SeedUsersAsync(pessoa, cargo.Descricao);
+                await _userRole.SeedUsersAsync(pessoa, cargo.Descricao);
+
+                return RedirectToAction(nameof(Index));
+            }
 
             return RedirectToAction(nameof(Index));
+
         }
         // GET: PessoaController/Edit/5
         public ActionResult Edit(int id)

@@ -19,31 +19,64 @@ namespace Service
             _context = context;
         }
 
-        public bool AdicionarCargo(Pessoa pessoa, int idCargo)
+        public bool AdicionarCargo(Pessoa pessoa, int idCargo, int idGoverno)
         {
 
-            if (BuscarPessoa(pessoa.Cpf)) 
+            var pessoaV = Get(pessoa.Id);
+            if (pessoaV == null)
             {
+                int idPessoa = Create(pessoa);
+                if (idPessoa == -1)
+                {
+                    return false;
+                }
+
+                Governoservidor governoServidor = new Governoservidor
+                {
+                    IdCargo = idCargo,
+                    IdPessoa = idPessoa,
+                    DataInicio = DateTime.Now,
+                    IdGoverno = idGoverno,
+                    Status = "A"
+                };
+                try
+                {
+                    _context.Add(governoServidor);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
 
             }
-
-            if (!Create(pessoa))
-            { }
-
-            return true;
-
-        }
-
-        private bool BuscarPessoa(string cpf)
-        {
-            var query = _context.Pessoas.Where(g => g.Cpf == cpf).First();
-            if (query == null)
+            else
             {
-                return false;
-            }
-            return true;
 
+                Governoservidor governo = new Governoservidor
+                {
+                    IdCargo = idCargo,
+                    IdPessoa = pessoaV.Id,
+                    DataInicio = DateTime.Now,
+                    IdGoverno = idGoverno,
+                    Status = "A"
+                };
+
+                try
+                {
+                    _context.Add(governo);
+                    _context.SaveChanges();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
+
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {
             var q = _context.Governoservidors
@@ -65,17 +98,17 @@ namespace Service
         /// </summary>
         /// <param name="pessoa">Dados da pessoa</param>
         /// <returns>Id da pessoa</returns>
-        public bool Create(Pessoa pessoa)
+        public int Create(Pessoa pessoa)
         {
             try
             {
                 _context.Add(pessoa);
                 _context.SaveChanges();
-                return true;
+                return pessoa.Id;
             }
             catch
             {
-                return false;
+                return -1;
             }
 
         }
