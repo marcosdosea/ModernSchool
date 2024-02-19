@@ -11,11 +11,11 @@ namespace ModernSchoolWEB.Models
         
         public int Id { get; set; }
         [Display(Name ="Data Show")]
-        public bool? DataShow { get; set; }
+        public bool DataShow { get; set; }
         [Display(Name ="Livos")]
-        public bool? Livros { get; set; }
+        public bool Livros { get; set; }
         [Display(Name = "Livros Seduc")]
-        public bool? LivrosSeduc { get; set; }
+        public bool LivrosSeduc { get; set; }
         [Display(Name = "Resumo da aula")]
         public string? ResumoAula { get; set; }
         [Display(Name ="Turma")]

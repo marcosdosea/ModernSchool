@@ -17,7 +17,7 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "CPF")]
         [Required(ErrorMessage = "Campo cpf é obrigatório")]
         [StringLength(11, ErrorMessage = "No minímo 11 caracteres e no máximo 11.", MinimumLength = 11)]
-        public string? Cpf { get; set; }
+        public string Cpf { get; set; } = string.Empty;
         [Display(Name = "Idade")]
         public int Idade { get; set; }
         [Display(Name = "Rua")]

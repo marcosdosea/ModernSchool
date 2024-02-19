@@ -152,5 +152,12 @@ namespace Service
         {
             return _context.Pessoas.AsNoTracking();
         }
+
+        public int GetById(string cpf)
+        {
+            var query = _context.Pessoas.Where( g => g.Cpf == cpf)
+                .Select( g => g.Id);
+            return query.First();
+        }
     }
 }

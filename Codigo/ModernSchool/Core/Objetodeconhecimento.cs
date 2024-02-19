@@ -14,8 +14,8 @@ namespace Core
         }
 
         public int Id { get; set; }
-        public string Descricao { get; set; }
         public int IdUnidadeTematica { get; set; }
+        public string Descricao { get; set; }
         public int SequenciaProposta { get; set; }
 
         public virtual Unidadetematica IdUnidadeTematicaNavigation { get; set; }

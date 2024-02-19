@@ -1,82 +1,167 @@
-﻿﻿﻿
+﻿﻿
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agende-Me | @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/simple-sidebar/dist/css/styles.css" />
-    <link rel="stylesheet" href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/core.min.css" />
-    <link rel="stylesheet" href="~/css/headerLayout.css" asp-append-version="true" />
-    <link rel="icon" href="~/assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="~/AgendeMeWeb.styles.css" asp-append-version="true" />
 
+    <!-- Design System GOV.BR -->
+    <link rel="stylesheet"
+          href="~/css/core.min.css" />
+    <!-- Font Awesome utilizado pelo GOV.BR -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="~/css/agendeme.css" />
+    <link rel="stylesheet" href="~/css/agendaDoServico.css" />
+    @await RenderSectionAsync("Css", required: false)
 </head>
 <body>
-    <div class="d-flex" id="wrapper">
-        <div class="border-end bg-white shadow bg-body rounded border-0" id="sidebar-wrapper">
-
-            <div class="sidebar-heading bg-primary-darken-01 tamDivHeader border-end border-primary-darken-01">
+    <header class="br-header large">
+        <div class="container-lg">
+            <div class="header-top">
                 <div class="header-logo">
-                    <img src="~/assets/LogoSoftware.png" alt="logo" width="50" height="50" /><span class="vertical mx-half mx-sm-1"></span>
-                    <img src="~/assets/NomeSoftware.png" alt="logo" width="100" height="50" /><span class="vertical mx-half mx-sm-1"></span>
+                    <a class="back-none" asp-controller="AgendarServico" asp-action="Index"><img src="~/assets/logo.svg" alt="logoAgendeMe" /></a>
+                    <span class="br-divider vertical mx-half mx-sm-1"></span>
+                    <div class="ms-2 header-sign">Agendamentos Municipais</div>
                 </div>
-
-            </div>
-
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Diário de Classe <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Avaliações <i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
-                <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Comunicados <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-            </div>
-        </div>
-        <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand navbar-light bg-primary-darken-01 tamDivHeader ">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle fs-5 text-light d-flex align-items-center" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div class="card-body">
-                                        <b class="fw-bold"><!--@User.FindFirst("UserName")?.Value-->pegar usuário logado </b>
-                                        <i class="fa-solid fa-circle-user"></i>
-                                    </div>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-controller="Identity" asp-action="Perfil">
-                                        <i class="fa-solid fa-address-card"></i>
-                                        Meus Dados
-                                    </a>
-                                    <form asp-controller="Identity" asp-action="Sair">
-                                        <button class="dropdown-item">
-                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                            Sair
-                                        </button>
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="header-actions">
+                    <div class="header-links dropdown">
+                        <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido">
+                            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                        </button>
+                        <div class="br-list">
+                            <div class="header">
+                                <div class="title">Acesso Rápido</div>
+                            </div>
+                            <a class="br-item" href="javascript:void(0)">Prefeituras</a>
+                            <a class="br-item" href="javascript:void(0)">Ajuda</a>
+                            <a class="br-item" href="javascript:void(0)">Acessibilidade</a>
+                            <a class="br-item" id="register" asp-area="Identity" asp-page="/Account/Register" target="_blank">Cadastre-se</a>
+                        </div>
+                    </div><span class="br-divider vertical mx-half mx-sm-1"></span>
+                    <div class="header-functions dropdown">
+                        <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema">
+                            <i class="fas fa-th" aria-hidden="true"></i>
+                        </button>
+                        <div class="br-list">
+                            <div class="header">
+                                <div class="title">Funcionalidades do Sistema</div>
+                            </div>
+                            <div class="align-items-center br-item">
+                                <a class="br-item" id="register" asp-area="Identity" asp-page="/Account/Register">Cadastre-se</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="header-sign-in">
+                            <partial name="_LoginPartial" />
+                        </div>
                     </div>
                 </div>
-            </nav>
-            <!-- Page content-->
-            <div class="container-fluid px-4 py-3">
-                @RenderBody()
             </div>
         </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
 
-    <footer class="border-top text-muted p-2 text-center">
-        <div class="container">
-            &copy; @DateTime.Now.Year - v1.0
+    <footer class="br-footer">
+        <div class="container-lg">
+            <div class="logo"><img src="~/assets/logoBranca.svg" alt="logoAgendeMe" width="180px" /></div>
+            <div class="br-list horizontal" data-toggle="data-toggle" data-sub="data-sub">
+                <div class="col-2">
+                    <a class="br-item header" href="javascript:void(0)">
+                        <div class="content text-down-01 text-bold text-uppercase">Fale Conosco</div>
+                        <div class="support">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <div class="br-list">
+                        <span class="br-divider d-md-none"></span>
+                        <a class="br-item" href="javascript:void(0)">
+                            <div class="content">Enviar um e-mail</div>
+                        </a>
+                        <a class="br-item" href="javascript:void(0)">
+                            <div class="content">Números para contato</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <a class="br-item header" href="javascript:void(0)">
+                        <div class="content text-down-01 text-bold text-uppercase">Por dentro do Agende-Me</div>
+                        <div class="support">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <div class="br-list">
+                        <span class="br-divider d-md-none"></span>
+                        <a class="br-item" href="javascript:void(0)">
+                            <div class="content">Dúvidas Frequentes</div>
+                        </a>
+                        <a class="br-item" href="javascript:void(0)">
+                            <div class="content">Guias para utilizar o Agende-Me</div>
+                        </a><span class="br-divider d-md-none"></span>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <a class="br-item header" href="javascript:void(0)">
+                        <div class="content text-down-01 text-bold text-uppercase">Acompanhe o Desenvolvimento</div>
+                        <div class="support">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <div class="br-list">
+                        <span class="br-divider d-md-none"></span>
+                        <a class="br-item" href="javascript:void(0)">
+                            <div class="content">O que há de novo?</div>
+                        </a>
+                        <a class="br-item" href="https://github.com/marcosdosea/AgendeMe" target="_blank">
+                            <div class="content">Quer contribuir com o Agende-Me?</div>
+                        </a><span class="br-divider d-md-none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-sm-block">
+                <div class="row align-items-end justify-content-between py-5">
+                    <div class="col social-network">
+                        <p class="text-bold text-uppercase">Redes Sociais</p>
+                        <a class="back-none" href="#">
+                            <i class="text-light fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a class="ms-3 back-none" href="#">
+                            <i class="text-light fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a class="ms-3 back-none" href="#">
+                            <i class="text-light fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a class="ms-3 back-none" href="#">
+                            <i class="text-light fab fa-youtube" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div><span class="br-divider my-3"></span>
+        <div class="container-lg">
+            <div class="info">
+                <div class="text-down-01 text-medium pb-3">
+                    &copy;
+                    @DateTime.Now.Year.ToString() - Agende-Me - <a class="back-none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/simple-sidebar/dist/js/scripts.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/vanilla-masker.min.js"></script>
+    <!-- Scripts de componentes GOV.BR -->
+    <script src="~/js/core-init.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

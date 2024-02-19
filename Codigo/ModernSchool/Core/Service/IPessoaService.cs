@@ -19,6 +19,7 @@ namespace Core.Service
 
         bool AdicionarCargo(Pessoa pessoa, int idCargo,int idGoverno);
 
+        int GetById(string cpf);
         
 
     }

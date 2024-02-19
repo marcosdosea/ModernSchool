@@ -10,6 +10,7 @@ namespace Core
         public Escola()
         {
             Anoletivos = new HashSet<Anoletivo>();
+            Governoservidors = new HashSet<Governoservidor>();
         }
 
         public int Id { get; set; }
@@ -19,8 +20,11 @@ namespace Core
         public string Bairro { get; set; }
         public short? Numero { get; set; }
         public int IdGoverno { get; set; }
+        public int IdDiretor { get; set; }
 
+        public virtual Pessoa IdDiretorNavigation { get; set; }
         public virtual Governo IdGovernoNavigation { get; set; }
         public virtual ICollection<Anoletivo> Anoletivos { get; set; }
+        public virtual ICollection<Governoservidor> Governoservidors { get; set; }
     }
 }

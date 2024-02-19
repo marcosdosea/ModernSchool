@@ -144,5 +144,31 @@ namespace ModernSchoolWEB.Controllers
             _pessoaService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        public ActionResult MatricularAluno()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult MatricularAluno(PessoaViewModel model)
+        {
+
+            if(_pessoaService?.GetById(model.Cpf) != null)
+            {
+                // metodo para add aluno turma 
+            }
+
+
+
+
+            return View(null);
+        }
+
+
+
     }
 }

@@ -9,6 +9,7 @@ namespace Core
     {
         public int IdAluno { get; set; }
         public int IdTurma { get; set; }
+        public string Status { get; set; }
 
         public virtual Pessoa IdAlunoNavigation { get; set; }
         public virtual Turma IdTurmaNavigation { get; set; }

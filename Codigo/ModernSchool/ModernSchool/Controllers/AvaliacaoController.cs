@@ -30,12 +30,6 @@ namespace ModernSchoolWEB.Controllers
             _mapper = mapper;
         }
 
-        public AvaliacaoController(IAvaliacaoService @object, IMapper mapper)
-        {
-            Object = @object;
-            Mapper = mapper;
-        }
-
         // GET: AvaliacaoController1
         public ActionResult Index()
         {

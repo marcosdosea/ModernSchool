@@ -16,7 +16,7 @@ namespace Core
         public DateTime DataEntrega { get; set; }
         public DateTime HorarioEntrega { get; set; }
         public string TipoDeAtividade { get; set; }
-        public short? Peso { get; set; }
+        public short Peso { get; set; }
         public bool? Avaliativo { get; set; }
         public int IdTurma { get; set; }
         public int IdComponente { get; set; }
