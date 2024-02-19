@@ -15,12 +15,10 @@
 </head>
 <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar-->
         <div class="border-end bg-white shadow bg-body rounded border-0" id="sidebar-wrapper">
 
             <div class="sidebar-heading bg-primary-darken-01 tamDivHeader border-end border-primary-darken-01">
                 <div class="header-logo">
-                    <!--colocar a logo aqui-->
                     <img src="~/assets/LogoSoftware.png" alt="logo" width="50" height="50" /><span class="vertical mx-half mx-sm-1"></span>
                     <img src="~/assets/NomeSoftware.png" alt="logo" width="100" height="50" /><span class="vertical mx-half mx-sm-1"></span>
                 </div>
@@ -33,9 +31,7 @@
                 <a class="list-group-item list-group-item-action p-3 border-bottom border-primary text-primary fw-bold d-flex justify-content-between" asp-controller="" asp-action="Index">Comunicados <i class="fa-sharp fa-solid fa-angle-right"></i></a>
             </div>
         </div>
-        <!-- Page content wrapper-->
         <div id="page-content-wrapper">
-            <!-- Top navigation-->
             <nav class="navbar navbar-expand navbar-light bg-primary-darken-01 tamDivHeader ">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -54,11 +50,6 @@
                                         <i class="fa-solid fa-address-card"></i>
                                         Meus Dados
                                     </a>
-                                    @*<a class="dropdown-item" href="#!">
-                                    <i class="fa-solid fa-gear"></i>
-                                    Configurações
-                                    </a>
-                                    <div class="dropdown-divider"></div>*@
                                     <form asp-controller="Identity" asp-action="Sair">
                                         <button class="dropdown-item">
                                             <i class="fa-solid fa-right-from-bracket"></i>
