@@ -114,7 +114,7 @@ namespace Service
         public IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor()
         {
             var query = _context.Gradehorarios
-               .Where(g => g.IdProfessor == 5)
+               .Where(g => g.IdProfessor == 3)
                .Select(g => new GradeHorarioProfessor
                {
                    Id = g.Id,

@@ -157,7 +157,22 @@ namespace Service
         {
             var query = _context.Pessoas.Where( g => g.Cpf == cpf)
                 .Select( g => g.Id);
-            return query.First();
+            return query.FirstOrDefault();
+        }
+
+        public bool MatricularAlunoTurma(Alunoturma alunoTuram)
+        {
+            try
+            {
+                _context.Add(alunoTuram);
+                _context.SaveChanges();
+
+                return true;
+
+            }catch
+            {
+                return false;
+            }
         }
     }
 }

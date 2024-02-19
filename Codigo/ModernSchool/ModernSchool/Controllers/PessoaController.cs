@@ -147,25 +147,58 @@ namespace ModernSchoolWEB.Controllers
 
 
 
-        public ActionResult MatricularAluno()
+        public ActionResult MatricularAlunoTurma()
         {
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult MatricularAluno(PessoaViewModel model)
+        public ActionResult MatricularAlunoTurma(AlunoViewModel model)
         {
+            int idAluno = _pessoaService.GetById(model.Cpf);
 
-            if(_pessoaService?.GetById(model.Cpf) != null)
+            if (idAluno != 0)
             {
-                // metodo para add aluno turma 
+                Alunoturma alunoTurma = new Alunoturma(){
+                    IdAluno = idAluno,
+                    IdTurma = model.IdTurma
+                };
+
+                _pessoaService.MatricularAlunoTurma(alunoTurma);
             }
 
 
 
 
             return View(null);
+        }
+
+
+        public ActionResult MatricularNovoAluno()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult MatricularNovoAluno(AlunoViewModel model)
+        {
+
+            Pessoa novoAluno = new Pessoa()
+            {
+                Nome = model.Nome,
+                Cpf = model.Cpf,
+                Bairro = model.Bairro,
+                Cep = model.Cep,
+                DataNascimento = model.DataNascimento,
+                Email = model.Email,
+                Numero = model.Numero,
+                Rua = model.Rua,
+
+            };
+
+            _pessoaService.Create(novoAluno);
+
+            return View("MatricularAlunoTurma");
         }
 
 
