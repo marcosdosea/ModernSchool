@@ -19,6 +19,63 @@ namespace Service
             _context = context;
         }
 
+        public bool AdicionarCargo(Pessoa pessoa, int idCargo, int idGoverno)
+        {
+
+            var pessoaV = Get(pessoa.Id);
+            if (pessoaV == null)
+            {
+                int idPessoa = Create(pessoa);
+                if (idPessoa == -1)
+                {
+                    return false;
+                }
+
+                Governoservidor governoServidor = new Governoservidor
+                {
+                    IdCargo = idCargo,
+                    IdPessoa = idPessoa,
+                    DataInicio = DateTime.Now,
+                    IdGoverno = idGoverno,
+                    Status = "A"
+                };
+                try
+                {
+                    _context.Add(governoServidor);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+
+                Governoservidor governo = new Governoservidor
+                {
+                    IdCargo = idCargo,
+                    IdPessoa = pessoaV.Id,
+                    DataInicio = DateTime.Now,
+                    IdGoverno = idGoverno,
+                    Status = "A"
+                };
+
+                try
+                {
+                    _context.Add(governo);
+                    _context.SaveChanges();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
 
         public IEnumerable<PessoaProfessorDTO> GetAllProfessor()
         {
@@ -41,18 +98,26 @@ namespace Service
         /// </summary>
         /// <param name="pessoa">Dados da pessoa</param>
         /// <returns>Id da pessoa</returns>
-        int IPessoaService.Create(Pessoa pessoa)
+        public int Create(Pessoa pessoa)
         {
-            _context.Add(pessoa);
-            _context.SaveChanges();
-            return pessoa.Id;
+            try
+            {
+                _context.Add(pessoa);
+                _context.SaveChanges();
+                return pessoa.Id;
+            }
+            catch
+            {
+                return -1;
+            }
+
         }
 
         /// <summary>
         /// Deletar uma pessoa no banco de dados
         /// </summary>
         /// <param name="id"></param>
-        void IPessoaService.Delete(int id)
+        public void Delete(int id)
         {
             var _pessoa = _context.Pessoas.Find(id);
             _context.Remove(_pessoa);
@@ -63,7 +128,7 @@ namespace Service
         /// Editar uma pessoa no banco de dados
         /// </summary>
         /// <param name="pessoa">Dados da pessoa</param>
-        void IPessoaService.Edit(Pessoa pessoa)
+        public void Edit(Pessoa pessoa)
         {
             _context.Update(pessoa);
             _context.SaveChanges();
@@ -74,7 +139,7 @@ namespace Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Dados da pessoa</returns>
-        Pessoa IPessoaService.Get(int id)
+        public Pessoa Get(int id)
         {
             return _context.Pessoas.Find(id);
         }
@@ -83,7 +148,7 @@ namespace Service
         /// Consultar todas as pessoas no banco
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Pessoa> IPessoaService.GetAll()
+        public IEnumerable<Pessoa> GetAll()
         {
             return _context.Pessoas.AsNoTracking();
         }

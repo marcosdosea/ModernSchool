@@ -7,6 +7,7 @@ using ModernSchoolWEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ModernSchoolWEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using ModernSchoolWEB.Service;
 
 namespace ModernSchoolWEB
 {
@@ -26,7 +27,9 @@ namespace ModernSchoolWEB
             builder.Services.AddDbContext<IdentityContext>(
                 options => options.UseMySQL(builder.Configuration.GetConnectionString("ModernSchoolDatabase")));
 
-            builder.Services.AddDefaultIdentity<UsuarioIdentity>(options =>
+
+            builder.Services.AddRazorPages();
+            builder.Services.AddIdentity<UsuarioIdentity, IdentityRole>(options =>
             {
                 // SignIn settings
                 options.SignIn.RequireConfirmedAccount = false;
@@ -86,6 +89,7 @@ namespace ModernSchoolWEB
             builder.Services.AddTransient<IAlunoAvaliacaoService, AlunoAvaliacaoService>();
             builder.Services.AddTransient<IFrequenciaAlunoService, FrequenciaAlunoService>();
 
+            builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
             var app = builder.Build();
 
 
@@ -101,7 +105,8 @@ namespace ModernSchoolWEB
             app.UseStaticFiles();
 
             app.UseRouting();
-                        app.UseAuthentication();;
+
+            app.UseAuthentication(); ;
 
             app.UseAuthorization();
 
@@ -112,6 +117,9 @@ namespace ModernSchoolWEB
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
         }
+
+
     }
 }

@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Content Remove="Views\FrequenciaAluno\Index.cshtml" />
-    <Content Remove="Views\Shared\_Sanduche.cshtml" />
     <Content Remove="wwwroot\icon.png" />
   </ItemGroup>
 
