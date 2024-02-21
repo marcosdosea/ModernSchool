@@ -85,14 +85,19 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
         {
-
-            Pessoa pessoa = new Pessoa
+            int idPessoa = _pessoaService.GetById(model.Cpf);
+            Pessoa pessoa = _pessoaService.Get(idPessoa);
+            if (pessoa == null)
             {
-                Cpf = model.Cpf,
-                Email = model.Email,
-                Nome = model.Nome,
-                DataNascimento = model.DataDeNascimento
-            };
+                pessoa = new Pessoa
+                {
+                    Cpf = model.Cpf,
+                    Email = model.Email,
+                    Nome = model.Nome,
+                    DataNascimento = model.DataDeNascimento
+                };
+            }
+
 
             if (_pessoaService.AdicionarCargo(pessoa, model.IdCargo, model.IdGoverno))
             {
