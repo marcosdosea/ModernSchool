@@ -24,5 +24,7 @@ namespace ModernSchoolWEB.Models
         public short? Numero { get; set; }
         [Required(ErrorMessage = "Campo governo é obrigatório")]
         public int IdGoverno { get; set; }
+        [Required(ErrorMessage ="Campo Diretor é obrigatório")]
+        public int IdDiretor { get; set; } 
     }
 }

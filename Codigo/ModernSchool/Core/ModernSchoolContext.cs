@@ -152,6 +152,13 @@ namespace Core
 
                 entity.Property(e => e.IdTurma).HasColumnName("idTurma");
 
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasColumnType("enum('M','A','R','C')")
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("'M'")
+                    .HasComment("M - MATRICULADO\nA - APROVADO\nR - REPROVADO\nC - CANCELADO");
+
                 entity.HasOne(d => d.IdAlunoNavigation)
                     .WithMany(p => p.Alunoturmas)
                     .HasForeignKey(d => d.IdAluno)
@@ -204,9 +211,11 @@ namespace Core
                 entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
                     .IsUnique();
 
-                entity.Property(e => e.Name).HasMaxLength(256);
+                entity.Property(e => e.Id).HasMaxLength(255);
 
-                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+                entity.Property(e => e.Name).HasMaxLength(255);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(255);
             });
 
             modelBuilder.Entity<Aspnetroleclaim>(entity =>
@@ -215,7 +224,9 @@ namespace Core
 
                 entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
 
-                entity.Property(e => e.RoleId).IsRequired();
+                entity.Property(e => e.RoleId)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Aspnetroleclaims)
@@ -232,21 +243,23 @@ namespace Core
                 entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
                     .IsUnique();
 
-                entity.Property(e => e.Email).HasMaxLength(256);
+                entity.Property(e => e.Id).HasMaxLength(255);
+
+                entity.Property(e => e.Email).HasMaxLength(255);
 
                 entity.Property(e => e.EmailConfirmed).HasColumnType("bit(1)");
 
                 entity.Property(e => e.LockoutEnabled).HasColumnType("bit(1)");
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(255);
 
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(255);
 
                 entity.Property(e => e.PhoneNumberConfirmed).HasColumnType("bit(1)");
 
                 entity.Property(e => e.TwoFactorEnabled).HasColumnType("bit(1)");
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
+                entity.Property(e => e.UserName).HasMaxLength(255);
             });
 
             modelBuilder.Entity<Aspnetuserclaim>(entity =>
@@ -255,7 +268,9 @@ namespace Core
 
                 entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
 
-                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Aspnetuserclaims)
@@ -272,11 +287,13 @@ namespace Core
 
                 entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+                entity.Property(e => e.LoginProvider).HasMaxLength(255);
 
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+                entity.Property(e => e.ProviderKey).HasMaxLength(255);
 
-                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Aspnetuserlogins)
@@ -292,6 +309,10 @@ namespace Core
                 entity.ToTable("aspnetuserroles");
 
                 entity.HasIndex(e => e.RoleId, "IX_AspNetUserRoles_RoleId");
+
+                entity.Property(e => e.UserId).HasMaxLength(255);
+
+                entity.Property(e => e.RoleId).HasMaxLength(255);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Aspnetuserroles)
@@ -311,9 +332,11 @@ namespace Core
 
                 entity.ToTable("aspnetusertokens");
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+                entity.Property(e => e.UserId).HasMaxLength(255);
 
-                entity.Property(e => e.Name).HasMaxLength(128);
+                entity.Property(e => e.LoginProvider).HasMaxLength(255);
+
+                entity.Property(e => e.Name).HasMaxLength(255);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Aspnetusertokens)
@@ -354,7 +377,8 @@ namespace Core
                 entity.Property(e => e.Peso).HasColumnName("peso");
 
                 entity.Property(e => e.TipoDeAtividade)
-                    .HasColumnType("enum('PROVA','PROJETO')")
+                    .IsRequired()
+                    .HasColumnType("enum('PROVA','PROJETO','ATIVIDADE')")
                     .HasColumnName("tipoDeAtividade");
 
                 entity.HasOne(d => d.IdComponenteNavigation)
@@ -383,7 +407,9 @@ namespace Core
 
                 entity.ToTable("cargo");
 
-                entity.Property(e => e.IdCargo).HasColumnName("idCargo");
+                entity.Property(e => e.IdCargo)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idCargo");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
@@ -472,7 +498,9 @@ namespace Core
                     .HasColumnName("escolaridade")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.IdGoverno).HasColumnName("idGoverno");
+                entity.Property(e => e.IdGoverno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idGoverno");
 
                 entity.HasOne(d => d.IdGovernoNavigation)
                     .WithMany(p => p.Curriculos)
@@ -561,6 +589,8 @@ namespace Core
                 entity.HasIndex(e => e.Nome, "Nome_UNIQUE")
                     .IsUnique();
 
+                entity.HasIndex(e => e.IdDiretor, "fk_Escola_Pessoa1_idx");
+
                 entity.HasIndex(e => e.IdGoverno, "fk_Escola_Prefeitura_idx");
 
                 entity.Property(e => e.Id)
@@ -577,7 +607,13 @@ namespace Core
                     .HasColumnName("cnpj")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.IdGoverno).HasColumnName("idGoverno");
+                entity.Property(e => e.IdDiretor)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idDiretor");
+
+                entity.Property(e => e.IdGoverno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idGoverno");
 
                 entity.Property(e => e.Nome)
                     .IsRequired()
@@ -588,6 +624,12 @@ namespace Core
                 entity.Property(e => e.Rua)
                     .HasMaxLength(50)
                     .HasColumnName("rua");
+
+                entity.HasOne(d => d.IdDiretorNavigation)
+                    .WithMany(p => p.Escolas)
+                    .HasForeignKey(d => d.IdDiretor)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Escola_Pessoa1");
 
                 entity.HasOne(d => d.IdGovernoNavigation)
                     .WithMany(p => p.Escolas)
@@ -634,7 +676,9 @@ namespace Core
             {
                 entity.ToTable("governo");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("id");
 
                 entity.Property(e => e.DependenciaAdministrativa)
                     .IsRequired()
@@ -654,20 +698,24 @@ namespace Core
 
             modelBuilder.Entity<Governoservidor>(entity =>
             {
-                entity.HasKey(e => new { e.IdPessoa, e.IdGoverno })
+                entity.HasKey(e => new { e.IdGoverno, e.IdPessoa })
                     .HasName("PRIMARY");
 
                 entity.ToTable("governoservidor");
 
                 entity.HasIndex(e => e.IdCargo, "fk_GovernoServidor_Cargo1_idx");
 
-                entity.HasIndex(e => e.IdGoverno, "fk_GovernoServidor_Governo1_idx");
+                entity.HasIndex(e => e.IdEscola, "fk_GovernoServidor_Escola1_idx");
+
+                entity.HasIndex(e => e.IdPessoa, "fk_GovernoServidor_Pessoa1_idx");
+
+                entity.Property(e => e.IdGoverno)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idGoverno");
 
                 entity.Property(e => e.IdPessoa)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idPessoa");
-
-                entity.Property(e => e.IdGoverno).HasColumnName("idGoverno");
 
                 entity.Property(e => e.DataFim)
                     .HasColumnType("date")
@@ -677,17 +725,31 @@ namespace Core
                     .HasColumnType("date")
                     .HasColumnName("dataInicio");
 
-                entity.Property(e => e.IdCargo).HasColumnName("idCargo");
+                entity.Property(e => e.IdCargo)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idCargo");
+
+                entity.Property(e => e.IdEscola)
+                    .HasColumnType("int unsigned")
+                    .HasColumnName("idEscola");
 
                 entity.Property(e => e.Status)
-                    .HasColumnType("enum('A','I')")
-                    .HasColumnName("status");
+                    .IsRequired()
+                    .HasColumnType("enum('A','I','L')")
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("'A'")
+                    .HasComment("A - ATIVO\nI - INATIVO\nL - LICENCIADO");
 
                 entity.HasOne(d => d.IdCargoNavigation)
                     .WithMany(p => p.Governoservidors)
                     .HasForeignKey(d => d.IdCargo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_GovernoServidor_Cargo1");
+
+                entity.HasOne(d => d.IdEscolaNavigation)
+                    .WithMany(p => p.Governoservidors)
+                    .HasForeignKey(d => d.IdEscola)
+                    .HasConstraintName("fk_GovernoServidor_Escola1");
 
                 entity.HasOne(d => d.IdGovernoNavigation)
                     .WithMany(p => p.Governoservidors)
@@ -716,14 +778,16 @@ namespace Core
 
                 entity.Property(e => e.DiaSemana)
                     .IsRequired()
-                    .HasColumnType("enum('SEG','TER')")
+                    .HasColumnType("enum('DOM','SEG','TER','QUA','QUI','SEX','SAB')")
                     .HasColumnName("diaSemana");
 
                 entity.Property(e => e.HoraFim)
+                    .IsRequired()
                     .HasMaxLength(4)
                     .HasColumnName("horaFim");
 
                 entity.Property(e => e.HoraInicio)
+                    .IsRequired()
                     .HasMaxLength(4)
                     .HasColumnName("horaInicio");
 
@@ -883,7 +947,7 @@ namespace Core
             {
                 entity.ToTable("pessoa");
 
-                entity.HasIndex(e => e.Email, "Email_UNIQUE")
+                entity.HasIndex(e => e.Email, "email_UNIQUE")
                     .IsUnique();
 
                 entity.Property(e => e.Id)
@@ -893,6 +957,11 @@ namespace Core
                 entity.Property(e => e.Bairro)
                     .HasMaxLength(40)
                     .HasColumnName("bairro");
+
+                entity.Property(e => e.Cep)
+                    .IsRequired()
+                    .HasMaxLength(8)
+                    .HasColumnName("cep");
 
                 entity.Property(e => e.Cpf)
                     .IsRequired()
@@ -906,9 +975,8 @@ namespace Core
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(45);
-
-                entity.Property(e => e.Idade).HasColumnName("idade");
+                    .HasMaxLength(45)
+                    .HasColumnName("email");
 
                 entity.Property(e => e.Nome)
                     .IsRequired()
@@ -980,9 +1048,10 @@ namespace Core
 
                 entity.Property(e => e.Status)
                     .IsRequired()
-                    .HasColumnType("enum('A','F')")
+                    .HasColumnType("enum('A','F','C')")
                     .HasColumnName("status")
-                    .HasDefaultValueSql("'A'");
+                    .HasDefaultValueSql("'A'")
+                    .HasComment("A - ATIVA\nF - FINALIZADA\nC - CANCELADA");
 
                 entity.Property(e => e.Turma1)
                     .IsRequired()

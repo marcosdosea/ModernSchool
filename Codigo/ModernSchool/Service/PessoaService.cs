@@ -152,5 +152,27 @@ namespace Service
         {
             return _context.Pessoas.AsNoTracking();
         }
+
+        public int GetById(string cpf)
+        {
+            var query = _context.Pessoas.Where( g => g.Cpf == cpf)
+                .Select( g => g.Id);
+            return query.FirstOrDefault();
+        }
+
+        public bool MatricularAlunoTurma(Alunoturma alunoTuram)
+        {
+            try
+            {
+                _context.Add(alunoTuram);
+                _context.SaveChanges();
+
+                return true;
+
+            }catch
+            {
+                return false;
+            }
+        }
     }
 }

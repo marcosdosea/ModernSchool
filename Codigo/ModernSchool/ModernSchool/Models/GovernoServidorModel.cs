@@ -26,6 +26,7 @@ namespace ModernSchoolWEB.Models
 
         [Display(Name ="Pessoa")]
         public int IdPessoa { get; set; }
+        public int? IdEscola { get; set; }
 
         public SelectList? listaCargo { get; set; } 
 

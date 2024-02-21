@@ -85,14 +85,19 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
         {
-
-            Pessoa pessoa = new Pessoa
+            int idPessoa = _pessoaService.GetById(model.Cpf);
+            Pessoa pessoa = _pessoaService.Get(idPessoa);
+            if (pessoa == null)
             {
-                Cpf = model.Cpf,
-                Email = model.Email,
-                Nome = model.Nome,
-                DataNascimento = model.DataDeNascimento
-            };
+                pessoa = new Pessoa
+                {
+                    Cpf = model.Cpf,
+                    Email = model.Email,
+                    Nome = model.Nome,
+                    DataNascimento = model.DataDeNascimento
+                };
+            }
+
 
             if (_pessoaService.AdicionarCargo(pessoa, model.IdCargo, model.IdGoverno))
             {
@@ -144,5 +149,64 @@ namespace ModernSchoolWEB.Controllers
             _pessoaService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        public ActionResult MatricularAlunoTurma()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult MatricularAlunoTurma(AlunoViewModel model)
+        {
+            int idAluno = _pessoaService.GetById(model.Cpf);
+
+            if (idAluno != 0)
+            {
+                Alunoturma alunoTurma = new Alunoturma(){
+                    IdAluno = idAluno,
+                    IdTurma = model.IdTurma
+                };
+
+                _pessoaService.MatricularAlunoTurma(alunoTurma);
+            }
+
+
+
+
+            return View(null);
+        }
+
+
+        public ActionResult MatricularNovoAluno()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult MatricularNovoAluno(AlunoViewModel model)
+        {
+
+            Pessoa novoAluno = new Pessoa()
+            {
+                Nome = model.Nome,
+                Cpf = model.Cpf,
+                Bairro = model.Bairro,
+                Cep = model.Cep,
+                DataNascimento = model.DataNascimento,
+                Email = model.Email,
+                Numero = model.Numero,
+                Rua = model.Rua,
+
+            };
+
+            _pessoaService.Create(novoAluno);
+
+            return View("MatricularAlunoTurma");
+        }
+
+
+
     }
 }

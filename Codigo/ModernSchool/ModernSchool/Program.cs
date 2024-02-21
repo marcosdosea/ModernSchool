@@ -29,7 +29,7 @@ namespace ModernSchoolWEB
 
 
             builder.Services.AddRazorPages();
-            builder.Services.AddIdentity<UsuarioIdentity, IdentityRole>(options =>
+            builder.Services.AddDefaultIdentity<UsuarioIdentity>(options =>
             {
                 // SignIn settings
                 options.SignIn.RequireConfirmedAccount = false;
@@ -52,7 +52,8 @@ namespace ModernSchoolWEB
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
-            }).AddEntityFrameworkStores<IdentityContext>();
+            }).AddRoles<IdentityRole>()
+                     .AddEntityFrameworkStores<IdentityContext>();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {

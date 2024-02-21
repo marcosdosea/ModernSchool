@@ -33,7 +33,8 @@ namespace Service
                 DataFim = governoservidor.DataFim,
                 DataInicio = governoservidor.DataInicio,
                 IdCargo = governoservidor.IdCargo,
-                Status = governoservidor.Status
+                Status = governoservidor.Status,
+                
             };
            
             _context.Add(governoservidor);

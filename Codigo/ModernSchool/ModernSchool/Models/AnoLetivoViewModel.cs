@@ -7,7 +7,7 @@ namespace ModernSchoolWEB.Models
         [Key]
         [Display(Name = "Ano Letivo")]
         [Required(ErrorMessage = "Campo ano letivo é obrigatório")]
-        public int AnoLetivo { get; set; }
+        public int AnoLetivo1 { get; set; }
         [Required(ErrorMessage = "Campo escola é obrigatório")]
         [Display(Name = "Escola")]
         public int? IdEscola { get; set; }

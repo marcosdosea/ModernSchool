@@ -33,7 +33,7 @@ namespace ServiceTests
                     new Pessoa {  Id = 1,
                     Nome = "Moises Junio Fagundes Dos Santos",
                     Cpf = "86413068035",
-                    Idade = 15,
+                    //Idade = 15,
                     Rua = "Gumercindo de oliveira",
                     Bairro = "Centro",
                     Numero = 221,
@@ -41,7 +41,7 @@ namespace ServiceTests
                     new Pessoa {  Id = 2,
                     Nome = "Mateus da cruz souza",
                     Cpf = "74432021055",
-                    Idade = 17,
+                    //Idade = 17,
                     Rua = "Percilio andrade",
                     Bairro = "Centro",
                     Numero = 21,
@@ -49,7 +49,7 @@ namespace ServiceTests
                     new Pessoa {  Id = 3,
                     Nome = "Reinan de Jesus Santoa",
                     Cpf = "65627407034",
-                    Idade = 15,
+                    //Idade = 15,
                     DataNascimento = DateTime.Parse("2008/01/23")},
                 };
 
@@ -67,7 +67,8 @@ namespace ServiceTests
                 Id = 4,
                 Nome = "Marlene Carvalho Santos",
                 Cpf = "20412100010",
-                Idade = 17,
+                //
+                //Idade = 17,
                 DataNascimento = DateTime.Parse("2005/03/25")
             });
             // Assert

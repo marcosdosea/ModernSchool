@@ -14,9 +14,9 @@ namespace Core
         }
 
         public int Id { get; set; }
-        public bool? DataShow { get; set; }
-        public bool? Livros { get; set; }
-        public bool? LivrosSeduc { get; set; }
+        public bool DataShow { get; set; }
+        public bool Livros { get; set; }
+        public bool LivrosSeduc { get; set; }
         public string ResumoAula { get; set; }
         public int IdTurma { get; set; }
         public int IdComponente { get; set; }
