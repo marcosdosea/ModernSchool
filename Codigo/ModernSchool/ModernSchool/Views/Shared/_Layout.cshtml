@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agende-Me | @ViewData["Title"]</title>
+    <title>ModernSchool | @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/AgendeMeWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/simple-sidebar/dist/css/styles.css" />
 
     <!-- Design System GOV.BR -->
     <link rel="stylesheet"
@@ -15,47 +16,46 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
 
-    <link rel="stylesheet" href="~/css/agendeme.css" />
-    <link rel="stylesheet" href="~/css/agendaDoServico.css" />
     @await RenderSectionAsync("Css", required: false)
 </head>
 <body>
-    <header class="br-header large">
+    <header class="br-header large bg-primary-darken-01 border-bottom">
         <div class="container-lg">
             <div class="header-top">
                 <div class="header-logo">
-                    <a class="back-none" asp-controller="AgendarServico" asp-action="Index"><img src="~/assets/logo.svg" alt="logoAgendeMe" /></a>
+                    <a class="back-none" asp-action="Index"><img src="~/assets/LogoSoftware.png" alt="logo ModernSchool" /></a>
                     <span class="br-divider vertical mx-half mx-sm-1"></span>
-                    <div class="ms-2 header-sign">Agendamentos Municipais</div>
+                    <div class="ms-2 header-sign"><img src="~/assets/NomeSoftware.png" alt="Nome do software" /></div>
+                    <button class="br-button circle small fs-5" id="sidebarToggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                 </div>
                 <div class="header-actions">
                     <div class="header-links dropdown">
                         <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido">
                             <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
                         </button>
-                        <div class="br-list">
+                        <div class="br-list bg-primary-darken-01">
                             <div class="header">
-                                <div class="title">Acesso Rápido</div>
+                                <div class="title text-uppercase text-bold text-white text-opacity-50">Acesso Rápido</div>
                             </div>
-                            <a class="br-item" href="javascript:void(0)">Prefeituras</a>
-                            <a class="br-item" href="javascript:void(0)">Ajuda</a>
-                            <a class="br-item" href="javascript:void(0)">Acessibilidade</a>
-                            <a class="br-item" id="register" asp-area="Identity" asp-page="/Account/Register" target="_blank">Cadastre-se</a>
+                            <a class="br-item bg-primary-darken-01 text-uppercase text-bold text-white text-opacity-75" href="javascript:void(0)">Prefeituras</a>
+                            <a class="br-item bg-primary-darken-01 text-uppercase text-bold text-white text-opacity-75" href="javascript:void(0)">Ajuda</a>
+                            <a class="br-item bg-primary-darken-01 text-uppercase text-bold text-white text-opacity-75" href="javascript:void(0)">Acessibilidade</a>
                         </div>
                     </div><span class="br-divider vertical mx-half mx-sm-1"></span>
-                    <div class="header-functions dropdown">
-                        <button class="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema">
+
+
+                    <div class="dropdown">
+                        <button class="br-button circle small" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-th" aria-hidden="true"></i>
                         </button>
-                        <div class="br-list">
-                            <div class="header">
-                                <div class="title">Funcionalidades do Sistema</div>
-                            </div>
-                            <div class="align-items-center br-item">
-                                <a class="br-item" id="register" asp-area="Identity" asp-page="/Account/Register">Cadastre-se</a>
-                            </div>
-                        </div>
+                        <ul class="dropdown-menu rounded-0 bg-primary-darken-01" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item text-uppercase text-bold text-white text-opacity-75" href="#">Meus dados</a></li>
+                            <li><a class="dropdown-item text-uppercase text-bold text-white text-opacity-75" href="#">Funcionalidades do Sistema</a></li>
+                        </ul>
                     </div>
+
                     <div>
                         <div class="header-sign-in">
                             <partial name="_LoginPartial" />
@@ -65,15 +65,40 @@
             </div>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="br-footer">
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
+            <div class="list-group list-group-flush">
+                <div class="d-flex" id="wrapper">
+                    <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
+                        <div class="list-group list-group-flush">
+                            <div class="d-flex" id="wrapper">
+                                <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
+                                    <div class="list-group list-group-flush">
+                                        <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="" asp-action="Index">Grade Horário <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                        <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Periodo" asp-action="Index">Período <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                        <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="" asp-action="Index">Turma <i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
+                                        <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="" asp-action="Index">Componente <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                        <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="" asp-action="Index">Matricular <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                        <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="" asp-action="Index">Comunicado <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <footer class="br-footer bg-primary-darken-01">
         <div class="container-lg">
-            <div class="logo"><img src="~/assets/logoBranca.svg" alt="logoAgendeMe" width="180px" /></div>
+            <div class="logo"><img src="~/assets/LogoSoftware.png" alt="logo ModernSchool" /></div>
             <div class="br-list horizontal" data-toggle="data-toggle" data-sub="data-sub">
                 <div class="col-2">
                     <a class="br-item header" href="javascript:void(0)">
@@ -85,16 +110,16 @@
                     <div class="br-list">
                         <span class="br-divider d-md-none"></span>
                         <a class="br-item" href="javascript:void(0)">
-                            <div class="content">Enviar um e-mail</div>
+                            <div class="content text-down-01 text-bold text-uppercase">Enviar um e-mail</div>
                         </a>
                         <a class="br-item" href="javascript:void(0)">
-                            <div class="content">Números para contato</div>
+                            <div class="content text-down-01 text-bold text-uppercase">Números para contato</div>
                         </a>
                     </div>
                 </div>
                 <div class="col-2">
                     <a class="br-item header" href="javascript:void(0)">
-                        <div class="content text-down-01 text-bold text-uppercase">Por dentro do Agende-Me</div>
+                        <div class="content text-down-01 text-bold text-uppercase">Por dentro do ModernSchool</div>
                         <div class="support">
                             <i class="fas fa-angle-down" aria-hidden="true"></i>
                         </div>
@@ -102,10 +127,10 @@
                     <div class="br-list">
                         <span class="br-divider d-md-none"></span>
                         <a class="br-item" href="javascript:void(0)">
-                            <div class="content">Dúvidas Frequentes</div>
+                            <div class="content text-down-01 text-bold text-uppercase">Dúvidas Frequentes</div>
                         </a>
                         <a class="br-item" href="javascript:void(0)">
-                            <div class="content">Guias para utilizar o Agende-Me</div>
+                            <div class="content text-down-01 text-bold text-uppercase">Guias para utilizar o ModernSchool</div>
                         </a><span class="br-divider d-md-none"></span>
                     </div>
                 </div>
@@ -119,10 +144,10 @@
                     <div class="br-list">
                         <span class="br-divider d-md-none"></span>
                         <a class="br-item" href="javascript:void(0)">
-                            <div class="content">O que há de novo?</div>
+                            <div class="content text-down-01 text-bold text-uppercase">O que há de novo?</div>
                         </a>
-                        <a class="br-item" href="https://github.com/marcosdosea/AgendeMe" target="_blank">
-                            <div class="content">Quer contribuir com o Agende-Me?</div>
+                        <a class="br-item" href="https://github.com/marcosdosea/modernschool" target="_blank">
+                            <div class="content text-down-01 text-bold text-uppercase">Quer contribuir com o ModernSchool?</div>
                         </a><span class="br-divider d-md-none"></span>
                     </div>
                 </div>
@@ -132,16 +157,16 @@
                     <div class="col social-network">
                         <p class="text-bold text-uppercase">Redes Sociais</p>
                         <a class="back-none" href="#">
-                            <i class="text-light fab fa-instagram" aria-hidden="true"></i>
+                            <i class="text-light fab fa-instagram fa-2x" aria-hidden="true"></i>
                         </a>
-                        <a class="ms-3 back-none" href="#">
-                            <i class="text-light fab fa-facebook-f" aria-hidden="true"></i>
+                        <a class="ms-1 back-none" href="#">
+                            <i class="text-light fab fa-facebook-f fa-2x" aria-hidden="true"></i>
                         </a>
-                        <a class="ms-3 back-none" href="#">
-                            <i class="text-light fab fa-twitter" aria-hidden="true"></i>
+                        <a class="ms-1 back-none" href="#">
+                            <i class="text-light fab fa-twitter fa-2x" aria-hidden="true"></i>
                         </a>
-                        <a class="ms-3 back-none" href="#">
-                            <i class="text-light fab fa-youtube" aria-hidden="true"></i>
+                        <a class="ms-1 back-none" href="#">
+                            <i class="text-light fab fa-youtube fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -151,16 +176,18 @@
             <div class="info">
                 <div class="text-down-01 text-medium pb-3">
                     &copy;
-                    @DateTime.Now.Year.ToString() - Agende-Me - <a class="back-none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    @DateTime.Now.Year.ToString() - ModernSchool - <a class="back-none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
             </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/simple-sidebar/dist/js/scripts.js"></script>
     <script src="~/js/vanilla-masker.min.js"></script>
     <!-- Scripts de componentes GOV.BR -->
     <script src="~/js/core-init.js"></script>
+    <script src="~/js/site.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
