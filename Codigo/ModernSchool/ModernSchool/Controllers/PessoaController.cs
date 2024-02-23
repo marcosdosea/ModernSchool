@@ -39,7 +39,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Index()
         {
 
-            int idGrupo = Convert.ToInt32(User.FindFirst("Id")?.Value);
+
 
             var listaPessoas = _pessoaService.GetAll();
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
