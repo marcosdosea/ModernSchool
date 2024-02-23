@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using ModernSchoolWEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ModernSchoolWEB.Service;
+using GestaoGrupoMusicalWeb.Helpers;
 
 namespace ModernSchoolWEB
 {
@@ -89,8 +90,10 @@ namespace ModernSchoolWEB
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IAlunoAvaliacaoService, AlunoAvaliacaoService>();
             builder.Services.AddTransient<IFrequenciaAlunoService, FrequenciaAlunoService>();
-
             builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+            builder.Services.AddScoped<IUserClaimsPrincipalFactory<UsuarioIdentity>, ApplicationUserClaims>();
+
+
             var app = builder.Build();
 
 
