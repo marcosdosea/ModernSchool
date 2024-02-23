@@ -38,6 +38,9 @@ namespace ModernSchoolWEB.Controllers
         // GET: PessoaController
         public ActionResult Index()
         {
+
+
+
             var listaPessoas = _pessoaService.GetAll();
             var listaPessoasModel = _mapper.Map<List<PessoaViewModel>>(listaPessoas);
             return View(listaPessoasModel);

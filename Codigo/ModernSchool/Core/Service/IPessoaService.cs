@@ -21,7 +21,9 @@ namespace Core.Service
 
         bool MatricularAlunoTurma(Alunoturma alunoTuram);
         int GetById(string cpf);
-        
+
+        Task<string> GetByCargo(string email);
+        Task<Pessoa> GetByEmail(string email);
 
     }
 }

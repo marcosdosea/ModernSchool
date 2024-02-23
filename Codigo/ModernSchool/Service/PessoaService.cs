@@ -174,5 +174,26 @@ namespace Service
                 return false;
             }
         }
+
+
+        public async Task<string> GetByCargo(string email)
+        {
+            var query =  _context.Governoservidors
+                .Where(g => g.IdPessoaNavigation.Email == email)
+                .Select(g => g.IdCargoNavigation.Descricao);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Pessoa> GetByEmail(string email)
+        {
+            var query = _context.Pessoas.Where(g => g.Email == email)
+                .Select(g => new Pessoa
+                {
+                    Nome = g.Nome,
+                    Id = g.Id,
+                });
+            return await  query.FirstOrDefaultAsync();
+        }
     }
 }
