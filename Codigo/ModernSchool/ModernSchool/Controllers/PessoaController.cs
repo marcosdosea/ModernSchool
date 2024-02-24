@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ModernSchoolWEB.Controllers
 {
 
-    //[Authorize(Roles = "PROFESSOR")]
+    [Authorize]
     public class PessoaController : Controller
     {
         private readonly IPessoaService _pessoaService;
