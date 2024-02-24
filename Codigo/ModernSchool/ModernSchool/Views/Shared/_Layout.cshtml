@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/simple-sidebar/dist/css/styles.css" />
+    <link rel="icon" type="image/x-icon" href="~/assets/favicon.png" />
 
     <!-- Design System GOV.BR -->
     <link rel="stylesheet"
@@ -15,7 +16,9 @@
     <!-- Font Awesome utilizado pelo GOV.BR -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
-
+    @{
+        ViewData["Title"] = "Autenticar";
+    }
     @await RenderSectionAsync("Css", required: false)
 </head>
 <body>
