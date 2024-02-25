@@ -1,13 +1,36 @@
 ﻿.cor-bg {
     background-color: #0c326f;
 }
+.cor-body {
+    background-color: #d3d9e3;
+}
 .altura-conteiner{
-    height:340px;
+    height:350px;
 }
 .pos-logo{
     position:relative;
     left: 2px;
+    top:20px;
+}
+.pos-pen-logo{
+    position:relative;
+    border-radius:50px;
+    right:40px;
+    height:80px;
+    width:80px;
+}
+.pos-pen {
+    position: relative;
     top: 20px;
+    left:15px;
+}
+.pos-logo-bottom {
+    position: relative;
+    
+}
+.pos-arame{
+    position:relative;
+    right:20px;
 }
 .btn-hover:hover {
     background-color: #011d4a;
@@ -16,4 +39,15 @@
     font-family: "Mukta", sans-serif;
     font-weight: 700;
     font-style: normal;
+}
+
+@media screen and (max-width: 1023px) {
+    .sumir-div {
+        display: none !important;
+    }
+
+    .pos-arame {
+        position: relative;
+        right: 75px;
+    }
 }

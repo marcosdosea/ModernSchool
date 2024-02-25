@@ -15,14 +15,13 @@
     }
 </head>
 <body>
-    <img class="position-absolute top-50 start-50 rounded translate-middle" src="~/assets/backgroundIMG.png" width="84%" />
-    <div class="position-absolute top-50 start-50 translate-middle pe-0 col-10 col-md-6 col-lg-6
+    <div class="card border-secondary border-opacity-50 position-absolute top-50 start-50 translate-middle pe-0 col-10 col-md-6 col-lg-6
                     shadow gray-login bg-light bg-opacity-50 rounded">
         <div class="d-flex justify-content-evenly align-items-center">
+            <img class="pos-arame sumir-div" src="~/assets/Arame.png" />
             <div class="col-lg-7">
                 <form id="account" class="p-2 d-grid gap-3" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                     <div class="form-group d-flex flex-column">
                         <div class="d-flex justify-content-between">
                             <label class="form-label text-uppercase text-bold text-dark text-opacity-100 mukta-bold">Usuário</label>
@@ -35,7 +34,7 @@
                                 <i class="fa-regular fa-user" style="color: #6c757d;"></i>
                             </div>
 
-                            <input asp-for="Input.Email" class="form-control fs-5  ps-1 border-0 rounded-0 bg-secondary bg-opacity-25 text-opacity-100" placeholder="Ex: email@exemplo.com" autocomplete="username" aria-required="true" />
+                            <input asp-for="Input.Email" class="form-control fs-5  ps-1 border-0 rounded-0 bg-secondary bg-opacity-50 text-opacity-100" placeholder="Ex: email@exemplo.com" autocomplete="username" aria-required="true" />
 
                         </div>
                     </div>
@@ -49,7 +48,7 @@
 
                             <div class="d-flex align-items-center col">
                                 <i class="fa-solid fa-lock mx-2" style="color: #6c757d;"></i>
-                                <input asp-for="Input.Password" class="form-control fs-5  ps-1 border-0 rounded-0 bg-secondary bg-opacity-25 text-opacity-100" placeholder="Digite sua Senha..." autocomplete="current-password" aria-required="true" />
+                                <input asp-for="Input.Password" class="form-control fs-5  ps-1 border-0 rounded-0 bg-secondary bg-opacity-50 text-opacity-100" placeholder="Digite sua Senha..." autocomplete="current-password" aria-required="true" />
                             </div>
 
                             <i class="fas fa-eye mx-2 pointer-cursor data-bs-toggle" tooltip" title="Mostrar senha" id="toggleSenha"></i>
@@ -75,12 +74,15 @@
                     </div>
                 </form>
             </div>
-            <div class="d-flex justify-content-center flex-column col rounded-end cor-bg altura-conteiner">
-                <div class="text-center">
+            <div class="sumir-div d-flex justify-content-center flex-column col rounded-end cor-bg altura-conteiner">
+                <div class="text-center pos-logo-bottom">
                     <img src="~/assets/LogoSoftware.png" />
                 </div>
                 <div class="text-center pos-logo">
                     <img src="~/assets/NomeSoftware.png" />
+                </div>
+                <div class="pos-pen-logo cor-bg">
+                    <i class="h1 pos-pen text-light fa-sharp fa-solid fa-pen-clip"></i>
                 </div>
             </div>
         </div>
