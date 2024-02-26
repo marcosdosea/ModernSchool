@@ -7,16 +7,13 @@
     <div class="col-md-4">
         <form asp-action="CreateDiarioClasse">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
             <table class="table">
                 <thead>
                     <tr>
-                        <th></th>
                         <th>Unidade temática</th>
                         <th>Data</th>
                         <th>Objeto conhecimento</th>
                         <th>Habilidade</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -40,23 +37,18 @@
             </table>
 
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" type="hidden" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DataShow" class="control-label"></label>
-                <input asp-for="DataShow" class="form-control" />
+                <input asp-for="DataShow" type="checkbox" value="true"/>
                 <span asp-validation-for="DataShow" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Livros" class="control-label"></label>
-                <input asp-for="Livros" class="form-control" />
+                <input asp-for="Livros" />
                 <span asp-validation-for="Livros" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LivrosSeduc" class="control-label"></label>
-                <input asp-for="LivrosSeduc" class="form-control" />
+                <input asp-for="LivrosSeduc" type="checkbox" value="true" />
                 <span asp-validation-for="LivrosSeduc" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,18 +57,15 @@
                 <span asp-validation-for="ResumoAula" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <input asp-for="IdTurma" class="form-control" />
+                <input asp-for="IdTurma" class="form-control" type="hidden" />
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdComponente" class="control-label"></label>
-                <input asp-for="IdComponente" class="form-control" />
+                <input asp-for="IdComponente" class="form-control" type="hidden" />
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProfessor" class="control-label"></label>
-                <input asp-for="IdProfessor" class="form-control" />
+                <input asp-for="IdProfessor" class="form-control" type="hidden"/>
                 <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
             <div class="form-group">

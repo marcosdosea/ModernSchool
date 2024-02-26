@@ -8,7 +8,8 @@ namespace ModernSchoolWEB.Models
 {
     public class DiarioDeClasseViewModel
     {
-        
+
+      
         public int Id { get; set; }
         [Display(Name ="Data Show")]
         public bool DataShow { get; set; }

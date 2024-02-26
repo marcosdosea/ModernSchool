@@ -13,7 +13,11 @@ namespace Core.Service
         void Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
         Diariodeclasse Get(int diariodeclasse);
-        IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAll();
+        /// <summary>
+        /// Pegar o diario/atividades do professor de uma turma com o determinado componente
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAllDiarioTurmaComponete(int IdProfessor, int IdComponente, int idTurma);
         IEnumerable<DiarioClasseHabilidade> GetAllHabilidade();
     }
 }

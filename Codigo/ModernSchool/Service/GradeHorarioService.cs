@@ -111,10 +111,10 @@ namespace Service
             return q;
         }
 
-        public IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor()
+        public IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor(int idProfessor)
         {
             var query = _context.Gradehorarios
-               .Where(g => g.IdProfessor == 3)
+               .Where(g => g.IdProfessor == idProfessor)
                .Select(g => new GradeHorarioProfessor
                {
                    Id = g.Id,
