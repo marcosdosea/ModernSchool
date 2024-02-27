@@ -3,7 +3,9 @@
 <p>
     <a asp-action="CreateDiarioClasse" asp-route-idTurma="@Model.IdTurma" 
         asp-route-idProfessor="@Model.IdProfessor" 
-        asp-route-idComponente="@Model.IdComponente">Create New</a>
+        asp-route-idComponente="@Model.IdComponente">Create New</a>:
+    <a asp-action="Index" asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma"
+       asp-route-idComponente="@Model.IdComponente">Avaliacao</a>
 </p>
 
 <div>
