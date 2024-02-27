@@ -53,27 +53,32 @@ namespace Service
             }
             else
             {
-
-                Governoservidor governo = new Governoservidor
+                Governoservidor governoservidor = new Governoservidor();
+                if (_context.Governoservidors.Find(idGoverno, pessoaV.Id) == null)
                 {
-                    IdCargo = idCargo,
-                    IdPessoa = pessoaV.Id,
-                    DataInicio = DateTime.Now,
-                    IdGoverno = idGoverno,
-                    Status = "A"
-                };
+                    governoservidor = new Governoservidor
+                    {
+                        IdCargo = idCargo,
+                        IdPessoa = pessoaV.Id,
+                        DataInicio = DateTime.Now,
+                        IdGoverno = idGoverno,
+                        Status = "A"
+                    };
 
-                try
-                {
-                    _context.Add(governo);
-                    _context.SaveChanges();
+                    try
+                    {
+                        _context.Add(governoservidor);
+                        _context.SaveChanges();
+                        return true;
 
-                    return true;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
                 }
-                catch
-                {
-                    return false;
-                }
+                return true;
+
             }
         }
 
@@ -155,8 +160,8 @@ namespace Service
 
         public int GetById(string cpf)
         {
-            var query = _context.Pessoas.Where( g => g.Cpf == cpf)
-                .Select( g => g.Id);
+            var query = _context.Pessoas.Where(g => g.Cpf == cpf)
+                .Select(g => g.Id);
             return query.FirstOrDefault();
         }
 
@@ -169,7 +174,8 @@ namespace Service
 
                 return true;
 
-            }catch
+            }
+            catch
             {
                 return false;
             }
@@ -178,7 +184,7 @@ namespace Service
 
         public async Task<string> GetByCargo(string email)
         {
-            var query =  _context.Governoservidors
+            var query = _context.Governoservidors
                 .Where(g => g.IdPessoaNavigation.Email == email)
                 .Select(g => g.IdCargoNavigation.Descricao);
 
@@ -193,7 +199,7 @@ namespace Service
                     Nome = g.Nome,
                     Id = g.Id,
                 });
-            return await  query.FirstOrDefaultAsync();
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
