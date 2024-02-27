@@ -1,16 +1,24 @@
-﻿@model IEnumerable<Core.DTO.ObjetodeconhecimentodiariodeclasseDTO>
+﻿@model ModernSchoolWEB.Models.DiarioClasseProfessorDTO
 
 <p>
-    <a asp-action="CreateDiarioClasse">Create New</a>
+    <a asp-action="CreateDiarioClasse" asp-route-idTurma="@Model.IdTurma" 
+        asp-route-idProfessor="@Model.IdProfessor" 
+        asp-route-idComponente="@Model.IdComponente">Create New</a>
 </p>
+
+<div>
+    <label>Turma: @Model.NomeTurma</label>
+    <label>Componente: @Model.NomeComponente</label>
+
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UnidadeTematica)
+                <label>Unidade Tematica</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data)
+                <label>Data</label>
             </th>
             <th>
                 <label> Frequência </label>
@@ -21,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.ObjetoConhecimento)
         {
             <tr>
                 <td>
@@ -31,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    <a role="button"  asp-action="Frequencia" class="btn btn-secondary btn-sm" asp-route-IdDiario="@item.IdDiarioClasse"> MORE</a>
+                    <a role="button" asp-action="Frequencia" class="btn btn-secondary btn-sm" asp-route-IdDiario="@item.IdDiarioClasse"> MORE</a>
                 </td>
                 <td>
                     @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })

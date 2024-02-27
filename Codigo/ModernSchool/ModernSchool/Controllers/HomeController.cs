@@ -17,6 +17,13 @@ namespace ModernSchoolWEB.Controllers
 
         public IActionResult Index()
         {
+
+            if (User.IsInRole("PROFESSOR"))
+            {
+                return RedirectToAction("Index","Professor");
+            }
+
+
             return View();
         }
 

@@ -19,7 +19,7 @@ namespace ModernSchoolWEB.Service
         {
             if (!await _roleManager.RoleExistsAsync(cargo.ToUpper()))
             {
-                await _roleManager.CreateAsync(new IdentityRole("professor".ToUpper()));
+                await _roleManager.CreateAsync(new IdentityRole(cargo.ToUpper()));
             }
         }
 
@@ -44,7 +44,7 @@ namespace ModernSchoolWEB.Service
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
-                IdentityResult result = await _userManager.CreateAsync(newUser, "Matheus12");
+                IdentityResult result = await _userManager.CreateAsync(newUser, "12345678");
 
                 if (result.Succeeded)
                 {

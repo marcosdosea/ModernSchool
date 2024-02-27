@@ -88,6 +88,7 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
         {
+
             int idPessoa = _pessoaService.GetById(model.Cpf);
             Pessoa pessoa = _pessoaService.Get(idPessoa);
             if (pessoa == null)
@@ -97,7 +98,8 @@ namespace ModernSchoolWEB.Controllers
                     Cpf = model.Cpf,
                     Email = model.Email,
                     Nome = model.Nome,
-                    DataNascimento = model.DataDeNascimento
+                    DataNascimento = model.DataDeNascimento,
+                    Cep = "4511899"
                 };
             }
 

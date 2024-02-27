@@ -16,15 +16,21 @@ namespace ModernSchoolWEB.Controllers
         private readonly IDiarioDeClasseService _diarioDeClasseService;
         private readonly IFrequenciaAlunoService _frequenciaAlunoService;
         private readonly IMapper _mappers;
+        private readonly ITurmaService _turmaService;
+        private readonly IComponenteService _componenteService;
 
         public ProfessorController(IGradeHorarioService gradeHorario,
             IMapper mappers, IDiarioDeClasseService diarioDeClasseService,
-            IFrequenciaAlunoService frequenciaAlunoService)
+            IFrequenciaAlunoService frequenciaAlunoService,
+            ITurmaService turmaService,
+            IComponenteService componenteService)
         {
             _gradeHorario = gradeHorario;
             _mappers = mappers;
             _diarioDeClasseService = diarioDeClasseService;
             _frequenciaAlunoService = frequenciaAlunoService;
+            _turmaService = turmaService;
+            _componenteService = componenteService;
         }
 
 
@@ -33,24 +39,40 @@ namespace ModernSchoolWEB.Controllers
         // GET: ProfessorController1
         public ActionResult Index()
         {
-            var gradeHorario = _gradeHorario.GetAllGradeProfessor();
+            int idProfessor = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            var gradeHorario = _gradeHorario.GetAllGradeProfessor(idProfessor);
             return View(gradeHorario);
         }
 
 
         public ActionResult DiarioDeClasse(int idTurma, int idComponente)
         {
+            int idProfessor = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            string nomeComponente = _componenteService.Get(idComponente).Nome;
+            string nomeTurma = _turmaService.Get(idTurma).Turma1;
 
-            var view = _diarioDeClasseService.GetAll();
+            DiarioClasseProfessorDTO diario = new DiarioClasseProfessorDTO();
+            var listaObjeto = _diarioDeClasseService.GetAllDiarioTurmaComponete(idProfessor,idComponente,idTurma);
 
-            return View(view);
+            diario.ObjetoConhecimento = listaObjeto;
+            diario.IdTurma = idTurma;
+            diario.IdComponente = idComponente;
+            diario.IdProfessor = idProfessor;
+            diario.NomeComponente = nomeComponente;
+            diario.NomeTurma = nomeTurma;
+
+
+            return View(diario);
         }
 
         // GET: ProfessorController1/Create
-        public ActionResult CreateDiarioClasse()
+        public ActionResult CreateDiarioClasse(int idTurma, int idProfessor, int idComponente)
         {
             DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
 
+            diario.IdProfessor = idProfessor;
+            diario.IdComponente = idComponente;
+            diario.IdTurma = idTurma;
             diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
             return View(diario);
         }
@@ -87,7 +109,7 @@ namespace ModernSchoolWEB.Controllers
             
             try
             {
-                return RedirectToAction(nameof(DiarioDeClasse));
+                return RedirectToAction(nameof(DiarioDeClasse),new {idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente});
             }
             catch
             {

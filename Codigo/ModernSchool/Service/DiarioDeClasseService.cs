@@ -84,9 +84,13 @@ namespace Service
             return diarioClasse;
         }
 
-        public IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAll()
+        public IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAllDiarioTurmaComponete(int IdProfessor, int IdComponente, int idTurma)
         {
             var query = _context.Objetodeconhecimentodiariodeclasses
+                .Where(g => g.IdDiarioDeClasseNavigation.IdTurma == idTurma &&
+                    g.IdDiarioDeClasseNavigation.IdComponente == IdComponente
+                    && g.IdDiarioDeClasseNavigation.IdProfessor == IdProfessor
+                )
                 .Select(g => new ObjetodeconhecimentodiariodeclasseDTO
                 {
                     Data = "20/05/2024",
