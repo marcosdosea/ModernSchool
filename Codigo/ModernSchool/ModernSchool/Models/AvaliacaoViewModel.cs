@@ -24,9 +24,9 @@ namespace ModernSchoolWEB.Models
         [Required(ErrorMessage = "Campo peso é obrigatório")]
         public int Peso { get; set; }
 
-        [Display(Name = "Tipo de Atividade")]
+        [Display(Name = "Avaliativo")]
         [Required(ErrorMessage = "Campo tipo de atividade é obrigatório")]
-        public int Avaliativo { get; set; }
+        public bool Avaliativo { get; set; }
         [Display(Name = "Turma")]
         [Required(ErrorMessage = "Campo turma é obrigatório")]
         public int IdTurma { get; set; }
