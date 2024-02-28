@@ -1,19 +1,10 @@
 ﻿@model ModernSchoolWEB.Models.DiarioClasseProfessorDTO
 
-<p>
-    <a asp-action="CreateDiarioClasse" asp-route-idTurma="@Model.IdTurma" 
-        asp-route-idProfessor="@Model.IdProfessor" 
-        asp-route-idComponente="@Model.IdComponente">Create New</a>:
-    <a asp-action="Index" asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma"
-       asp-route-idComponente="@Model.IdComponente">Avaliacao</a>
-</p>
-
-<div>
+<div class="py-1">
     <label>Turma: @Model.NomeTurma</label>
     <label>Componente: @Model.NomeComponente</label>
-
 </div>
-<table class="table">
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -41,12 +32,23 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    <a role="button" asp-action="Frequencia" class="btn btn-secondary btn-sm" asp-route-IdDiario="@item.IdDiarioClasse"> MORE</a>
+                    <a role="button" asp-action="Frequencia" class="fs-5" asp-route-IdDiario="@item.IdDiarioClasse"><i class="fa-solid fa-clipboard-check"></i></a>
                 </td>
                 <td>
-                    @Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })
+                    <a role="button" asp-action="Frequencia" class="fs-5" asp-route-IdDiario="@item.IdDiarioClasse"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <!--//Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })-->
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="d-flex justify-content-end col-lg-6">
+            <a class="display-4" role="button" asp-action="CreateDiarioClasse" asp-route-idTurma="@Model.IdTurma"
+               asp-route-idProfessor="@Model.IdProfessor"
+               asp-route-idComponente="@Model.IdComponente"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
+</div>
