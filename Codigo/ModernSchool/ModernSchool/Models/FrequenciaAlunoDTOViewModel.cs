@@ -12,4 +12,10 @@ namespace ModernSchoolWEB.Models
         public int Faltas { get; set; }
         public int IdDiario { get; set; }
     }
+    public class FrequenciaListaAlunoDTOViewModel
+    {
+        public List<FrequenciaAlunoDTOViewModel> Lista { get; set; }
+        public int IdTurma { get; set; }
+        public int IdComponente { get; set; }
+    }
 }

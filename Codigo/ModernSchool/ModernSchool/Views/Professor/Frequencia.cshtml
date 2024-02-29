@@ -1,4 +1,4 @@
-﻿@model List<ModernSchoolWEB.Models.FrequenciaAlunoDTOViewModel>
+﻿@model ModernSchoolWEB.Models.FrequenciaListaAlunoDTOViewModel
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -7,13 +7,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model[0].IdAluno)
+                @Html.DisplayNameFor(model => model.Lista[0].IdAluno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].NomeAluno)
+                @Html.DisplayNameFor(model => model.Lista[0].NomeAluno)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Faltas)
+                @Html.DisplayNameFor(model => model.Lista[0].Faltas)
             </th>
 
             <th></th>
@@ -21,25 +21,27 @@
     </thead>
     <tbody>
         <form asp-action="SalvarFrequencia" method="post">
-            @for (int i = 0; i < Model.Count(); i++) 
+            <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden" />
+            <input asp-for="IdComponente" value="@Model.IdComponente" type="hidden" />
+            @for (int i = 0; i < Model.Lista.Count(); i++)
             {
-            
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model[i].IdAluno)
-                    <input asp-for="@Model[i].IdAluno" type="hidden" value="@Model[i].IdAluno" />
-                    <input asp-for="@Model[i].IdDiario" type="hidden" value="@Model[i].IdDiario"/>
+                        @Html.DisplayFor(modelItem => Model.Lista[i].IdAluno)
+                    <input asp-for="@Model.Lista[i].IdAluno" type="hidden" value="@Model.Lista[i].IdAluno" />
+                    <input asp-for="@Model.Lista[i].IdDiario" type="hidden" value="@Model.Lista[i].IdDiario" />
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => @Model[i].NomeAluno)
+                        @Html.DisplayFor(modelItem => @Model.Lista[i].NomeAluno)
                 </td>
                 <td>
-                    <input asp-for="@Model[i].Faltas" />
+                    <input asp-for="@Model.Lista[i].Faltas" />
                 </td>
                 <td>
                 </td>
             </tr>
-        }
+            }
         <input type="submit" value="Salvar" class="btn btn-primary" />
         </form>
     </tbody>
