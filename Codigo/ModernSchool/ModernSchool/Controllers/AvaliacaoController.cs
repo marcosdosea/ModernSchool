@@ -33,6 +33,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: AvaliacaoController1
         public ActionResult Index(int idTurma, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
             var avaliacoes = _avaliacaoService.GetAllDTO(idTurma, idComponente);
 
             AvaliacaoProfessorViewModel viewModel = new AvaliacaoProfessorViewModel();
@@ -55,6 +56,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: AvaliacaoController1/Create
         public ActionResult Create(int idTurma, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
 
             AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
             avaliacaoViewModel.IdTurma = idTurma;

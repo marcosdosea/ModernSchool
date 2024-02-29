@@ -56,7 +56,8 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Avaliacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma"
+       asp-route-idComponente="@Model.IdComponente"> Voltar </a>
 </div>
 
 @section Scripts {

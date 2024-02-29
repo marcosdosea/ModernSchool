@@ -74,7 +74,7 @@
         @{
             if (User.IsInRole("PROFESSOR") && Convert.ToBoolean(ViewData["FlagLyoutProf"]) == true)
             {
-                <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
                         <div class="d-flex" id="wrapper">
                             <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
@@ -82,7 +82,8 @@
                                     <div class="d-flex" id="wrapper">
                                         <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
                                             <div class="list-group list-group-flush">
-                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="DiarioDeClasse" asp-action="Index">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Professor" asp-action="DiarioDeClasse"
+                                                    asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-action="Index" 
                                                     asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Avaliacao <i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
@@ -97,7 +98,7 @@
             }
             else if (User.IsInRole("DIRETOR"))
             {
-                <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
                         <div class="d-flex" id="wrapper">
                             <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
@@ -123,7 +124,7 @@
             }
             else if (User.IsInRole("ALUNO"))
             {
-                <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
                         <div class="d-flex" id="wrapper">
                             <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
@@ -145,7 +146,7 @@
             }
             else if (User.IsInRole("RESPONSAVEL"))
             {
-                <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
                         <div class="d-flex" id="wrapper">
                             <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
