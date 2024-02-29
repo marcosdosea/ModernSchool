@@ -39,6 +39,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: ProfessorController1
         public ActionResult Index()
         {
+            ViewData["FlagLyoutProf"] = false;
             int idProfessor = Convert.ToInt32(User.FindFirst("Id")?.Value);
             var gradeHorario = _gradeHorario.GetAllGradeProfessor(idProfessor);
             return View(gradeHorario);
@@ -47,6 +48,7 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult DiarioDeClasse(int idTurma, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
             int idProfessor = Convert.ToInt32(User.FindFirst("Id")?.Value);
             string nomeComponente = _componenteService.Get(idComponente).Nome;
             string nomeTurma = _turmaService.Get(idTurma).Turma1;
@@ -68,12 +70,17 @@ namespace ModernSchoolWEB.Controllers
         // GET: ProfessorController1/Create
         public ActionResult CreateDiarioClasse(int idTurma, int idProfessor, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
             DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
 
             diario.IdProfessor = idProfessor;
             diario.IdComponente = idComponente;
             diario.IdTurma = idTurma;
             diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
+            string nomeComponente = _componenteService.Get(idComponente).Nome;
+            string nomeTurma = _turmaService.Get(idTurma).Turma1;
+            ViewData["nomeTurma"] = nomeTurma;
+            ViewData["nomeComponente"] = nomeComponente;
             return View(diario);
         }
 

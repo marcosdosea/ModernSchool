@@ -31,13 +31,17 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: AvaliacaoController1
-        public ActionResult Index()
+        public ActionResult Index(int idTurma, int idComponente)
         {
-            var listaAvaliacao = _avaliacaoService.GetAll();
-            
-            var listaAvaliacaoModel = _mapper.Map<List<AvaliacaoViewModel>>(listaAvaliacao);
+            ViewData["FlagLyoutProf"] = true;
+            var avaliacoes = _avaliacaoService.GetAllDTO(idTurma, idComponente);
 
-            return View(listaAvaliacaoModel);
+            AvaliacaoProfessorViewModel viewModel = new AvaliacaoProfessorViewModel();
+
+            viewModel.Avalicoes = avaliacoes;
+            viewModel.IdComponente = idComponente;
+            viewModel.IdTurma = idTurma;
+            return View(viewModel);
         }
 
         // GET: AvaliacaoController1/Details/5
@@ -50,16 +54,16 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: AvaliacaoController1/Create
-        public ActionResult Create()
+        public ActionResult Create(int idTurma, int idComponente)
         {
-            AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
+            ViewData["FlagLyoutProf"] = true;
 
-            //IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
+            avaliacaoViewModel.IdTurma = idTurma;
+            avaliacaoViewModel.IdComponente = idComponente;
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
-            
 
             avaliacaoViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
-            //avaliacaoViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
            
             return View(avaliacaoViewModel);
         }
@@ -75,7 +79,7 @@ namespace ModernSchoolWEB.Controllers
                 _avaliacaoService.Create(avaliacao);
 
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
         }
 
         // GET: AvaliacaoController1/Edit/5

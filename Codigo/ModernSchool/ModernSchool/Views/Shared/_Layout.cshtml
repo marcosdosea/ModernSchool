@@ -71,25 +71,41 @@
 
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
-        <div class="border-end-0 bg-white border-danger" id="sidebar-wrapper">
-            <div class="list-group list-group-flush">
-                <div class="d-flex" id="wrapper">
-                    <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
-                        <div class="list-group list-group-flush">
-                            <div class="d-flex" id="wrapper">
-                                <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
-                                    <div class="list-group list-group-flush">
-                                        @{
-                                            if (User.IsInRole("PROFESSOR"))
-                                            {
-                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="DiarioDeClasse" asp-action="Index">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Notas" asp-action="Index">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="FrequenciaAluno" asp-action="Index">Frequencia <i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Avaliacao" asp-action="Index">Avaliação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+        @{
+            if (User.IsInRole("PROFESSOR") && Convert.ToBoolean(ViewData["FlagLyoutProf"]) == true)
+            {
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                    <div class="list-group list-group-flush">
+                        <div class="d-flex" id="wrapper">
+                            <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
+                                <div class="list-group list-group-flush">
+                                    <div class="d-flex" id="wrapper">
+                                        <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
+                                            <div class="list-group list-group-flush">
+                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Professor" asp-action="DiarioDeClasse"
+                                                    asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-action="Index" 
+                                                    asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Avaliacao <i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                            }
-                                            else if (User.IsInRole("DIRETOR"))
-                                            {
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("DIRETOR"))
+            {
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                    <div class="list-group list-group-flush">
+                        <div class="d-flex" id="wrapper">
+                            <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
+                                <div class="list-group list-group-flush">
+                                    <div class="d-flex" id="wrapper">
+                                        <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
+                                            <div class="list-group list-group-flush">
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicação<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Periodo" asp-action="Index">Período<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Pessoa" asp-action="AddPessoaCargo">Matricular<i class="fa-sharp fa-solid fa-angle-right"></i></a>
@@ -97,30 +113,62 @@
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="GradeHorario" asp-action="Index">Grade Horário<i class="fa-small fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Componente" asp-action="Index">Componente<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Pessoa" asp-action="Index">Pessoa<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                            }
-                                            else if (User.IsInRole("ALUNO"))
-                                            {
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Notas" asp-action="Index">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="GradeHorario" asp-action="Index">Horário<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-
-                                            }
-                                            else
-                                            {
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Notas" asp-action="Index">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                            }
-                                        }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+            else if (User.IsInRole("ALUNO"))
+            {
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                    <div class="list-group list-group-flush">
+                        <div class="d-flex" id="wrapper">
+                            <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
+                                <div class="list-group list-group-flush">
+                                    <div class="d-flex" id="wrapper">
+                                        <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
+                                            <div class="list-group list-group-flush">
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Notas" asp-action="Index">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="GradeHorario" asp-action="Index">Horário<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("RESPONSAVEL"))
+            {
+                <div class="bg-primary-darken-01 border-end-0 bg-white border-danger" id="sidebar-wrapper">
+                    <div class="list-group list-group-flush">
+                        <div class="d-flex" id="wrapper">
+                            <div class="shadow-lg rounded-0 border-0 bg-primary-darken-01" id="sidebar-wrapper">
+                                <div class="list-group list-group-flush">
+                                    <div class="d-flex" id="wrapper">
+                                        <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
+                                            <div class="list-group list-group-flush">
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Notas" asp-action="Index">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
         <div class="container">
-            <main role="main" class="pb-3">
+            <main role="main" class="pb-3 py-4">
                 @RenderBody()
             </main>
         </div>

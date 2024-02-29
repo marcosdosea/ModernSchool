@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -46,6 +47,22 @@ namespace Service
         public Avaliacao Get(int idAvaliacao)
         {
             return _context.Avaliacaos.Find(idAvaliacao);
+            //throw new NotImplementedException();
+        }
+        public List<AvaliacaoDTO> GetAllDTO(int idTurma, int IdComponente)
+        {
+            var query = _context.Avaliacaos
+                .Where(g => g.IdTurma == idTurma && g.IdComponente == IdComponente)
+                .Select(g => new AvaliacaoDTO
+                {
+                    DataEntrega = g.DataEntrega,
+                    Id = g.Id,
+                    Peso = g.Peso, 
+                    TipoDeAtividade = g.TipoDeAtividade
+                });
+
+            return query.ToList();
+
             //throw new NotImplementedException();
         }
 
