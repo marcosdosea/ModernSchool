@@ -19,7 +19,7 @@ namespace Service
             _context = context;
         }
 
-        public int Create(int idAluno, int idAvaliacao, Alunoavaliacao alunoavaliacao)
+        public int Create(Alunoavaliacao alunoavaliacao)
         {
             _context.Add(alunoavaliacao);
             _context.SaveChanges();

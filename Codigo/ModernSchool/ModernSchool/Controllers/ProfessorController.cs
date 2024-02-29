@@ -110,10 +110,6 @@ namespace ModernSchoolWEB.Controllers
                 }
             }
 
-
-
-
-
             try
             {
                 return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
@@ -174,6 +170,8 @@ namespace ModernSchoolWEB.Controllers
 
             return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
         }
+
+        
 
 
         // GET: ProfessorController1/Details/5

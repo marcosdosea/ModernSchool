@@ -12,6 +12,7 @@
                 <th>Tipo de Avaliacão</th>
                 <th>Data Entrega</th>
                 <th>Peso</th>
+                <th>Notas</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,6 +24,10 @@
                     <td>@Html.DisplayFor(model => Model.Avalicoes[i].TipoDeAtividade)</td>
                     <td>@Html.DisplayFor(model => Model.Avalicoes[i].DataEntrega)</td>
                     <td>@Html.DisplayFor(model => Model.Avalicoes[i].Peso)</td>
+                    <td>
+                    <a asp-controller="Avaliacao" asp-action="AdicionarNotasAvaliacao" asp-route-idAvaliacao="@Model.Avalicoes[i].Id"
+                        asp-route-idComponente="@Model.IdComponente">Adicionar</a>
+                    </td>
                 </tr>
             }
         </tbody>
