@@ -70,6 +70,7 @@ namespace ModernSchoolWEB.Controllers
         // GET: ProfessorController1/Create
         public ActionResult CreateDiarioClasse(int idTurma, int idProfessor, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
             DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
 
             diario.IdProfessor = idProfessor;
