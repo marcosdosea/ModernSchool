@@ -124,9 +124,11 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult Frequencia(int IdDiario, int IdTurma, int IdComponente)
         {
-
+            ViewData["FlagLyoutProf"] = true;
             var listAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO(IdDiario);
             var listModel = _mappers.Map<List<FrequenciaAlunoDTOViewModel>>(listAluno);
+            ViewData["Turma"] = _turmaService.Get(IdTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(IdComponente).Nome;
 
             FrequenciaListaAlunoDTOViewModel list = new FrequenciaListaAlunoDTOViewModel();
             list.IdTurma = IdTurma;

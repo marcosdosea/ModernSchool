@@ -36,8 +36,9 @@
                        asp-route-IdTurma="@Model.IdTurma" asp-route-IdComponente="@Model.IdComponente"><i class="fa-solid fa-clipboard-check"></i></a>
                 </td>
                 <td>
-                    <a role="button" asp-action="Frequencia" class="fs-5" asp-route-IdDiario="@item.IdDiarioClasse"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <!--//Html.ActionLink("+", "Edit", new { IdObjeto = item.IdObjeto, IdDiario = item.IdDiarioClasse })-->
+                    <a role="button" asp-action="Frequencia" class="fs-5" asp-route-IdDiario="@item.IdDiarioClasse" 
+                        asp-route-IdTurma="@Model.IdTurma" asp-route-IdComponente="@Model.IdComponente"><i class="fa-solid fa-pen-to-square"></i></a>
+                    
                 </td>
             </tr>
         }

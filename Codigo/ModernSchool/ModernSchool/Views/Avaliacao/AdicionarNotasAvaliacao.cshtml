@@ -1,44 +1,46 @@
 ﻿@model ModernSchoolWEB.Models.AlunoAvaliacaoNotasDTOViewModel
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                Matricula
-            </th>
+            <th>Matricula</th>
             <th>Nome</th>
             <th>Nota</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-        <form asp-controller="Avaliacao" asp-action="AdicionarNotasAvaliacao" method="post">
-            
+        <form class="d-flex flex-column-reverse" asp-controller="Avaliacao" asp-action="AdicionarNotasAvaliacao" method="post">
+
             <input asp-for="Idavaliacao" value="@Model.Idavaliacao" type="hidden" />
             <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden" />
             <input asp-for="IdComponente" value="@Model.IdComponente" type="hidden" />
-            
+
             @for (int i = 0; i < Model.ListaAluno.Count(); i++)
             {
-                <tr>
-                    <td>
+            <tr>
+                <td>
                         @Html.DisplayFor(modelItem => Model.ListaAluno[i].IdAluno)
-                        <input asp-for="ListaAluno[i].IdAluno" value="@Model.ListaAluno[i].IdAluno" type="hidden" />
-                    </td>
-                    <td>
-                            @Html.DisplayFor(modelItem => Model.ListaAluno[i].NomeAluno)
-                    </td>
-                    <td>
-                        <input asp-for="ListaAluno[i].Notas" />
-                    </td>
-                    <td></td>
-
-                </tr>
+                    <input asp-for="ListaAluno[i].IdAluno" value="@Model.ListaAluno[i].IdAluno" type="hidden" />
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => Model.ListaAluno[i].NomeAluno)
+                </td>
+                <td>
+                    <input class="input-group-text w-25 h-25" id="decimalInput" asp-for="ListaAluno[i].Notas" />
+                </td>
+            </tr>
             }
-            <input type="submit" value="Save" class="btn btn-primary" />
+        <div class="d-flex justify-content-between py-5">
+            <div class="col">
+                <label>Turma: @ViewData["Turma"]</label>
+                <label>Componente: @ViewData["Componente"]</label>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <input type="submit" value="Registrar" class="btn cor-bg d-grid gap-2 col-5 text-white border border-0" />
+            </div>
+        </div>
         </form>
     </tbody>
 </table>
+
+

@@ -1,7 +1,9 @@
 ﻿@model ModernSchoolWEB.Models.AvaliacaoViewModel
 
-<h4>Atividade Avaliativa</h4>
-<hr />
+<div class="py-1">
+    <label>Turma: @ViewData["Turma"]</label>
+    <label>Componente: @ViewData["Componente"]</label>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

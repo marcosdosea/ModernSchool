@@ -17,21 +17,22 @@ namespace ModernSchoolWEB.Controllers
         private readonly IAvaliacaoService _avaliacaoService;
         private readonly IComponenteService _componenteService;
         private readonly IAlunoAvaliacaoService _alunoAvaliacaoService;
-        //private readonly ITurmaService _turmaService;
+        private readonly ITurmaService _turmaService;
         //private readonly IPessoaService _pessoaService;
 
         private readonly IMapper _mapper;
 
         public IAvaliacaoService Object { get; }
         public IMapper Mapper { get; }
-
+        [ActivatorUtilitiesConstructor]
         public AvaliacaoController(IAvaliacaoService avaliacaoService,
-            IComponenteService componenteService, IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService) 
+            IComponenteService componenteService, IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService) 
         {
             _avaliacaoService = avaliacaoService;
             _componenteService = componenteService;
             _mapper = mapper;
             _alunoAvaliacaoService = alunoAvaliacaoService;
+            _turmaService = turmaService;
         }
 
         // GET: AvaliacaoController1
@@ -45,12 +46,17 @@ namespace ModernSchoolWEB.Controllers
             viewModel.Avalicoes = avaliacoes;
             viewModel.IdComponente = idComponente;
             viewModel.IdTurma = idTurma;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome; ;
             return View(viewModel);
         }
 
         public ActionResult AdicionarNotasAvaliacao(int idAvaliacao, int idComponente)
         {
+            ViewData["FlagLyoutProf"] = true;
             int idTurma = _avaliacaoService.Get(idAvaliacao).IdTurma;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome;
             AlunoAvaliacaoNotasDTOViewModel viewModel = new AlunoAvaliacaoNotasDTOViewModel();
 
             var listaForAvaliacao = _avaliacaoService.GetAllAlunosAvaliacao(idTurma, idAvaliacao);
@@ -120,6 +126,8 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Create(int idTurma, int idComponente)
         {
             ViewData["FlagLyoutProf"] = true;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome;
 
             AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
             avaliacaoViewModel.IdTurma = idTurma;

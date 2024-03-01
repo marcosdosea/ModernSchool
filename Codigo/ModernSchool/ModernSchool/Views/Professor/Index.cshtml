@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<Core.DTO.GradeHorarioProfessor>
 
-<p>
-    <a asp-controller="Professor" asp-action="CreateDiarioClasse">Create New</a>
-</p>
+<div class="py-1">
+    <label>Turma: @ViewData["nomeTurma"]</label>
+    <label>Componente: @ViewData["nomeComponente"]</label>
+</div>
 <table class="table">
     <thead>
         <tr>

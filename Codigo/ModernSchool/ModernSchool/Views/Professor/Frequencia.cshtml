@@ -1,9 +1,6 @@
 ﻿@model ModernSchoolWEB.Models.FrequenciaListaAlunoDTOViewModel
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -15,8 +12,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Lista[0].Faltas)
             </th>
-
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -36,13 +31,19 @@
                         @Html.DisplayFor(modelItem => @Model.Lista[i].NomeAluno)
                 </td>
                 <td>
-                    <input asp-for="@Model.Lista[i].Faltas" />
-                </td>
-                <td>
+                    <input class="input-group-text w-25" asp-for="@Model.Lista[i].Faltas" />
                 </td>
             </tr>
             }
-        <input type="submit" value="Salvar" class="btn btn-primary" />
+        <div class="d-flex justify-content-between py-5">
+            <div class="col">
+                <label>Turma: @ViewData["Turma"]</label>
+                <label>Componente: @ViewData["Componente"]</label>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <input type="submit" value="Registrar" class="btn cor-bg d-grid gap-2 col-5 text-white border border-0" />
+            </div>
+        </div>
         </form>
     </tbody>
 </table>
