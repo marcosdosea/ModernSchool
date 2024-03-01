@@ -18,13 +18,9 @@ namespace ModernSchoolWEB.Controllers
         private readonly IComponenteService _componenteService;
         private readonly IAlunoAvaliacaoService _alunoAvaliacaoService;
         private readonly ITurmaService _turmaService;
-        //private readonly IPessoaService _pessoaService;
 
         private readonly IMapper _mapper;
 
-        public IAvaliacaoService Object { get; }
-        public IMapper Mapper { get; }
-        [ActivatorUtilitiesConstructor]
         public AvaliacaoController(IAvaliacaoService avaliacaoService,
             IComponenteService componenteService, IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService) 
         {

@@ -2,6 +2,7 @@
 using Core;
 using Core.DTO;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
@@ -9,6 +10,7 @@ using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
+    [Authorize(Roles = "PROFESSOR")]
     public class ProfessorController : Controller
     {
 
