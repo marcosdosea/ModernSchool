@@ -18,17 +18,20 @@ namespace ModernSchoolWEB.Controllers
         private readonly IComponenteService _componenteService;
         private readonly IAlunoAvaliacaoService _alunoAvaliacaoService;
         private readonly ITurmaService _turmaService;
+        private readonly IPeriodoService _periodoService;
 
         private readonly IMapper _mapper;
 
-        public AvaliacaoController(IAvaliacaoService avaliacaoService,
-            IComponenteService componenteService, IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService) 
+        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, 
+                                   IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService,
+                                   IPeriodoService periodoService) 
         {
             _avaliacaoService = avaliacaoService;
             _componenteService = componenteService;
             _mapper = mapper;
             _alunoAvaliacaoService = alunoAvaliacaoService;
             _turmaService = turmaService;
+            _periodoService = periodoService;
         }
 
         // GET: AvaliacaoController1
@@ -129,6 +132,10 @@ namespace ModernSchoolWEB.Controllers
             avaliacaoViewModel.IdTurma = idTurma;
             avaliacaoViewModel.IdComponente = idComponente;
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable<Turma>listaTurma = _turmaService.GetAll();
+            IEnumerable<Periodo> listaPeriodo = _periodoService.GetAll();
+            avaliacaoViewModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
+            avaliacaoViewModel.listaPeriodo = new SelectList(listaPeriodo, "Id", "Nome", null);
 
             avaliacaoViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
 

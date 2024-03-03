@@ -26,7 +26,7 @@
                         @Html.DisplayFor(modelItem => Model.ListaAluno[i].NomeAluno)
                 </td>
                 <td>
-                    <input class="input-group-text w-25 h-25" id="decimalInput" asp-for="ListaAluno[i].Notas" />
+                    <input class="form-control-input input-group-text w-25 h-25" id="decimalInput" asp-for="ListaAluno[i].Notas" />
                 </td>
             </tr>
             }
@@ -42,5 +42,13 @@
         </form>
     </tbody>
 </table>
+<div class="container py-4">
+    <div class="row">
+        <div class="d-flex justify-content-end col-lg align-items-center">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Avaliacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma"
+               asp-route-idComponente="@Model.IdComponente"> Voltar </a>
+        </div>
+    </div>
+</div>
 
 

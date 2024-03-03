@@ -79,10 +79,9 @@ namespace ModernSchoolWEB.Controllers
             diario.IdComponente = idComponente;
             diario.IdTurma = idTurma;
             diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
-            string nomeComponente = _componenteService.Get(idComponente).Nome;
-            string nomeTurma = _turmaService.Get(idTurma).Turma1;
-            ViewData["nomeTurma"] = nomeTurma;
-            ViewData["nomeComponente"] = nomeComponente;
+
+            ViewData["nomeTurma"] = _componenteService.Get(idComponente).Nome;
+            ViewData["nomeComponente"] = _turmaService.Get(idTurma).Turma1;
             return View(diario);
         }
 

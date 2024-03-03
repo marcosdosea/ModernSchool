@@ -25,8 +25,8 @@ namespace ModernSchoolWEB.Models
         public int IdComponente { get; set; }
         [Display(Name ="Professor")]
         public int IdProfessor { get; set; }
-        [Display(Name ="Tipo de aula")]
-        public string? TipoAula { get; set; }
+        [Display(Name = "Tipo de aula")]
+        public string? TipoAula { get; set; } = "C";
 
         public SelectList? listaTurma { get; set; }
 
@@ -34,6 +34,11 @@ namespace ModernSchoolWEB.Models
 
         public SelectList? listaComponente { get; set; }
         public List<DiarioClasseHabilidade> Habilidade { get; set;}
+        public Dictionary<Char, string> tipoAula { get; } = new()
+        {
+            { 'A', "Avaliativo" },
+            { 'C', "Comum" }
+        };
     }
 
 
