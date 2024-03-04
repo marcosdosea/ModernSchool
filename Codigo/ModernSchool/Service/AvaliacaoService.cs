@@ -65,6 +65,13 @@ namespace Service
 
             //throw new NotImplementedException();
         }
+                public bool SalvarNotas(Alunoavaliacao alunoAvaliacao)
+        {
+            _context.Add(alunoAvaliacao);
+            _context.SaveChanges();
+            return true;
+        }
+
 
         public IEnumerable<Avaliacao> GetAll()
         {
@@ -72,5 +79,33 @@ namespace Service
             return _context.Avaliacaos.AsNoTracking();
             //throw new NotImplementedException();
         }
+
+        public List<AlunoAvaliacaoNotaDTO> GetAllAlunos(int idTurma)
+        {
+            var query = _context.Alunoturmas
+                .Where(g => g.IdTurma == idTurma)
+                .Select(g => new AlunoAvaliacaoNotaDTO
+                {
+                    IdAluno = g.IdAluno,
+                    NomeAluno = g.IdAlunoNavigation.Nome,
+                });
+
+            return query.ToList();
+        }
+
+        public List<AlunoAvaliacaoNotaDTO> GetAllAlunosAvaliacao(int idTurma, int idAvaliacao)
+        {
+            var query = _context.Alunoavaliacaos
+                .Where(g => g.IdAvaliacaoNavigation.IdTurmaNavigation.Id == idTurma && g.IdAvaliacao == idAvaliacao)
+                .Select(g => new AlunoAvaliacaoNotaDTO
+                {
+                    IdAluno = g.IdAluno,
+                    NomeAluno = g.IdAlunoNavigation.Nome,
+                    Notas = g.Nota
+                });
+
+            return query.ToList();
+        }
+
     }
 }

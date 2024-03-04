@@ -2,6 +2,7 @@
 using Core;
 using Core.DTO;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
@@ -9,6 +10,7 @@ using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
+    [Authorize(Roles = "PROFESSOR")]
     public class ProfessorController : Controller
     {
 
@@ -54,7 +56,7 @@ namespace ModernSchoolWEB.Controllers
             string nomeTurma = _turmaService.Get(idTurma).Turma1;
 
             DiarioClasseProfessorDTO diario = new DiarioClasseProfessorDTO();
-            var listaObjeto = _diarioDeClasseService.GetAllDiarioTurmaComponete(idProfessor,idComponente,idTurma);
+            var listaObjeto = _diarioDeClasseService.GetAllDiarioTurmaComponete(idProfessor, idComponente, idTurma);
 
             diario.ObjetoConhecimento = listaObjeto;
             diario.IdTurma = idTurma;
@@ -77,10 +79,9 @@ namespace ModernSchoolWEB.Controllers
             diario.IdComponente = idComponente;
             diario.IdTurma = idTurma;
             diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
-            string nomeComponente = _componenteService.Get(idComponente).Nome;
-            string nomeTurma = _turmaService.Get(idTurma).Turma1;
-            ViewData["nomeTurma"] = nomeTurma;
-            ViewData["nomeComponente"] = nomeComponente;
+
+            ViewData["nomeTurma"] = _componenteService.Get(idComponente).Nome;
+            ViewData["nomeComponente"] = _turmaService.Get(idTurma).Turma1;
             return View(diario);
         }
 
@@ -90,7 +91,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult CreateDiarioClasse(DiarioDeClasseViewModel diarioDeClasse)
         {
 
-            foreach(var list in diarioDeClasse.Habilidade)
+            foreach (var list in diarioDeClasse.Habilidade)
             {
                 if (list.Selecionado)
                 {
@@ -110,13 +111,9 @@ namespace ModernSchoolWEB.Controllers
                 }
             }
 
-
-
-
-            
             try
             {
-                return RedirectToAction(nameof(DiarioDeClasse),new {idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente});
+                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
             }
             catch
             {
@@ -126,28 +123,36 @@ namespace ModernSchoolWEB.Controllers
 
 
 
-        public ActionResult Frequencia(int IdDiario)
+        public ActionResult Frequencia(int IdDiario, int IdTurma, int IdComponente)
         {
-
+            ViewData["FlagLyoutProf"] = true;
             var listAluno = _frequenciaAlunoService.GetAllFrequenciaAlunoDTO(IdDiario);
             var listModel = _mappers.Map<List<FrequenciaAlunoDTOViewModel>>(listAluno);
+            ViewData["Turma"] = _turmaService.Get(IdTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(IdComponente).Nome;
 
-            foreach (var item in listModel)
+            FrequenciaListaAlunoDTOViewModel list = new FrequenciaListaAlunoDTOViewModel();
+            list.IdTurma = IdTurma;
+            list.IdComponente = IdComponente;
+            list.Lista = listModel;
+
+
+            foreach (var item in list.Lista)
             {
                 item.IdDiario = IdDiario;
             }
 
-            return View(listModel);
+            return View(list);
         }
 
         [HttpPost]
-        public ActionResult SalvarFrequencia(List<FrequenciaAlunoDTOViewModel> frequenciaAluno)
+        public ActionResult SalvarFrequencia(FrequenciaListaAlunoDTOViewModel frequenciaAluno)
         {
 
 
-            bool createNew = _frequenciaAlunoService.ExistFrequencia(frequenciaAluno[0].IdDiario);
+            bool createNew = _frequenciaAlunoService.ExistFrequencia(frequenciaAluno.Lista[0].IdDiario);
 
-            foreach (var item in frequenciaAluno)
+            foreach (var item in frequenciaAluno.Lista)
             {
                 Frequenciaaluno freuqencia = new Frequenciaaluno
                 {
@@ -166,8 +171,10 @@ namespace ModernSchoolWEB.Controllers
             }
 
 
-            return RedirectToAction(nameof(DiarioDeClasse));
+            return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
         }
+
+        
 
 
         // GET: ProfessorController1/Details/5

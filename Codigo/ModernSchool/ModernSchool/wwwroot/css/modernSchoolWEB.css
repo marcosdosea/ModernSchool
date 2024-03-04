@@ -1,5 +1,5 @@
 ﻿.cor-bg {
-    background-color: #0c326f;
+    background-color: #0c326f !important;
 }
 .cor-body {
     background-color: #d3d9e3;
@@ -51,3 +51,5 @@
         right: 75px;
     }
 }
+
+

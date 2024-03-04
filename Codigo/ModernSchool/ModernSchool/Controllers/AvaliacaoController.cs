@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 using Service;
+using System.Text;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -15,19 +16,22 @@ namespace ModernSchoolWEB.Controllers
 
         private readonly IAvaliacaoService _avaliacaoService;
         private readonly IComponenteService _componenteService;
-        //private readonly ITurmaService _turmaService;
-        //private readonly IPessoaService _pessoaService;
+        private readonly IAlunoAvaliacaoService _alunoAvaliacaoService;
+        private readonly ITurmaService _turmaService;
+        private readonly IPeriodoService _periodoService;
 
         private readonly IMapper _mapper;
 
-        public IAvaliacaoService Object { get; }
-        public IMapper Mapper { get; }
-
-        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, IMapper mapper)
+        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, 
+                                   IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService,
+                                   IPeriodoService periodoService) 
         {
             _avaliacaoService = avaliacaoService;
             _componenteService = componenteService;
             _mapper = mapper;
+            _alunoAvaliacaoService = alunoAvaliacaoService;
+            _turmaService = turmaService;
+            _periodoService = periodoService;
         }
 
         // GET: AvaliacaoController1
@@ -41,8 +45,72 @@ namespace ModernSchoolWEB.Controllers
             viewModel.Avalicoes = avaliacoes;
             viewModel.IdComponente = idComponente;
             viewModel.IdTurma = idTurma;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome; ;
             return View(viewModel);
         }
+
+        public ActionResult AdicionarNotasAvaliacao(int idAvaliacao, int idComponente)
+        {
+            ViewData["FlagLyoutProf"] = true;
+            int idTurma = _avaliacaoService.Get(idAvaliacao).IdTurma;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome;
+            AlunoAvaliacaoNotasDTOViewModel viewModel = new AlunoAvaliacaoNotasDTOViewModel();
+
+            var listaForAvaliacao = _avaliacaoService.GetAllAlunosAvaliacao(idTurma, idAvaliacao);
+            if(listaForAvaliacao.Count() !=  0)
+            {
+                viewModel.ListaAluno = listaForAvaliacao;
+            }
+            else
+            {
+                var listaForTurma = _avaliacaoService.GetAllAlunos(idTurma);
+                viewModel.ListaAluno = listaForTurma;
+            }
+
+            viewModel.Idavaliacao = idAvaliacao;
+            viewModel.IdTurma = idTurma;
+            viewModel.IdComponente = idComponente;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+
+        public ActionResult AdicionarNotasAvaliacao(AlunoAvaliacaoNotasDTOViewModel viewModel)
+        {
+
+
+            Alunoavaliacao alunoAvaliacao = new();
+
+            foreach (var item in viewModel.ListaAluno)
+            {
+                alunoAvaliacao = _alunoAvaliacaoService.Get(item.IdAluno, viewModel.Idavaliacao);
+                if (alunoAvaliacao == null)
+                {
+
+                    alunoAvaliacao = new Alunoavaliacao
+                    {
+                        Arquivo = Encoding.ASCII.GetBytes("t"),
+                        DataEntrega = DateTime.Now,
+                        IdAluno = item.IdAluno,
+                        IdAvaliacao = viewModel.Idavaliacao,
+                        Nota = item.Notas
+
+                    };
+                    _alunoAvaliacaoService.Create(alunoAvaliacao);
+                }
+                else
+                {
+                    alunoAvaliacao.Nota = item.Notas;
+                    _alunoAvaliacaoService.Edit(alunoAvaliacao);
+                }
+            }
+
+            return RedirectToAction(nameof(Index), new {idComponente = viewModel.IdComponente , idTurma = viewModel.IdComponente});
+        }
+
 
         // GET: AvaliacaoController1/Details/5
         public ActionResult Details(int id)
@@ -57,14 +125,20 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Create(int idTurma, int idComponente)
         {
             ViewData["FlagLyoutProf"] = true;
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome;
 
             AvaliacaoViewModel avaliacaoViewModel = new AvaliacaoViewModel();
             avaliacaoViewModel.IdTurma = idTurma;
             avaliacaoViewModel.IdComponente = idComponente;
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
+            IEnumerable<Turma>listaTurma = _turmaService.GetAll();
+            IEnumerable<Periodo> listaPeriodo = _periodoService.GetAll();
+            avaliacaoViewModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
+            avaliacaoViewModel.listaPeriodo = new SelectList(listaPeriodo, "Id", "Nome", null);
 
             avaliacaoViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
-           
+
             return View(avaliacaoViewModel);
         }
 
@@ -119,9 +193,9 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id, AvaliacaoViewModel avaliacaoModel)
         {
 
-                _avaliacaoService.Delete(id);
-                
-            
+            _avaliacaoService.Delete(id);
+
+
             return RedirectToAction(nameof(Index));
 
         }

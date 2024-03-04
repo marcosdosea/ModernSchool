@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome-free-6.4.0-web/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/simple-sidebar/dist/css/styles.css" />
+    <link rel="stylesheet" href="~/css/modernSchoolWEB.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/x-icon" href="~/assets/favicon.png" />
 
     <!-- Design System GOV.BR -->
@@ -26,7 +28,17 @@
         <div class="container-lg">
             <div class="header-top">
                 <div class="header-logo">
-                    <a class="back-none" asp-action="Index"><img src="~/assets/LogoSoftware.png" alt="logo ModernSchool" /></a>
+                    @{
+                        if (User.IsInRole("PROFESSOR"))
+                        {
+                            <a class="back-none" asp-controller="Professor" asp-action="Index"><img src="~/assets/LogoSoftware.png" alt="logo ModernSchool" /></a>
+                        }
+                        else
+                        {
+                            <a class="back-none" asp-action="Index"><img src="~/assets/LogoSoftware.png" alt="logo ModernSchool" /></a>
+
+                        }
+                    }
                     <span class="br-divider vertical mx-half mx-sm-1"></span>
                     <div class="ms-2 header-sign"><img src="~/assets/NomeSoftware.png" alt="Nome do software" /></div>
                     <button class="br-button circle small fs-5" id="sidebarToggle">
@@ -83,10 +95,11 @@
                                         <div class="border-end shadow-lg rounded-0 border-0" id="sidebar-wrapper">
                                             <div class="list-group list-group-flush">
                                                 <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Professor" asp-action="DiarioDeClasse"
-                                                    asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-action="Index" 
-                                                    asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Avaliacao <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                   asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-action="Index"
+                                                   asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Avaliacao <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao"
+                                                   asp-action="Index" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                             </div>
                                         </div>
                                     </div>

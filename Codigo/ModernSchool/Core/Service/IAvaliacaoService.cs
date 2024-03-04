@@ -11,6 +11,9 @@ namespace Core.Service
         List<AvaliacaoDTO> GetAllDTO(int idTurma, int IdComponente);
         IEnumerable<Avaliacao> GetAll();
 
+        List<AlunoAvaliacaoNotaDTO> GetAllAlunos(int idTurma);
+        List<AlunoAvaliacaoNotaDTO> GetAllAlunosAvaliacao(int idTurma, int idAvaliacao);
 
+        bool SalvarNotas(Alunoavaliacao alunoAvaliacao);
     }
 }

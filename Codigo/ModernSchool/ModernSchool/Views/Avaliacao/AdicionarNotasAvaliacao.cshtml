@@ -1,37 +1,32 @@
-﻿@model ModernSchoolWEB.Models.FrequenciaListaAlunoDTOViewModel
+﻿@model ModernSchoolWEB.Models.AlunoAvaliacaoNotasDTOViewModel
 
 <table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Lista[0].IdAluno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lista[0].NomeAluno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lista[0].Faltas)
-            </th>
+            <th>Matricula</th>
+            <th>Nome</th>
+            <th>Nota</th>
         </tr>
     </thead>
     <tbody>
-        <form asp-action="SalvarFrequencia" method="post">
+        <form class="d-flex flex-column-reverse" asp-controller="Avaliacao" asp-action="AdicionarNotasAvaliacao" method="post">
+
+            <input asp-for="Idavaliacao" value="@Model.Idavaliacao" type="hidden" />
             <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden" />
             <input asp-for="IdComponente" value="@Model.IdComponente" type="hidden" />
-            @for (int i = 0; i < Model.Lista.Count(); i++)
-            {
 
+            @for (int i = 0; i < Model.ListaAluno.Count(); i++)
+            {
             <tr>
                 <td>
-                        @Html.DisplayFor(modelItem => Model.Lista[i].IdAluno)
-                    <input asp-for="@Model.Lista[i].IdAluno" type="hidden" value="@Model.Lista[i].IdAluno" />
-                    <input asp-for="@Model.Lista[i].IdDiario" type="hidden" value="@Model.Lista[i].IdDiario" />
+                        @Html.DisplayFor(modelItem => Model.ListaAluno[i].IdAluno)
+                    <input asp-for="ListaAluno[i].IdAluno" value="@Model.ListaAluno[i].IdAluno" type="hidden" />
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => @Model.Lista[i].NomeAluno)
+                        @Html.DisplayFor(modelItem => Model.ListaAluno[i].NomeAluno)
                 </td>
                 <td>
-                    <input class="form-control-input input-group-text w-25" asp-for="@Model.Lista[i].Faltas" />
+                    <input class="form-control-input input-group-text w-25 h-25" id="decimalInput" asp-for="ListaAluno[i].Notas" />
                 </td>
             </tr>
             }
@@ -50,8 +45,10 @@
 <div class="container py-4">
     <div class="row">
         <div class="d-flex justify-content-end col-lg align-items-center">
-            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Professor" asp-action="DiarioDeClasse" asp-route-idTurma="@Model.IdTurma"
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Avaliacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma"
                asp-route-idComponente="@Model.IdComponente"> Voltar </a>
         </div>
     </div>
 </div>
+
+

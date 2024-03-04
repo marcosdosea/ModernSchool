@@ -84,7 +84,7 @@ namespace ModernSchoolWEB.Controllers
                     alunoAvaliacao.DataEntrega = DateTime.Now;
                     alunoAvaliacao.Arquivo = Encoding.ASCII.GetBytes("t");
                     alunoAvaliacao.Nota = aluno.Nota;
-                    _alunoAvaliacaoService.Create(aluno.IdAluno, aluno.IdAvaliacao, alunoAvaliacao);
+                    //_alunoAvaliacaoService.Create(aluno.IdAluno, aluno.IdAvaliacao, alunoAvaliacao);
                 }
                 else
                 {

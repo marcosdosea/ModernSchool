@@ -9,7 +9,7 @@ namespace Core.Service
 {
     public interface IAlunoAvaliacaoService
     {
-        int Create(int idAluno, int idAvaliacao, Alunoavaliacao alunoavaliacao);
+        int Create(Alunoavaliacao alunoavaliacao);
         void Edit(Alunoavaliacao alunoavaliacao);
         void Delete(int idAluno, int idAvaliacao);
         Alunoavaliacao Get(int idAluno, int idAvaliacao);
