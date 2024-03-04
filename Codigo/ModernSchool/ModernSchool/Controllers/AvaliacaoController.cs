@@ -22,9 +22,9 @@ namespace ModernSchoolWEB.Controllers
 
         private readonly IMapper _mapper;
 
-        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService, 
-                                   IMapper mapper,IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService,
-                                   IPeriodoService periodoService) 
+        public AvaliacaoController(IAvaliacaoService avaliacaoService, IComponenteService componenteService,
+                                   IMapper mapper, IAlunoAvaliacaoService alunoAvaliacaoService, ITurmaService turmaService,
+                                   IPeriodoService periodoService)
         {
             _avaliacaoService = avaliacaoService;
             _componenteService = componenteService;
@@ -59,16 +59,8 @@ namespace ModernSchoolWEB.Controllers
             AlunoAvaliacaoNotasDTOViewModel viewModel = new AlunoAvaliacaoNotasDTOViewModel();
 
             var listaForAvaliacao = _avaliacaoService.GetAllAlunosAvaliacao(idTurma, idAvaliacao);
-            if(listaForAvaliacao.Count() !=  0)
-            {
-                viewModel.ListaAluno = listaForAvaliacao;
-            }
-            else
-            {
-                var listaForTurma = _avaliacaoService.GetAllAlunos(idTurma);
-                viewModel.ListaAluno = listaForTurma;
-            }
 
+            viewModel.ListaAluno = listaForAvaliacao;
             viewModel.Idavaliacao = idAvaliacao;
             viewModel.IdTurma = idTurma;
             viewModel.IdComponente = idComponente;
@@ -87,28 +79,12 @@ namespace ModernSchoolWEB.Controllers
             foreach (var item in viewModel.ListaAluno)
             {
                 alunoAvaliacao = _alunoAvaliacaoService.Get(item.IdAluno, viewModel.Idavaliacao);
-                if (alunoAvaliacao == null)
-                {
+                alunoAvaliacao.Nota = item.Notas;
+                _alunoAvaliacaoService.Edit(alunoAvaliacao);
 
-                    alunoAvaliacao = new Alunoavaliacao
-                    {
-                        Arquivo = Encoding.ASCII.GetBytes("t"),
-                        DataEntrega = DateTime.Now,
-                        IdAluno = item.IdAluno,
-                        IdAvaliacao = viewModel.Idavaliacao,
-                        Nota = item.Notas
-
-                    };
-                    _alunoAvaliacaoService.Create(alunoAvaliacao);
-                }
-                else
-                {
-                    alunoAvaliacao.Nota = item.Notas;
-                    _alunoAvaliacaoService.Edit(alunoAvaliacao);
-                }
             }
 
-            return RedirectToAction(nameof(Index), new {idComponente = viewModel.IdComponente , idTurma = viewModel.IdComponente});
+            return RedirectToAction(nameof(Index), new { idComponente = viewModel.IdComponente, idTurma = viewModel.IdComponente });
         }
 
 
@@ -132,7 +108,7 @@ namespace ModernSchoolWEB.Controllers
             avaliacaoViewModel.IdTurma = idTurma;
             avaliacaoViewModel.IdComponente = idComponente;
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
-            IEnumerable<Turma>listaTurma = _turmaService.GetAll();
+            IEnumerable<Turma> listaTurma = _turmaService.GetAll();
             IEnumerable<Periodo> listaPeriodo = _periodoService.GetAll();
             avaliacaoViewModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
             avaliacaoViewModel.listaPeriodo = new SelectList(listaPeriodo, "Id", "Nome", null);
@@ -150,9 +126,38 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);
-                _avaliacaoService.Create(avaliacao);
+                int idAvaliacao = _avaliacaoService.Create(avaliacao);
+                if (idAvaliacao != 0)
+                {
+                    var listaForTurma = _avaliacaoService.GetAllAlunos(avaliacaoModel.IdTurma);
+                    Alunoavaliacao alunoAvaliacao = new();
+                    foreach (var item in listaForTurma)
+                    {
+                        alunoAvaliacao = _alunoAvaliacaoService.Get(item.IdAluno, idAvaliacao);
+                        if (alunoAvaliacao == null)
+                        {
 
+                            alunoAvaliacao = new Alunoavaliacao
+                            {
+                                Arquivo = Encoding.ASCII.GetBytes("t"),
+                                DataEntrega = DateTime.Now,
+                                IdAluno = item.IdAluno,
+                                IdAvaliacao = idAvaliacao,
+                                Nota = item.Notas
+
+                            };
+                            _alunoAvaliacaoService.Create(alunoAvaliacao);
+                        }
+                        else
+                        {
+                            alunoAvaliacao.Nota = item.Notas;
+                            _alunoAvaliacaoService.Edit(alunoAvaliacao);
+                        }
+                    }
+
+                }
             }
+
             return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
         }
 
