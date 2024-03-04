@@ -24,22 +24,11 @@ namespace Service
         /// </summary>
         /// <param name="governoservidor"></param>
         /// <returns>Id Governo</returns>
-        public int Create(int idPessoa, int idGoverno, Governoservidor governoservidor)
+        public int Create( Governoservidor governoservidor)
         {
-            Governoservidor _governo = new()
-            {
-                IdGoverno = idGoverno,
-                IdPessoa = idPessoa,
-                DataFim = governoservidor.DataFim,
-                DataInicio = governoservidor.DataInicio,
-                IdCargo = governoservidor.IdCargo,
-                Status = governoservidor.Status,
-                
-            };
-           
             _context.Add(governoservidor);
             _context.SaveChanges();
-            return idPessoa;
+            return governoservidor.IdGoverno;
         }
 
         /// <summary>

@@ -188,7 +188,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Nome =  "Sexto",
                     DataInicio = DateTime.Parse("2022-01-01"),
                     DataFim = DateTime.Parse("2022-12-12"),
-                    AnoLetivo = 2022
+                    AnoLetivo1 = 2022
 
                 },
                 new Periodo
@@ -197,7 +197,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Nome =  "Quarto",
                     DataInicio = DateTime.Parse("2021-01-01"),
                     DataFim = DateTime.Parse("2021-12-12"),
-                    AnoLetivo = 2021
+                    AnoLetivo1 = 2021
                 },
                 new Periodo
                 {
@@ -205,7 +205,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                     Nome =  "Segundo",
                     DataInicio = DateTime.Parse("2020-01-01"),
                     DataFim = DateTime.Parse("2020-12-12"),
-                    AnoLetivo = 2020
+                    AnoLetivo1 = 2020
                 }
             };
         }
@@ -218,7 +218,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
                 Nome = "Quarto",
                 DataInicio = DateTime.Parse("2021-01-01"),
                 DataFim = DateTime.Parse("2021-12-12"),
-                AnoLetivo = 2021
+                AnoLetivo1 = 2021
             };
         }
     }

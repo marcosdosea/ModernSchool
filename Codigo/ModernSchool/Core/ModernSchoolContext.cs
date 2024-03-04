@@ -21,20 +21,12 @@ namespace Core
         public virtual DbSet<Alunocomunicacao> Alunocomunicacaos { get; set; }
         public virtual DbSet<Alunoturma> Alunoturmas { get; set; }
         public virtual DbSet<Anoletivo> Anoletivos { get; set; }
-        public virtual DbSet<Aspnetrole> Aspnetroles { get; set; }
-        public virtual DbSet<Aspnetroleclaim> Aspnetroleclaims { get; set; }
-        public virtual DbSet<Aspnetuser> Aspnetusers { get; set; }
-        public virtual DbSet<Aspnetuserclaim> Aspnetuserclaims { get; set; }
-        public virtual DbSet<Aspnetuserlogin> Aspnetuserlogins { get; set; }
-        public virtual DbSet<Aspnetuserrole> Aspnetuserroles { get; set; }
-        public virtual DbSet<Aspnetusertoken> Aspnetusertokens { get; set; }
         public virtual DbSet<Avaliacao> Avaliacaos { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<Componente> Componentes { get; set; }
         public virtual DbSet<Comunicacao> Comunicacaos { get; set; }
         public virtual DbSet<Curriculo> Curriculos { get; set; }
         public virtual DbSet<Diariodeclasse> Diariodeclasses { get; set; }
-        public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
         public virtual DbSet<Escola> Escolas { get; set; }
         public virtual DbSet<Frequenciaaluno> Frequenciaalunos { get; set; }
         public virtual DbSet<Governo> Governos { get; set; }
@@ -80,7 +72,6 @@ namespace Core
                     .HasColumnName("idAvaliacao");
 
                 entity.Property(e => e.Arquivo)
-                    .IsRequired()
                     .HasColumnType("blob")
                     .HasColumnName("arquivo");
 
@@ -204,146 +195,6 @@ namespace Core
                     .HasConstraintName("fk_AnoLetivo_Escola1");
             });
 
-            modelBuilder.Entity<Aspnetrole>(entity =>
-            {
-                entity.ToTable("aspnetroles");
-
-                entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasMaxLength(255);
-
-                entity.Property(e => e.Name).HasMaxLength(255);
-
-                entity.Property(e => e.NormalizedName).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<Aspnetroleclaim>(entity =>
-            {
-                entity.ToTable("aspnetroleclaims");
-
-                entity.HasIndex(e => e.RoleId, "IX_AspNetRoleClaims_RoleId");
-
-                entity.Property(e => e.RoleId)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Aspnetroleclaims)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_AspNetRoleClaims_AspNetRoles_RoleId");
-            });
-
-            modelBuilder.Entity<Aspnetuser>(entity =>
-            {
-                entity.ToTable("aspnetusers");
-
-                entity.HasIndex(e => e.NormalizedEmail, "EmailIndex");
-
-                entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasMaxLength(255);
-
-                entity.Property(e => e.Email).HasMaxLength(255);
-
-                entity.Property(e => e.EmailConfirmed).HasColumnType("bit(1)");
-
-                entity.Property(e => e.LockoutEnabled).HasColumnType("bit(1)");
-
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(255);
-
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(255);
-
-                entity.Property(e => e.PhoneNumberConfirmed).HasColumnType("bit(1)");
-
-                entity.Property(e => e.TwoFactorEnabled).HasColumnType("bit(1)");
-
-                entity.Property(e => e.UserName).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<Aspnetuserclaim>(entity =>
-            {
-                entity.ToTable("aspnetuserclaims");
-
-                entity.HasIndex(e => e.UserId, "IX_AspNetUserClaims_UserId");
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Aspnetuserclaims)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_AspNetUserClaims_AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<Aspnetuserlogin>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("aspnetuserlogins");
-
-                entity.HasIndex(e => e.UserId, "IX_AspNetUserLogins_UserId");
-
-                entity.Property(e => e.LoginProvider).HasMaxLength(255);
-
-                entity.Property(e => e.ProviderKey).HasMaxLength(255);
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Aspnetuserlogins)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_AspNetUserLogins_AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<Aspnetuserrole>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("aspnetuserroles");
-
-                entity.HasIndex(e => e.RoleId, "IX_AspNetUserRoles_RoleId");
-
-                entity.Property(e => e.UserId).HasMaxLength(255);
-
-                entity.Property(e => e.RoleId).HasMaxLength(255);
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Aspnetuserroles)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_AspNetUserRoles_AspNetRoles_RoleId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Aspnetuserroles)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_AspNetUserRoles_AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<Aspnetusertoken>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name })
-                    .HasName("PRIMARY");
-
-                entity.ToTable("aspnetusertokens");
-
-                entity.Property(e => e.UserId).HasMaxLength(255);
-
-                entity.Property(e => e.LoginProvider).HasMaxLength(255);
-
-                entity.Property(e => e.Name).HasMaxLength(255);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Aspnetusertokens)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_AspNetUserTokens_AspNetUsers_UserId");
-            });
-
             modelBuilder.Entity<Avaliacao>(entity =>
             {
                 entity.ToTable("avaliacao");
@@ -362,8 +213,6 @@ namespace Core
 
                 entity.Property(e => e.DataEntrega).HasColumnName("dataEntrega");
 
-                entity.Property(e => e.HorarioEntrega).HasColumnName("horarioEntrega");
-
                 entity.Property(e => e.IdComponente)
                     .HasColumnType("int unsigned")
                     .HasColumnName("idComponente");
@@ -376,10 +225,10 @@ namespace Core
 
                 entity.Property(e => e.Peso).HasColumnName("peso");
 
-                entity.Property(e => e.TipoDeAtividade)
+                entity.Property(e => e.TipoAvaliacao)
                     .IsRequired()
                     .HasColumnType("enum('PROVA','PROJETO','ATIVIDADE')")
-                    .HasColumnName("tipoDeAtividade");
+                    .HasColumnName("tipoAvaliacao");
 
                 entity.HasOne(d => d.IdComponenteNavigation)
                     .WithMany(p => p.Avaliacaos)
@@ -490,7 +339,7 @@ namespace Core
                     .HasMaxLength(4)
                     .HasColumnName("anoFaixa");
 
-                entity.Property(e => e.AnoLetivo).HasColumnName("anoLetivo");
+                entity.Property(e => e.AnoLetivo1).HasColumnName("anoLetivo");
 
                 entity.Property(e => e.Escolaridade)
                     .IsRequired()
@@ -522,6 +371,10 @@ namespace Core
                 entity.Property(e => e.Id)
                     .HasColumnType("int unsigned")
                     .HasColumnName("id");
+
+                entity.Property(e => e.Data)
+                    .HasColumnType("date")
+                    .HasColumnName("data");
 
                 entity.Property(e => e.DataShow).HasColumnName("dataShow");
 
@@ -566,20 +419,6 @@ namespace Core
                     .HasForeignKey(d => d.IdTurma)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_DiarioDeClasse_Turma1");
-            });
-
-            modelBuilder.Entity<Efmigrationshistory>(entity =>
-            {
-                entity.HasKey(e => e.MigrationId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("__efmigrationshistory");
-
-                entity.Property(e => e.MigrationId).HasMaxLength(150);
-
-                entity.Property(e => e.ProductVersion)
-                    .IsRequired()
-                    .HasMaxLength(32);
             });
 
             modelBuilder.Entity<Escola>(entity =>
@@ -913,13 +752,13 @@ namespace Core
             {
                 entity.ToTable("periodo");
 
-                entity.HasIndex(e => e.AnoLetivo, "fk_Periodo_AnoLetivo1_idx");
+                entity.HasIndex(e => e.AnoLetivo1, "fk_Periodo_AnoLetivo1_idx");
 
                 entity.Property(e => e.Id)
                     .HasColumnType("int unsigned")
                     .HasColumnName("id");
 
-                entity.Property(e => e.AnoLetivo)
+                entity.Property(e => e.AnoLetivo1)
                     .HasColumnType("int unsigned")
                     .HasColumnName("anoLetivo");
 
@@ -938,7 +777,7 @@ namespace Core
 
                 entity.HasOne(d => d.AnoLetivoNavigation)
                     .WithMany(p => p.Periodos)
-                    .HasForeignKey(d => d.AnoLetivo)
+                    .HasForeignKey(d => d.AnoLetivo1)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Periodo_AnoLetivo1");
             });
@@ -1028,11 +867,11 @@ namespace Core
             {
                 entity.ToTable("turma");
 
-                entity.HasIndex(e => e.AnoLetivo, "fk_Turma_AnoLetivo1_idx");
+                entity.HasIndex(e => e.AnoLetivo1, "fk_Turma_AnoLetivo1_idx");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.AnoLetivo)
+                entity.Property(e => e.AnoLetivo1)
                     .HasColumnType("int unsigned")
                     .HasColumnName("anoLetivo");
 
@@ -1066,7 +905,7 @@ namespace Core
 
                 entity.HasOne(d => d.AnoLetivoNavigation)
                     .WithMany(p => p.Turmas)
-                    .HasForeignKey(d => d.AnoLetivo)
+                    .HasForeignKey(d => d.AnoLetivo1)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_Turma_AnoLetivo1");
             });
@@ -1083,7 +922,7 @@ namespace Core
                     .HasColumnType("int unsigned")
                     .HasColumnName("id");
 
-                entity.Property(e => e.AnoLetivo).HasColumnName("anoLetivo");
+                entity.Property(e => e.AnoLetivo1).HasColumnName("anoLetivo");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()

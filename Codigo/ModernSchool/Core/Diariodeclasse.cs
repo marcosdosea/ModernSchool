@@ -14,6 +14,7 @@ namespace Core
         }
 
         public int Id { get; set; }
+        public DateTime Data { get; set; }
         public bool DataShow { get; set; }
         public bool Livros { get; set; }
         public bool LivrosSeduc { get; set; }

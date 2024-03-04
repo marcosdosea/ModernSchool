@@ -30,12 +30,12 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var avaliacoes = new List<Avaliacao>
                 {
-                   new Avaliacao { Id = 1, DataEntrega = new DateTime(2022,01,01), HorarioEntrega = new DateTime(2022,01,01) ,
-                       TipoDeAtividade = "Prova", Peso = 7, Avaliativo = true, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
-                   new Avaliacao { Id = 2, DataEntrega = new DateTime(2022,02,01), HorarioEntrega = new DateTime(2022,02,01),
-                       TipoDeAtividade = "Projeto", Peso = 8, Avaliativo = false, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
-                   new Avaliacao { Id = 3, DataEntrega = new DateTime(2022,03,01), HorarioEntrega = new DateTime(2022,03,01),
-                       TipoDeAtividade = "Projeto", Peso = 5, Avaliativo = false, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
+                   new Avaliacao { Id = 1, DataEntrega = new DateTime(2022,01,01),
+                       TipoAvaliacao = "Prova", Peso = 7, Avaliativo = true, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
+                   new Avaliacao { Id = 2, DataEntrega = new DateTime(2022,02,01), 
+                       TipoAvaliacao = "Projeto", Peso = 8, Avaliativo = false, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
+                   new Avaliacao { Id = 3, DataEntrega = new DateTime(2022,03,01),
+                       TipoAvaliacao = "Projeto", Peso = 5, Avaliativo = false, IdTurma = 1, IdComponente = 1, IdPeriodo = 1},
 
                 };
 
@@ -53,13 +53,12 @@ namespace Service.Tests
             {
                 Id = 4,
                 DataEntrega = new DateTime(2022, 01, 04),
-                HorarioEntrega = new DateTime(2022, 01, 05),
                 IdTurma = 1,
                 Avaliativo = true,
                 IdComponente = 1,
                 IdPeriodo = 1,
                 Peso = 7,
-                TipoDeAtividade = "PROVA"
+                TipoAvaliacao = "PROVA"
 
             });
             short peso = 7;
@@ -68,11 +67,10 @@ namespace Service.Tests
             var avaliacao = _avaliacaoService.Get(4);
             Assert.AreEqual(new DateTime(2022, 01, 04), avaliacao.DataEntrega);
             Assert.AreEqual(4, avaliacao.Id);
-            Assert.AreEqual(new DateTime(2022, 01, 05), avaliacao.HorarioEntrega);
             Assert.AreEqual(1, avaliacao.IdTurma);
             Assert.AreEqual(1, avaliacao.IdComponente);
             Assert.AreEqual(1, avaliacao.IdPeriodo);
-            Assert.AreEqual("PROVA", avaliacao.TipoDeAtividade);
+            Assert.AreEqual("PROVA", avaliacao.TipoAvaliacao);
             Assert.AreEqual(true, avaliacao.Avaliativo);
             Assert.AreEqual(peso, avaliacao.Peso);
         }
@@ -95,19 +93,17 @@ namespace Service.Tests
             var avaliacao = _avaliacaoService.Get(3);
             avaliacao.DataEntrega = new DateTime(2022, 04, 01);
             avaliacao.Avaliativo = true;
-            avaliacao.HorarioEntrega = new DateTime(2022, 04, 01);
             avaliacao.Peso = peso;
-            avaliacao.TipoDeAtividade = "PROVA";
+            avaliacao.TipoAvaliacao = "PROVA";
 
             avaliacao = _avaliacaoService.Get(3);
 
             //Assert
             Assert.IsNotNull(avaliacao);
             Assert.AreEqual(new DateTime(2022, 04, 01), avaliacao.DataEntrega);
-            Assert.AreEqual(new DateTime(2022, 04, 01), avaliacao.HorarioEntrega);
             Assert.AreEqual(true, avaliacao.Avaliativo);
             Assert.AreEqual(peso, avaliacao.Peso);
-            Assert.AreEqual("PROVA", avaliacao.TipoDeAtividade);
+            Assert.AreEqual("PROVA", avaliacao.TipoAvaliacao);
 
 
         }
@@ -119,8 +115,7 @@ namespace Service.Tests
             var avaliacao = _avaliacaoService.Get(1);
             Assert.IsNotNull(avaliacao);
             Assert.AreEqual(new DateTime(2022, 01, 01), avaliacao.DataEntrega);
-            Assert.AreEqual(new DateTime(2022, 01, 01), avaliacao.HorarioEntrega);
-            Assert.AreEqual("Prova", avaliacao.TipoDeAtividade);
+            Assert.AreEqual("Prova", avaliacao.TipoAvaliacao);
             Assert.AreEqual(peso, avaliacao.Peso);
             Assert.AreEqual(1, avaliacao.IdTurma);
             Assert.AreEqual(1, avaliacao.IdComponente);

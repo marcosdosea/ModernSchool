@@ -19,6 +19,6 @@ namespace ModernSchoolWEB.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DataFim { get; set; }
         [Required(ErrorMessage = "Campo ano Letivo é obrigatório")]
-        public int? AnoLetivo { get; set; }
+        public int? AnoLetivo1 { get; set; }
     }
 }

@@ -58,7 +58,7 @@ namespace Service
                     DataEntrega = g.DataEntrega,
                     Id = g.Id,
                     Peso = g.Peso, 
-                    TipoDeAtividade = g.TipoDeAtividade
+                    TipoAvaliacao = g.TipoAvaliacao
                 });
 
             return query.ToList();
