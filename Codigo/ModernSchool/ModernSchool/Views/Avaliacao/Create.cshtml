@@ -6,7 +6,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DataEntrega" class="control-label"></label>
@@ -55,6 +55,10 @@
                 <label asp-for="Avaliativo" class="control-label my-2"></label>
                 <input asp-for="Avaliativo" type="checkbox" value="true" />
                 <span asp-validation-for="Avaliativo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label my-2"></label>
+                <input asp-for="Arquivo" type="file" />
             </div>
             <div class="d-flex justify-content-end py-5">
                 <div class="col-3">

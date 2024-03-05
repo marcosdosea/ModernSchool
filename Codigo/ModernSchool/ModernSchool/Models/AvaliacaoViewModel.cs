@@ -31,6 +31,7 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Período")]
         [Required(ErrorMessage = "Campo período é obrigatório")]
         public int IdPeriodo { get; set;}
+        public IFormFile Arquivo { get; set; }
         public SelectList? ListaComponentes { get; set; }
         public SelectList? listaTurma { get; set; }
         public SelectList? listaPeriodo { get; set; }

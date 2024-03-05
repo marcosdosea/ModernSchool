@@ -130,6 +130,9 @@ namespace ModernSchoolWEB.Controllers
                 if (idAvaliacao != 0)
                 {
                     var listaForTurma = _avaliacaoService.GetAllAlunos(avaliacaoModel.IdTurma);
+                    MemoryStream ms = new();
+                    avaliacaoModel.Arquivo.CopyTo(ms);
+                    byte[] arquivo = ms.ToArray();
                     Alunoavaliacao alunoAvaliacao = new();
                     foreach (var item in listaForTurma)
                     {
@@ -139,7 +142,7 @@ namespace ModernSchoolWEB.Controllers
 
                             alunoAvaliacao = new Alunoavaliacao
                             {
-                                Arquivo = Encoding.ASCII.GetBytes("t"),
+                                Arquivo = arquivo,
                                 DataEntrega = DateTime.Now,
                                 IdAluno = item.IdAluno,
                                 IdAvaliacao = idAvaliacao,
