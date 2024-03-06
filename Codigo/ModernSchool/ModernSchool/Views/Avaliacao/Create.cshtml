@@ -6,7 +6,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DataEntrega" class="control-label"></label>
@@ -14,13 +14,8 @@
                 <span asp-validation-for="DataEntrega" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HorarioEntrega" class="control-label"></label>
-                <input asp-for="HorarioEntrega" class="form-control col-3" type="datetime-local" />
-                <span asp-validation-for="HorarioEntrega" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoDeAtividade" class="control-label"></label>
-                <select asp-for="TipoDeAtividade" class="form-select col-3">
+                <label asp-for="TipoAvaliacao" class="control-label"></label>
+                <select asp-for="TipoAvaliacao" class="form-select col-3">
                     @{
                         foreach (var item in Model.listaTipoAtividade)
                         {
@@ -31,7 +26,7 @@
 
                     }
                 </select>
-                <span asp-validation-for="TipoDeAtividade" class="text-danger"></span>
+                <span asp-validation-for="TipoAvaliacao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdTurma" class="control-label"></label>
@@ -60,6 +55,10 @@
                 <label asp-for="Avaliativo" class="control-label my-2"></label>
                 <input asp-for="Avaliativo" type="checkbox" value="true" />
                 <span asp-validation-for="Avaliativo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label my-2"></label>
+                <input asp-for="Arquivo" type="file" />
             </div>
             <div class="d-flex justify-content-end py-5">
                 <div class="col-3">

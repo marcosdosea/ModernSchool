@@ -10,7 +10,7 @@ namespace Core.DTO
     {
         public int Id { get; set; }
         public DateTime DataEntrega { get; set; }
-        public string TipoDeAtividade { get; set; } =string.Empty;
+        public string TipoAvaliacao { get; set; } =string.Empty;
         public short Peso { get; set; }
     }
 }

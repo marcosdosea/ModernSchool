@@ -1,15 +1,8 @@
 ﻿@model IEnumerable<Core.DTO.GradeHorarioProfessor>
 
-<div class="py-1">
-    <label>Turma: @ViewData["nomeTurma"]</label>
-    <label>Componente: @ViewData["nomeComponente"]</label>
-</div>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Escola)
             </th>
@@ -23,25 +16,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Escola)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Turma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Componente)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Escola)
+                    <input type="hidden" name="Id" value="@item.Id" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Turma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Componente)
+                </td>
+                <td>
                     <a role="button" class="btn btn-secondary btn-sm" asp-controller="Professor" asp-action="DiarioDeClasse" asp-route-idTurma="@item.IdTurma"
-                    asp-route-idComponente="@item.IdComponente"> Selecionar </a>
-            </td>
-        </tr>
-}
+                       asp-route-idComponente="@item.IdComponente"> Selecionar </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

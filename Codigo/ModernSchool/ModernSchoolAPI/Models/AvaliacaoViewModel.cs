@@ -13,13 +13,9 @@ namespace ModernSchoolAPI.Models
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataEntrega { get; set; }
-        [Display(Name = "Horário Entrega")]
-        [DataType(DataType.Date, ErrorMessage = "Horário válido requerido")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime HorarioEntrega { get; set; }
-        [Display(Name = "Tipo de Atividade")]
+        [Display(Name = "Tipo de Avaliação")]
         [Required(ErrorMessage = "Campo tipo de atividade é obrigatório")]
-        public string? TipoDeAtividade { get; set; }
+        public string? TipoAvaliacao { get; set; }
         [Display(Name = "Peso")]
         [Required(ErrorMessage = "Campo peso é obrigatório")]
         public int Peso { get; set; }

@@ -31,9 +31,9 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var periodo = new List<Periodo>
                 {
-                    new Periodo { Id = 1, Nome = "Sexto", DataInicio = DateTime.Parse("2022-01-01"), DataFim = DateTime.Parse("2022-12-12"), AnoLetivo = 2022},
-                    new Periodo { Id = 2, Nome = "Quarto", DataInicio = DateTime.Parse("2021-01-01"), DataFim = DateTime.Parse("2021-12-12"), AnoLetivo = 2021},
-                    new Periodo { Id = 3, Nome = "Segundo", DataInicio = DateTime.Parse("2020-01-01"), DataFim = DateTime.Parse("2020-12-12"), AnoLetivo = 2020},
+                    new Periodo { Id = 1, Nome = "Sexto", DataInicio = DateTime.Parse("2022-01-01"), DataFim = DateTime.Parse("2022-12-12"), AnoLetivo1 = 2022},
+                    new Periodo { Id = 2, Nome = "Quarto", DataInicio = DateTime.Parse("2021-01-01"), DataFim = DateTime.Parse("2021-12-12"), AnoLetivo1 = 2021},
+                    new Periodo { Id = 3, Nome = "Segundo", DataInicio = DateTime.Parse("2020-01-01"), DataFim = DateTime.Parse("2020-12-12"), AnoLetivo1 = 2020},
                 };
 
             _context.AddRange(periodo);
@@ -46,12 +46,12 @@ namespace Service.Tests
         public void CreateTest()
         {
             // Act
-            _periodoService.Create(new Periodo() { Id = 4, Nome = "Segundo", DataInicio = DateTime.Parse("2020-01-01"), DataFim = DateTime.Parse("2020-12-12"), AnoLetivo = 2024 });
+            _periodoService.Create(new Periodo() { Id = 4, Nome = "Segundo", DataInicio = DateTime.Parse("2020-01-01"), DataFim = DateTime.Parse("2020-12-12"), AnoLetivo1 = 2024 });
             // Assert
             Assert.AreEqual(4, _periodoService.GetAll().Count());
             var periodo = _periodoService.Get(4);
             Assert.AreEqual(4, periodo.Id);
-            Assert.AreEqual(2024, periodo.AnoLetivo);
+            Assert.AreEqual(2024, periodo.AnoLetivo1);
         }
 
         [TestMethod()]
@@ -69,13 +69,13 @@ namespace Service.Tests
         {
             var periodo = _periodoService.Get(1);
             periodo.Id = 1;
-            periodo.AnoLetivo = 2022;
+            periodo.AnoLetivo1 = 2022;
             _periodoService.Edit(periodo);
             //Assert
             periodo = _periodoService.Get(1);
             Assert.IsNotNull(periodo);
             Assert.AreEqual(1, periodo.Id);
-            Assert.AreEqual(2022, periodo.AnoLetivo);
+            Assert.AreEqual(2022, periodo.AnoLetivo1);
         }
 
         [TestMethod()]
@@ -84,7 +84,7 @@ namespace Service.Tests
             var periodo = _periodoService.Get(2);
             Assert.IsNotNull(periodo);
             Assert.AreEqual(2, periodo.Id);
-            Assert.AreEqual(2021, periodo.AnoLetivo);
+            Assert.AreEqual(2021, periodo.AnoLetivo1);
         }
 
         [TestMethod()]

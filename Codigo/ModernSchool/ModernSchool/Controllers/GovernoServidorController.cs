@@ -77,7 +77,7 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var governoServidor = _mapper.Map<Governoservidor>(governoservidorM);
-                _governoService.Create(governoservidorM.IdPessoa,governoservidorM.IdGoverno,governoServidor);
+                _governoService.Create(governoServidor);
             }
 
             return RedirectToAction(nameof(Index));

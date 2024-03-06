@@ -8,12 +8,11 @@ namespace ModernSchoolWEB.Models
     public class FrequenciaAlunoDTOViewModel
     {
         [Display(Name = "Matrícula")]
-        [Required(ErrorMessage = "Campo Matrícula é obrigatório")]
         public int IdAluno { get; set; }
         [Display(Name = "Nome")]
-        [Required(ErrorMessage = "Campo Nome é obrigatório")]
         [StringLength(70, ErrorMessage = "No minímo 10 caracteres e no máximo 70.", MinimumLength = 10)]
         public string? NomeAluno { get; set; }
+        [Range(0, 5, ErrorMessage = "O Número deve estar entre 0 e 5")]
         public int Faltas { get; set; }
         public int IdDiario { get; set; }
     }

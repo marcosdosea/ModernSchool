@@ -10,7 +10,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnoLetivo)
+                @Html.DisplayNameFor(model => model.AnoLetivo1)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Turma1)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AnoLetivo)
+                @Html.DisplayFor(modelItem => item.AnoLetivo1)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Turma1)
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
             </td>
         </tr>
 }

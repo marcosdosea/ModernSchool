@@ -6,20 +6,15 @@ namespace ModernSchoolWEB.Models
 {
     public class AvaliacaoViewModel
     {
-
-        public int Id { get; set; }
         [Key]
+        public int Id { get; set; }
         [Display(Name = "Data Entrega")]
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataEntrega{ get; set; }
-        [Display(Name = "Horário Entrega")]
-        [DataType(DataType.Date, ErrorMessage = "Horário válido requerido")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime HorarioEntrega{ get; set; }
-        [Display(Name = "Tipo de Atividade")]
+        [Display(Name = "Tipo de Avaliação")]
         [Required(ErrorMessage = "Campo tipo de atividade é obrigatório")]
-        public string? TipoDeAtividade { get; set; }
+        public string? TipoAvaliacao { get; set; }
         [Display(Name = "Peso")]
         [Required(ErrorMessage = "Campo peso é obrigatório")]
         public int Peso { get; set; }
@@ -36,6 +31,7 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Período")]
         [Required(ErrorMessage = "Campo período é obrigatório")]
         public int IdPeriodo { get; set;}
+        public IFormFile Arquivo { get; set; }
         public SelectList? ListaComponentes { get; set; }
         public SelectList? listaTurma { get; set; }
         public SelectList? listaPeriodo { get; set; }

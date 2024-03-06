@@ -149,24 +149,26 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult SalvarFrequencia(FrequenciaListaAlunoDTOViewModel frequenciaAluno)
         {
 
-
-            bool createNew = _frequenciaAlunoService.ExistFrequencia(frequenciaAluno.Lista[0].IdDiario);
-
-            foreach (var item in frequenciaAluno.Lista)
+            if (ModelState.IsValid)
             {
-                Frequenciaaluno freuqencia = new Frequenciaaluno
+                bool createNew = _frequenciaAlunoService.ExistFrequencia(frequenciaAluno.Lista[0].IdDiario);
+
+                foreach (var item in frequenciaAluno.Lista)
                 {
-                    Faltas = item.Faltas,
-                    IdAluno = item.IdAluno,
-                    IdDiarioDeClasse = item.IdDiario
-                };
-                if (!createNew)
-                {
-                    _frequenciaAlunoService.Create(freuqencia);
-                }
-                else
-                {
-                    _frequenciaAlunoService.Edit(freuqencia);
+                    Frequenciaaluno freuqencia = new Frequenciaaluno
+                    {
+                        Faltas = item.Faltas,
+                        IdAluno = item.IdAluno,
+                        IdDiarioDeClasse = item.IdDiario
+                    };
+                    if (!createNew)
+                    {
+                        _frequenciaAlunoService.Create(freuqencia);
+                    }
+                    else
+                    {
+                        _frequenciaAlunoService.Edit(freuqencia);
+                    }
                 }
             }
 

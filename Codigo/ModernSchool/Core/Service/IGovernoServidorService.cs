@@ -9,7 +9,7 @@ namespace Core.Service
 {
     public interface IGovernoServidorService
     {
-        int Create(int idPessoa,int idGoverno,Governoservidor governoservidor);
+        int Create(Governoservidor governoservidor);
         void Edit(Governoservidor governoservidor);
         void Delete(int idPessoa, int idGoverno);
         Governoservidor Get(int idPessoa, int idGoverno);
