@@ -31,7 +31,16 @@
                         @Html.DisplayFor(modelItem => @Model.Lista[i].NomeAluno)
                 </td>
                 <td>
-                    <input class="form-control-input input-group-text w-25" asp-for="@Model.Lista[i].Faltas" />
+                    <select asp-for="@Model.Lista[i].Faltas" class="form-select w-25">
+                            @{
+                                for (int a = 1; a <= 5; a++)
+                                {
+                                <option value="@a">@a</option>
+                                }
+                            }
+
+                    </select>
+                    <!--<input class="form-control-input input-group-text w-25" asp-for="Model.Lista[i].Faltas" />-->
                 </td>
             </tr>
             }
