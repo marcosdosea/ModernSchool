@@ -11,6 +11,7 @@ namespace ModernSchoolWEB.Models
 
       
         public int Id { get; set; }
+        public DateTime Data { get; set; }
         [Display(Name ="Data Show")]
         public bool DataShow { get; set; }
         [Display(Name ="Livos")]
@@ -34,11 +35,12 @@ namespace ModernSchoolWEB.Models
 
         public SelectList? listaComponente { get; set; }
         public List<DiarioClasseHabilidade> Habilidade { get; set;}
-        public Dictionary<Char, string> tipoAula { get; } = new()
+        public Dictionary<string, string> tpAula { get; } = new()
         {
-            { 'A', "Avaliativo" },
-            { 'C', "Comum" }
+            { "A", "Avaliativo" },
+            { "C", "Comum" }
         };
+        public DiarioObjeto? ObjetoConhecimento { get; set;}
     }
 
 

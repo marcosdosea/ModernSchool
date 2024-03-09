@@ -31,9 +31,9 @@
                         @Html.DisplayFor(modelItem => @Model.Lista[i].NomeAluno)
                 </td>
                 <td>
-                    <select asp-for="@Model.Lista[i].Faltas" class="form-select w-25">
+                    <select asp-for="@Model.Lista[i].Faltas" class="form-select" style="width: 65px;">
                             @{
-                                for (int a = 1; a <= 5; a++)
+                                for (int a = 0; a <= 5; a++)
                                 {
                                 <option value="@a">@a</option>
                                 }
