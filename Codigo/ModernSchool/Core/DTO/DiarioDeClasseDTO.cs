@@ -23,5 +23,12 @@ namespace Core.DTO
         public bool Selecionado { get; set; } = false;
         public int IdObjeto { get; set; }
     }
+    public class DiarioObjeto
+    {
+        public string UnidadeTematica { get; set; } = string.Empty;
+        public string ObjetoConhecimento { get; set; } = string.Empty;
+        public string Habilidade { get; set; } = string.Empty;
+        public int IdObjeto { get; set; }
+    }
 
 }

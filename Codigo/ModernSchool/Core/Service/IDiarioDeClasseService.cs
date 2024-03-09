@@ -9,7 +9,7 @@ namespace Core.Service
 {
     public interface IDiarioDeClasseService
     {
-        int CreateDiarioClasse(Diariodeclasse diariodeclasse,DiarioClasseHabilidade listHabilidade);
+        int CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade);
         void Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
         Diariodeclasse Get(int diariodeclasse);
@@ -19,5 +19,7 @@ namespace Core.Service
         /// <returns></returns>
         IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAllDiarioTurmaComponete(int IdProfessor, int IdComponente, int idTurma);
         IEnumerable<DiarioClasseHabilidade> GetAllHabilidade();
+        public DiarioObjeto GetObjetodeconhecimento(int idObjeto);
+        public int DeleteDiarioClasse(int IdDiario, int IdObjeto);
     }
 }

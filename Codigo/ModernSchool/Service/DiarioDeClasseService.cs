@@ -90,14 +90,13 @@ namespace Service
                 .Where(g => g.IdDiarioDeClasseNavigation.IdTurma == idTurma &&
                     g.IdDiarioDeClasseNavigation.IdComponente == IdComponente
                     && g.IdDiarioDeClasseNavigation.IdProfessor == IdProfessor
-                )
+                ).OrderBy(g => g.IdDiarioDeClasseNavigation.Data)
                 .Select(g => new ObjetodeconhecimentodiariodeclasseDTO
                 {
-                    Data = "20/05/2024",
                     UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
                     IdDiarioClasse = g.IdDiarioDeClasse,
-                    IdObjeto = g.IdObjetoDeConhecimento
-
+                    IdObjeto = g.IdObjetoDeConhecimento,
+                    Data = g.IdDiarioDeClasseNavigation.Data.ToString("dd/MM/yyyy"),
 
                 });
             return query.ToList();
@@ -131,6 +130,27 @@ namespace Service
                     IdObjeto = g.IdObjetoDeConhecimentoNavigation.Id
                 });
             return query.AsNoTracking().ToList();
+        }
+
+        public DiarioObjeto GetObjetodeconhecimento(int idObjeto)
+        {
+            var query = _context.Habilidades.Where(g => g.IdObjetoDeConhecimentoNavigation.Id == idObjeto)
+                .Select(g => new DiarioObjeto
+                {
+                    Habilidade = g.Descricao,
+                    UnidadeTematica = g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.Descricao,
+                    IdObjeto = idObjeto,
+                    ObjetoConhecimento = g.IdObjetoDeConhecimentoNavigation.Descricao
+                });
+            return query.First();
+        }
+        public int DeleteDiarioClasse(int IdDiario, int IdObjeto)
+        {
+            var objetoDiario = _context.Objetodeconhecimentodiariodeclasses.Find(IdObjeto, IdDiario);
+            _context.Remove(objetoDiario);
+            _context.SaveChanges();
+            Delete(IdDiario);
+            return 1;
         }
     }
 }

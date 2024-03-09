@@ -105,6 +105,7 @@ namespace ModernSchoolWEB.Controllers
                         IdTurma = diarioDeClasse.IdTurma,
                         ResumoAula = diarioDeClasse.ResumoAula,
                         TipoAula = diarioDeClasse.TipoAula,
+                        Data = diarioDeClasse.Data
                     };
 
                     _diarioDeClasseService.CreateDiarioClasse(diario, list);
@@ -176,8 +177,51 @@ namespace ModernSchoolWEB.Controllers
             return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
         }
 
-        
 
+        public ActionResult EditDiarioClasse(int IdDiario, int IdObjeto)
+        {
+
+            Core.Diariodeclasse diario = _diarioDeClasseService.Get(IdDiario);
+
+            DiarioDeClasseViewModel diarioDeClasse = _mappers.Map<DiarioDeClasseViewModel>(diario);
+            diarioDeClasse.ObjetoConhecimento = _diarioDeClasseService.GetObjetodeconhecimento(IdObjeto);
+            diarioDeClasse.Id = IdDiario;
+
+            //ViewData["Turma"] = _turmaService.Get(IdTurma).Turma1;
+            //ViewData["Componente"] = _componenteService.Get(IdComponente).Nome;
+
+            return View(diarioDeClasse);
+        }
+
+        [HttpPost]
+        public ActionResult EditDiarioClasse(DiarioDeClasseViewModel diarioDeClasse)
+        {
+            ModelState.Remove("Habilidade");
+            if (ModelState.IsValid)
+            {
+                Diariodeclasse diario = _mappers.Map<Diariodeclasse>(diarioDeClasse);
+
+                _diarioDeClasseService.Edit(diario);
+            }
+            try
+            {
+                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteDiarioClasse(DiarioDeClasseViewModel diarioDeClasse, int IdDiario, int IdObjeto) {
+            
+            diarioDeClasse = _mappers.Map<DiarioDeClasseViewModel>(_diarioDeClasseService.Get(IdDiario));
+            _diarioDeClasseService.DeleteDiarioClasse(IdDiario, IdObjeto);
+
+            return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+        }
 
         // GET: ProfessorController1/Details/5
         public ActionResult Details(int id)
