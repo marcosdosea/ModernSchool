@@ -21,16 +21,19 @@ namespace ModernSchoolWEB.Controllers
         private readonly ICargoService _cargoService;
         private readonly IMapper _mapper;
         private readonly IGovernoService _governoService;
+        private readonly IGovernoServidorService _governoServidorService;
 
         private readonly ISeedUserRoleInitial _userRole;
         public PessoaController(IPessoaService pessoaService, ICargoService cargoService,
-            IMapper mapper, ISeedUserRoleInitial userRole, IGovernoService governoService)
+            IMapper mapper, ISeedUserRoleInitial userRole, IGovernoService governoService,
+            IGovernoServidorService governoServidorService)
         {
             _pessoaService = pessoaService;
             _cargoService = cargoService;
             _mapper = mapper;
             _userRole = userRole;
             _governoService = governoService;
+            _governoServidorService = governoServidorService;
         }
 
 

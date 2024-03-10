@@ -1,31 +1,14 @@
 ﻿@model IEnumerable<ModernSchoolWEB.Models.PessoaViewModel>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<label class="control-label fs-5">Pessoas</label>
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cpf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rua)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bairro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -36,10 +19,12 @@
     <tbody>
         @foreach (var item in Model)
         {
+            <input asp-for="@item.Rua" type="hidden" />
+            <input asp-for="@item.Bairro" type="hidden" />
+            <input asp-for="@item.Numero" type="hidden" />
+            <input asp-for="@item.DataNascimento" type="hidden" />
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
+                <input asp-for="@item.Id" type="hidden" />
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
@@ -47,26 +32,37 @@
                     @Html.DisplayFor(modelItem => item.Cpf)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Rua)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bairro)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataNascimento)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <div class="d-flex">
+                        <div>
+                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                        <div>
+                            <a role="button" asp-action="Details" class="fs-5 pl-5" asp-route-Id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+                        </div>
+                        <div>
+                            <form asp-action="Delete"
+                                  asp-route-Id="@item.Id">
+                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                    <i class="fa-solid text-danger fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div class="container py-4">
+    <div class="row">
+        <div class="d-flex justify-content-end col-lg align-items-center">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
+        </div>
+        <!--<div class="d-flex justify-content-end col-lg-2">
+            <a class="display-4" role="button" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>-->
+    </div>
+</div>
