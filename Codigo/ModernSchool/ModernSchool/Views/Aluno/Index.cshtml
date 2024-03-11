@@ -1,0 +1,85 @@
+﻿@model ModernSchoolWEB.Models.AlunoTelaIndex
+
+<p>
+    <label>Turma :@Model.NomeTurma</label>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Componente
+            </th>
+            <th>
+                Local
+            </th>
+            <th>
+                Horário
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.AlunosDisciplinas.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.AlunosDisciplinas[i].NomeComponente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.AlunosDisciplinas[i].Local)
+                </td>
+                <td>
+                    @for(int j = 0; j < Model.AlunosDisciplinas[i].Horas.Count(); j++)
+                    {
+                        <label> @Model.AlunosDisciplinas[i].Horas[j]</label>
+                    }
+                </td>
+                <td>
+                    <a>Selecionar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<p>
+    <label>Atividades</label>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data
+            </th>
+            <th>
+                Componente
+            </th>
+            <th>
+                Descricao
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.AlunosAtividade.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Componente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Descricao)
+                </td>
+                <td>
+                    <a>Enviar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

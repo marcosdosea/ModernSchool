@@ -201,5 +201,27 @@ namespace Service
                 });
             return await query.FirstOrDefaultAsync();
         }
+
+        public Alunoturma GetAlunoTurma(int idAluno)
+        {
+            return _context.Alunoturmas.Where(g => g.IdAluno == idAluno && g.Status == "M").First();
+        }
+
+        public List<AlunoComponente> GetListasComponente(int idTurma)
+        {
+
+
+            var query = _context.Gradehorarios.Where(g => g.IdTurma == idTurma)
+                .Select(g => new AlunoComponente
+                {
+                    NomeComponente = g.IdComponenteNavigation.Nome,
+                    Local = g.IdTurmaNavigation.Sala,
+                    DiaSemana = g.DiaSemana,
+                    HoraFim = g.HoraFim,
+                    HoraInicio = g.HoraInicio,
+                });
+
+            return query.ToList();
+        }
     }
 }

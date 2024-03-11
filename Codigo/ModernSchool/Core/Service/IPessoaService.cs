@@ -24,6 +24,8 @@ namespace Core.Service
 
         Task<string> GetByCargo(string email);
         Task<Pessoa> GetByEmail(string email);
+        List<AlunoComponente> GetListasComponente(int idTurma);
+        Alunoturma GetAlunoTurma(int idAluno);
 
     }
 }
