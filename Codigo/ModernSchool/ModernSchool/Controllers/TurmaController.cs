@@ -4,6 +4,7 @@ using Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -11,10 +12,12 @@ namespace ModernSchoolWEB.Controllers
     {
         private readonly ITurmaService _turmaService;
         private readonly IMapper _mapper;
+        private readonly IAnoLetivoService _anoLetivoService;
 
-        public TurmaController(ITurmaService turmaService, IMapper mapper)
+        public TurmaController(ITurmaService turmaService, IAnoLetivoService anoLetivoService, IMapper mapper)
         {
             _turmaService = turmaService;
+            _anoLetivoService = anoLetivoService;
             _mapper = mapper;
         }
 
@@ -23,7 +26,18 @@ namespace ModernSchoolWEB.Controllers
         {
             var listaTurma = _turmaService.GetAll();
             var listaTurmaModel = _mapper.Map<List<TurmaViewModel>>(listaTurma);
-            return View(listaTurmaModel);
+
+            foreach (var turmaViewModel in listaTurmaModel)
+            {
+                turmaViewModel.ListaTurma = _mapper.Map<List<TurmaViewModel>>(_turmaService.GetAll());
+            }
+            TurmaViewModel turma =  new TurmaViewModel()
+            {
+                ListaTurma = listaTurmaModel
+            };
+            var anoLetivo = _anoLetivoService.GetAll();
+            turma.listaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
+            return View(turma);
         }
 
         // GET: TurmaController/Details/5
@@ -75,13 +89,13 @@ namespace ModernSchoolWEB.Controllers
         }
 
         // GET: TurmaController/Delete/5
-        public ActionResult Delete(int id)
+        /*public ActionResult Delete(int id)
         {
             Turma turma = _turmaService.Get(id);
             TurmaViewModel turmaViewModel = _mapper.Map<TurmaViewModel>(turma);
             return View(turmaViewModel);
         }
-
+        */
         // POST: TurmaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

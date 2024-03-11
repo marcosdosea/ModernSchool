@@ -4,17 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<label class="control-label fs-5">Períodos</label>
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.nome)
             </th>
@@ -22,20 +15,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nome)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.id }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <input asp-for="@item.id" type="hidden" />
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    <div class="d-flex">
+                        <div>
+                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@item.id"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                        <div>
+                            <form asp-action="Delete"
+                                  asp-route-Id="@item.id">
+                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                    <i class="fa-solid text-danger fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div class="container py-4">
+    <div class="row">
+        <div class="d-flex justify-content-end col-lg align-items-center">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
+        </div>
+        <div class="d-flex justify-content-end col-lg-2">
+            <a class="display-4" role="button" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
+</div>

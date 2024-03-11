@@ -1,14 +1,18 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.TurmaViewModel>
+﻿@model ModernSchoolWEB.Models.TurmaViewModel
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="d-flex justify-content-between align-items-end mb-5">
+    <div>
+        <label class="control-label fs-5">Turmas</label>
+    </div>
+    <div class="form-group">
+        <label asp-for="AnoLetivo1" class="control-label"></label>
+        <select asp-for="AnoLetivo1" class="form-select" asp-items="@Model.listaAnoLetivo"></select>
+        <span asp-validation-for="AnoLetivo1" class="text-danger"></span>
+    </div>
+</div>
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.AnoLetivo1)
             </th>
@@ -21,51 +25,57 @@
             <th>
                 @Html.DisplayNameFor(model => model.VagasDisponiveis)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sala)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Escolaridade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnoLetivo1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Turma1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vagas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VagasDisponiveis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sala)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Escolaridade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.ListaTurma)
+        {
+            <tr>
+                <input asp-for="Id" type="hidden" />
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoLetivo1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Turma1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vagas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VagasDisponiveis)
+                </td>
+                <td>
+                    <div class="d-flex justify-content-evenly">
+                        <div>
+                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="Pessoa" asp-action="AddPessoaCargo">Matricular</a>
+                        </div>
+                        <div>
+                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="GradeHorario" asp-action="Index" asp-action="">Grade</a>
+                        </div>
+                        <div>
+                            <form asp-action="Delete"
+                                  asp-route-Id="@item.Id">
+                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                    <i class="fa-solid text-danger fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div class="d-flex justify-content-end">
+</div>
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="d-flex justify-content-end col-lg-6">
+            <a class="display-4" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
+</div>
+
+
