@@ -107,5 +107,18 @@ namespace Service
             return query.ToList();
         }
 
+        public List<AlunoAtividade> GetAlunoAtividades(int idTurma)
+        {
+            var query = _context.Alunoavaliacaos.Where(g => g.IdAvaliacaoNavigation.IdTurma == idTurma)
+                .Select(g => new AlunoAtividade
+                {
+                    Componente = g.IdAvaliacaoNavigation.IdComponenteNavigation.Nome,
+                    Data = g.DataEntrega,
+                    Descricao = "Sem descricao"
+                });
+
+            return query.ToList();
+        }
+
     }
 }
