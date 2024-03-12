@@ -118,9 +118,11 @@ namespace Service
 
         }
 
-        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade()
+        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade(int idComponente, string anoFaixa)
         {
-            var query = _context.Habilidades
+            var query = _context.Habilidades.Where(g =>
+                g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.IdCurriculoNavigation.AnoFaixa == anoFaixa
+                && g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.IdComponente == idComponente)
                 .Select(g => new DiarioClasseHabilidade
                 {
                     Data = "20/05/2024",

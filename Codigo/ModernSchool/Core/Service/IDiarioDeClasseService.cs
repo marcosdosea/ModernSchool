@@ -18,7 +18,7 @@ namespace Core.Service
         /// </summary>
         /// <returns></returns>
         IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAllDiarioTurmaComponete(int IdProfessor, int IdComponente, int idTurma);
-        IEnumerable<DiarioClasseHabilidade> GetAllHabilidade();
+        IEnumerable<DiarioClasseHabilidade> GetAllHabilidade(int idComponente, string anoFaixa);
         public DiarioObjeto GetObjetodeconhecimento(int idObjeto);
         public int DeleteDiarioClasse(int IdDiario, int IdObjeto);
 
