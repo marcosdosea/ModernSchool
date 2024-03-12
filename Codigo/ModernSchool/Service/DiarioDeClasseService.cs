@@ -152,5 +152,18 @@ namespace Service
             Delete(IdDiario);
             return 1;
         }
+
+        public List<DiarioAluno> GetDiarioAlunos(int idAluno, int idComponente)
+        {
+            var query = _context.Frequenciaalunos.Where(g => g.IdAluno == idAluno && g.IdDiarioDeClasseNavigation.IdComponente == idComponente)
+                .Select(g => new DiarioAluno
+                {
+                    Data = g.IdDiarioDeClasseNavigation.Data,
+                    Falta = g.Faltas,
+                    Resumo = g.IdDiarioDeClasseNavigation.ResumoAula
+                });
+
+            return query.ToList();
+        }
     }
 }

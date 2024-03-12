@@ -21,5 +21,7 @@ namespace Core.Service
         IEnumerable<DiarioClasseHabilidade> GetAllHabilidade();
         public DiarioObjeto GetObjetodeconhecimento(int idObjeto);
         public int DeleteDiarioClasse(int IdDiario, int IdObjeto);
+
+        public List<DiarioAluno> GetDiarioAlunos(int idAluno, int idComponente);  
     }
 }

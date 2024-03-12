@@ -31,4 +31,11 @@ namespace Core.DTO
         public int IdObjeto { get; set; }
     }
 
+    public class DiarioAluno
+    {
+        public string Resumo { get; set; } = string.Empty;
+        public DateTime Data { get; set; }
+        public int Falta { get; set; }
+    }
+
 }
