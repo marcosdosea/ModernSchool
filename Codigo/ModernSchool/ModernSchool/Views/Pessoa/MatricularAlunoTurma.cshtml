@@ -1,30 +1,41 @@
 ﻿@model ModernSchoolWEB.Models.AlunoViewModel
 
-<h4>AlunoViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<label class="fs-5">Matricular Aluno / Adicionar em uma Turma</label>
+<div class="row mt-5">
+    <div>
         <form asp-action="MatricularAlunoTurma">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <input asp-for="IdTurma" class="form-control" />
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex">
+                <div class="form-group col-5">
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+                <div class="form-group ml-5 col-3">
+                    <label asp-for="IdTurma" class="control-label"></label>
+                    <Select asp-for="IdTurma" asp-items="@Model.listaTurma" class="form-select"></Select>
+                    <span asp-validation-for="IdTurma" class="text-danger"></span>
+                </div>
+                <div class="d-flex align-items-center ml-3 col-5">
+                    <form asp-action="Create">
+                        <button type="submit" class="border-0 fs-5 bg-transparent pl-5 cor-bg rounded-pill text-light" role="button">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-    <a asp-action="MatricularNovoAluno" asp-controller="Pessoa">Novo aluno</a>
+<div class="container py-4 col-4">
+    <div class="row">
+        <div class="d-flex justify-content-end col-lg align-items-center">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
+        </div>
+        <div class="d-flex justify-content-end col-lg-2">
+            <a class="display-4" role="button" asp-action="MatricularNovoAluno" asp-controller="Pessoa"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
 </div>
 

@@ -28,7 +28,7 @@ namespace ModernSchoolWEB.Controllers
 
         public IActionResult Index()
         {
-            Alunoturma aluno = _pessooaService.GetAlunoTurma(8);
+            Alunoturma aluno = _pessooaService.GetAlunoTurma(2);
             var listaComponentes = _pessooaService.GetListasComponente(aluno.IdTurma);
             var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma);
             AlunoTelaIndex telaAluno = new();

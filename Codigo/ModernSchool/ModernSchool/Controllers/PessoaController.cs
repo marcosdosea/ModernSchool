@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using ModernSchoolWEB.Areas.Identity.Data;
 using ModernSchoolWEB.Service;
 using Microsoft.AspNetCore.Authorization;
+using Service;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -22,11 +23,12 @@ namespace ModernSchoolWEB.Controllers
         private readonly IMapper _mapper;
         private readonly IGovernoService _governoService;
         private readonly IGovernoServidorService _governoServidorService;
+        private readonly ITurmaService _turmaService;
 
         private readonly ISeedUserRoleInitial _userRole;
         public PessoaController(IPessoaService pessoaService, ICargoService cargoService,
             IMapper mapper, ISeedUserRoleInitial userRole, IGovernoService governoService,
-            IGovernoServidorService governoServidorService)
+            IGovernoServidorService governoServidorService, ITurmaService turmaService)
         {
             _pessoaService = pessoaService;
             _cargoService = cargoService;
@@ -34,6 +36,7 @@ namespace ModernSchoolWEB.Controllers
             _userRole = userRole;
             _governoService = governoService;
             _governoServidorService = governoServidorService;
+            _turmaService = turmaService;
         }
 
 
@@ -162,7 +165,11 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult MatricularAlunoTurma()
         {
-            return View();
+            AlunoViewModel alunoModel = new AlunoViewModel();
+            var listaTurmas = _turmaService.GetAll();
+            alunoModel.listaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
+
+            return View(alunoModel);
         }
 
 
@@ -190,7 +197,11 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult MatricularNovoAluno()
         {
-            return View();
+            AlunoViewModel alunoModel = new AlunoViewModel();
+            var listaTurmas = _turmaService.GetAll();
+            alunoModel.listaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
+
+            return View(alunoModel);
         }
         [HttpPost]
         public ActionResult MatricularNovoAluno(AlunoViewModel model)
