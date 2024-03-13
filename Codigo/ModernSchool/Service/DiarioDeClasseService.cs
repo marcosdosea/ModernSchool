@@ -2,11 +2,7 @@
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Service
 {
@@ -155,17 +151,25 @@ namespace Service
             return 1;
         }
 
-        public List<DiarioAluno> GetDiarioAlunos(int idAluno, int idComponente)
+        public List<DiarioAluno> GetDiarioAlunos(int idTurma, int idComponente)
         {
-            var query = _context.Frequenciaalunos.Where(g => g.IdAluno == idAluno && g.IdDiarioDeClasseNavigation.IdComponente == idComponente)
+            var query = _context.Diariodeclasses.Where( g => g.IdTurma == idTurma && g.IdComponente == idComponente)
                 .Select(g => new DiarioAluno
                 {
-                    Data = g.IdDiarioDeClasseNavigation.Data,
-                    Falta = g.Faltas,
-                    Resumo = g.IdDiarioDeClasseNavigation.ResumoAula
+                    IdDiario = g.Id,
+                    Data = g.Data,
+                    Resumo = g.ResumoAula
                 });
 
             return query.ToList();
+        }
+
+        public int GetFaltaAluno(int idAluno, int idDiario)
+        {
+            var query = _context.Frequenciaalunos.Where(g => g.IdDiarioDeClasse == idDiario && g.IdAluno == idAluno)
+                .Select(g => g.Faltas).FirstOrDefault();
+
+            return query;
         }
     }
 }

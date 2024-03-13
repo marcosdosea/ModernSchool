@@ -33,6 +33,7 @@ namespace Core.DTO
 
     public class DiarioAluno
     {
+        public int IdDiario { get; set; }   
         public string Resumo { get; set; } = string.Empty;
         public DateTime Data { get; set; }
         public int Falta { get; set; }

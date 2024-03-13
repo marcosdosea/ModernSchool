@@ -76,12 +76,16 @@ namespace ModernSchoolWEB.Controllers
             return View(telaAluno);
         }
 
-        public ActionResult AtividadesComponentes(int idComponente, int idAluno)
+        public ActionResult AtividadesComponentes(int idComponente, int idAluno, int idTurma)
         {
 
             AvaliacaoComponente view = new();
-            var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idAluno,idComponente);
+            var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idTurma,idComponente);
 
+            for (int i = 0; i < diarioAluno.Count(); i++)
+            {
+                diarioAluno[i].Falta = _diarioDeClasseService.GetFaltaAluno(idAluno, diarioAluno[i].IdDiario);
+            }
             view.DiarioAlunos = diarioAluno;
             view.NomeComponente = _componenteService.Get(idComponente).Nome;
             view.IdComponente = idComponente;

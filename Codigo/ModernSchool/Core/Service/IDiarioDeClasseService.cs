@@ -22,6 +22,7 @@ namespace Core.Service
         public DiarioObjeto GetObjetodeconhecimento(int idObjeto);
         public int DeleteDiarioClasse(int IdDiario, int IdObjeto);
 
-        public List<DiarioAluno> GetDiarioAlunos(int idAluno, int idComponente);  
+        public List<DiarioAluno> GetDiarioAlunos(int idTurma, int idComponente);
+        public int GetFaltaAluno(int idAluno, int idDiario);
     }
 }
