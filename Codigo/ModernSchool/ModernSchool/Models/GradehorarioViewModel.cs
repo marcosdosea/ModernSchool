@@ -18,10 +18,12 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Dia da Semana")]
         public string? DiaSemana { get; set; }
         [Required(ErrorMessage = "Este campo é requerido")]
-        [Display(Name = "Hora Inicio")]
+        [RegularExpression(@"^(?:[01]\d|2[0-3]):[0-5]\d$", ErrorMessage = "Formato Inválido! Ex:23:59")]
+        [Display(Name = "Hora Inicio", Prompt = "Ex: 23:59")]
         public string? HoraInicio { get; set; }
         [Required(ErrorMessage = "Este campo é requerido")]
-        [Display(Name = "Hora Fim")]
+        [RegularExpression(@"^(?:[01]\d|2[0-3]):[0-5]\d$", ErrorMessage = "Formato Inválido! Ex: 23:59")]
+        [Display(Name = "Hora Fim", Prompt = "Ex: 23:59")]
         public string? HoraFim { get; set; }
         [Required]
         [Display(Name = "Professor")]

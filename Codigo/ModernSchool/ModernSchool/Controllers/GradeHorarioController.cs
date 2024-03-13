@@ -79,6 +79,8 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var gradeHorario = _mapper.Map<Gradehorario>(gradehorarioModel);
+                gradeHorario.HoraInicio = gradeHorario.HoraInicio.Replace(":", "");
+                gradeHorario.HoraFim = gradeHorario.HoraFim.Replace(":", "");
                 _gradehorarioService.Create(gradeHorario);
             }
             return RedirectToAction(nameof(Index),new {idTurma = gradehorarioModel.IdTurma});
@@ -127,7 +129,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id,GradehorarioViewModel gradehorarioModel )
         {
             _gradehorarioService.Delete(id);
-            return RedirectToAction(nameof(Index)); 
+            return RedirectToAction(nameof(Index), new {gradehorarioModel.IdTurma}); 
         }
     }
 }
