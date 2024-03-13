@@ -27,6 +27,9 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Professor")]
         public int IdProfessor { get; set; }
 
+        public string NomeEscola {  get; set; }
+        public string Turma { get; set; }
+        public string Sala { get; set; }
         public SelectList? ListaComponentes { get; set; }
 
         public SelectList? ListaTurma { get; set; } 

@@ -1,25 +1,24 @@
 ﻿@model ModernSchoolWEB.Models.GradehorarioViewModel
 
-<h4>Adicionar</h4>
+<h4>@Model.NomeEscola</h4>
+<label>Turma: @Model.Turma</label>
+<label>Sala: @Model.Sala</label>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control"/>
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="IdProfessor" class="control-label">Professor</label>
+                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
+                <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdComponente" class="control-label">Componente</label>
                 <select asp-for="IdComponente" class="form-control" asp-items="@Model.ListaComponentes"></select>
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTurma" class="control-label">Turma</label>
-                <select asp-for="IdTurma" class="form-control" asp-items="@Model.ListaTurma" ></select>
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DiaSemana" class="control-label"></label>
@@ -37,11 +36,6 @@
                 <span asp-validation-for="HoraFim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProfessor" class="control-label">Professor</label>
-                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
-                <span asp-validation-for="IdProfessor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
@@ -49,7 +43,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-idTurma="@Model.IdTurma">Back to List</a>
 </div>
 
 @section Scripts {

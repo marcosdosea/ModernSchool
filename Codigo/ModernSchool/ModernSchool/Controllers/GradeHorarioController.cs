@@ -17,22 +17,27 @@ namespace ModernSchoolWEB.Controllers
         private readonly IComponenteService _componenteService;
         private readonly ITurmaService _turmaService; 
         private readonly IPessoaService _pessoaService;
+        private readonly IEscolaService _escolaService;
 
         public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper
-            , IComponenteService componenteService, ITurmaService turmaService,IPessoaService pessoaService)
+            , IComponenteService componenteService, ITurmaService turmaService,IPessoaService pessoaService
+            , IEscolaService escolaService)
         {
             _gradehorarioService = gradehorario;
             _mapper = mapper;
             _componenteService = componenteService;
             _turmaService = turmaService;
             _pessoaService = pessoaService;
+            _escolaService = escolaService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int idTurma)
         {
             var listaGrade = _gradehorarioService.GetAllGradeHorario();
-            var listaModel = _mapper.Map<List<GradeHorarioDTOModel>>(listaGrade);
-            return View(listaModel);
+            GradeHorarioDTOModel view = new();
+            view.GradeHorarioDTOs = listaGrade.ToList();
+            view.IdTurma = idTurma;
+            return View(view);
         }
 
 
@@ -43,18 +48,22 @@ namespace ModernSchoolWEB.Controllers
             return View(model);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int idTurma)
         {
             GradehorarioViewModel gradehorarioViewModel = new GradehorarioViewModel();
 
-            IEnumerable<Turma> listaTurmas = _turmaService.GetAll();
+            var turma = _turmaService.Get(idTurma);
+            string nomeEscola = _escolaService.GetNomeEscola(Convert.ToInt32(User.FindFirst("Id")?.Value));
+               
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
             IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
             
             gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome",null);
-            gradehorarioViewModel.ListaTurma = new SelectList(listaTurmas, "Id", "Turma1",null);
             gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa",null);
-
+            gradehorarioViewModel.Turma = turma.Turma1;
+            gradehorarioViewModel.Sala = turma.Sala;
+            gradehorarioViewModel.NomeEscola = nomeEscola;
+            gradehorarioViewModel.IdTurma = idTurma;
 
 
             return View(gradehorarioViewModel);
@@ -63,12 +72,16 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(GradehorarioViewModel gradehorarioModel)
         {
+            ModelState.Remove("Sala");
+            ModelState.Remove("Turma");
+            ModelState.Remove("NomeEscola");
+
             if (ModelState.IsValid)
             {
                 var gradeHorario = _mapper.Map<Gradehorario>(gradehorarioModel);
                 _gradehorarioService.Create(gradeHorario);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index),new {idTurma = gradehorarioModel.IdTurma});
         }
 
         public ActionResult Edit(int id)
