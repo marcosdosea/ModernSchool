@@ -9,6 +9,7 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Ano Letivo")]
         public int AnoLetivo1 { get; set; }
         [Display(Name = "Turma")]
+        [RegularExpression(@"^\d+° [A-Za-z]$", ErrorMessage = "Formato inválido. Siga este exemplo 1° A")]
         public string? Turma1 { get; set; }
         public int Vagas { get; set; }
         [Display(Name = "Matriculados")]
