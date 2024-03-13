@@ -14,12 +14,14 @@ namespace Core.DTO
         public string HoraInicio { get; set; } = string.Empty;
         public string HoraFim { get; set; } = string.Empty;
         public Horarios HorarioComponente { get; set; }
+        public int IdComponente { get; set; }
     }
     public class Horarios
     {
         public string NomeComponente { get; set; }
         public string Local { get; set; }
         public List<string> Horas { get; set; }
+        public int IdComponente { get; set; }
 
     }
 

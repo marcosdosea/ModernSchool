@@ -1,0 +1,22 @@
+﻿@model ModernSchoolWEB.Models.AvaliacaoComponente
+
+<label>Componente: @Model.NomeComponente</label>
+
+
+@for (int i = 0; i < Model.DiarioAlunos.Count(); i++)
+{
+    <div style="background-color:grey">
+        <label>@Model.DiarioAlunos[i].Resumo - [@Model.DiarioAlunos[i].Data]</label>
+        <br />
+        @if (@Model.DiarioAlunos[i].Falta == 0)
+        {
+        <label>Aluno Presente</label>
+        }
+        else
+        {
+        <label>Aluno Ausente - @Model.DiarioAlunos[i].Falta </label>
+        }
+
+    </div>
+    <br />
+}

@@ -219,6 +219,7 @@ namespace Service
                     DiaSemana = g.DiaSemana,
                     HoraFim = g.HoraFim,
                     HoraInicio = g.HoraInicio,
+                    IdComponente = g.IdComponente
                 });
 
             return query.ToList();

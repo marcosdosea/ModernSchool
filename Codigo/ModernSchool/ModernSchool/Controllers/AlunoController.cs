@@ -14,21 +14,27 @@ namespace ModernSchoolWEB.Controllers
         private readonly IGradeHorarioService _gradeHorarioService;
         private readonly ITurmaService _turmaService;
         private readonly IAvaliacaoService _avaliacaoService;
+        private readonly IDiarioDeClasseService _diarioDeClasseService;
+        private readonly IComponenteService _componenteService;
         private readonly IMapper _mapper;
 
         public AlunoController(IPessoaService pessooaService, IGradeHorarioService gradeHorarioService,
-            IMapper mapper, ITurmaService turmaService,IAvaliacaoService avaliacaoService)
+            IMapper mapper, ITurmaService turmaService,IAvaliacaoService avaliacaoService,
+            IDiarioDeClasseService diarioDeClasseService,
+            IComponenteService componenteService)
         {
             _pessooaService = pessooaService;
             _gradeHorarioService = gradeHorarioService;
             _mapper = mapper;
             _turmaService = turmaService;
             _avaliacaoService = avaliacaoService;
+            _diarioDeClasseService = diarioDeClasseService;
+            _componenteService = componenteService;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            Alunoturma aluno = _pessooaService.GetAlunoTurma(2);
+            Alunoturma aluno = _pessooaService.GetAlunoTurma(8);
             var listaComponentes = _pessooaService.GetListasComponente(aluno.IdTurma);
             var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma);
             AlunoTelaIndex telaAluno = new();
@@ -51,6 +57,7 @@ namespace ModernSchoolWEB.Controllers
                 }
                 listaComponentes[i].HorarioComponente = horarios;
                 listaComponentes[i].HorarioComponente.Local = listaComponentes[i].Local;
+                listaComponentes[i].HorarioComponente.IdComponente = listaComponentes[i].IdComponente;
                 if (telaAluno.AlunosDisciplinas == null)
                 {
                     telaAluno.AlunosDisciplinas = new List<Horarios>();
@@ -69,8 +76,21 @@ namespace ModernSchoolWEB.Controllers
             return View(telaAluno);
         }
 
+        public ActionResult AtividadesComponentes(int idComponente, int idAluno, int idTurma)
+        {
 
+            AvaliacaoComponente view = new();
+            var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idTurma,idComponente);
 
+            for (int i = 0; i < diarioAluno.Count(); i++)
+            {
+                diarioAluno[i].Falta = _diarioDeClasseService.GetFaltaAluno(idAluno, diarioAluno[i].IdDiario);
+            }
+            view.DiarioAlunos = diarioAluno;
+            view.NomeComponente = _componenteService.Get(idComponente).Nome;
+            view.IdComponente = idComponente;
+            return View(view);
+        }
 
     }
 }

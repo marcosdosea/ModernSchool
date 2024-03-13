@@ -2,11 +2,7 @@
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Service
 {
@@ -118,9 +114,11 @@ namespace Service
 
         }
 
-        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade()
+        public IEnumerable<DiarioClasseHabilidade> GetAllHabilidade(int idComponente, string anoFaixa)
         {
-            var query = _context.Habilidades
+            var query = _context.Habilidades.Where(g =>
+                g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.IdCurriculoNavigation.AnoFaixa == anoFaixa
+                && g.IdObjetoDeConhecimentoNavigation.IdUnidadeTematicaNavigation.IdComponente == idComponente)
                 .Select(g => new DiarioClasseHabilidade
                 {
                     Data = "20/05/2024",
@@ -151,6 +149,27 @@ namespace Service
             _context.SaveChanges();
             Delete(IdDiario);
             return 1;
+        }
+
+        public List<DiarioAluno> GetDiarioAlunos(int idTurma, int idComponente)
+        {
+            var query = _context.Diariodeclasses.Where( g => g.IdTurma == idTurma && g.IdComponente == idComponente)
+                .Select(g => new DiarioAluno
+                {
+                    IdDiario = g.Id,
+                    Data = g.Data,
+                    Resumo = g.ResumoAula
+                });
+
+            return query.ToList();
+        }
+
+        public int GetFaltaAluno(int idAluno, int idDiario)
+        {
+            var query = _context.Frequenciaalunos.Where(g => g.IdDiarioDeClasse == idDiario && g.IdAluno == idAluno)
+                .Select(g => g.Faltas).FirstOrDefault();
+
+            return query;
         }
     }
 }

@@ -74,11 +74,12 @@ namespace ModernSchoolWEB.Controllers
         {
             ViewData["FlagLyoutProf"] = true;
             DiarioDeClasseViewModel diario = new DiarioDeClasseViewModel();
-
+            string[] anoFaixa = _turmaService.Get(idTurma).Turma1.Split(" ");
+            anoFaixa[0] = System.Text.RegularExpressions.Regex.Replace(anoFaixa[0], "[^a-zA-Z0-9]", "");
             diario.IdProfessor = idProfessor;
             diario.IdComponente = idComponente;
             diario.IdTurma = idTurma;
-            diario.Habilidade = _diarioDeClasseService.GetAllHabilidade().ToList();
+            diario.Habilidade = _diarioDeClasseService.GetAllHabilidade(idComponente, anoFaixa[0]).ToList();
 
             ViewData["nomeTurma"] = _componenteService.Get(idComponente).Nome;
             ViewData["nomeComponente"] = _turmaService.Get(idTurma).Turma1;
