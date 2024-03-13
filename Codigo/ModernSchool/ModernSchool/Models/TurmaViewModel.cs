@@ -16,8 +16,9 @@ namespace ModernSchoolWEB.Models
         public string? Sala { get; set; }
         public string? Escolaridade { get; set; }
         public string? Status { get; set; }
-        public SelectList ?listaAnoLetivo {get; set;}
-
+        public SelectList ?ListaAnoLetivo {get; set;}
+        public string NomeEscola { get; set; } = string.Empty;
         public IEnumerable<TurmaViewModel> ListaTurma;
     }
+
 }

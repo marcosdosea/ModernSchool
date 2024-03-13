@@ -26,6 +26,8 @@ namespace Service
         /// <returns>Id da turma</returns>
         int ITurmaService.Create(Turma turma)
         {
+            turma.VagasDisponiveis = turma.Vagas;
+            turma.Status = "A";
             _context.Add(turma);
             _context.SaveChanges();
             return turma.Id;
