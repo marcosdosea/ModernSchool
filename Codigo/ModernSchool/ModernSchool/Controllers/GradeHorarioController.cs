@@ -106,10 +106,14 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, GradehorarioViewModel gradehorarioModel)
         {
-
+            ModelState.Remove("Sala");
+            ModelState.Remove("Turma");
+            ModelState.Remove("NomeEscola");
+            gradehorarioModel.HoraInicio = gradehorarioModel.HoraInicio.Replace(":", "");
+            gradehorarioModel.HoraFim = gradehorarioModel.HoraFim.Replace(":", "");
             if (ModelState.IsValid)
             {
-                Gradehorario gradehorario = _gradehorarioService.Get(id);
+                Gradehorario gradehorario = _mapper.Map<Gradehorario>(gradehorarioModel);
                 _gradehorarioService.Edit(gradehorario);
             }
 

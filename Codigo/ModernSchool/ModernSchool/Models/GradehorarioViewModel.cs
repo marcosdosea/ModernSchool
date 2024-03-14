@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,7 +29,6 @@ namespace ModernSchoolWEB.Models
         [Required]
         [Display(Name = "Professor")]
         public int IdProfessor { get; set; }
-
         public string NomeEscola {  get; set; }
         public string Turma { get; set; }
         public string Sala { get; set; }
