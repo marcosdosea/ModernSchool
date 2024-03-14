@@ -12,6 +12,8 @@ namespace Core.Service
         void Edit(Escola escola);
         void Delete(int escola);
         Escola Get(int escola);
+
+        string GetNomeEscola(int idDiretor);
         IEnumerable<Escola> GetAll();
     }
 }

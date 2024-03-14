@@ -3,6 +3,7 @@ using Core;
 using Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 
 namespace ModernSchoolWEB.Controllers
@@ -11,11 +12,13 @@ namespace ModernSchoolWEB.Controllers
     {
         private readonly IPeriodoService _periodoService;
         private readonly IMapper _mapper;
+        private readonly IAnoLetivoService _anoLetivoService;
 
-        public PeriodoController(IPeriodoService periodoService, IMapper mapper)
+        public PeriodoController(IPeriodoService periodoService, IAnoLetivoService anoLetivoService, IMapper mapper)
         {
             _periodoService = periodoService;
             _mapper = mapper;
+            _anoLetivoService = anoLetivoService;
         }
 
         // GET: PeriodoController
@@ -37,7 +40,9 @@ namespace ModernSchoolWEB.Controllers
         // GET: PeriodoController/Create
         public ActionResult Create()
         {
-            return View();
+            PeriodoViewModel periodoViewModel = new();
+            periodoViewModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo1", "AnoLetivo1", null);
+            return View(periodoViewModel);
         }
 
         // POST: PeriodoController/Create
@@ -59,6 +64,7 @@ namespace ModernSchoolWEB.Controllers
         {
             Periodo periodo = _periodoService.Get(id);
             PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
+            periodoModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo1", "AnoLetivo1", null);
             return View(periodoModel);
         }
 

@@ -1,15 +1,18 @@
 ﻿@model ModernSchoolWEB.Models.GradehorarioViewModel
 
-<h4>Adicionar</h4>
-<hr />
+<h4>@Model.NomeEscola</h4>
+<label class="fs-6">Turma: @Model.Turma</label>
+<label class="fs-6 pb-3">Sala: @Model.Sala</label>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control"/>
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="IdProfessor" class="control-label">Professor</label>
+                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
+                <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdComponente" class="control-label">Componente</label>
@@ -17,13 +20,17 @@
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTurma" class="control-label">Turma</label>
-                <select asp-for="IdTurma" class="form-control" asp-items="@Model.ListaTurma" ></select>
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DiaSemana" class="control-label"></label>
-                <input asp-for="DiaSemana" class="form-control" />
+                <select asp-for="DiaSemana" class="form-select">
+                    @{
+                        foreach(var item in Model.dias)
+                        {
+                            <option value="@item.Key">
+                                @item.Value
+                            </option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="DiaSemana" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,20 +43,16 @@
                 <input asp-for="HoraFim" class="form-control" />
                 <span asp-validation-for="HoraFim" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdProfessor" class="control-label">Professor</label>
-                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
-                <span asp-validation-for="IdProfessor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+            <div class="d-flex flex-wrap py-4">
+                <div class="col-lg">
+                    <a class="btn bg-secondary text-white border border-0 col" asp-action="Index" asp-route-idTurma="@Model.IdTurma"> Voltar </a>
+                </div>
+                <div class="col-lg">
+                    <input type="submit" value="Adicionar" class="btn cor-bg col text-light" />
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -82,9 +82,9 @@ namespace ModernSchoolWEB.Controllers
             AvaliacaoComponente view = new();
             var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idTurma,idComponente);
 
-            for (int i = 0; i < diarioAluno.Count(); i++)
+            foreach (var item in diarioAluno)
             {
-                diarioAluno[i].Falta = _diarioDeClasseService.GetFaltaAluno(idAluno, diarioAluno[i].IdDiario);
+                item.Falta = _diarioDeClasseService.GetFaltaAluno(idAluno, item.IdDiario);
             }
             view.DiarioAlunos = diarioAluno;
             view.NomeComponente = _componenteService.Get(idComponente).Nome;

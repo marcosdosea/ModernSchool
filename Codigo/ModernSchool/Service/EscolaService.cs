@@ -64,5 +64,12 @@ namespace Service
         {
             return _context.Escolas.AsNoTracking();
         }
+
+        public string GetNomeEscola(int idDiretor)
+        {
+            var query = _context.Escolas.Where(g => g.IdDiretor == idDiretor)
+                .Select(g => g.Nome);
+            return query.FirstOrDefault();
+        }
     }
 }

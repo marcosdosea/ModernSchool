@@ -13,12 +13,14 @@ namespace ModernSchoolWEB.Controllers
         private readonly ITurmaService _turmaService;
         private readonly IMapper _mapper;
         private readonly IAnoLetivoService _anoLetivoService;
-
-        public TurmaController(ITurmaService turmaService, IAnoLetivoService anoLetivoService, IMapper mapper)
+        private readonly IEscolaService _escolaService;
+        public TurmaController(ITurmaService turmaService, IAnoLetivoService anoLetivoService,
+            IMapper mapper, IEscolaService escolaService)
         {
             _turmaService = turmaService;
             _anoLetivoService = anoLetivoService;
             _mapper = mapper;
+            _escolaService = escolaService;
         }
 
         // GET: TurmaController
@@ -36,7 +38,7 @@ namespace ModernSchoolWEB.Controllers
                 ListaTurma = listaTurmaModel
             };
             var anoLetivo = _anoLetivoService.GetAll();
-            turma.listaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
+            turma.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
             return View(turma);
         }
 
@@ -51,7 +53,11 @@ namespace ModernSchoolWEB.Controllers
         // GET: TurmaController/Create
         public ActionResult Create()
         {
-            return View();
+            TurmaViewModel viewModel = new();
+            var anoLetivo = _anoLetivoService.GetAll();
+            viewModel.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
+            viewModel.NomeEscola = _escolaService.GetNomeEscola(Convert.ToInt32(User.FindFirst("Id")?.Value));
+            return View(viewModel);
         }
 
         // POST: TurmaController/Create

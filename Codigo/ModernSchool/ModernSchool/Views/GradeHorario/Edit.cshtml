@@ -1,7 +1,6 @@
 ﻿@model ModernSchoolWEB.Models.GradehorarioViewModel
 
-<h4>Editar</h4>
-<hr />
+<h4>Editar Grade Horário</h4>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -12,45 +11,65 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdComponente" class="control-label"></label>
-                <select asp-for="IdComponente" class="form-control" asp-items="@Model.ListaComponentes"></select>
+                <select asp-for="IdComponente" class="form-select" asp-items="@Model.ListaComponentes"></select>
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdTurma" class="control-label"></label>
-                <select asp-for="IdTurma" class="form-control" asp-items="@Model.ListaTurma"></select>
+                <select asp-for="IdTurma" class="form-select" asp-items="@Model.ListaTurma"></select>
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DiaSemana" class="control-label"></label>
-                <input asp-for="DiaSemana" class="form-control" />
+                <select asp-for="DiaSemana" class="form-select">
+                    @{
+                        foreach (var item in Model.dias)
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="DiaSemana" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @{
+                    string h = Model.HoraInicio;
+                    string horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    Model.HoraInicio = horaFormatada;
+                }
                 <label asp-for="HoraInicio" class="control-label"></label>
                 <input asp-for="HoraInicio" class="form-control" />
                 <span asp-validation-for="HoraInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @{
+                    h = Model.HoraFim;
+                    horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    Model.HoraFim = horaFormatada;
+                }
                 <label asp-for="HoraFim" class="control-label"></label>
                 <input asp-for="HoraFim" class="form-control" />
                 <span asp-validation-for="HoraFim" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdProfessor" class="control-label"></label>
-                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
+                <select asp-for="IdProfessor" class="form-select" asp-items="@Model.ListaProfessor"></select>
                 <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+            <div class="d-flex flex-wrap py-4">
+                <div class="col-lg">
+                    <a class="btn bg-secondary text-white border border-0 col" asp-action="Index" asp-route-IdTurma="@Model.IdTurma"> Voltar </a>
+                </div>
+                <div class="col-lg">
+                    <input type="submit" value="Salvar" class="btn cor-bg col text-light" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Voltar</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

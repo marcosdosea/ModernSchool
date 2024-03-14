@@ -1,55 +1,80 @@
-﻿@model IEnumerable<ModernSchoolWEB.Models.GradeHorarioDTOModel>
-
-<label class="fs-5">Diários de Classes</label>
+﻿@model ModernSchoolWEB.Models.GradeHorarioDTOModel
+<label class="fs-5">Grade Horário</label>
 <table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Componente)
+                <label>Componente</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dia)
+                <label>Dia</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
+                <label>Hora Início</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoraFim)
+                <label>Hora Fim</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Professor)
+                <label>Professor</label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @for (int i = 0; i < Model.GradeHorarioDTOs.Count(); i++)
         {
             <tr>
-                <input type="hidden" asp-for="@item.Id" />
+                <input type="hidden" asp-for="@Model.GradeHorarioDTOs[i].Id" />
                 <td>
-                    @Html.DisplayFor(modelItem => item.Componente)
+                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Componente)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Dia)
+                    @{
+                        Dictionary<string, string> dias = new()
+                        {
+                            {"DOM","Domingo" },
+                            {"SEG","Segunda-Feira" },
+                            {"TER","Terça-Feira" },
+                            {"QUA","Quarta-Feira" },
+                            {"QUI","Quinta-Feira" },
+                            {"SEX","Sexta-Feira" },
+                            {"SAB","Sábado" }
+                        };
+                        foreach(var item in dias)
+                        {
+                            if (Model.GradeHorarioDTOs[i].Dia.Equals(item.Key))
+                            {
+                                <span>@item.Value</span>
+                            }
+                        }
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HoraInicio)
+                    @{
+                        string h = @Model.GradeHorarioDTOs[i].HoraInicio;
+                        string horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    }
+                    <span>@horaFormatada</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HoraFim)
+                    @{
+                        h = @Model.GradeHorarioDTOs[i].HoraFim;
+                        horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    }
+                    <span>@horaFormatada</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Professor)
+                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Professor)
                 </td>
                 <td>
                     <div class="d-flex">
                         <div>
-                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@Model.GradeHorarioDTOs[i].Id"><i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
                         <div>
                             <form asp-action="Delete"
-                                  asp-route-Id="@item.Id">
+                                  asp-route-Id="@Model.GradeHorarioDTOs[i].Id" asp-route-idTurma="@Model.IdTurma">
                                 <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
                                     <i class="fa-solid text-danger fa-trash-can"></i>
                                 </button>
@@ -67,7 +92,7 @@
             <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
         </div>
         <div class="d-flex justify-content-end col-lg-2">
-            <a class="display-4" role="button" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+            <a class="display-4" role="button" asp-action="Create" asp-route-idTurma="@Model.IdTurma"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
         </div>
     </div>
 </div>
