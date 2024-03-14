@@ -4,16 +4,16 @@
     <thead>
         <tr>
             <th>
-               <label>Componente</label>
+                <label>Componente</label>
             </th>
             <th>
-               <label>Dia</label>
+                <label>Dia</label>
             </th>
             <th>
-                <label>HoraInicio</label>
+                <label>Hora Início</label>
             </th>
             <th>
-                <label>HoraFim</label>
+                <label>Hora Fim</label>
             </th>
             <th>
                 <label>Professor</label>
@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.GradeHorarioDTOs.Count(); i ++)
+        @for (int i = 0; i < Model.GradeHorarioDTOs.Count(); i++)
         {
             <tr>
                 <input type="hidden" asp-for="@Model.GradeHorarioDTOs[i].Id" />
@@ -30,13 +30,39 @@
                     @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Componente)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Dia)
+                    @{
+                        Dictionary<string, string> dias = new()
+                        {
+                            {"DOM","Domingo" },
+                            {"SEG","Segunda-Feira" },
+                            {"TER","Terça-Feira" },
+                            {"QUA","Quarta-Feira" },
+                            {"QUI","Quinta-Feira" },
+                            {"SEX","Sexta-Feira" },
+                            {"SAB","Sábado" }
+                        };
+                        foreach(var item in dias)
+                        {
+                            if (Model.GradeHorarioDTOs[i].Dia.Equals(item.Key))
+                            {
+                                <span>@item.Value</span>
+                            }
+                        }
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].HoraInicio)
+                    @{
+                        string h = @Model.GradeHorarioDTOs[i].HoraInicio;
+                        string horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    }
+                    <span>@horaFormatada</span>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].HoraFim)
+                    @{
+                        h = @Model.GradeHorarioDTOs[i].HoraFim;
+                        horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
+                    }
+                    <span>@horaFormatada</span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Professor)
@@ -48,7 +74,7 @@
                         </div>
                         <div>
                             <form asp-action="Delete"
-                                  asp-route-Id="@Model.GradeHorarioDTOs[i].Id">
+                                  asp-route-Id="@Model.GradeHorarioDTOs[i].Id" asp-route-idTurma="@Model.IdTurma">
                                 <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
                                     <i class="fa-solid text-danger fa-trash-can"></i>
                                 </button>

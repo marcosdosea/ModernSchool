@@ -18,7 +18,7 @@ namespace ModernSchoolWEB.Models
         public bool Livros { get; set; }
         [Display(Name = "Livros Seduc")]
         public bool LivrosSeduc { get; set; }
-        [Display(Name = "Resumo da aula")]
+        [Display(Name = "Resumo da aula", Prompt = "Digite Algo...")]
         public string? ResumoAula { get; set; }
         [Display(Name ="Turma")]
         public int IdTurma { get; set; }

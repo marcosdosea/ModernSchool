@@ -52,11 +52,11 @@
                 <select asp-for="IdTurma" asp-items="@Model.listaTurma" class="form-control"></select>
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
-            <div class="d-flex py-4">
-                    <div class="col-lg">
+            <div class="d-flex flex-wrap py-4">
+                <div class="col-lg padd">
                     <a class="btn bg-secondary text-white border border-0 col" asp-action="MatricularAlunoTurma"> Voltar </a>
                     </div>
-                    <div class="col-lg">
+                <div class="col-lg">
                         <input type="submit" value="Adicionar" class="btn cor-bg col text-light" />
                     </div>
             </div>

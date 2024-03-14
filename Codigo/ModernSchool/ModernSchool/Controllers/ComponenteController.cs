@@ -46,6 +46,7 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ComponenteViewModel componenteViewModel)
         {
+            ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
                 var componente = _mapper.Map<Componente>(componenteViewModel);

@@ -19,7 +19,7 @@ namespace ModernSchoolWEB.Models
         public string? DiaSemana { get; set; }
         [Required(ErrorMessage = "Este campo é requerido")]
         [RegularExpression(@"^(?:[01]\d|2[0-3]):[0-5]\d$", ErrorMessage = "Formato Inválido! Ex:23:59")]
-        [Display(Name = "Hora Inicio", Prompt = "Ex: 23:59")]
+        [Display(Name = "Hora Início", Prompt = "Ex: 23:59")]
         public string? HoraInicio { get; set; }
         [Required(ErrorMessage = "Este campo é requerido")]
         [RegularExpression(@"^(?:[01]\d|2[0-3]):[0-5]\d$", ErrorMessage = "Formato Inválido! Ex: 23:59")]
@@ -37,6 +37,17 @@ namespace ModernSchoolWEB.Models
         public SelectList? ListaTurma { get; set; } 
 
         public SelectList? ListaProfessor { get;set; }
+
+        public Dictionary<string, string> dias { get; } = new()
+        {
+            {"DOM","Domingo" },
+            {"SEG","Segunda-Feira" },
+            {"TER","Terça-Feira" },
+            {"QUA","Quarta-Feira" },
+            {"QUI","Quinta-Feira" },
+            {"SEX","Sexta-Feira" },
+            {"SAB","Sábado" }
+        };
 
     }
 }
