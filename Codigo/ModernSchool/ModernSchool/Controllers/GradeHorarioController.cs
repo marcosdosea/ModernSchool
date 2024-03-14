@@ -6,6 +6,7 @@ using ModernSchoolWEB.Models;
 using Core;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.DTO;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -72,11 +73,19 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(GradehorarioViewModel gradehorarioModel)
         {
-            ModelState.Remove("Sala");
-            ModelState.Remove("Turma");
-            ModelState.Remove("NomeEscola");
-
-            if (ModelState.IsValid)
+            ModelStateDictionary modelStateClone = new ModelStateDictionary();
+            foreach (var entry in ModelState)
+            {
+                modelStateClone.SetModelValue(entry.Key, entry.Value.RawValue, entry.Value.AttemptedValue);
+            }
+            modelStateClone.Remove("Sala");
+            modelStateClone.Remove("Turma");
+            modelStateClone.Remove("NomeEscola");
+            foreach (var entry in modelStateClone)
+            {
+                entry.Value.ValidationState = ModelValidationState.Valid;
+            }
+            if (modelStateClone.IsValid)
             {
                 var gradeHorario = _mapper.Map<Gradehorario>(gradehorarioModel);
                 gradeHorario.HoraInicio = gradeHorario.HoraInicio.Replace(":", "");
@@ -106,18 +115,29 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, GradehorarioViewModel gradehorarioModel)
         {
-            ModelState.Remove("Sala");
-            ModelState.Remove("Turma");
-            ModelState.Remove("NomeEscola");
+            ModelStateDictionary modelStateClone = new ModelStateDictionary();
+            foreach (var entry in ModelState)
+            {
+                modelStateClone.SetModelValue(entry.Key, entry.Value.RawValue, entry.Value.AttemptedValue);
+            }
+            modelStateClone.Remove("Sala");
+            modelStateClone.Remove("Turma");
+            modelStateClone.Remove("NomeEscola");
+            foreach (var entry in modelStateClone)
+            {
+                entry.Value.ValidationState = ModelValidationState.Valid;
+            }
+
+
             gradehorarioModel.HoraInicio = gradehorarioModel.HoraInicio.Replace(":", "");
             gradehorarioModel.HoraFim = gradehorarioModel.HoraFim.Replace(":", "");
-            if (ModelState.IsValid)
+            if (modelStateClone.IsValid)
             {
                 Gradehorario gradehorario = _mapper.Map<Gradehorario>(gradehorarioModel);
                 _gradehorarioService.Edit(gradehorario);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {gradehorarioModel.IdTurma});
 
         }
 
