@@ -11,17 +11,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdComponente" class="control-label"></label>
-                <select asp-for="IdComponente" class="form-control" asp-items="@Model.ListaComponentes"></select>
+                <select asp-for="IdComponente" class="form-select" asp-items="@Model.ListaComponentes"></select>
                 <span asp-validation-for="IdComponente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdTurma" class="control-label"></label>
-                <select asp-for="IdTurma" class="form-control" asp-items="@Model.ListaTurma"></select>
+                <select asp-for="IdTurma" class="form-select" asp-items="@Model.ListaTurma"></select>
                 <span asp-validation-for="IdTurma" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DiaSemana" class="control-label"></label>
-                <select asp-for="DiaSemana" class="form-control">
+                <select asp-for="DiaSemana" class="form-select">
                     @{
                         foreach (var item in Model.dias)
                         {
@@ -53,18 +53,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdProfessor" class="control-label"></label>
-                <select asp-for="IdProfessor" class="form-control" asp-items="@Model.ListaProfessor"></select>
+                <select asp-for="IdProfessor" class="form-select" asp-items="@Model.ListaProfessor"></select>
                 <span asp-validation-for="IdProfessor" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+            <div class="d-flex flex-wrap py-4">
+                <div class="col-lg">
+                    <a class="btn bg-secondary text-white border border-0 col" asp-action="Index" asp-route-IdTurma="@Model.IdTurma"> Voltar </a>
+                </div>
+                <div class="col-lg">
+                    <input type="submit" value="Salvar" class="btn cor-bg col text-light" />
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" asp-route-IdTurma ="@Model.IdTurma">Voltar</a>
 </div>
 
 @section Scripts {

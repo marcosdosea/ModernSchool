@@ -30,17 +30,17 @@
                 <select asp-items="@Model.listaAnoLetivo" class="form-select"></select>
                 <span asp-validation-for="AnoLetivo1" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="d-flex flex-wrap py-4">
+                <div class="col-lg">
+                    <a class="btn bg-secondary text-white border border-0 col" asp-action="Index"> Voltar </a>
+                </div>
+                <div class="col-lg">
+                    <input type="submit" value="Salvar" class="btn cor-bg col text-light" />
+                </div>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
