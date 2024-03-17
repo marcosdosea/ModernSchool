@@ -48,7 +48,7 @@
                 <td>
                     <div class="d-flex justify-content-evenly">
                         <div>
-                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="Pessoa" asp-action="MatricularAlunoTurma">Matricular</a>
+                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="Pessoa" asp-action="MatricularAlunoTurma" asp-route-IdTurma="@item.Id">Matricular</a>
                         </div>
                         <div>
                             <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="GradeHorario" asp-action="Index"
