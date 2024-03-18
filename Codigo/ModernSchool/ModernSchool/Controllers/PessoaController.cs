@@ -234,7 +234,7 @@ namespace ModernSchoolWEB.Controllers
             {
                 Alunoturma alunoTurma = new Alunoturma()
                 {
-                    IdAluno = idAluno,
+                    IdAluno = aluno.Id,
                     IdTurma = model.IdTurma
                 };
 
