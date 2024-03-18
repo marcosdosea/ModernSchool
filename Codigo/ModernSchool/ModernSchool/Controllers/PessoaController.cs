@@ -230,6 +230,16 @@ namespace ModernSchoolWEB.Controllers
                 };
                 _pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma);
             }
+            else
+            {
+                Alunoturma alunoTurma = new Alunoturma()
+                {
+                    IdAluno = idAluno,
+                    IdTurma = model.IdTurma
+                };
+
+                _pessoaService.MatricularAlunoTurma(alunoTurma);
+            }
 
             return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
         }
