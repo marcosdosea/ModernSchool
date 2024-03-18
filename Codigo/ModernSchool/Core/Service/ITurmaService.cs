@@ -9,11 +9,13 @@ namespace Core.Service
 {
     public interface ITurmaService
     {
-            int Create(Turma turma);
-            void Edit(Turma turma);
-            void Delete(int id);
-            Turma Get(int id);
-            IEnumerable<Turma> GetAll();
-            IEnumerable<EscolaProfessorDTO> EscolaVinculadaProfessor();
+        int Create(Turma turma);
+        void Edit(Turma turma);
+        void Delete(int id);
+        Turma Get(int id);
+        IEnumerable<Turma> GetAll();
+
+        int GetByIdEscola(int idTurma);
+        IEnumerable<EscolaProfessorDTO> EscolaVinculadaProfessor();
     }
 }

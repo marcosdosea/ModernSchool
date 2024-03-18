@@ -1,9 +1,11 @@
 ﻿using Core.DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+
 namespace ModernSchoolWEB.Models
 {
-    public class AlunoViewModel
+    public class AlunoTurmaViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
@@ -21,7 +23,13 @@ namespace ModernSchoolWEB.Models
         public string Email { get; set; } = string.Empty;
         [Display(Name = "Turma")]
         public int IdTurma { get; set; }
+        public string Turma { get; set; } = string.Empty;
+        public string Sala { get; set; } = string.Empty;
+        public string NomeEscola { get; set; } = string.Empty;  
+        public int NumVagas { get; set; }
+        public List<IndexAlunoTurmaDTO> Alunos { get; set; }
     }
+
 
     public class AlunoTelaIndex
     {
@@ -29,7 +37,7 @@ namespace ModernSchoolWEB.Models
         public int IdTurma { get; set; }
         public string NomeTurma { get; set; } = string.Empty;
         public List<Horarios> AlunosDisciplinas { get; set; }
-        public List<AlunoAtividade> AlunosAtividade { get; set; }
+        public List<AlunoAtividadeDTO> AlunosAtividade { get; set; }
 
     }
 

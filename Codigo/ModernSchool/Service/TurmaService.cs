@@ -92,5 +92,12 @@ namespace Service
                         };
             return query;
         }
+
+        public int GetByIdEscola(int idTurma)
+        {
+            var query = _context.Turmas.Where(g => g.Id == idTurma)
+                .Select(g => g.AnoLetivoNavigation.IdEscola);
+            return query.FirstOrDefault();
+        }
     }
 }

@@ -25,12 +25,17 @@ namespace Core.DTO
 
     }
 
-    public class AlunoAtividade
+    public class AlunoAtividadeDTO
     {
         public DateTime Data { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public string Componente { get; set; } = string.Empty;
     }
 
+    public class IndexAlunoTurmaDTO
+    {
+        public int IdAluno { get; set; }
+        public string NomeAluno { get; set; } = string.Empty;
 
+    }
 }

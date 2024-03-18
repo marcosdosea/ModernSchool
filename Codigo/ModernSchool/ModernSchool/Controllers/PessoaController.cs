@@ -11,6 +11,8 @@ using ModernSchoolWEB.Areas.Identity.Data;
 using ModernSchoolWEB.Service;
 using Microsoft.AspNetCore.Authorization;
 using Service;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -24,11 +26,13 @@ namespace ModernSchoolWEB.Controllers
         private readonly IGovernoService _governoService;
         private readonly IGovernoServidorService _governoServidorService;
         private readonly ITurmaService _turmaService;
+        private readonly IEscolaService _escolaService;
 
         private readonly ISeedUserRoleInitial _userRole;
         public PessoaController(IPessoaService pessoaService, ICargoService cargoService,
             IMapper mapper, ISeedUserRoleInitial userRole, IGovernoService governoService,
-            IGovernoServidorService governoServidorService, ITurmaService turmaService)
+            IGovernoServidorService governoServidorService, ITurmaService turmaService,
+            IEscolaService escolaService)
         {
             _pessoaService = pessoaService;
             _cargoService = cargoService;
@@ -37,6 +41,7 @@ namespace ModernSchoolWEB.Controllers
             _governoService = governoService;
             _governoServidorService = governoServidorService;
             _turmaService = turmaService;
+            _escolaService = escolaService;
         }
 
 
@@ -165,14 +170,20 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult MatricularAlunoTurma(int idTurma)
         {
-            AlunoViewModel alunoModel = new AlunoViewModel();
+            Turma turma = _turmaService.Get(idTurma);  
+            AlunoTurmaViewModel alunoModel = new AlunoTurmaViewModel();
+            alunoModel.Alunos = _pessoaService.GetAlunosTurma(idTurma);
+            alunoModel.Turma = turma.Turma1;
+            alunoModel.Sala = turma.Sala;
+            alunoModel.NumVagas = turma.VagasDisponiveis;
             alunoModel.IdTurma = idTurma;
+            alunoModel.NomeEscola = _escolaService.GetNomeEscola(Convert.ToInt32(User.FindFirst("Id")?.Value));
             return View(alunoModel);
         }
 
 
         [HttpPost]
-        public ActionResult MatricularAlunoTurma(AlunoViewModel model)
+        public ActionResult MatricularAlunoTurma(AlunoTurmaViewModel model)
         {
             int idAluno = _pessoaService.GetById(model.Cpf);
 
@@ -192,50 +203,54 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult MatricularNovoAluno(int idTurma)
         {
-            AlunoViewModel alunoModel = new AlunoViewModel();
+            AlunoTurmaViewModel alunoModel = new AlunoTurmaViewModel();
             alunoModel.IdTurma = idTurma;
             return View(alunoModel);
         }
         [HttpPost]
-        public ActionResult MatricularNovoAluno(AlunoViewModel model)
+        public ActionResult MatricularNovoAluno(AlunoTurmaViewModel model)
         {
             model.Cpf = model.Cpf.Replace(".", "").Replace("-", "").Replace("_", "");
             model.Cep = model.Cep.Replace("-", "");
 
-            Pessoa novoAluno = new Pessoa()
+            Pessoa aluno = _pessoaService.Get(model.Id);
+            if(aluno == null)
             {
-                Nome = model.Nome,
-                Cpf = model.Cpf,
-                Bairro = model.Bairro,
-                Cep = model.Cep,
-                DataNascimento = model.DataNascimento,
-                Email = model.Email,
-                Numero = model.Numero,
-                Rua = model.Rua,
+                aluno = new Pessoa()
+                {
+                    Nome = model.Nome,
+                    Cpf = model.Cpf,
+                    Bairro = model.Bairro,
+                    Cep = model.Cep,
+                    DataNascimento = model.DataNascimento,
+                    Email = model.Email,
+                    Numero = model.Numero,
+                    Rua = model.Rua,
 
-            };
-
-            _pessoaService.Create(novoAluno);
+                };
+                _pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma);
+            }
 
             return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
         }
         [HttpPost]
-        public IActionResult BuscarAlunoPorCPF(string cpf)
+        public IActionResult BuscarAlunoPorCPF(string cpf, int idTurma)
         {
+
             if(cpf == null)
             {
                 cpf = "";
             }
             cpf = cpf.Replace(".", "").Replace("-", "").Replace("_", "");
-            int idPessoa = _pessoaService.GetById(cpf);
-            Pessoa pessoa = _pessoaService.Get(idPessoa);
-            if (idPessoa == 0)
+            int idEscola = _turmaService.GetByIdEscola(idTurma);
+            Pessoa pessoa = _pessoaService.GetAluno(idEscola, cpf);
+            if (pessoa != null)
             {
                 return Json(pessoa);
             }
             else
             {
-                pessoa.Cep = pessoa.Cep.Replace("-", "");
+                //pessoa.Cep = pessoa.Cep.Replace("-", "");
                 return Json(pessoa);
             }
         }

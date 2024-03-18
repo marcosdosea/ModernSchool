@@ -5,10 +5,14 @@
 $(document).ready(function () {
     $('#cpf').on('change', function () {
         var cpf = $(this).val();
+        var idTurma = $('#idTurma').val();
         $.ajax({
             url: 'BuscarAlunoPorCPF',
             type: 'POST',
-            data: { cpf: cpf },
+            data: {
+                cpf: cpf,
+                idTurma: idTurma
+            },
             success: function (aluno) {
                 if (aluno) {
                     $('#nome').val(aluno.nome = capitalizarPrimeirasLetras(aluno.nome));
@@ -18,6 +22,7 @@ $(document).ready(function () {
                     $('#bairro').val(aluno.bairro);
                     $('#numero').val(aluno.numero);
                     $('#email').val(aluno.email);
+                    $('#idAluno').val(aluno.id);
                 } else {
                     // Limpar os campos do formulário
                     $('#nome').val('');
@@ -27,6 +32,7 @@ $(document).ready(function () {
                     $('#bairro').val('');
                     $('#numero').val('');
                     $('#email').val('');
+                    $('#idAluno').val('');
                 }
             },
         });
