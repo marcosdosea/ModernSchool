@@ -163,12 +163,10 @@ namespace ModernSchoolWEB.Controllers
 
 
 
-        public ActionResult MatricularAlunoTurma()
+        public ActionResult MatricularAlunoTurma(int idTurma)
         {
             AlunoViewModel alunoModel = new AlunoViewModel();
-            var listaTurmas = _turmaService.GetAll();
-            alunoModel.listaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
-
+            alunoModel.IdTurma = idTurma;
             return View(alunoModel);
         }
 
@@ -187,25 +185,22 @@ namespace ModernSchoolWEB.Controllers
 
                 _pessoaService.MatricularAlunoTurma(alunoTurma);
             }
-
-
-
-
-            return View(null);
+            //adiconar retorno para index de alunos turma
+            return RedirectToAction("MatricularAlunoTurma", new { idTurma = model.IdTurma });
         }
 
 
-        public ActionResult MatricularNovoAluno()
+        public ActionResult MatricularNovoAluno(int idTurma)
         {
             AlunoViewModel alunoModel = new AlunoViewModel();
-            var listaTurmas = _turmaService.GetAll();
-            alunoModel.listaTurma = new SelectList(listaTurmas, "Id", "Turma1", null);
-
+            alunoModel.IdTurma = idTurma;
             return View(alunoModel);
         }
         [HttpPost]
         public ActionResult MatricularNovoAluno(AlunoViewModel model)
         {
+            model.Cpf = model.Cpf.Replace(".", "").Replace("-", "").Replace("_", "");
+            model.Cep = model.Cep.Replace("-", "");
 
             Pessoa novoAluno = new Pessoa()
             {
@@ -222,7 +217,27 @@ namespace ModernSchoolWEB.Controllers
 
             _pessoaService.Create(novoAluno);
 
-            return View("MatricularAlunoTurma");
+            return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
+        }
+        [HttpPost]
+        public IActionResult BuscarAlunoPorCPF(string cpf)
+        {
+            if(cpf == null)
+            {
+                cpf = "";
+            }
+            cpf = cpf.Replace(".", "").Replace("-", "").Replace("_", "");
+            int idPessoa = _pessoaService.GetById(cpf);
+            Pessoa pessoa = _pessoaService.Get(idPessoa);
+            if (idPessoa == 0)
+            {
+                return Json(pessoa);
+            }
+            else
+            {
+                pessoa.Cep = pessoa.Cep.Replace("-", "");
+                return Json(pessoa);
+            }
         }
 
 

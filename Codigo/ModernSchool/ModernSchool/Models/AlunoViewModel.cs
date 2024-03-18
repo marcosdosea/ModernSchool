@@ -21,7 +21,6 @@ namespace ModernSchoolWEB.Models
         public string Email { get; set; } = string.Empty;
         [Display(Name = "Turma")]
         public int IdTurma { get; set; }
-        public SelectList listaTurma { get; set; }
     }
 
     public class AlunoTelaIndex

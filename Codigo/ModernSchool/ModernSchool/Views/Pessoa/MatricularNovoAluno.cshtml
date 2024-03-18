@@ -6,60 +6,56 @@
         <form asp-action="MatricularNovoAluno">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="Id" type="hidden" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Cpf" class="control-label"></label>
+                <input asp-for="Cpf" id="cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" id="nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
+                <input asp-for="DataNascimento" id="dataNascimento" type="date" class="form-control" />
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cep" class="control-label"></label>
-                <input asp-for="Cep" class="form-control" />
+                <input asp-for="Cep" id="cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rua" class="control-label"></label>
-                <input asp-for="Rua" class="form-control" />
+                <input asp-for="Rua" id="rua" class="form-control" />
                 <span asp-validation-for="Rua" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Bairro" class="control-label"></label>
-                <input asp-for="Bairro" class="form-control" />
+                <input asp-for="Bairro" id="bairro" class="form-control" />
                 <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
+                <input asp-for="Numero" id="numero" class="form-control" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" id="email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <select asp-for="IdTurma" asp-items="@Model.listaTurma" class="form-control"></select>
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
-            </div>
-            <div class="d-flex flex-wrap py-4">
-                <div class="col-lg padd">
-                    <a class="btn bg-secondary text-white border border-0 col" asp-action="MatricularAlunoTurma"> Voltar </a>
-                    </div>
+            <div class="d-flex py-4">
                 <div class="col-lg">
-                        <input type="submit" value="Adicionar" class="btn cor-bg col text-light" />
-                    </div>
+                    <a class="btn bg-secondary text-white border border-0 col" asp-action="MatricularAlunoTurma"> Voltar </a>
+                </div>
+                <div class="col-lg">
+                    <input type="submit" value="Adicionar" class="btn cor-bg col text-light" />
+                </div>
             </div>
+            <input asp-for="IdTurma" type="hidden" value="@Model.IdTurma" />
         </form>
     </div>
 </div>
