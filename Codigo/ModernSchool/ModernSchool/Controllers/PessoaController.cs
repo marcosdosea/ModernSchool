@@ -181,26 +181,6 @@ namespace ModernSchoolWEB.Controllers
             return View(alunoModel);
         }
 
-
-        [HttpPost]
-        public ActionResult MatricularAlunoTurma(AlunoTurmaViewModel model)
-        {
-            int idAluno = _pessoaService.GetById(model.Cpf);
-
-            if (idAluno != 0)
-            {
-                Alunoturma alunoTurma = new Alunoturma(){
-                    IdAluno = idAluno,
-                    IdTurma = model.IdTurma
-                };
-
-                _pessoaService.MatricularAlunoTurma(alunoTurma);
-            }
-            //adiconar retorno para index de alunos turma
-            return RedirectToAction("MatricularAlunoTurma", new { idTurma = model.IdTurma });
-        }
-
-
         public ActionResult MatricularNovoAluno(int idTurma)
         {
             AlunoTurmaViewModel alunoModel = new AlunoTurmaViewModel();
