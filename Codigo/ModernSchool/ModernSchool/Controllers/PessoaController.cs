@@ -192,6 +192,7 @@ namespace ModernSchoolWEB.Controllers
         {
             model.Cpf = model.Cpf.Replace(".", "").Replace("-", "").Replace("_", "");
             model.Cep = model.Cep.Replace("-", "");
+            Turma turma = _turmaService.Get(model.IdTurma);
 
             Pessoa aluno = _pessoaService.Get(model.Id);
             if(aluno == null)
@@ -209,6 +210,8 @@ namespace ModernSchoolWEB.Controllers
 
                 };
                 _pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma);
+                turma.VagasDisponiveis = turma.VagasDisponiveis - 1;
+                _turmaService.Edit(turma);
             }
             else
             {
@@ -219,6 +222,8 @@ namespace ModernSchoolWEB.Controllers
                 };
 
                 _pessoaService.MatricularAlunoTurma(alunoTurma);
+                turma.VagasDisponiveis = turma.VagasDisponiveis--;
+                _turmaService.Edit(turma);
             }
 
             return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
