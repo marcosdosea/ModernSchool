@@ -224,5 +224,72 @@ namespace Service
 
             return query.ToList();
         }
+
+        public List<IndexAlunoTurmaDTO> GetAlunosTurma(int idTurma)
+        {
+            var query = _context.Alunoturmas.Where(g => g.IdTurma == idTurma)
+                .Select(g => new IndexAlunoTurmaDTO
+                {
+                    IdAluno = g.IdAluno,
+                    NomeAluno = g.IdAlunoNavigation.Nome
+                });
+            return query.ToList();
+
+        }
+
+        public bool MatricularNovoAlunoTurma(Pessoa aluno, int idTurma)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    int idAluno = Create(aluno);
+
+                    if (idAluno != -1)
+                    {
+                        Alunoturma alunoTurma = new Alunoturma()
+                        {
+                            IdAluno = idAluno,
+                            IdTurma = idTurma
+                        };
+                        _context.Add(alunoTurma);
+                        _context.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    else
+                    {
+
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
+
+        public Pessoa GetAluno(int idEscola, string cpf)
+        {
+            var query = _context.Alunoturmas.Where(g => g.IdTurmaNavigation.AnoLetivoNavigation.IdEscolaNavigation.Id ==  idEscola 
+                    && g.IdAlunoNavigation.Cpf == cpf)
+                .Select(g => new Pessoa
+                {
+                    Id = g.IdAluno,
+                    Bairro = g.IdAlunoNavigation.Bairro,
+                    Cep = g.IdAlunoNavigation.Cep,
+                    Cpf = g.IdAlunoNavigation.Cpf,
+                    DataNascimento = g.IdAlunoNavigation.DataNascimento,
+                    Email = g.IdAlunoNavigation.Email,
+                    Nome = g.IdAlunoNavigation.Nome,
+                    Numero = g.IdAlunoNavigation.Numero,
+                    Rua = g.IdAlunoNavigation.Rua
+                    
+                });
+            return query.FirstOrDefault();
+        }
     }
 }
