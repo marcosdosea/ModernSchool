@@ -15,24 +15,23 @@ $(document).ready(function () {
             },
             success: function (aluno) {
                 if (aluno) {
-                    $('#nome').val(aluno.nome = capitalizarPrimeirasLetras(aluno.nome));
-                    $('#dataNascimento').val(aluno.dataNascimento.substring(0, 10));
-                    $('#cep').val(aluno.cep);
-                    $('#rua').val(aluno.rua);
-                    $('#bairro').val(aluno.bairro);
-                    $('#numero').val(aluno.numero);
-                    $('#email').val(aluno.email);
-                    $('#idAluno').val(aluno.id);
+                    $('#nome').val(aluno.nome = capitalizarPrimeirasLetras(aluno.nome)).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#dataNascimento').val(aluno.dataNascimento.substring(0, 10)).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#cep').val(aluno.cep).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#rua').val(aluno.rua).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#bairro').val(aluno.bairro).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#numero').val(aluno.numero).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#email').val(aluno.email).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#idAluno').val(aluno.id).prop('readonly', true);
                 } else {
-                    // Limpar os campos do formulário
-                    $('#nome').val('');
-                    $('#dataNascimento').val('');
-                    $('#cep').val('');
-                    $('#rua').val('');
-                    $('#bairro').val('');
-                    $('#numero').val('');
-                    $('#email').val('');
-                    $('#idAluno').val('');
+                    $('#nome').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#dataNascimento').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#cep').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#rua').val('').removeClass('text-secondary').prop('readonly', true);
+                    $('#bairro').val('').removeClass('text-secondary').prop('readonly', true);
+                    $('#numero').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#email').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#idAluno').val('').removeClass('text-secondary').prop('readonly', false);
                 }
             },
         });
