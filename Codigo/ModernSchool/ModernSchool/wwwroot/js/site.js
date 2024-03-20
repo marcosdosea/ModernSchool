@@ -27,8 +27,8 @@ $(document).ready(function () {
                     $('#nome').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#dataNascimento').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#cep').val('').removeClass('text-secondary').prop('readonly', false);
-                    $('#rua').val('').removeClass('text-secondary').prop('readonly', true);
-                    $('#bairro').val('').removeClass('text-secondary').prop('readonly', true);
+                    $('#rua').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#bairro').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#numero').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#email').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#idAluno').val('').removeClass('text-secondary').prop('readonly', false);
