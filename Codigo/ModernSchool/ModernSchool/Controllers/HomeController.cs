@@ -26,6 +26,10 @@ namespace ModernSchoolWEB.Controllers
             {
                 return RedirectToAction("Index", "Turma");
             }
+            if (User.IsInRole("ALUNO"))
+            {
+                return RedirectToAction("Index", "Aluno");
+            }
 
 
             return View();
