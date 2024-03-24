@@ -9,7 +9,6 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="Id" type="hidden" class="form-control" />
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -17,17 +16,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
-                <input asp-for="DataInicio" class="form-control" />
+                <input asp-for="DataInicio" value="@Model.DataInicio.Value.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataFim" class="control-label"></label>
-                <input asp-for="DataFim" class="form-control" />
+                <input asp-for="DataFim" value="@Model.DataFim.Value.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AnoLetivo1" class="control-label"></label>
-                <select asp-items="@Model.listaAnoLetivo" class="form-select"></select>
+                <select asp-for="AnoLetivo1" asp-items="@Model.listaAnoLetivo" class="form-select"></select>
                 <span asp-validation-for="AnoLetivo1" class="text-danger"></span>
             </div>
             <div class="d-flex flex-wrap py-4">

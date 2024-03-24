@@ -38,7 +38,7 @@
                     Model.HoraInicio = horaFormatada;
                 }
                 <label asp-for="HoraInicio" class="control-label"></label>
-                <input asp-for="HoraInicio" class="form-control" />
+                <input asp-for="HoraInicio" type="time" class="form-control" />
                 <span asp-validation-for="HoraInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,7 +48,7 @@
                     Model.HoraFim = horaFormatada;
                 }
                 <label asp-for="HoraFim" class="control-label"></label>
-                <input asp-for="HoraFim" class="form-control" />
+                <input asp-for="HoraFim" type="time" class="form-control" />
                 <span asp-validation-for="HoraFim" class="text-danger"></span>
             </div>
             <div class="form-group">

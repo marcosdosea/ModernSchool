@@ -59,10 +59,11 @@ namespace ModernSchoolWEB.Controllers
 
 
         // GET: PessoaController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int idTurma)
         {
             Pessoa pessoa = _pessoaService.Get(id);
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            pessoaModel.IdTurma = idTurma;
             return View(pessoaModel);
         }
 
@@ -129,24 +130,28 @@ namespace ModernSchoolWEB.Controllers
 
         }
         // GET: PessoaController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int idTurma)
         {
             Pessoa pessoa = _pessoaService.Get(id);
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            pessoaModel.IdTurma = idTurma;
             return View(pessoaModel);
         }
 
         // POST: PessoaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, PessoaViewModel pessoaViewModel)
+        public ActionResult Edit(int id, int idTurma, PessoaViewModel pessoaViewModel)
         {
+            pessoaViewModel.IdTurma = idTurma;
+            pessoaViewModel.Cep = pessoaViewModel.Cep.Replace("-", "");
+            pessoaViewModel.Cpf = pessoaViewModel.Cpf.Replace("-", "").Replace(".", "");
             if (ModelState.IsValid)
             {
                 var pessoa = _mapper.Map<Pessoa>(pessoaViewModel);
                 _pessoaService.Edit(pessoa);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("MatricularAlunoTurma", new {pessoaViewModel.IdTurma});
         }
 
         // GET: PessoaController/Delete/5
@@ -160,10 +165,11 @@ namespace ModernSchoolWEB.Controllers
         // POST: PessoaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, PessoaViewModel pessoaViewModel)
+        public ActionResult Delete(int id, int idTurma, PessoaViewModel pessoaViewModel)
         {
-            _pessoaService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            pessoaViewModel.IdTurma = idTurma;
+            _pessoaService.DeleteAlunoTurma(id, pessoaViewModel.IdTurma);
+            return RedirectToAction("MatricularAlunoTurma", new { pessoaViewModel.IdTurma });
         }
 
 

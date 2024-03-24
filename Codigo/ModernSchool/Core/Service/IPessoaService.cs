@@ -40,5 +40,7 @@ namespace Core.Service
 
         List<IndexAlunoTurmaDTO> GetAlunosTurma(int idTurma);
 
+        public void DeleteAlunoTurma(int idAluno, int idTurma);
+
     }
 }

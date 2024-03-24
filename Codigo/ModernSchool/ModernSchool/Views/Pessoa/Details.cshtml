@@ -1,60 +1,62 @@
 ﻿@model ModernSchoolWEB.Models.PessoaViewModel
 
 <div>
-    <h4>PessoaViewModel</h4>
-    <hr />
+    <h4>Dados do Aluno</h4>
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Nome)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Cpf)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Cpf)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Rua)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Rua)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Bairro)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Bairro)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Numero)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Numero)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.DataNascimento)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataNascimento)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Email)
+            <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
+    <div class="d-flex flex- py-4 col-4 d-flex justify-content-center">
+        <div class="col-8 d-flex justify-content-end">
+            <a asp-action="MatricularAlunoTurma" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
