@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Turma1" class="control-label"></label>
-                <input asp-for="Turma1" class="form-control" />
+                <input asp-for="Turma1" id="turma" class="form-control" />
                 <span asp-validation-for="Turma1" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,6 +46,13 @@
         </form>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-mask/jquery.inputmask.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#turma').inputmask('9º A');
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -50,6 +50,7 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PeriodoViewModel periodoModel)
         {
+            ModelState.Remove("listaAnoletivo");
             if (ModelState.IsValid)
             {
                 var periodo = _mapper.Map<Periodo>(periodoModel);
