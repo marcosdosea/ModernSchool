@@ -204,7 +204,7 @@ namespace Service
 
         public Alunoturma GetAlunoTurma(int idAluno)
         {
-            return _context.Alunoturmas.Where(g => g.IdAluno == idAluno && g.Status == "M").First();
+            return _context.Alunoturmas.Where(g => g.IdAluno == idAluno && g.Status == "M").FirstOrDefault();
         }
 
         public List<AlunoComponente> GetListasComponente(int idTurma)
