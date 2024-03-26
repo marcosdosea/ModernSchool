@@ -49,8 +49,12 @@ namespace ModernSchoolWEB.Controllers
                 {
                     if(horarios.NomeComponente == listaComponentes[j].NomeComponente)
                     {
-                        string horario = listaComponentes[j].DiaSemana + " - " + listaComponentes[j].HoraInicio + " - " + listaComponentes[j].HoraFim;
-                        if(horarios.Horas == null)
+                        string horario = "<strong>" + (listaComponentes[j].DiaSemana ?? "") + "</strong>" + " - " +
+                                         (listaComponentes[j].HoraInicio.Substring(0, 2) ?? "") + ":"  +
+                                         (listaComponentes[j].HoraInicio.Substring(2, 2) ?? "") + " - " +
+                                         (listaComponentes[j].HoraFim.Substring(0, 2) ?? "") + ":" +
+                                         (listaComponentes[j].HoraFim.Substring(2, 2) ?? "");
+                        if (horarios.Horas == null)
                         {
                             horarios.Horas = new List<string>();
                         }

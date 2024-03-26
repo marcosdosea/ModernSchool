@@ -1,20 +1,26 @@
 ﻿@model ModernSchoolWEB.Models.AvaliacaoComponente
 
-<label>Componente: @Model.NomeComponente</label>
+<label class="fs-5 py-2">Componente: @Model.NomeComponente</label>
 
 
 @for (int i = 0; i < Model.DiarioAlunos.Count(); i++)
 {
-    <div style="background-color:grey">
-        <label>@Model.DiarioAlunos[i].Resumo - [@Model.DiarioAlunos[i].Data]</label>
+    <div class="rounded border border-gray-30" style="background-color: whitesmoke">
+        <label class="px-3 py-2">@Model.DiarioAlunos[i].Resumo - [ @Model.DiarioAlunos[i].Data.ToString("dd/MM/yyyy") ]</label>
         <br />
         @if (@Model.DiarioAlunos[i].Falta == 0)
         {
-        <label>Aluno Presente</label>
+            <label class="ml-3">Frequência : </label>
+
+            <label class="mr-3" style="color: green">Presente</label>
         }
         else
         {
-        <label>Aluno Ausente - @Model.DiarioAlunos[i].Falta </label>
+            <label class="ml-3">Frequência : </label>
+
+            <label class="mr-3" style="color: red">Ausente</label>
+            <label class="mr-3">-</label>
+            <label class="mr-3">@Model.DiarioAlunos[i].Falta Faltas</label>
         }
 
     </div>
