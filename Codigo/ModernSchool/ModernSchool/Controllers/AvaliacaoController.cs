@@ -110,10 +110,7 @@ namespace ModernSchoolWEB.Controllers
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
             IEnumerable<Turma> listaTurma = _turmaService.GetAll();
             IEnumerable<Periodo> listaPeriodo = _periodoService.GetAll();
-            avaliacaoViewModel.listaTurma = new SelectList(listaTurma, "Id", "Turma1", null);
             avaliacaoViewModel.listaPeriodo = new SelectList(listaPeriodo, "Id", "Nome", null);
-
-            avaliacaoViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
 
             return View(avaliacaoViewModel);
         }
