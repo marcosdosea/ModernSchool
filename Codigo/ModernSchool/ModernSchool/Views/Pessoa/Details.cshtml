@@ -2,7 +2,7 @@
 
 <div>
     <h4>Dados do Aluno</h4>
-    <dl class="row">
+    <dl class="row rounded border border-gray-30" style="background-color: whitesmoke">
         <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Nome)
             <span><strong>:</strong></span>
@@ -39,7 +39,7 @@
             @Html.DisplayFor(model => model.Numero)
         </dd>
         <dt class="col-sm-2 d-flex justify-content-between">
-            @Html.DisplayNameFor(model => model.DataNascimento)
+            <label>Nascimento</label>
             <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
@@ -53,8 +53,8 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
-    <div class="d-flex flex- py-4 col-4 d-flex justify-content-center">
-        <div class="col-8 d-flex justify-content-end">
+    <div class="d-flex flex- py-4 col-4">
+        <div class="col-8 d-flex">
             <a asp-action="MatricularAlunoTurma" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
         </div>
     </div>
