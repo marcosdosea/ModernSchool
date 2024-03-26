@@ -17,11 +17,12 @@ namespace ModernSchoolWEB.Controllers
         private readonly IDiarioDeClasseService _diarioDeClasseService;
         private readonly IComponenteService _componenteService;
         private readonly IMapper _mapper;
+        private readonly IPeriodoService _periodoService;
 
         public AlunoController(IPessoaService pessooaService, IGradeHorarioService gradeHorarioService,
-            IMapper mapper, ITurmaService turmaService,IAvaliacaoService avaliacaoService,
+            IMapper mapper, ITurmaService turmaService, IAvaliacaoService avaliacaoService,
             IDiarioDeClasseService diarioDeClasseService,
-            IComponenteService componenteService)
+            IComponenteService componenteService, IPeriodoService periodo)
         {
             _pessooaService = pessooaService;
             _gradeHorarioService = gradeHorarioService;
@@ -30,6 +31,7 @@ namespace ModernSchoolWEB.Controllers
             _avaliacaoService = avaliacaoService;
             _diarioDeClasseService = diarioDeClasseService;
             _componenteService = componenteService;
+            _periodoService = periodo;
         }
 
         public ActionResult Index()
@@ -38,19 +40,19 @@ namespace ModernSchoolWEB.Controllers
             int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
             Alunoturma aluno = _pessooaService.GetAlunoTurma(idAluno);
             var listaComponentes = _pessooaService.GetListasComponente(aluno.IdTurma);
-            var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma,idAluno);
+            var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma, idAluno);
             AlunoTelaIndex telaAluno = new();
 
-            for(int i =0; i < listaComponentes.Count(); i++)
+            for (int i = 0; i < listaComponentes.Count(); i++)
             {
                 Horarios horarios = new Horarios();
                 horarios.NomeComponente = listaComponentes[i].NomeComponente;
                 for (int j = 0; j < listaComponentes.Count(); j++)
                 {
-                    if(horarios.NomeComponente == listaComponentes[j].NomeComponente)
+                    if (horarios.NomeComponente == listaComponentes[j].NomeComponente)
                     {
                         string horario = "<strong>" + (listaComponentes[j].DiaSemana ?? "") + "</strong>" + " - " +
-                                         (listaComponentes[j].HoraInicio.Substring(0, 2) ?? "") + ":"  +
+                                         (listaComponentes[j].HoraInicio.Substring(0, 2) ?? "") + ":" +
                                          (listaComponentes[j].HoraInicio.Substring(2, 2) ?? "") + " - " +
                                          (listaComponentes[j].HoraFim.Substring(0, 2) ?? "") + ":" +
                                          (listaComponentes[j].HoraFim.Substring(2, 2) ?? "");
@@ -73,7 +75,7 @@ namespace ModernSchoolWEB.Controllers
                     telaAluno.AlunosDisciplinas.Add(listaComponentes[i].HorarioComponente);
                 }
             }
-            
+
             telaAluno.IdTurma = aluno.IdTurma;
             telaAluno.IdAluno = aluno.IdAluno;
             telaAluno.NomeTurma = _turmaService.Get(aluno.IdTurma).Turma1;
@@ -86,7 +88,7 @@ namespace ModernSchoolWEB.Controllers
         {
 
             AvaliacaoComponente view = new();
-            var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idTurma,idComponente);
+            var diarioAluno = _diarioDeClasseService.GetDiarioAlunos(idTurma, idComponente);
 
             foreach (var item in diarioAluno)
             {
@@ -96,6 +98,43 @@ namespace ModernSchoolWEB.Controllers
             view.NomeComponente = _componenteService.Get(idComponente).Nome;
             view.IdComponente = idComponente;
             return View(view);
+        }
+
+        public ActionResult NotasAluno()
+        {
+
+            var periodos = _periodoService.GetAll().ToList();
+            var componentes = _componenteService.GetAll().ToList();
+            int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            NotasAlunoModel model = new NotasAlunoModel();  
+            model.Componentes = new List<ComponenteNota>();
+            model.PeriodosNotas = new List<PeriodoNota>();
+            
+            for (int i = 0; i < componentes.Count(); i++)
+            {
+                ComponenteNota componente = new ComponenteNota()
+                {
+                    IdComponente = componentes[i].Id,
+                    NomeComponente = componentes[i].Nome
+                };
+                model.Componentes.Add(componente);
+                for (int j = 0; j < periodos.Count(); j++)
+                {
+                    decimal nota = _avaliacaoService.GetNotaPeriodo(idAluno, 1, periodos[j].Id, componentes[i].Id);
+                    string periodo = periodos[j].Nome;
+                    PeriodoNota notasPeriodo = new()
+                    {
+                        Nota = nota,
+                        PeriodoAvaliacao = periodo,
+                        IdComponente = componentes[i].Id
+                    };
+                    model.PeriodosNotas.Add(notasPeriodo);
+                }
+            }
+
+
+
+            return View(model);
         }
 
     }

@@ -67,7 +67,7 @@ namespace Service
         /// <returns></returns>
         IEnumerable<Componente> IComponenteService.GetAll()
         {
-            return _context.Componentes.AsNoTracking();
+            return _context.Componentes.AsNoTracking().OrderBy(g => g.Nome);
         }
     }
 }
