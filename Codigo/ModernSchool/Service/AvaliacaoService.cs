@@ -107,9 +107,9 @@ namespace Service
             return query.ToList();
         }
 
-        public List<AlunoAtividadeDTO> GetAlunoAtividades(int idTurma)
+        public List<AlunoAtividadeDTO> GetAlunoAtividades(int idTurma, int idAluno)
         {
-            var query = _context.Alunoavaliacaos.Where(g => g.IdAvaliacaoNavigation.IdTurma == idTurma)
+            var query = _context.Alunoavaliacaos.Where(g => g.IdAvaliacaoNavigation.IdTurma == idTurma && g.IdAluno == idAluno)
                 .Select(g => new AlunoAtividadeDTO
                 {
                     Componente = g.IdAvaliacaoNavigation.IdComponenteNavigation.Nome,

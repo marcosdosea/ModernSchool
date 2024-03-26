@@ -34,9 +34,11 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult Index()
         {
-            Alunoturma aluno = _pessooaService.GetAlunoTurma(8);
+
+            int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            Alunoturma aluno = _pessooaService.GetAlunoTurma(idAluno);
             var listaComponentes = _pessooaService.GetListasComponente(aluno.IdTurma);
-            var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma);
+            var listaAvaliacao = _avaliacaoService.GetAlunoAtividades(aluno.IdTurma,idAluno);
             AlunoTelaIndex telaAluno = new();
 
             for(int i =0; i < listaComponentes.Count(); i++)
@@ -47,8 +49,12 @@ namespace ModernSchoolWEB.Controllers
                 {
                     if(horarios.NomeComponente == listaComponentes[j].NomeComponente)
                     {
-                        string horario = listaComponentes[j].DiaSemana + " - " + listaComponentes[j].HoraInicio + " - " + listaComponentes[j].HoraFim;
-                        if(horarios.Horas == null)
+                        string horario = "<strong>" + (listaComponentes[j].DiaSemana ?? "") + "</strong>" + " - " +
+                                         (listaComponentes[j].HoraInicio.Substring(0, 2) ?? "") + ":"  +
+                                         (listaComponentes[j].HoraInicio.Substring(2, 2) ?? "") + " - " +
+                                         (listaComponentes[j].HoraFim.Substring(0, 2) ?? "") + ":" +
+                                         (listaComponentes[j].HoraFim.Substring(2, 2) ?? "");
+                        if (horarios.Horas == null)
                         {
                             horarios.Horas = new List<string>();
                         }
