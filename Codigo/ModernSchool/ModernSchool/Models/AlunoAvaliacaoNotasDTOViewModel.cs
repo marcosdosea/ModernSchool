@@ -15,6 +15,7 @@ namespace ModernSchoolWEB.Models
     {
         public List<ComponenteNota> Componentes { get; set; }
         public List<PeriodoNota> PeriodosNotas { get; set; }
+        public int IdTurma { get; set; }
 
     }
 

@@ -6,7 +6,7 @@
 @for(int componente = 0; componente < Model.Componentes.Count(); componente++)
 {
     <label>@Model.Componentes[componente].NomeComponente</label>
-    <table>
+    <table class="table table-sm table-striped table-bordered">
         <thead>
             <tr>
                 @for (int periodo = 0; periodo < Model.PeriodosNotas.Count(); periodo++)

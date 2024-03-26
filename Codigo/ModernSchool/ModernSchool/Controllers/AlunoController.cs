@@ -100,7 +100,7 @@ namespace ModernSchoolWEB.Controllers
             return View(view);
         }
 
-        public ActionResult NotasAluno()
+        public ActionResult NotasAluno(int IdTurma)
         {
 
             var periodos = _periodoService.GetAll().ToList();
@@ -109,6 +109,7 @@ namespace ModernSchoolWEB.Controllers
             NotasAlunoModel model = new NotasAlunoModel();  
             model.Componentes = new List<ComponenteNota>();
             model.PeriodosNotas = new List<PeriodoNota>();
+            model.IdTurma = IdTurma;
             
             for (int i = 0; i < componentes.Count(); i++)
             {
@@ -120,7 +121,7 @@ namespace ModernSchoolWEB.Controllers
                 model.Componentes.Add(componente);
                 for (int j = 0; j < periodos.Count(); j++)
                 {
-                    decimal nota = _avaliacaoService.GetNotaPeriodo(idAluno, 1, periodos[j].Id, componentes[i].Id);
+                    decimal nota = _avaliacaoService.GetNotaPeriodo(idAluno, IdTurma, periodos[j].Id, componentes[i].Id);
                     string periodo = periodos[j].Nome;
                     PeriodoNota notasPeriodo = new()
                     {
