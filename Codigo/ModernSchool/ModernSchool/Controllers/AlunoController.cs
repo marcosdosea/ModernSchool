@@ -2,11 +2,14 @@
 using Core;
 using Core.DTO;
 using Core.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using ModernSchoolWEB.Models;
 
 namespace ModernSchoolWEB.Controllers
 {
+    [Authorize(Roles = "ALUNO")]
     public class AlunoController : Controller
     {
 
@@ -97,6 +100,7 @@ namespace ModernSchoolWEB.Controllers
             view.DiarioAlunos = diarioAluno;
             view.NomeComponente = _componenteService.Get(idComponente).Nome;
             view.IdComponente = idComponente;
+            view.IdTurma = idTurma;
             return View(view);
         }
 

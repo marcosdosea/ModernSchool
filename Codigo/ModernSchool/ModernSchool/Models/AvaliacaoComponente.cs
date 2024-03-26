@@ -8,5 +8,6 @@ namespace ModernSchoolWEB.Models
         public List<DiarioAluno> DiarioAlunos { get; set; } 
         public int IdComponente { get; set; }
         public string NomeComponente { get; set; } = string.Empty;
+        public int IdTurma { get; set; }
     }
 }
