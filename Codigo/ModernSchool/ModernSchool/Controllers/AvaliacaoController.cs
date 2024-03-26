@@ -84,7 +84,7 @@ namespace ModernSchoolWEB.Controllers
 
             }
 
-            return RedirectToAction(nameof(Index), new { idComponente = viewModel.IdComponente, idTurma = viewModel.IdComponente });
+            return RedirectToAction(nameof(Index), new { idTurma = viewModel.IdTurma, idComponente = viewModel.IdComponente  });
         }
 
 

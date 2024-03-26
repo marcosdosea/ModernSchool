@@ -120,5 +120,19 @@ namespace Service
             return query.ToList();
         }
 
+        public decimal GetNotaPeriodo(int idAluno , int idTurma, int idPeriodo, int idComponente)
+        {
+            var query = _context.Alunoavaliacaos.Where(g => g.IdAluno == idAluno &&
+                g.IdAvaliacaoNavigation.IdTurma == idTurma
+                && g.IdAvaliacaoNavigation.IdPeriodo == idPeriodo
+                && g.IdAvaliacaoNavigation.IdComponente == idComponente
+                        )
+                .Select(g => g.Nota);
+            if(query.Count() > 0 )
+            {
+                return query.Sum();
+            }
+            return 0;
+        }
     }
 }
