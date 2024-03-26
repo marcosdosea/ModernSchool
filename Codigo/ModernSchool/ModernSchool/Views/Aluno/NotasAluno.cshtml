@@ -2,39 +2,39 @@
 
 
 <h2>Notas</h2>
-
-@for(int componente = 0; componente < Model.Componentes.Count(); componente++)
-{
-    <label>@Model.Componentes[componente].NomeComponente</label>
-    <table class="table table-sm table-striped table-bordered">
+@{
+    bool flag = true;
+}
+<table class="table table-sm table-striped table-bordered">
+    @for (int componente = 0; componente < Model.Componentes.Count(); componente++)
+    {
         <thead>
             <tr>
-                @for (int periodo = 0; periodo < Model.PeriodosNotas.Count(); periodo++)
+                @if (flag)
                 {
-                    if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo].IdComponente)
+                    <th style="width: 90px"></th>
+                    @for (int periodo = 0; periodo < Model.PeriodosNotas.Count(); periodo++)
                     {
-                        <th>Periodo</th>
-                        <th>Nota</th>
+                        if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo].IdComponente)
+                        {
+                            <th style="width: 90px"><strong>@Model.PeriodosNotas[periodo].PeriodoAvaliacao Período</strong></th>
+                        }
                     }
-
-
+                    flag = false;
                 }
             </tr>
         </thead>
         <tbody>
             <tr>
-                @for(int periodo = 0; periodo < Model.PeriodosNotas.Count(); periodo++)
+                <th style="width: 90px"><label>@Model.Componentes[componente].NomeComponente</label></th>
+                @for (int periodo1 = 0; periodo1 < Model.PeriodosNotas.Count(); periodo1++)
                 {
-                    if(Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo].IdComponente)
+                    if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo1].IdComponente)
                     {
-                        <th>@Model.PeriodosNotas[periodo].PeriodoAvaliacao</th>
-                        <th>@Model.PeriodosNotas[periodo].Nota</th>
+                        <th style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
                     }
-
-                    
                 }
             </tr>
         </tbody>
-    </table>
-    <br />
-}
+    }
+</table>

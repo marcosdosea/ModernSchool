@@ -28,18 +28,6 @@
                 </select>
                 <span asp-validation-for="TipoAvaliacao" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <select asp-for="IdTurma" asp-items="@Model.listaTurma" class="form-select col-3"></select>
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="IdComponente" class="control-label">Componente</label>
-                <select asp-for="IdComponente" class="form-select col-3" asp-items="@Model.ListaComponentes"></select>
-                <span asp-validation-for="IdComponente" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <label asp-for="IdPeriodo" class="control-label"></label>
@@ -65,6 +53,8 @@
                     <a asp-controller="Avaliacao" asp-action="Index" class="btn bg-secondary text-white border border-0 d-grid gap-2 col" asp-route-idTurma="@Model.IdTurma"
                        asp-route-idComponente="@Model.IdComponente"> Voltar </a>
                 </div>
+                <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden" />
+                <input asp-for="IdComponente" value="@Model.IdComponente" type="hidden" />
                 <div class="form-group col-3">
                     <input class="btn cor-bg d-grid gap-2 col text-white border border-0" type="submit" value="Adicionar" />
                 </div>

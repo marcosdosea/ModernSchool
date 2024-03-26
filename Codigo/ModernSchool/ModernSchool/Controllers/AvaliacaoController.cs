@@ -123,6 +123,10 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AvaliacaoViewModel avaliacaoModel)
         {
+            if(avaliacaoModel.Arquivo == null)
+            {
+                ModelState.Remove("Arquivo");
+            }
             if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);

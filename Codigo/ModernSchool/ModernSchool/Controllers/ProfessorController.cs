@@ -106,7 +106,7 @@ namespace ModernSchoolWEB.Controllers
                         IdTurma = diarioDeClasse.IdTurma,
                         ResumoAula = diarioDeClasse.ResumoAula,
                         TipoAula = diarioDeClasse.TipoAula,
-                        Data = diarioDeClasse.Data
+                        Data = Convert.ToDateTime(diarioDeClasse.Data)
                     };
 
                     _diarioDeClasseService.CreateDiarioClasse(diario, list);

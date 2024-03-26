@@ -20,11 +20,13 @@ namespace ModernSchoolWEB.Controllers
 
 
         // GET: ComunicacaoController
-        public ActionResult Index()
+        public ActionResult Index(int IdTurma)
         {
+            ComunicacaoModel model = new();
             var listaComunicacao = _comunicacaoService.GetAll();
-            var listaComunicacaoViewModel = _mapper.Map<List<ComunicacaoViewModel>>(listaComunicacao);
-            return View(listaComunicacaoViewModel);
+            model.Comunicacoes = listaComunicacao;
+            model.IdTurma = IdTurma;
+            return View(model);
         }
 
         // GET: ComunicacaoController/Details/5
