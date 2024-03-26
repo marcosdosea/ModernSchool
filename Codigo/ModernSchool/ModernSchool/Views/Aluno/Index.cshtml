@@ -31,7 +31,7 @@
                 <td class="align-middle">
                     @for(int j = 0; j < Model.AlunosDisciplinas[i].Horas.Count(); j++)
                     {
-                        <span> @Model.AlunosDisciplinas[i].Horas[j]</span>
+                        <span> @Html.Raw(Model.AlunosDisciplinas[i].Horas[j])</span>
                         <br />
                     }
                 </td>
@@ -63,7 +63,6 @@
             <th>
                 Descricao
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -78,9 +77,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Descricao)
-                </td>
-                <td>
-                    <a role="button" class="btn btn-sm cor-bg rounded-pill text-light">Enviar</a>
                 </td>
             </tr>
         }

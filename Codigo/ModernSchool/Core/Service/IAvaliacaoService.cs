@@ -13,7 +13,7 @@ namespace Core.Service
 
         List<AlunoAvaliacaoNotaDTO> GetAllAlunos(int idTurma);
         List<AlunoAvaliacaoNotaDTO> GetAllAlunosAvaliacao(int idTurma, int idAvaliacao);
-        List<AlunoAtividadeDTO> GetAlunoAtividades(int idTurma);
+        List<AlunoAtividadeDTO> GetAlunoAtividades(int idTurma, int idAluno);
 
         bool SalvarNotas(Alunoavaliacao alunoAvaliacao);
     }

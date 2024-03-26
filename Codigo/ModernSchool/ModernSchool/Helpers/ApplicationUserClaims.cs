@@ -25,6 +25,10 @@ namespace GestaoGrupoMusicalWeb.Helpers
         {
             var identity = await base.GenerateClaimsAsync(user);
             var cargo = await _pessoaService.GetByCargo(identity.Name);
+            if(cargo == null)
+            {
+                cargo = "aluno";
+            }
             var pessoa =  await _pessoaService.GetByEmail(identity.Name);
             if (pessoa != null)
             {

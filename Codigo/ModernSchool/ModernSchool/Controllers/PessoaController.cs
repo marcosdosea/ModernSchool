@@ -194,7 +194,7 @@ namespace ModernSchoolWEB.Controllers
             return View(alunoModel);
         }
         [HttpPost]
-        public ActionResult MatricularNovoAluno(AlunoTurmaViewModel model)
+        public async Task<ActionResult> MatricularNovoAluno(AlunoTurmaViewModel model)
         {
             model.Cpf = model.Cpf.Replace(".", "").Replace("-", "").Replace("_", "");
             model.Cep = model.Cep.Replace("-", "");
@@ -215,9 +215,11 @@ namespace ModernSchoolWEB.Controllers
                     Rua = model.Rua,
 
                 };
-                _pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma);
-                turma.VagasDisponiveis = turma.VagasDisponiveis - 1;
-                _turmaService.Edit(turma);
+                
+                if(_pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma))
+                {
+                    await _userRole.SeedUsersAsync(aluno, "Aluno");
+                }
             }
             else
             {
@@ -228,8 +230,6 @@ namespace ModernSchoolWEB.Controllers
                 };
 
                 _pessoaService.MatricularAlunoTurma(alunoTurma);
-                turma.VagasDisponiveis = turma.VagasDisponiveis--;
-                _turmaService.Edit(turma);
             }
 
             return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
