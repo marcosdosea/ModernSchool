@@ -15,7 +15,14 @@
             <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
+            <span id="cpf">@Model.Cpf</span>
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Cep)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cep)
         </dd>
         <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Rua)
@@ -59,4 +66,5 @@
         </div>
     </div>
 </div>
+
 

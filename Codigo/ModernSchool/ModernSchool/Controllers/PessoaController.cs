@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Service;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Text.RegularExpressions;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -63,6 +64,12 @@ namespace ModernSchoolWEB.Controllers
         {
             Pessoa pessoa = _pessoaService.Get(id);
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
+            var cpf = pessoaModel.Cpf;
+            var cep = pessoaModel.Cep;
+            cpf = Regex.Replace(cpf, @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
+            cep = Regex.Replace(cep, @"(\d{5})(\d{3})", "$1-$2");
+            pessoaModel.Cpf = cpf;
+            pessoaModel.Cep = cep;
             pessoaModel.IdTurma = idTurma;
             return View(pessoaModel);
         }
