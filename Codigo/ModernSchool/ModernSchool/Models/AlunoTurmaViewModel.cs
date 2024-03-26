@@ -16,7 +16,6 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Data de Nascimento")]
         [Required(ErrorMessage = "Campo Data de Nascimento é Obrigatório")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-
         public DateTime DataNascimento { get; set; }
         [Display(Name = "CEP", Prompt = "Ex: 00000-000")]
         [Required(ErrorMessage = "Campo CEP é Obrigatório")]

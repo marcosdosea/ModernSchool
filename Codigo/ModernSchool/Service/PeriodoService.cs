@@ -34,9 +34,16 @@ namespace Service
         /// <param name="idPeriodo">Id do periodo</param>
         public void Delete(int idPeriodo)
         {
-            var _periodo = _context.Periodos.Find(idPeriodo);
-            _context.Remove(_periodo);
-            _context.SaveChanges();
+            try
+            {
+                var _periodo = _context.Periodos.Find(idPeriodo);
+                _context.Remove(_periodo);
+                _context.SaveChanges();
+            }
+            catch
+            {
+
+            }
         }
         /// <summary>
         /// Editar um periodo no banco de dados

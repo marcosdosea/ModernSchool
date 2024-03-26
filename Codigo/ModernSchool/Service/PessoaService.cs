@@ -291,5 +291,14 @@ namespace Service
                 });
             return query.FirstOrDefault();
         }
+        public void DeleteAlunoTurma(int idAluno, int idTurma)
+        {
+            var _alunoTurma = _context.Alunoturmas.Find(idAluno, idTurma);
+            _context.Remove(_alunoTurma);
+            _context.SaveChanges();
+            var _pessoa = _context.Pessoas.Find(idAluno);
+            _context.Remove(_pessoa);
+            _context.SaveChanges();
+        }
     }
 }
