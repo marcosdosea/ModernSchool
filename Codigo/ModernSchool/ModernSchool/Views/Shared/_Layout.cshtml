@@ -98,8 +98,8 @@
                                                    asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Diário de Classe<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="content bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-action="Index"
                                                    asp-controller="Avaliacao" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Avaliacao <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao"
-                                                   asp-action="Index" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Professor"
+                                                   asp-action="ComunicacaoProfessorTurma" asp-route-idTurma="@Model.IdTurma" asp-route-idComponente="@Model.IdComponente">Comunicação <i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +145,7 @@
                                             <div class="list-group list-group-flush">
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Aluno" asp-action="NotasAluno" asp-route-idTurma="@Model.IdTurma">Notas<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                                 <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Aluno" asp-action="Index">Horário <i class="fa-sharp fa-solid fa-angle-right"></i></a>
-                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Comunicacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
+                                                <a class="bg-primary-darken-01 list-group-item list-group-item-action p-3 border-bottom border-primary fw-bold d-flex justify-content-between text-uppercase text-bold text-white text-opacity-75" asp-controller="Aluno" asp-action="ComunicadoAluno" asp-route-idTurma="@Model.IdTurma">Comunicados<i class="fa-sharp fa-solid fa-angle-right"></i></a>
                                             </div>
                                         </div>
                                     </div>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
+using Org.BouncyCastle.Asn1.Mozilla;
 using Service;
 
 namespace ModernSchoolWEB.Controllers
@@ -20,12 +21,16 @@ namespace ModernSchoolWEB.Controllers
         private readonly IMapper _mappers;
         private readonly ITurmaService _turmaService;
         private readonly IComponenteService _componenteService;
+        private readonly IPessoaService _pessoaService;
+        private readonly IComunicacaoService _comunicacaoService;
 
         public ProfessorController(IGradeHorarioService gradeHorario,
             IMapper mappers, IDiarioDeClasseService diarioDeClasseService,
             IFrequenciaAlunoService frequenciaAlunoService,
             ITurmaService turmaService,
-            IComponenteService componenteService)
+            IComponenteService componenteService,
+            IPessoaService pessoaService,
+            IComunicacaoService comunicacaoService)
         {
             _gradeHorario = gradeHorario;
             _mappers = mappers;
@@ -33,6 +38,8 @@ namespace ModernSchoolWEB.Controllers
             _frequenciaAlunoService = frequenciaAlunoService;
             _turmaService = turmaService;
             _componenteService = componenteService;
+            _pessoaService = pessoaService;
+            _comunicacaoService = comunicacaoService;
         }
 
 
@@ -216,81 +223,48 @@ namespace ModernSchoolWEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteDiarioClasse(DiarioDeClasseViewModel diarioDeClasse, int IdDiario, int IdObjeto) {
-            
+        public ActionResult DeleteDiarioClasse(DiarioDeClasseViewModel diarioDeClasse, int IdDiario, int IdObjeto)
+        {
+
             diarioDeClasse = _mappers.Map<DiarioDeClasseViewModel>(_diarioDeClasseService.Get(IdDiario));
             _diarioDeClasseService.DeleteDiarioClasse(IdDiario, IdObjeto);
 
             return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
         }
 
-        // GET: ProfessorController1/Details/5
-        public ActionResult Details(int id)
+
+        public ActionResult ComunicacaoProfessorTurma(int idTurma, int idComponente)
         {
-            return View();
+            ViewData["FlagLyoutProf"] = true;
+            ComunicarProfessorTurmaViewModel model = new();
+
+            model.Componente = _componenteService.Get(idComponente).Nome;
+            model.Turma = _turmaService.Get(idTurma).Turma1;
+            model.Alunos = _pessoaService.GetAlunosTurma(idTurma);
+
+            return View(model);
+
         }
 
-        // GET: ProfessorController1/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProfessorController1/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult ComunicacaoProfessorTurma(ComunicarProfessorTurmaViewModel model)
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                Comunicacao comunicacao = new Comunicacao
+                {
+                    EnviarAlunos = 0,
+                    EnviarResponsaveis = 0,
+                    IdTurma = model.IdTurma,
+                    Mensagem = model.Menssagem,
+                    IdComponente = model.IdComponente
+                    
+                };
+                _comunicacaoService.SalvarComunicacao(comunicacao, model.Alunos);
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction(nameof(ComunicacaoProfessorTurma), new { idTurma = model.IdTurma, idComponente = model.IdComponente });
         }
 
-        // GET: ProfessorController1/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProfessorController1/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProfessorController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProfessorController1/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

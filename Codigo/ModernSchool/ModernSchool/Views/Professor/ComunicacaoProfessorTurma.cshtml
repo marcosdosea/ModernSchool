@@ -1,0 +1,70 @@
+﻿@model ModernSchoolWEB.Models.ComunicarProfessorTurmaViewModel
+
+<h3>Comunicado</h3>
+<label>Turma: @Model.Turma Componente: @Model.Componente</label>
+
+<form asp-action="ComunicacaoProfessorTurma" method="post">
+<table>
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>
+                Matricula
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Alunos
+                <input type="checkbox" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+            @for (int i = 0; i < Model.Alunos.Count(); i++)
+            {
+                <input asp-for="IdTurma" type="hidden" />
+                <input asp-for="IdComponente" type="hidden"/>
+            <tr>
+
+
+                <td>
+                        @(i + 1)
+                </td>
+                <td>
+                        @Model.Alunos[i].IdAluno
+                        <input asp-for="@Model.Alunos[i].IdAluno" value="@Model.Alunos[i].IdAluno" type="hidden" />
+                </td>
+                <td>
+                        @Model.Alunos[i].NomeAluno
+                </td>
+                <td>
+                    <input type="checkbox" />
+                </td>
+
+
+            </tr>
+            }
+
+        <div class="mb-3">
+            <label asp-for="Menssagem" class="form-label">Example textarea</label>
+            <textarea class="form-control" asp-for="Menssagem" rows="3" cols="5"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Enviar" class="btn btn-primary" />
+        </div>
+
+        
+    </tbody>
+</table>
+</form>
+<div class="container py-4">
+    <div class="row">
+        <div class="d-flex justify-content-end col-lg align-items-center">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Avaliacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma"
+               asp-route-idComponente="@Model.IdComponente"> Voltar </a>
+        </div>
+    </div>

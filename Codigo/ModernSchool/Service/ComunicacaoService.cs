@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -106,6 +107,53 @@ namespace Service
         {
             _context.Add(pessoacomunicacao);
             _context.SaveChanges();
+        }
+
+        public bool SalvarComunicacao(Comunicacao comunicacao, List<IndexAlunoTurmaDTO> alunos)
+        {
+            using( var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Add(comunicacao);
+                    _context.SaveChanges();
+
+
+
+                    foreach( var aluno in alunos)
+                    {
+                        Alunocomunicacao alunoComunicacao = new();
+                        alunoComunicacao.IdComunicacao = comunicacao.Id;
+                        alunoComunicacao.IdAluno = aluno.IdAluno;
+                        _context.Add(alunoComunicacao);
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+
+            }
+
+        }
+
+        public List<AlunoComunicacaoDTO> ComunicacaoAluno(int idAluno, int idTurma)
+        {
+
+            var query = _context.Alunocomunicacaos.Where(g => g.IdAluno == idAluno && g.IdComunicacaoNavigation.IdTurma == idTurma)
+                .Select(g => new AlunoComunicacaoDTO
+                {
+                    NomeComponente = g.IdComunicacaoNavigation.IdComponenteNavigation.Nome,
+                    IdComponente = g.IdComunicacaoNavigation.IdComponente,
+                    Menssagem = g.IdComunicacaoNavigation.Mensagem,
+                    IdComunicado = g.IdComunicacao
+                });
+            return query.ToList();
         }
     }
 }
