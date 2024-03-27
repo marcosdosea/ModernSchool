@@ -29,6 +29,12 @@ namespace Service
 
         public void Delete(int idAvaliacao)
         {
+            var _alunoAvaliacao = _context.Alunoavaliacaos.Where(a => a.IdAvaliacao == idAvaliacao);
+            foreach (var alunoAvaliacao in _alunoAvaliacao)
+            {
+                _context.Alunoavaliacaos.Remove(alunoAvaliacao);
+            }
+            _context.SaveChanges();
             var _avaliacao = _context.Avaliacaos.Find(idAvaliacao);
             _context.Remove(_avaliacao);
             _context.SaveChanges();
@@ -57,7 +63,7 @@ namespace Service
                 {
                     DataEntrega = g.DataEntrega,
                     Id = g.Id,
-                    Peso = g.Peso, 
+                    Peso = g.Peso,
                     TipoAvaliacao = g.TipoAvaliacao
                 });
 
@@ -65,7 +71,7 @@ namespace Service
 
             //throw new NotImplementedException();
         }
-                public bool SalvarNotas(Alunoavaliacao alunoAvaliacao)
+        public bool SalvarNotas(Alunoavaliacao alunoAvaliacao)
         {
             _context.Add(alunoAvaliacao);
             _context.SaveChanges();
@@ -120,7 +126,7 @@ namespace Service
             return query.ToList();
         }
 
-        public decimal GetNotaPeriodo(int idAluno , int idTurma, int idPeriodo, int idComponente)
+        public decimal GetNotaPeriodo(int idAluno, int idTurma, int idPeriodo, int idComponente)
         {
             var query = _context.Alunoavaliacaos.Where(g => g.IdAluno == idAluno &&
                 g.IdAvaliacaoNavigation.IdTurma == idTurma
@@ -128,7 +134,7 @@ namespace Service
                 && g.IdAvaliacaoNavigation.IdComponente == idComponente
                         )
                 .Select(g => g.Nota);
-            if(query.Count() > 0 )
+            if (query.Count() > 0)
             {
                 return query.Sum();
             }

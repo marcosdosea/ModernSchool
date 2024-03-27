@@ -40,13 +40,13 @@
                 <span asp-validation-for="Peso" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Arquivo" class="control-label my-2"></label>
+                <input asp-for="Arquivo" class="form-control col-5" type="file" />
+            </div>
+            <div class="form-group">
                 <label asp-for="Avaliativo" class="control-label my-2"></label>
                 <input asp-for="Avaliativo" type="checkbox" value="true" />
                 <span asp-validation-for="Avaliativo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Arquivo" class="control-label my-2"></label>
-                <input asp-for="Arquivo" type="file" />
             </div>
             <div class="d-flex justify-content-end py-5">
                 <div class="col-3">

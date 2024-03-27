@@ -84,7 +84,7 @@ namespace ModernSchoolWEB.Controllers
 
             }
 
-            return RedirectToAction(nameof(Index), new { idTurma = viewModel.IdTurma, idComponente = viewModel.IdComponente  });
+            return RedirectToAction(nameof(Index), new { idTurma = viewModel.IdTurma, idComponente = viewModel.IdComponente });
         }
 
 
@@ -120,7 +120,7 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AvaliacaoViewModel avaliacaoModel)
         {
-            if(avaliacaoModel.Arquivo == null)
+            if (avaliacaoModel.Arquivo == null)
             {
                 ModelState.Remove("Arquivo");
             }
@@ -132,7 +132,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     var listaForTurma = _avaliacaoService.GetAllAlunos(avaliacaoModel.IdTurma);
                     MemoryStream ms = new();
-                    if(avaliacaoModel.Arquivo != null)
+                    if (avaliacaoModel.Arquivo != null)
                         avaliacaoModel.Arquivo.CopyTo(ms);
                     byte[] arquivo = ms.ToArray();
                     Alunoavaliacao alunoAvaliacao = new();
@@ -170,7 +170,12 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Edit(int id)
         {
             Avaliacao avaliacao = _avaliacaoService.Get(id);
+            ViewData["FlagLyoutProf"] = true;
+            ViewData["Turma"] = _turmaService.Get(avaliacao.IdTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(avaliacao.IdComponente).Nome;
             AvaliacaoViewModel avaliacaoModel = _mapper.Map<AvaliacaoViewModel>(avaliacao);
+            IEnumerable<Periodo> listaPeriodo = _periodoService.GetAll();
+            avaliacaoModel.listaPeriodo = new SelectList(listaPeriodo, "Id", "Nome", null);
 
             return View(avaliacaoModel);
         }
@@ -180,33 +185,35 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, AvaliacaoViewModel avaliacaoModel)
         {
+            if (avaliacaoModel.Arquivo == null)
+                ModelState.Remove("Arquivo");
             if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);
                 _avaliacaoService.Edit(avaliacao);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
         }
 
         // GET: AvaliacaoController1/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int idTurma)
         {
             Avaliacao avaliacao = _avaliacaoService.Get(id);
             AvaliacaoViewModel avaliacaoModel = _mapper.Map<AvaliacaoViewModel>(avaliacao);
-
+            avaliacaoModel.IdTurma = idTurma;
             return View(avaliacaoModel);
         }
 
         // POST: AvaliacaoController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, AvaliacaoViewModel avaliacaoModel)
+        public ActionResult Delete(int id, int idTurma, AvaliacaoViewModel avaliacaoModel)
         {
-
+            avaliacaoModel.IdTurma = idTurma;
             _avaliacaoService.Delete(id);
 
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
 
         }
     }
