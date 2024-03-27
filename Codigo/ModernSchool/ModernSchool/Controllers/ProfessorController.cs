@@ -241,7 +241,8 @@ namespace ModernSchoolWEB.Controllers
             model.Componente = _componenteService.Get(idComponente).Nome;
             model.Turma = _turmaService.Get(idTurma).Turma1;
             model.Alunos = _pessoaService.GetAlunosTurma(idTurma);
-
+            model.IdComponente = idComponente;
+            model.IdTurma = idTurma;
             return View(model);
 
         }

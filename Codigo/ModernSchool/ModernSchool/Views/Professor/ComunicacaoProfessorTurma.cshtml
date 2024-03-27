@@ -4,62 +4,53 @@
 <label>Turma: @Model.Turma Componente: @Model.Componente</label>
 
 <form asp-action="ComunicacaoProfessorTurma" method="post">
-<table>
-    <thead>
-        <tr>
-            <th>N°</th>
-            <th>
-                Matricula
-            </th>
-            <th>
-                Nome
-            </th>
-            <th>
-                Alunos
-                <input type="checkbox" />
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-
-
-
+    <input asp-for="IdTurma" type="hidden" />
+    <input asp-for="IdComponente" type="hidden" />
+    <table>
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>
+                    Matricula
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Alunos
+                    <input type="checkbox" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
             @for (int i = 0; i < Model.Alunos.Count(); i++)
             {
-                <input asp-for="IdTurma" type="hidden" />
-                <input asp-for="IdComponente" type="hidden"/>
-            <tr>
-
-
-                <td>
+                <tr>
+                    <td>
                         @(i + 1)
-                </td>
-                <td>
+                    </td>
+                    <td>
                         @Model.Alunos[i].IdAluno
                         <input asp-for="@Model.Alunos[i].IdAluno" value="@Model.Alunos[i].IdAluno" type="hidden" />
-                </td>
-                <td>
+                    </td>
+                    <td>
                         @Model.Alunos[i].NomeAluno
-                </td>
-                <td>
-                    <input type="checkbox" asp-for="@Model.Alunos[i].Enviar" value="True" />
-                </td>
-
-
-            </tr>
+                    </td>
+                    <td>
+                        <input type="checkbox" asp-for="@Model.Alunos[i].Enviar" value="True" />
+                    </td>
+                </tr>
             }
+            <div class="mb-3">
+                <label asp-for="Menssagem" class="form-label">Example textarea</label>
+                <textarea class="form-control" asp-for="Menssagem" rows="3" cols="5"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enviar" class="btn btn-primary" />
+            </div>
 
-        <div class="mb-3">
-            <label asp-for="Menssagem" class="form-label">Example textarea</label>
-            <textarea class="form-control" asp-for="Menssagem" rows="3" cols="5"></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Enviar" class="btn btn-primary" />
-        </div>
-
-        
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </form>
 <div class="container py-4">
     <div class="row">
@@ -68,3 +59,4 @@
                asp-route-idComponente="@Model.IdComponente"> Voltar </a>
         </div>
     </div>
+</div>
