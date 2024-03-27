@@ -251,6 +251,17 @@ namespace ModernSchoolWEB.Controllers
         {
             if(ModelState.IsValid)
             {
+
+                List<IndexAlunoTurmaDTO> alunos = new();
+
+                foreach (var item in model.Alunos)
+                {
+                    if(item.Enviar == true)
+                    {
+                        alunos.Add(item);
+                    }
+                }
+
                 Comunicacao comunicacao = new Comunicacao
                 {
                     EnviarAlunos = 0,
@@ -260,7 +271,7 @@ namespace ModernSchoolWEB.Controllers
                     IdComponente = model.IdComponente
                     
                 };
-                _comunicacaoService.SalvarComunicacao(comunicacao, model.Alunos);
+                _comunicacaoService.SalvarComunicacao(comunicacao, alunos);
             }
 
             return RedirectToAction(nameof(ComunicacaoProfessorTurma), new { idTurma = model.IdTurma, idComponente = model.IdComponente });
