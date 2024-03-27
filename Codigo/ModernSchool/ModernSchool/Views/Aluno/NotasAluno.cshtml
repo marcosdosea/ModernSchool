@@ -1,0 +1,40 @@
+﻿@model ModernSchoolWEB.Models.NotasAlunoModel
+
+
+<h2>Notas</h2>
+@{
+    bool flag = true;
+}
+<table class="table table-sm table-striped table-bordered">
+    @for (int componente = 0; componente < Model.Componentes.Count(); componente++)
+    {
+        <thead>
+            <tr>
+                @if (flag)
+                {
+                    <th style="width: 90px"></th>
+                    @for (int periodo = 0; periodo < Model.PeriodosNotas.Count(); periodo++)
+                    {
+                        if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo].IdComponente)
+                        {
+                            <th style="width: 90px"><strong>@Model.PeriodosNotas[periodo].PeriodoAvaliacao Período</strong></th>
+                        }
+                    }
+                    flag = false;
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="width: 90px"><label>@Model.Componentes[componente].NomeComponente</label></th>
+                @for (int periodo1 = 0; periodo1 < Model.PeriodosNotas.Count(); periodo1++)
+                {
+                    if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo1].IdComponente)
+                    {
+                        <th style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
+                    }
+                }
+            </tr>
+        </tbody>
+    }
+</table>

@@ -11,7 +11,7 @@ namespace ModernSchoolWEB.Models
 
       
         public int Id { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
         [Display(Name ="Data Show")]
         public bool DataShow { get; set; }
         [Display(Name ="Livos")]

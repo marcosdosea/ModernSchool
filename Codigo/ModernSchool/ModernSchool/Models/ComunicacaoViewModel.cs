@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModernSchoolWEB.Models
 {
@@ -23,5 +24,10 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Código do componente")]
         [Required(ErrorMessage = "Campo Código do componente é obrigatório")]
         public int IdComponente { get; set; }
+    }
+    public class ComunicacaoModel
+    {
+        public IEnumerable<Comunicacao> Comunicacoes { get; set; }
+        public int IdTurma { get; set; }
     }
 }

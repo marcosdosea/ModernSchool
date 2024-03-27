@@ -1,62 +1,72 @@
 ﻿@model ModernSchoolWEB.Models.AvaliacaoViewModel
 
-<h4>AvaliacaoViewModel</h4>
-<hr />
+<div class="py-1">
+    <label class="fs-5">Turma: @ViewData["Turma"]</label>
+    <label class="fs-5">Componente: @ViewData["Componente"]</label>
+</div>
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DataEntrega" class="control-label"></label>
-                <input asp-for="DataEntrega" class="form-control" />
+                <input asp-for="DataEntrega" class="form-control col-3" type="datetime-local" value="@Model.DataEntrega.ToString("yyyy-MM-ddTHH:mm")" />
                 <span asp-validation-for="DataEntrega" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoAvaliacao" class="control-label"></label>
-                <input asp-for="TipoAvaliacao" class="form-control" />
+                <select asp-for="TipoAvaliacao" class="form-select col-3">
+                    @{
+                        foreach (var item in Model.listaTipoAtividade)
+                        {
+                            <option value="@item.Key">
+                                @item.Value
+                            </option>
+                        }
+
+                    }
+                </select>
                 <span asp-validation-for="TipoAvaliacao" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Peso" class="control-label"></label>
-                <input asp-for="Peso" class="form-control" />
-                <span asp-validation-for="Peso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Avaliativo" class="control-label"></label>
-                <input asp-for="Avaliativo" class="form-control" />
-                <span asp-validation-for="Avaliativo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTurma" class="control-label"></label>
-                <input asp-for="IdTurma" class="form-control" />
-                <span asp-validation-for="IdTurma" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdComponente" class="control-label"></label>
-                <input asp-for="IdComponente" class="form-control" />
-                <span asp-validation-for="IdComponente" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="IdPeriodo" class="control-label"></label>
-                <input asp-for="IdPeriodo" class="form-control" />
+                <select asp-for="IdPeriodo" asp-items="@Model.listaPeriodo" class="form-select col-3"></select>
                 <span asp-validation-for="IdPeriodo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Peso" class="control-label"></label>
+                <input asp-for="Peso" class="form-control col-3" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Arquivo" class="control-label my-2"></label>
+                <input asp-for="Arquivo" class="form-control col-5" type="file" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Avaliativo" class="control-label my-2"></label>
+                @if (Model.Avaliativo)
+                {
+                    <input asp-for="Avaliativo" type="checkbox"  checked/>
+                }
+                else
+                {
+                    <input asp-for="Avaliativo" type="checkbox"  />
+                }
+
+                <span asp-validation-for="Avaliativo" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-end py-5">
+                <div class="col-3">
+                    <a asp-controller="Avaliacao" asp-action="Index" class="btn bg-secondary text-white border border-0 d-grid gap-2 col" asp-route-idTurma="@Model.IdTurma"
+                       asp-route-idComponente="@Model.IdComponente"> Voltar </a>
+                </div>
+                <input asp-for="IdTurma" value="@Model.IdTurma" type="hidden" />
+                <input asp-for="IdComponente" value="@Model.IdComponente" type="hidden" />
+                <div class="form-group col-3">
+                    <input class="btn cor-bg d-grid gap-2 col text-white border border-0" type="submit" value="Adicionar" />
+                </div>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
