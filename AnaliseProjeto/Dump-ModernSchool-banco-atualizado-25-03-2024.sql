@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `modernschool` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `modernschool`;
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: modernschool
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	5.7.39-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,10 +23,10 @@ DROP TABLE IF EXISTS `__efmigrationshistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `__efmigrationshistory` (
-  `MigrationId` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `ProductVersion` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MigrationId` varchar(150) NOT NULL,
+  `ProductVersion` varchar(32) NOT NULL,
   PRIMARY KEY (`MigrationId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,17 +46,17 @@ DROP TABLE IF EXISTS `alunoavaliacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alunoavaliacao` (
-  `idAluno` int unsigned NOT NULL,
-  `idAvaliacao` int unsigned NOT NULL,
+  `idAluno` int(10) unsigned NOT NULL,
+  `idAvaliacao` int(10) unsigned NOT NULL,
   `nota` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `dataEntrega` datetime NOT NULL,
-  `arquivo` blob,
+  `dataEntrega` datetime DEFAULT NULL,
+  `arquivo` mediumblob,
   PRIMARY KEY (`idAluno`,`idAvaliacao`),
   KEY `fk_PessoaAvaliacao_Avaliacao1_idx` (`idAvaliacao`),
   KEY `fk_PessoaAvaliacao_Pessoa1_idx` (`idAluno`),
-  CONSTRAINT `fk_PessoaAvaliacao_Avaliacao1` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`id`),
-  CONSTRAINT `fk_PessoaAvaliacao_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_PessoaAvaliacao_Avaliacao1` FOREIGN KEY (`idAvaliacao`) REFERENCES `avaliacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PessoaAvaliacao_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +65,6 @@ CREATE TABLE `alunoavaliacao` (
 
 LOCK TABLES `alunoavaliacao` WRITE;
 /*!40000 ALTER TABLE `alunoavaliacao` DISABLE KEYS */;
-INSERT INTO `alunoavaliacao` VALUES (6,1,0.00,'2024-03-25 16:26:56',_binary 'from tkinter import *\r\nimport random as r\r\n\r\ndef resultado():\r\n\r\n    jogador = \"\"\r\n    vencedor = \"\"\r\n    if estado_radio.get() == 1:\r\n        jogador = \"Impar\"\r\n    elif estado_radio.get() == 2:\r\n        jogador = \"Par\"\r\n\r\n    if estado_radio.get() == 0:\r\n        resultadoPartida = Label(text=\"Escolha uma opcao\").grid(column=4,row=5)\r\n\r\n    else:\r\n        numPc = r.randint(1,10)\r\n        soma = int(escolhaNum.get()) + numPc\r\n        div = soma%2\r\n\r\n        if div == 0:\r\n            vencedor = \"Par\"\r\n        else:\r\n            vencedor = \"Impar\"\r\n        if(vencedor == jogador):\r\n            resultadoPartida = Label(text=f\"Voce venceu, o pc escolheu {numPc} \").grid(column=4,row=5)\r\n        else:\r\n\r\n            resultadoPartida = Label(text=f\"Voce perdeu, o pc escolheu {numPc} \").grid(column=4,row=5)\r\n            \r\njanela = Tk()\r\njanela.title(\"Impar par\")\r\njanela.minsize(height=500,width=500)\r\n\r\nestado_radio = IntVar()\r\n\r\nradiobutton1 = Radiobutton(text=\"Ímpar\", value=1, variable=estado_radio).grid(column=3,row=1)\r\nradiobutton2 = Radiobutton(text=\"Par\", value=2, variable=estado_radio).grid(column=6,row=1)\r\nnumInfo = Label(text=\"Informe o seu Número\").grid(column=4,row=2)\r\nescolhaNum = Entry()\r\nescolhaNum.grid(column=4,row=3)\r\njogar = Button(text=\"Jogar\",command=resultado).grid(column=4,row=4)\r\n\r\n\r\njanela.mainloop()\r\n\r\n\r\n\r\n\r\n\r\n'),(7,1,0.00,'2024-03-25 16:26:57',_binary 'from tkinter import *\r\nimport random as r\r\n\r\ndef resultado():\r\n\r\n    jogador = \"\"\r\n    vencedor = \"\"\r\n    if estado_radio.get() == 1:\r\n        jogador = \"Impar\"\r\n    elif estado_radio.get() == 2:\r\n        jogador = \"Par\"\r\n\r\n    if estado_radio.get() == 0:\r\n        resultadoPartida = Label(text=\"Escolha uma opcao\").grid(column=4,row=5)\r\n\r\n    else:\r\n        numPc = r.randint(1,10)\r\n        soma = int(escolhaNum.get()) + numPc\r\n        div = soma%2\r\n\r\n        if div == 0:\r\n            vencedor = \"Par\"\r\n        else:\r\n            vencedor = \"Impar\"\r\n        if(vencedor == jogador):\r\n            resultadoPartida = Label(text=f\"Voce venceu, o pc escolheu {numPc} \").grid(column=4,row=5)\r\n        else:\r\n\r\n            resultadoPartida = Label(text=f\"Voce perdeu, o pc escolheu {numPc} \").grid(column=4,row=5)\r\n            \r\njanela = Tk()\r\njanela.title(\"Impar par\")\r\njanela.minsize(height=500,width=500)\r\n\r\nestado_radio = IntVar()\r\n\r\nradiobutton1 = Radiobutton(text=\"Ímpar\", value=1, variable=estado_radio).grid(column=3,row=1)\r\nradiobutton2 = Radiobutton(text=\"Par\", value=2, variable=estado_radio).grid(column=6,row=1)\r\nnumInfo = Label(text=\"Informe o seu Número\").grid(column=4,row=2)\r\nescolhaNum = Entry()\r\nescolhaNum.grid(column=4,row=3)\r\njogar = Button(text=\"Jogar\",command=resultado).grid(column=4,row=4)\r\n\r\n\r\njanela.mainloop()\r\n\r\n\r\n\r\n\r\n\r\n');
 /*!40000 ALTER TABLE `alunoavaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,14 +76,14 @@ DROP TABLE IF EXISTS `alunocomunicacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alunocomunicacao` (
-  `idAluno` int unsigned NOT NULL,
-  `idComunicacao` int unsigned NOT NULL,
+  `idAluno` int(10) unsigned NOT NULL,
+  `idComunicacao` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idAluno`,`idComunicacao`),
   KEY `fk_PessoaComunicacao_Comunicacao1_idx` (`idComunicacao`),
   KEY `fk_PessoaComunicacao_Pessoa1_idx` (`idAluno`),
-  CONSTRAINT `fk_PessoaComunicacao_Comunicacao1` FOREIGN KEY (`idComunicacao`) REFERENCES `comunicacao` (`id`),
-  CONSTRAINT `fk_PessoaComunicacao_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_PessoaComunicacao_Comunicacao1` FOREIGN KEY (`idComunicacao`) REFERENCES `comunicacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PessoaComunicacao_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,15 +103,15 @@ DROP TABLE IF EXISTS `alunoturma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alunoturma` (
-  `idAluno` int unsigned NOT NULL,
-  `idTurma` int NOT NULL,
+  `idAluno` int(10) unsigned NOT NULL,
+  `idTurma` int(11) NOT NULL,
   `status` enum('M','A','R','C') NOT NULL DEFAULT 'M' COMMENT 'M - MATRICULADO\nA - APROVADO\nR - REPROVADO\nC - CANCELADO',
   PRIMARY KEY (`idAluno`,`idTurma`),
   KEY `fk_PessoaTurma_Turma1_idx` (`idTurma`),
   KEY `fk_PessoaTurma_Pessoa1_idx` (`idAluno`),
-  CONSTRAINT `fk_PessoaTurma_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`),
-  CONSTRAINT `fk_PessoaTurma_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_PessoaTurma_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PessoaTurma_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,14 +132,14 @@ DROP TABLE IF EXISTS `anoletivo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `anoletivo` (
-  `anoLetivo` int unsigned NOT NULL,
-  `idEscola` int unsigned NOT NULL,
+  `anoLetivo` int(10) unsigned NOT NULL,
+  `idEscola` int(10) unsigned NOT NULL,
   `dataInicio` date NOT NULL,
   `dataFim` date NOT NULL,
   PRIMARY KEY (`anoLetivo`),
   KEY `fk_AnoLetivo_Escola1_idx` (`idEscola`),
-  CONSTRAINT `fk_AnoLetivo_Escola1` FOREIGN KEY (`idEscola`) REFERENCES `escola` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_AnoLetivo_Escola1` FOREIGN KEY (`idEscola`) REFERENCES `escola` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,14 +160,14 @@ DROP TABLE IF EXISTS `aspnetroleclaims`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aspnetroleclaims` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `RoleId` varchar(255) NOT NULL,
   `ClaimType` text,
   `ClaimValue` text,
   PRIMARY KEY (`Id`),
   KEY `IX_AspNetRoleClaims_RoleId` (`RoleId`),
   CONSTRAINT `FK_AspNetRoleClaims_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +193,7 @@ CREATE TABLE `aspnetroles` (
   `ConcurrencyStamp` text,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `RoleNameIndex` (`NormalizedName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,14 +214,14 @@ DROP TABLE IF EXISTS `aspnetuserclaims`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aspnetuserclaims` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` varchar(255) NOT NULL,
   `ClaimType` text,
   `ClaimValue` text,
   PRIMARY KEY (`Id`),
   KEY `IX_AspNetUserClaims_UserId` (`UserId`),
   CONSTRAINT `FK_AspNetUserClaims_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +248,7 @@ CREATE TABLE `aspnetuserlogins` (
   PRIMARY KEY (`LoginProvider`,`ProviderKey`),
   KEY `IX_AspNetUserLogins_UserId` (`UserId`),
   CONSTRAINT `FK_AspNetUserLogins_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +274,7 @@ CREATE TABLE `aspnetuserroles` (
   KEY `IX_AspNetUserRoles_RoleId` (`RoleId`),
   CONSTRAINT `FK_AspNetUserRoles_AspNetRoles_RoleId` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE,
   CONSTRAINT `FK_AspNetUserRoles_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,11 +309,11 @@ CREATE TABLE `aspnetusers` (
   `TwoFactorEnabled` bit(1) NOT NULL,
   `LockoutEnd` timestamp NULL DEFAULT NULL,
   `LockoutEnabled` bit(1) NOT NULL,
-  `AccessFailedCount` int NOT NULL,
+  `AccessFailedCount` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UserNameIndex` (`NormalizedUserName`),
   KEY `EmailIndex` (`NormalizedEmail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,7 +340,7 @@ CREATE TABLE `aspnetusertokens` (
   `Value` text,
   PRIMARY KEY (`UserId`,`LoginProvider`,`Name`),
   CONSTRAINT `FK_AspNetUserTokens_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,22 +360,23 @@ DROP TABLE IF EXISTS `avaliacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `avaliacao` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(500) NOT NULL,
   `dataEntrega` datetime NOT NULL,
   `tipoAvaliacao` enum('PROVA','PROJETO','ATIVIDADE') NOT NULL,
-  `peso` smallint NOT NULL,
+  `peso` smallint(2) NOT NULL,
   `avaliativo` tinyint(1) DEFAULT NULL,
-  `idTurma` int NOT NULL,
-  `idComponente` int unsigned NOT NULL,
-  `idPeriodo` int unsigned NOT NULL,
+  `idTurma` int(11) NOT NULL,
+  `idComponente` int(10) unsigned NOT NULL,
+  `idPeriodo` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Avaliacao_Turma1_idx` (`idTurma`),
   KEY `fk_Avaliacao_Componente1_idx` (`idComponente`),
   KEY `fk_Avaliacao_Periodo1_idx` (`idPeriodo`),
-  CONSTRAINT `fk_Avaliacao_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`),
-  CONSTRAINT `fk_Avaliacao_Periodo1` FOREIGN KEY (`idPeriodo`) REFERENCES `periodo` (`id`),
-  CONSTRAINT `fk_Avaliacao_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Avaliacao_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Avaliacao_Periodo1` FOREIGN KEY (`idPeriodo`) REFERENCES `periodo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Avaliacao_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -387,7 +385,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,'2024-03-25 16:25:00','PROVA',2,1,1,1,1);
+INSERT INTO `avaliacao` VALUES (1,'','2024-03-25 16:25:00','PROVA',2,1,1,1,1);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,10 +397,10 @@ DROP TABLE IF EXISTS `cargo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cargo` (
-  `idCargo` int unsigned NOT NULL,
+  `idCargo` int(10) unsigned NOT NULL,
   `descricao` varchar(45) NOT NULL,
   PRIMARY KEY (`idCargo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,10 +421,10 @@ DROP TABLE IF EXISTS `componente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `componente` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -447,18 +445,22 @@ DROP TABLE IF EXISTS `comunicacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comunicacao` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `enviarAlunos` tinyint NOT NULL DEFAULT '0',
-  `enviarResponsaveis` tinyint NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `data` datetime NOT NULL,
+  `enviarAlunos` tinyint(4) NOT NULL DEFAULT '0',
+  `enviarResponsaveis` tinyint(4) NOT NULL,
   `mensagem` varchar(500) NOT NULL,
-  `idTurma` int NOT NULL,
-  `idComponente` int unsigned NOT NULL,
+  `idPessoaRemetente` int(10) unsigned NOT NULL,
+  `idTurma` int(11) NOT NULL,
+  `idComponente` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Comunicacao_Turma1_idx` (`idTurma`),
   KEY `fk_Comunicacao_Componente1_idx` (`idComponente`),
-  CONSTRAINT `fk_Comunicacao_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`),
-  CONSTRAINT `fk_Comunicacao_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  KEY `fk_Comunicacao_Pessoa1_idx` (`idPessoaRemetente`),
+  CONSTRAINT `fk_Comunicacao_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comunicacao_Pessoa1` FOREIGN KEY (`idPessoaRemetente`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Comunicacao_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -478,15 +480,15 @@ DROP TABLE IF EXISTS `curriculo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `curriculo` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `escolaridade` char(1) NOT NULL,
   `anoFaixa` varchar(4) NOT NULL,
-  `anoLetivo` smallint NOT NULL,
-  `idGoverno` int unsigned NOT NULL,
+  `anoLetivo` smallint(4) NOT NULL,
+  `idGoverno` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Curriculo_Governo1_idx` (`idGoverno`),
-  CONSTRAINT `fk_Curriculo_Governo1` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Curriculo_Governo1` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -507,24 +509,24 @@ DROP TABLE IF EXISTS `diariodeclasse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `diariodeclasse` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
   `dataShow` tinyint(1) NOT NULL DEFAULT '0',
   `livros` tinyint(1) NOT NULL DEFAULT '0',
   `livrosSeduc` tinyint(1) NOT NULL DEFAULT '0',
   `resumoAula` varchar(100) DEFAULT NULL,
-  `idTurma` int NOT NULL,
-  `idComponente` int unsigned NOT NULL,
-  `idProfessor` int unsigned NOT NULL,
+  `idTurma` int(11) NOT NULL,
+  `idComponente` int(10) unsigned NOT NULL,
+  `idProfessor` int(10) unsigned NOT NULL,
   `tipoAula` enum('C','A') NOT NULL DEFAULT 'C',
   PRIMARY KEY (`id`),
   KEY `fk_DiarioDeClasse_Turma1_idx` (`idTurma`),
   KEY `fk_DiarioDeClasse_Componente1_idx` (`idComponente`),
   KEY `fk_DiarioDeClasse_Pessoa1_idx` (`idProfessor`),
-  CONSTRAINT `fk_DiarioDeClasse_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`),
-  CONSTRAINT `fk_DiarioDeClasse_Pessoa1` FOREIGN KEY (`idProfessor`) REFERENCES `pessoa` (`id`),
-  CONSTRAINT `fk_DiarioDeClasse_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_DiarioDeClasse_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DiarioDeClasse_Pessoa1` FOREIGN KEY (`idProfessor`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DiarioDeClasse_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,21 +547,21 @@ DROP TABLE IF EXISTS `escola`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `escola` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Nome` varchar(70) NOT NULL,
   `cnpj` char(14) NOT NULL,
   `rua` varchar(50) DEFAULT NULL,
   `bairro` varchar(40) DEFAULT NULL,
-  `numero` smallint DEFAULT NULL,
-  `idGoverno` int unsigned NOT NULL,
-  `idDiretor` int unsigned NOT NULL,
+  `numero` smallint(4) DEFAULT NULL,
+  `idGoverno` int(10) unsigned NOT NULL,
+  `idDiretor` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Nome_UNIQUE` (`Nome`),
   KEY `fk_Escola_Prefeitura_idx` (`idGoverno`),
   KEY `fk_Escola_Pessoa1_idx` (`idDiretor`),
-  CONSTRAINT `fk_Escola_Pessoa1` FOREIGN KEY (`idDiretor`) REFERENCES `pessoa` (`id`),
-  CONSTRAINT `fk_Escola_Prefeitura` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Escola_Pessoa1` FOREIGN KEY (`idDiretor`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Escola_Prefeitura` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -580,15 +582,15 @@ DROP TABLE IF EXISTS `frequenciaaluno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `frequenciaaluno` (
-  `idAluno` int unsigned NOT NULL,
-  `idDiarioDeClasse` int unsigned NOT NULL,
-  `faltas` int NOT NULL DEFAULT '0',
+  `idAluno` int(10) unsigned NOT NULL,
+  `idDiarioDeClasse` int(10) unsigned NOT NULL,
+  `faltas` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idAluno`,`idDiarioDeClasse`),
   KEY `fk_PessoaDiarioDeClasse_DiarioDeClasse1_idx` (`idDiarioDeClasse`),
   KEY `fk_PessoaDiarioDeClasse_Pessoa1_idx` (`idAluno`),
-  CONSTRAINT `fk_PessoaDiarioDeClasse_DiarioDeClasse1` FOREIGN KEY (`idDiarioDeClasse`) REFERENCES `diariodeclasse` (`id`),
-  CONSTRAINT `fk_PessoaDiarioDeClasse_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_PessoaDiarioDeClasse_DiarioDeClasse1` FOREIGN KEY (`idDiarioDeClasse`) REFERENCES `diariodeclasse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PessoaDiarioDeClasse_Pessoa1` FOREIGN KEY (`idAluno`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -608,12 +610,12 @@ DROP TABLE IF EXISTS `governo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `governo` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `municipio` varchar(50) NOT NULL,
   `Estado` varchar(50) NOT NULL,
   `dependenciaAdministrativa` enum('M','E') NOT NULL DEFAULT 'M',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -634,22 +636,22 @@ DROP TABLE IF EXISTS `governoservidor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `governoservidor` (
-  `idGoverno` int unsigned NOT NULL,
-  `idPessoa` int unsigned NOT NULL,
-  `idCargo` int unsigned NOT NULL,
+  `idGoverno` int(10) unsigned NOT NULL,
+  `idPessoa` int(10) unsigned NOT NULL,
+  `idCargo` int(10) unsigned NOT NULL,
   `dataInicio` date NOT NULL,
   `dataFim` date DEFAULT NULL,
   `status` enum('A','I','L') NOT NULL DEFAULT 'A' COMMENT 'A - ATIVO\nI - INATIVO\nL - LICENCIADO',
-  `idEscola` int unsigned DEFAULT NULL,
+  `idEscola` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`idGoverno`,`idPessoa`),
   KEY `fk_GovernoServidor_Pessoa1_idx` (`idPessoa`),
   KEY `fk_GovernoServidor_Cargo1_idx` (`idCargo`),
   KEY `fk_GovernoServidor_Escola1_idx` (`idEscola`),
-  CONSTRAINT `fk_GovernoServidor_Cargo1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`),
-  CONSTRAINT `fk_GovernoServidor_Escola1` FOREIGN KEY (`idEscola`) REFERENCES `escola` (`id`),
-  CONSTRAINT `fk_GovernoServidor_Governo1` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`),
-  CONSTRAINT `fk_GovernoServidor_Pessoa1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_GovernoServidor_Cargo1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_GovernoServidor_Escola1` FOREIGN KEY (`idEscola`) REFERENCES `escola` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_GovernoServidor_Governo1` FOREIGN KEY (`idGoverno`) REFERENCES `governo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_GovernoServidor_Pessoa1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -670,21 +672,21 @@ DROP TABLE IF EXISTS `gradehorario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `gradehorario` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idComponente` int unsigned NOT NULL,
-  `idTurma` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idComponente` int(10) unsigned NOT NULL,
+  `idTurma` int(11) NOT NULL,
   `diaSemana` enum('DOM','SEG','TER','QUA','QUI','SEX','SAB') NOT NULL,
   `horaInicio` varchar(4) NOT NULL,
   `horaFim` varchar(4) NOT NULL,
-  `idProfessor` int unsigned NOT NULL,
+  `idProfessor` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_ComponenteTurma_Turma1_idx` (`idTurma`),
   KEY `fk_ComponenteTurma_Componente1_idx` (`idComponente`),
   KEY `fk_GradeHorario_Pessoa1_idx` (`idProfessor`),
-  CONSTRAINT `fk_ComponenteTurma_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`),
-  CONSTRAINT `fk_ComponenteTurma_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`),
-  CONSTRAINT `fk_GradeHorario_Pessoa1` FOREIGN KEY (`idProfessor`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_ComponenteTurma_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ComponenteTurma_Turma1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_GradeHorario_Pessoa1` FOREIGN KEY (`idProfessor`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -705,13 +707,13 @@ DROP TABLE IF EXISTS `habilidade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `habilidade` (
-  `idHabilidade` int unsigned NOT NULL AUTO_INCREMENT,
+  `idHabilidade` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descricao` varchar(300) NOT NULL,
-  `idObjetoDeConhecimento` int unsigned NOT NULL,
+  `idObjetoDeConhecimento` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idHabilidade`),
   KEY `fk_Habilidade_ObjetoDeConhecimento1_idx` (`idObjetoDeConhecimento`),
-  CONSTRAINT `fk_Habilidade_ObjetoDeConhecimento1` FOREIGN KEY (`idObjetoDeConhecimento`) REFERENCES `objetodeconhecimento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Habilidade_ObjetoDeConhecimento1` FOREIGN KEY (`idObjetoDeConhecimento`) REFERENCES `objetodeconhecimento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -732,14 +734,14 @@ DROP TABLE IF EXISTS `objetodeconhecimento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `objetodeconhecimento` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `idUnidadeTematica` int unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idUnidadeTematica` int(10) unsigned NOT NULL,
   `descricao` varchar(200) NOT NULL,
-  `sequenciaProposta` int NOT NULL,
+  `sequenciaProposta` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_ObjetoDeConhecimento_UnidadeTematica1_idx` (`idUnidadeTematica`),
-  CONSTRAINT `fk_ObjetoDeConhecimento_UnidadeTematica1` FOREIGN KEY (`idUnidadeTematica`) REFERENCES `unidadetematica` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_ObjetoDeConhecimento_UnidadeTematica1` FOREIGN KEY (`idUnidadeTematica`) REFERENCES `unidadetematica` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -760,14 +762,14 @@ DROP TABLE IF EXISTS `objetodeconhecimentodiariodeclasse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `objetodeconhecimentodiariodeclasse` (
-  `idObjetoDeConhecimento` int unsigned NOT NULL,
-  `idDiarioDeClasse` int unsigned NOT NULL,
+  `idObjetoDeConhecimento` int(10) unsigned NOT NULL,
+  `idDiarioDeClasse` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idObjetoDeConhecimento`,`idDiarioDeClasse`),
   KEY `fk_ObjetoDeConhecimentoDiarioDeClasse_ObjetoDeConhecimento1_idx` (`idObjetoDeConhecimento`),
   KEY `fk_ObjetoDeConhecimentoDiarioDeClasse_DiarioDeClasse1_idx` (`idDiarioDeClasse`),
-  CONSTRAINT `fk_ObjetoDeConhecimentoDiarioDeClasse_DiarioDeClasse1` FOREIGN KEY (`idDiarioDeClasse`) REFERENCES `diariodeclasse` (`id`),
-  CONSTRAINT `fk_ObjetoDeConhecimentoDiarioDeClasse_ObjetoDeConhecimento1` FOREIGN KEY (`idObjetoDeConhecimento`) REFERENCES `objetodeconhecimento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_ObjetoDeConhecimentoDiarioDeClasse_DiarioDeClasse1` FOREIGN KEY (`idDiarioDeClasse`) REFERENCES `diariodeclasse` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ObjetoDeConhecimentoDiarioDeClasse_ObjetoDeConhecimento1` FOREIGN KEY (`idObjetoDeConhecimento`) REFERENCES `objetodeconhecimento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -788,15 +790,15 @@ DROP TABLE IF EXISTS `periodo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `periodo` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(30) NOT NULL,
   `dataInicio` date DEFAULT NULL,
   `dataFim` date DEFAULT NULL,
-  `anoLetivo` int unsigned NOT NULL,
+  `anoLetivo` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Periodo_AnoLetivo1_idx` (`anoLetivo`),
-  CONSTRAINT `fk_Periodo_AnoLetivo1` FOREIGN KEY (`anoLetivo`) REFERENCES `anoletivo` (`anoLetivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Periodo_AnoLetivo1` FOREIGN KEY (`anoLetivo`) REFERENCES `anoletivo` (`anoLetivo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -817,18 +819,23 @@ DROP TABLE IF EXISTS `pessoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pessoa` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(70) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cpf` char(11) NOT NULL,
+  `nome` varchar(70) NOT NULL,
   `dataNascimento` date NOT NULL,
   `cep` varchar(8) NOT NULL,
   `rua` varchar(50) DEFAULT NULL,
   `bairro` varchar(40) DEFAULT NULL,
-  `numero` smallint unsigned DEFAULT NULL,
+  `numero` smallint(4) unsigned DEFAULT NULL,
+  `uf` char(2) DEFAULT 'SE',
+  `cidade` varchar(100) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL,
+  `telefone1` varchar(13) DEFAULT NULL,
+  `telefone2` varchar(13) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -837,7 +844,7 @@ CREATE TABLE `pessoa` (
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
-INSERT INTO `pessoa` VALUES (1,'Jose Souza','78954126684','1979-06-05','4511899',NULL,NULL,NULL,'diretor@gmail.com'),(2,'Emilio da Conceição ','78548854486','1982-01-04','4511899',NULL,NULL,NULL,'professor@gmail.com'),(4,'Jose Ramalho da Silva','45124567544','1995-06-21','4511899',NULL,NULL,NULL,'professorjose@gmail.com'),(5,'Maria da Silva','27854123645','2000-01-01','4511899',NULL,NULL,NULL,'professoramaria@gmail.com'),(6,'Matheus Da Cruz Souza','87456985471','2006-05-21','78547851',NULL,NULL,60,'matheusdacruzsouza1998@gmail.com'),(7,'Reinan De Jesus','25488763548','2000-06-25','75665652',NULL,NULL,60,'reinan@gmail.com');
+INSERT INTO `pessoa` VALUES (1,'78954126684','Jose Souza','1979-06-05','4511899',NULL,NULL,NULL,'SE',NULL,NULL,NULL,NULL,'diretor@gmail.com'),(2,'78548854486','Emilio da Conceição ','1982-01-04','4511899',NULL,NULL,NULL,'SE',NULL,NULL,NULL,NULL,'professor@gmail.com'),(4,'45124567544','Jose Ramalho da Silva','1995-06-21','4511899',NULL,NULL,NULL,'SE',NULL,NULL,NULL,NULL,'professorjose@gmail.com'),(5,'27854123645','Maria da Silva','2000-01-01','4511899',NULL,NULL,NULL,'SE',NULL,NULL,NULL,NULL,'professoramaria@gmail.com'),(6,'87456985471','Matheus Da Cruz Souza','2006-05-21','78547851',NULL,NULL,60,'SE',NULL,NULL,NULL,NULL,'matheusdacruzsouza1998@gmail.com'),(7,'25488763548','Reinan De Jesus','2000-06-25','75665652',NULL,NULL,60,'SE',NULL,NULL,NULL,NULL,'reinan@gmail.com');
 /*!40000 ALTER TABLE `pessoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -849,14 +856,14 @@ DROP TABLE IF EXISTS `pessoacomunicacao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pessoacomunicacao` (
-  `idPessoa` int unsigned NOT NULL,
-  `idComunicacao` int unsigned NOT NULL,
+  `idPessoa` int(10) unsigned NOT NULL,
+  `idComunicacao` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idPessoa`,`idComunicacao`),
   KEY `fk_PessoaComunicacao_Comunicacao2_idx` (`idComunicacao`),
   KEY `fk_PessoaComunicacao_Pessoa2_idx` (`idPessoa`),
-  CONSTRAINT `fk_PessoaComunicacao_Comunicacao2` FOREIGN KEY (`idComunicacao`) REFERENCES `comunicacao` (`id`),
-  CONSTRAINT `fk_PessoaComunicacao_Pessoa2` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_PessoaComunicacao_Comunicacao2` FOREIGN KEY (`idComunicacao`) REFERENCES `comunicacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PessoaComunicacao_Pessoa2` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -876,18 +883,18 @@ DROP TABLE IF EXISTS `turma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `turma` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `anoLetivo` int unsigned NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `anoLetivo` int(10) unsigned NOT NULL,
   `turma` varchar(50) NOT NULL,
-  `vagas` int unsigned NOT NULL,
-  `vagasDisponiveis` int NOT NULL,
+  `vagas` int(10) unsigned NOT NULL,
+  `vagasDisponiveis` int(11) NOT NULL,
   `sala` varchar(20) DEFAULT NULL,
   `escolaridade` enum('F','I','M') NOT NULL DEFAULT 'F',
   `status` enum('A','F','C') NOT NULL DEFAULT 'A' COMMENT 'A - ATIVA\nF - FINALIZADA\nC - CANCELADA',
   PRIMARY KEY (`id`),
   KEY `fk_Turma_AnoLetivo1_idx` (`anoLetivo`),
-  CONSTRAINT `fk_Turma_AnoLetivo1` FOREIGN KEY (`anoLetivo`) REFERENCES `anoletivo` (`anoLetivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_Turma_AnoLetivo1` FOREIGN KEY (`anoLetivo`) REFERENCES `anoletivo` (`anoLetivo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -908,17 +915,17 @@ DROP TABLE IF EXISTS `unidadetematica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unidadetematica` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descricao` varchar(100) NOT NULL,
-  `anoLetivo` smallint DEFAULT NULL,
-  `idCurriculo` int unsigned NOT NULL,
-  `idComponente` int unsigned NOT NULL,
+  `anoLetivo` smallint(4) DEFAULT NULL,
+  `idCurriculo` int(10) unsigned NOT NULL,
+  `idComponente` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_UnidadeTematica_Curriculo1_idx` (`idCurriculo`),
   KEY `fk_UnidadeTematica_Componente1_idx` (`idComponente`),
-  CONSTRAINT `fk_UnidadeTematica_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`),
-  CONSTRAINT `fk_UnidadeTematica_Curriculo1` FOREIGN KEY (`idCurriculo`) REFERENCES `curriculo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_UnidadeTematica_Componente1` FOREIGN KEY (`idComponente`) REFERENCES `componente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_UnidadeTematica_Curriculo1` FOREIGN KEY (`idCurriculo`) REFERENCES `curriculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -940,4 +947,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 16:35:38
+-- Dump completed on 2024-03-27 22:58:51
