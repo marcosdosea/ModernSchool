@@ -35,6 +35,11 @@ namespace ModernSchoolWEB.Models
         public string Sala { get; set; } = string.Empty;
         public string NomeEscola { get; set; } = string.Empty;  
         public int NumVagas { get; set; }
+        public string Uf { get; set; } = string.Empty;
+        public string Cidade { get; set; } = string.Empty;
+        public string Complemento { get; set; } = string.Empty;
+        public string Telefone1 { get; set; } = string.Empty;
+        public string Telefone2 { get; set; } = string.Empty;
         public List<IndexAlunoTurmaDTO> Alunos { get; set; }
     }
 

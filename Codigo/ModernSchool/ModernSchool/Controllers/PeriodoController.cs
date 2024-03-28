@@ -41,7 +41,7 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Create()
         {
             PeriodoViewModel periodoViewModel = new();
-            periodoViewModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo1", "AnoLetivo1", null);
+            periodoViewModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo", "AnoLetivo", null);
             return View(periodoViewModel);
         }
 
@@ -65,7 +65,7 @@ namespace ModernSchoolWEB.Controllers
         {
             Periodo periodo = _periodoService.Get(id);
             PeriodoViewModel periodoModel = _mapper.Map<PeriodoViewModel>(periodo);
-            periodoModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo1", "AnoLetivo1", null);
+            periodoModel.listaAnoLetivo = new SelectList(_anoLetivoService.GetAll(), "AnoLetivo", "AnoLetivo", null);
             return View(periodoModel);
         }
 

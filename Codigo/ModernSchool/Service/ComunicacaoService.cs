@@ -151,7 +151,9 @@ namespace Service
                     NomeComponente = g.IdComunicacaoNavigation.IdComponenteNavigation.Nome,
                     IdComponente = g.IdComunicacaoNavigation.IdComponente,
                     Menssagem = g.IdComunicacaoNavigation.Mensagem,
-                    IdComunicado = g.IdComunicacao
+                    IdComunicado = g.IdComunicacao,
+                    Data = g.IdComunicacaoNavigation.Data,
+                    NomeRemetente = g.IdComunicacaoNavigation.IdPessoaRemetenteNavigation.Nome,
                 });
             return query.ToList();
         }

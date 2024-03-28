@@ -11,7 +11,8 @@ namespace Core.DTO
         public string Menssagem { get; set; } = string.Empty;
         public string NomeComponente {  get; set; } = string.Empty;
         public int IdComponente { get; set; }
-
+        public string NomeRemetente {  get; set; } = string.Empty;
+        public DateTime Data { get; set; }
         public int IdComunicado {  get; set; }
 
     }

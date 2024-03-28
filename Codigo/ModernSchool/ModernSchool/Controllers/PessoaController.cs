@@ -207,6 +207,7 @@ namespace ModernSchoolWEB.Controllers
             model.Cep = model.Cep.Replace("-", "");
             Turma turma = _turmaService.Get(model.IdTurma);
 
+            
             Pessoa aluno = _pessoaService.Get(model.Id);
             if(aluno == null)
             {
@@ -220,6 +221,11 @@ namespace ModernSchoolWEB.Controllers
                     Email = model.Email,
                     Numero = model.Numero,
                     Rua = model.Rua,
+                    Uf = model.Uf,
+                    Complemento = model.Complemento,
+                    Telefone1 = model.Telefone1,
+                    Telefone2 = model.Telefone2,
+                    Cidade = model.Cidade
 
                 };
                 

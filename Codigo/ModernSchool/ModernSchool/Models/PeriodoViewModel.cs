@@ -24,7 +24,7 @@ namespace ModernSchoolWEB.Models
         public DateTime? DataFim { get; set; }
         [Required(ErrorMessage = "Campo ano Letivo é obrigatório")]
         [Display(Name = "Ano Letivo")]
-        public int? AnoLetivo1 { get; set; }
+        public int? AnoLetivo { get; set; }
         public SelectList listaAnoLetivo { get; set; }
     }
 }

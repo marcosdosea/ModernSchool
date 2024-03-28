@@ -250,14 +250,14 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public ActionResult ComunicacaoProfessorTurma(ComunicarProfessorTurmaViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
 
                 List<IndexAlunoTurmaDTO> alunos = new();
 
                 foreach (var item in model.Alunos)
                 {
-                    if(item.Enviar == true)
+                    if (item.Enviar == true)
                     {
                         alunos.Add(item);
                     }
@@ -269,8 +269,11 @@ namespace ModernSchoolWEB.Controllers
                     EnviarResponsaveis = 0,
                     IdTurma = model.IdTurma,
                     Mensagem = model.Menssagem,
-                    IdComponente = model.IdComponente
-                    
+                    IdComponente = model.IdComponente,
+                    IdPessoaRemetente = Convert.ToInt32(User.FindFirst("Id")?.Value),
+                    Data = DateTime.Now
+
+
                 };
                 _comunicacaoService.SalvarComunicacao(comunicacao, alunos);
             }

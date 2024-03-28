@@ -14,7 +14,7 @@ namespace Core
 
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public short? AnoLetivo1 { get; set; }
+        public short? AnoLetivo { get; set; }
         public int IdCurriculo { get; set; }
         public int IdComponente { get; set; }
 

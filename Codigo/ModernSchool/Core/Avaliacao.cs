@@ -13,6 +13,7 @@ namespace Core
         }
 
         public int Id { get; set; }
+        public string Descricao { get; set; }
         public DateTime DataEntrega { get; set; }
         public string TipoAvaliacao { get; set; }
         public short Peso { get; set; }
