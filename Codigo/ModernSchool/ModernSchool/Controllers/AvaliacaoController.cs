@@ -46,7 +46,7 @@ namespace ModernSchoolWEB.Controllers
             viewModel.IdComponente = idComponente;
             viewModel.IdTurma = idTurma;
             ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
-            ViewData["Componente"] = _componenteService.Get(idComponente).Nome; ;
+            ViewData["Componente"] = _componenteService.Get(idComponente).Nome;
             return View(viewModel);
         }
 

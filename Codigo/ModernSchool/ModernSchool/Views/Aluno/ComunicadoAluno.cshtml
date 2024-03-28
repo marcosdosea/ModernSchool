@@ -1,0 +1,31 @@
+﻿@model Core.DTO.AlunoComunicacaoIndexDTO
+
+<h6>Comunicado</h6>
+
+<label>Turma: @Model.NomeTurma</label>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Mensagem
+            </th>
+            <th>
+                Componente
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < @Model.Comunicados.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Model.Comunicados[i].Menssagem
+                </td>
+                <td>
+                    @Model.Comunicados[i].NomeComponente
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

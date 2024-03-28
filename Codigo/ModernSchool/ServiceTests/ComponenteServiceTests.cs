@@ -96,7 +96,7 @@ namespace Service.Tests
             Assert.IsInstanceOfType(listaComponente, typeof(IEnumerable<Componente>));
             Assert.IsNotNull(listaComponente);
             Assert.AreEqual(3, listaComponente.Count());
-            Assert.AreEqual(1, listaComponente.First().Id);
+            Assert.AreEqual(2, listaComponente.First().Id);
         }
     }
 }

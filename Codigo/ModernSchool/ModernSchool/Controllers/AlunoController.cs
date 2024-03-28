@@ -21,11 +21,13 @@ namespace ModernSchoolWEB.Controllers
         private readonly IComponenteService _componenteService;
         private readonly IMapper _mapper;
         private readonly IPeriodoService _periodoService;
+        private readonly IComunicacaoService _comunicacaoService;
 
         public AlunoController(IPessoaService pessooaService, IGradeHorarioService gradeHorarioService,
             IMapper mapper, ITurmaService turmaService, IAvaliacaoService avaliacaoService,
             IDiarioDeClasseService diarioDeClasseService,
-            IComponenteService componenteService, IPeriodoService periodo)
+            IComponenteService componenteService, IPeriodoService periodo,
+            IComunicacaoService comunicacaoService)
         {
             _pessooaService = pessooaService;
             _gradeHorarioService = gradeHorarioService;
@@ -35,6 +37,7 @@ namespace ModernSchoolWEB.Controllers
             _diarioDeClasseService = diarioDeClasseService;
             _componenteService = componenteService;
             _periodoService = periodo;
+            _comunicacaoService = comunicacaoService;
         }
 
         public ActionResult Index()
@@ -141,6 +144,20 @@ namespace ModernSchoolWEB.Controllers
 
             return View(model);
         }
+
+
+        public ActionResult ComunicadoAluno(int idTurma)
+        {
+            int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
+
+            AlunoComunicacaoIndexDTO comunicado = new();
+            comunicado.Comunicados = _comunicacaoService.ComunicacaoAluno(idAluno,idTurma);
+            comunicado.IdTurma = idTurma;
+            comunicado.NomeTurma = _turmaService.Get(idTurma).Turma1;
+            return View(comunicado);
+        }
+
+
 
     }
 }

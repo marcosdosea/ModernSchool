@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Service;
 
-namespace ServiceTests
+namespace Service.Tests
 {
     [TestClass()]
     public class PessoaServiceTests
