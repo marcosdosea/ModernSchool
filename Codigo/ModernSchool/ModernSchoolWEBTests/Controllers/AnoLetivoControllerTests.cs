@@ -63,7 +63,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
             AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo1);
+            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
             Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
         }
 
@@ -109,7 +109,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         {
             return new AnoLetivoViewModel
             {
-                AnoLetivo1 = 2022,
+                AnoLetivo = 2022,
                 DataInicio = DateTime.Parse("2022-01-01"),
                 DataFim = DateTime.Parse("2022-01-01"),
                 IdEscola = 1
@@ -126,7 +126,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
             AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo1);
+            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
             Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
         }
 
@@ -134,7 +134,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         public void EditTest_Post()
         {
             // Act
-            var result = controller.Edit(GetTargetAnoLetivoViewModel().AnoLetivo1, GetTargetAnoLetivoViewModel());
+            var result = controller.Edit(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -153,7 +153,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             ViewResult viewResult = (ViewResult)result;
             Assert.IsInstanceOfType(viewResult.ViewData.Model, typeof(AnoLetivoViewModel));
             AnoLetivoViewModel anoLetivoViewModel = (AnoLetivoViewModel)viewResult.ViewData.Model;
-            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo1);
+            Assert.AreEqual(2022, anoLetivoViewModel.AnoLetivo);
             Assert.AreEqual(1, anoLetivoViewModel.IdEscola);
         }
 
@@ -161,7 +161,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         public void DeleteTest_Post()
         {
             // Act
-            var result = controller.Delete(GetTargetAnoLetivoViewModel().AnoLetivo1, GetTargetAnoLetivoViewModel());
+            var result = controller.Delete(GetTargetAnoLetivoViewModel().AnoLetivo, GetTargetAnoLetivoViewModel());
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
@@ -174,7 +174,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         {
             return new Anoletivo
             {
-                AnoLetivo1 = 2022,
+                AnoLetivo = 2022,
                 DataInicio = DateTime.Parse("2022-01-01"),
                 DataFim = DateTime.Parse("2022-11-11"),
                 IdEscola = 1
@@ -187,21 +187,21 @@ namespace ModernSchoolWEBTest.Controllers.Tests
             {
                  new Anoletivo
                 {
-                    AnoLetivo1 = 2022,
+                    AnoLetivo = 2022,
                     DataInicio =  DateTime.Parse("2022-01-01"),
                     DataFim =  DateTime.Parse("2022-11-11"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
-                    AnoLetivo1 = 2023,
+                    AnoLetivo = 2023,
                     DataInicio =  DateTime.Parse("2023-01-01"),
                     DataFim =  DateTime.Parse("2023-01-01"),
                     IdEscola = 1
                 },
                 new Anoletivo
                 {
-                    AnoLetivo1 = 2024,
+                    AnoLetivo = 2024,
                     DataInicio =  DateTime.Parse("2024-01-01"),
                     DataFim =  DateTime.Parse("2024-11-11"),
                     IdEscola = 1
@@ -213,7 +213,7 @@ namespace ModernSchoolWEBTest.Controllers.Tests
         {
             return new AnoLetivoViewModel
             {
-                AnoLetivo1 = 2023,
+                AnoLetivo = 2023,
                 DataInicio = DateTime.Parse("2023-01-01"),
                 DataFim = DateTime.Parse("2023-11-11"),
                 IdEscola = 1

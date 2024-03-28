@@ -13,7 +13,7 @@ namespace ModernSchoolWEB.Models
         [StringLength(100, ErrorMessage = "descrição deve ter no máximo 100 caracteres")]
         public string Descricao { get; set; }
         [Required(ErrorMessage = "Código do ano letivo é obrigatório")]
-        public short? AnoLetivo1 { get; set; }
+        public short? AnoLetivo { get; set; }
         [Required(ErrorMessage = "Código do currículo é obrigatório")]
         public int IdCurriculo { get; set; }
         [Required(ErrorMessage = "Código do componente é obrigatório")]

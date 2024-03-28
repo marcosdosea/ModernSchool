@@ -38,7 +38,7 @@ namespace ModernSchoolWEB.Controllers
                 ListaTurma = listaTurmaModel
             };
             var anoLetivo = _anoLetivoService.GetAll();
-            turma.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
+            turma.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo", "AnoLetivo", null);
             return View(turma);
         }
 
@@ -55,7 +55,7 @@ namespace ModernSchoolWEB.Controllers
         {
             TurmaViewModel viewModel = new();
             var anoLetivo = _anoLetivoService.GetAll();
-            viewModel.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo1", "AnoLetivo1", null);
+            viewModel.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo", "AnoLetivo", null);
             viewModel.NomeEscola = _escolaService.GetNomeEscola(Convert.ToInt32(User.FindFirst("Id")?.Value));
             return View(viewModel);
         }

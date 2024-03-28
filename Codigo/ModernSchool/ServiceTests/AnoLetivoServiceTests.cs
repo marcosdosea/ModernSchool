@@ -29,9 +29,9 @@ namespace Service.Tests
             _context.Database.EnsureCreated();
             var anoletivos = new List<Anoletivo>
                 {
-                    new Anoletivo { AnoLetivo1 = 2022, DataInicio = DateTime.Parse("2022-01-01"), DataFim = DateTime.Parse("2022-11-11"), IdEscola = 1},
-                    new Anoletivo { AnoLetivo1 = 2023, DataInicio = DateTime.Parse("2023-01-01"), DataFim = DateTime.Parse("2023-11-11"), IdEscola = 1},
-                    new Anoletivo { AnoLetivo1 = 2024, DataInicio = DateTime.Parse("2024-11-11"), DataFim = DateTime.Parse("2024-11-11"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2022, DataInicio = DateTime.Parse("2022-01-01"), DataFim = DateTime.Parse("2022-11-11"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2023, DataInicio = DateTime.Parse("2023-01-01"), DataFim = DateTime.Parse("2023-11-11"), IdEscola = 1},
+                    new Anoletivo { AnoLetivo = 2024, DataInicio = DateTime.Parse("2024-11-11"), DataFim = DateTime.Parse("2024-11-11"), IdEscola = 1},
                 };
 
             _context.AddRange(anoletivos);
@@ -44,11 +44,11 @@ namespace Service.Tests
         public void CreateTest()
         {
             // Act
-            _anoLetivoService.Create(new Anoletivo() { AnoLetivo1 = 2025, DataInicio = DateTime.Parse("01/01/2025"), DataFim = DateTime.Parse("11/11/2025"), IdEscola = 1 });
+            _anoLetivoService.Create(new Anoletivo() { AnoLetivo = 2025, DataInicio = DateTime.Parse("01/01/2025"), DataFim = DateTime.Parse("11/11/2025"), IdEscola = 1 });
             // Assert
             Assert.AreEqual(4, _anoLetivoService.GetAll().Count());
             var anoletivo = _anoLetivoService.Get(2025);
-            Assert.AreEqual(2025, anoletivo.AnoLetivo1);
+            Assert.AreEqual(2025, anoletivo.AnoLetivo);
             Assert.AreEqual(DateTime.Parse("11/11/2025"), anoletivo.DataFim);
         }
 
@@ -66,13 +66,13 @@ namespace Service.Tests
         public void EditTest()
         {
             var anoletivo = _anoLetivoService.Get(2022);
-            anoletivo.AnoLetivo1 = 2022;
+            anoletivo.AnoLetivo = 2022;
             anoletivo.DataInicio = DateTime.Parse("2022-01-01");
             _anoLetivoService.Edit(anoletivo);
             //Assert
             anoletivo = _anoLetivoService.Get(2022);
             Assert.IsNotNull(anoletivo);
-            Assert.AreEqual(2022, anoletivo.AnoLetivo1);
+            Assert.AreEqual(2022, anoletivo.AnoLetivo);
             Assert.AreEqual(DateTime.Parse("2022-01-01"), anoletivo.DataInicio);
         }
 
@@ -81,7 +81,7 @@ namespace Service.Tests
         {
             var anoletivo = _anoLetivoService.Get(2022);
             Assert.IsNotNull(anoletivo);
-            Assert.AreEqual(2022, anoletivo.AnoLetivo1);
+            Assert.AreEqual(2022, anoletivo.AnoLetivo);
             Assert.AreEqual(DateTime.Parse("2022-01-01"), anoletivo.DataInicio);
         }
 
@@ -94,7 +94,7 @@ namespace Service.Tests
             Assert.IsInstanceOfType(listaAnoLetivo, typeof(IEnumerable<Anoletivo>));
             Assert.IsNotNull(listaAnoLetivo);
             Assert.AreEqual(3, listaAnoLetivo.Count());
-            Assert.AreEqual(2022, listaAnoLetivo.First().AnoLetivo1);
+            Assert.AreEqual(2022, listaAnoLetivo.First().AnoLetivo);
         }
     }
 }

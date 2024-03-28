@@ -17,7 +17,7 @@ namespace ModernSchoolWEB.Models
         public string? AnoFaixa { get; set; }
         [Display(Name = "Ano letivo")]
         [Required(ErrorMessage = "Campo ano letivo é obrigatório")]
-        public short? AnoLetivo1 { get; set; }
+        public short? AnoLetivo { get; set; }
         [Display(Name = "Código do governo")]
         [Required(ErrorMessage = "Campo id do governo é obrigatório")]
         public int IdGoverno { get; set; }
