@@ -66,10 +66,23 @@ namespace ModernSchoolWEB.Controllers
             PessoaViewModel pessoaModel = _mapper.Map<PessoaViewModel>(pessoa);
             var cpf = pessoaModel.Cpf;
             var cep = pessoaModel.Cep;
+            var telefone1 = pessoaModel.Telefone1;
+            if (telefone1 != null)
+            {
+                telefone1 = Regex.Replace(telefone1, @"(\d{2})(\d{1})(\d{4})(\d{4})", "($1)-$2 $3-$4");
+                pessoaModel.Telefone1 = telefone1;
+            }
+            var telefone2 = pessoaModel.Telefone2;
+            if (telefone2 != null)
+            {
+                telefone2 = Regex.Replace(telefone2, @"(\d{2})(\d{1})(\d{4})(\d{4})", "($1)-$2 $3-$4");
+                pessoaModel.Telefone2 = telefone2;
+            }
             cpf = Regex.Replace(cpf, @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
             cep = Regex.Replace(cep, @"(\d{5})(\d{3})", "$1-$2");
             pessoaModel.Cpf = cpf;
             pessoaModel.Cep = cep;
+            
             pessoaModel.IdTurma = idTurma;
             return View(pessoaModel);
         }
@@ -153,11 +166,19 @@ namespace ModernSchoolWEB.Controllers
             pessoaViewModel.IdTurma = idTurma;
             pessoaViewModel.Cep = pessoaViewModel.Cep.Replace("-", "");
             pessoaViewModel.Cpf = pessoaViewModel.Cpf.Replace("-", "").Replace(".", "");
-            if (ModelState.IsValid)
+            if (pessoaViewModel.Telefone1 != null)
             {
+                pessoaViewModel.Telefone1 = pessoaViewModel.Telefone1.Replace("-", "").Replace("(", "").Replace(" ", "").Replace(")", "");
+            }
+            if (pessoaViewModel.Telefone2 != null)
+            {
+                pessoaViewModel.Telefone2 = pessoaViewModel.Telefone2.Replace("-", "").Replace("(", "").Replace(" ", "").Replace(")", "");
+            }
+            //if (ModelState.IsValid)
+            //{
                 var pessoa = _mapper.Map<Pessoa>(pessoaViewModel);
                 _pessoaService.Edit(pessoa);
-            }
+           // }
             return RedirectToAction("MatricularAlunoTurma", new {pessoaViewModel.IdTurma});
         }
 
@@ -205,6 +226,14 @@ namespace ModernSchoolWEB.Controllers
         {
             model.Cpf = model.Cpf.Replace(".", "").Replace("-", "").Replace("_", "");
             model.Cep = model.Cep.Replace("-", "");
+            if (model.Telefone1 != null)
+            {
+                model.Telefone1 = model.Telefone1.Replace("-", "").Replace("(", "").Replace(" ", "").Replace(")", "");
+            }
+            if (model.Telefone2 != null)
+            {
+                model.Telefone2 = model.Telefone2.Replace("-", "").Replace("(", "").Replace(" ", "").Replace(")", "");
+            }
             Turma turma = _turmaService.Get(model.IdTurma);
 
             

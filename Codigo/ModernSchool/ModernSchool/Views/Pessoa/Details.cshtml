@@ -18,6 +18,34 @@
             <span id="cpf">@Model.Cpf</span>
         </dd>
         <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Telefone1)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefone1)
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Telefone2)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefone2)
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
+            <label>Nascimento</label>
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            <span>@Model.DataNascimento.ToString().Substring(0,10)</span>
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Email)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Cep)
             <span><strong>:</strong></span>
         </dt>
@@ -39,6 +67,20 @@
             @Html.DisplayFor(model => model.Bairro)
         </dd>
         <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Uf)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Uf)
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
+            @Html.DisplayNameFor(model => model.Cidade)
+            <span><strong>:</strong></span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+        <dt class="col-sm-2 d-flex justify-content-between">
             @Html.DisplayNameFor(model => model.Numero)
             <span><strong>:</strong></span>
         </dt>
@@ -46,23 +88,16 @@
             @Html.DisplayFor(model => model.Numero)
         </dd>
         <dt class="col-sm-2 d-flex justify-content-between">
-            <label>Nascimento</label>
+            @Html.DisplayNameFor(model => model.Complemento)
             <span><strong>:</strong></span>
         </dt>
         <dd class="col-sm-10">
-            <span>@Model.DataNascimento.ToString().Substring(0,10)</span>
-        </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
-            @Html.DisplayNameFor(model => model.Email)
-            <span><strong>:</strong></span>
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Complemento)
         </dd>
     </dl>
     <div class="d-flex flex- py-4 col-4">
         <div class="col-8 d-flex">
-            <a asp-action="Index"  asp-controller="Pessoa" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
+            <a asp-action="MatricularAlunoTurma" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
         </div>
     </div>
 </div>

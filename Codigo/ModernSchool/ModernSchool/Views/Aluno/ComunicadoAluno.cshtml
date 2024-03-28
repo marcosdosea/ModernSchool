@@ -4,20 +4,20 @@
 
 <label>Turma: @Model.NomeTurma</label>
 
-<table class="table">
+<table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
             <th>
-                Remetente
+                Professor
+            </th>
+            <th>
+                Componente
             </th>
             <th>
                Data
             </th>
             <th>
                 Mensagem
-            </th>
-            <th>
-                Componente
             </th>
         </tr>
     </thead>
@@ -29,14 +29,15 @@
                     @Model.Comunicados[i].NomeRemetente
                 </td>
                 <td>
-                    @Model.Comunicados[i].Data
+                    @Model.Comunicados[i].NomeComponente
+                </td>
+                <td>
+                    @Model.Comunicados[i].Data.ToString("dd/MM/yyyy")
                 </td>
                 <td>
                     @Model.Comunicados[i].Menssagem
                 </td>
-                <td>
-                    @Model.Comunicados[i].NomeComponente
-                </td>
+
             </tr>
         }
     </tbody>
