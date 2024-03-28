@@ -17,8 +17,7 @@
                     Nome
                 </th>
                 <th>
-                    Alunos
-                    <input type="checkbox" />
+                    <input id="checkAll" type="checkbox" />
                 </th>
             </tr>
         </thead>
@@ -37,26 +36,32 @@
                         @Model.Alunos[i].NomeAluno
                     </td>
                     <td>
-                        <input type="checkbox" asp-for="@Model.Alunos[i].Enviar" value="True" />
+                        <input class="checkboxEnviar" type="checkbox" asp-for="@Model.Alunos[i].Enviar" value="True" />
                     </td>
                 </tr>
             }
             <div class="mb-3">
-                <label asp-for="Menssagem" class="form-label">Example textarea</label>
+                <label asp-for="Menssagem" class="form-label">Mensagem</label>
                 <textarea class="form-control" asp-for="Menssagem" rows="3" cols="5"></textarea>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Enviar" class="btn btn-primary" />
-            </div>
-
         </tbody>
     </table>
-</form>
-<div class="container py-4">
-    <div class="row">
-        <div class="d-flex justify-content-end col-lg align-items-center">
-            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Avaliacao" asp-action="Index" asp-route-idTurma="@Model.IdTurma"
+    <div class="d-flex justify-content-end py-5">
+        <div class="col-3 pr-2">
+            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col" asp-controller="Professor" asp-action="DiarioDeClasse" asp-route-idTurma="@Model.IdTurma"
                asp-route-idComponente="@Model.IdComponente"> Voltar </a>
         </div>
+        <div class="form-group col-3">
+            <input class="btn cor-bg d-grid gap-2 col text-white border border-0" type="submit" value="Enviar" />
+        </div>
     </div>
-</div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#checkAll').change(function () {
+            $('.checkboxEnviar').prop('checked', $(this).prop('checked'));
+        });
+    });
+</script>

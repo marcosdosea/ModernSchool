@@ -286,8 +286,12 @@ namespace Service
                     Email = g.IdAlunoNavigation.Email,
                     Nome = g.IdAlunoNavigation.Nome,
                     Numero = g.IdAlunoNavigation.Numero,
-                    Rua = g.IdAlunoNavigation.Rua
-                    
+                    Rua = g.IdAlunoNavigation.Rua,
+                    Cidade = g.IdAlunoNavigation.Cidade,
+                    Telefone1 = g.IdAlunoNavigation.Telefone1,
+                    Telefone2 = g.IdAlunoNavigation.Telefone2,
+                    Complemento = g.IdAlunoNavigation.Complemento,
+                    Uf = g.IdAlunoNavigation.Uf
                 });
             return query.FirstOrDefault();
         }

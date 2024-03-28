@@ -23,6 +23,21 @@
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" id="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone1" class="control-label"></label>
+                <input asp-for="Telefone1" id="telefone1" class="form-control" />
+                <span asp-validation-for="Telefone1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone2" class="control-label"></label>
+                <input asp-for="Telefone2" id="telefone2" class="form-control" />
+                <span asp-validation-for="Telefone2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Cep" class="control-label"></label>
                 <input asp-for="Cep" id="cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
@@ -38,18 +53,8 @@
                 <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" id="numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" id="email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Uf" class="control-label"></label>
-                <input asp-for="Uf" class="form-control" />
+                <input asp-for="Uf" id="estado" class="form-control" />
                 <span asp-validation-for="Uf" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -58,19 +63,14 @@
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" id="numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Complemento" class="control-label"></label>
-                <input asp-for="Complemento" class="form-control" />
+                <textarea asp-for="Complemento" id="complemento" rows="2" class="form-control"></textarea>
                 <span asp-validation-for="Complemento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone1" class="control-label"></label>
-                <input asp-for="Telefone1" class="form-control" />
-                <span asp-validation-for="Telefone1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone2" class="control-label"></label>
-                <input asp-for="Telefone2" class="form-control" />
-                <span asp-validation-for="Telefone2" class="text-danger"></span>
             </div>
 
             <div class="d-flex py-4">
@@ -85,4 +85,11 @@
         </form>
     </div>
 </div>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-mask/jquery.inputmask.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#telefone1").inputmask("(99)9 9999-9999");
+        $("#telefone2").inputmask("(99)9 9999-9999");
+    });
+</script>

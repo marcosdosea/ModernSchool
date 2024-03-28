@@ -1,4 +1,5 @@
 ﻿using Core.DTO;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModernSchoolWEB.Models
 {
@@ -10,6 +11,7 @@ namespace ModernSchoolWEB.Models
         public int IdComponente {  get; set; }
         public string Turma { get; set; } = string.Empty;
         public string Componente { get; set; } = string.Empty;
+        [Display(Name = "Mensagem", Prompt = "Digite Algo...")]
         public string Menssagem { get; set; } = string.Empty;
     }
 }

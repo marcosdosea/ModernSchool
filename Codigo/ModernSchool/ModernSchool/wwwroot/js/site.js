@@ -23,6 +23,11 @@ $(document).ready(function () {
                     $('#numero').val(aluno.numero).addClass('text-secondary !importants').prop('readonly', true);
                     $('#email').val(aluno.email).addClass('text-secondary !importants').prop('readonly', true);
                     $('#idAluno').val(aluno.id).prop('readonly', true);
+                    $('#telefone1').val(aluno.telefone1).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#telefone2').val(aluno.telefone2).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#estado').val(aluno.uf).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#cidade').val(aluno.cidade).addClass('text-secondary !importants').prop('readonly', true);
+                    $('#complemento').val(aluno.complemento).addClass('text-secondary !importants').prop('readonly', true);
                 } else {
                     $('#nome').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#dataNascimento').val('').removeClass('text-secondary').prop('readonly', false);
@@ -32,6 +37,11 @@ $(document).ready(function () {
                     $('#numero').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#email').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#idAluno').val('').removeClass('text-secondary').prop('readonly', false);
+                    $('#telefone1').val(aluno.telefone1).removeClass('text-secondary !importants').prop('readonly', false);
+                    $('#telefone2').val(aluno.telefone2).removeClass('text-secondary !importants').prop('readonly', false);
+                    $('#estado').val(aluno.uf).removeClass('text-secondary !importants').prop('readonly', false);
+                    $('#cidade').val(aluno.cidade).removeClass('text-secondary !importants').prop('readonly', false);
+                    $('#complemento').val(aluno.complemento).removeClass('text-secondary !importants').prop('readonly', false);
                 }
             },
         });

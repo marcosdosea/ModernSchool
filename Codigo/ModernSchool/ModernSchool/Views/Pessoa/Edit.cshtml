@@ -7,14 +7,35 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="Id" type="hidden" class="form-control" />
             <div class="form-group">
+                <label asp-for="Cpf" class="control-label"></label>
+                <input asp-for="Cpf" id="cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" id="nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cpf" class="control-label"></label>
-                <input asp-for="Cpf" id="cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" id="dataNascimento" type="date" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" id="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone1" class="control-label"></label>
+                <input asp-for="Telefone1" id="telefone1" class="form-control" />
+                <span asp-validation-for="Telefone1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone2" class="control-label"></label>
+                <input asp-for="Telefone2" id="telefone2" class="form-control" />
+                <span asp-validation-for="Telefone2" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cep" class="control-label"></label>
@@ -32,19 +53,24 @@
                 <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Uf" class="control-label"></label>
+                <input asp-for="Uf" id="estado" class="form-control" />
+                <span asp-validation-for="Uf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cidade" class="control-label"></label>
+                <input asp-for="Cidade" id="cidade" class="form-control" />
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
+                <input asp-for="Numero" id="numero" class="form-control" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" type="date" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Complemento" class="control-label"></label>
+                <textarea asp-for="Complemento" rows="2" class="form-control"></textarea>
+                <span asp-validation-for="Complemento" class="text-danger"></span>
             </div>
             <div class="d-flex flex-wrap py-4">
                 <div class="col-lg">
@@ -55,11 +81,18 @@
                     <input asp-for="IdTurma" type="hidden" value="@Model.IdTurma">
                     <button type="submit" class="btn cor-bg col text-light" role="button">Salvar</button>
                 </form>
-
             </div>
         </form>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-mask/jquery.inputmask.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#telefone1").inputmask("(99)9 9999-9999");
+        $("#telefone2").inputmask("(99)9 9999-9999");
+    });
+</script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
