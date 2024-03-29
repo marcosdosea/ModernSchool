@@ -138,7 +138,7 @@ namespace Service
             {
                 return query.Sum();
             }
-            return 0;
+            return -1;
         }
     }
 }
