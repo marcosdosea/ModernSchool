@@ -9,6 +9,7 @@ namespace ModernSchoolWEB.Models
     {
         public int Id { get; set; }
         [Display(Prompt = "Ex: Nome do Aluno")]
+        [Required(ErrorMessage = "Campo Nome do Aluno é Obrigatório")]
         public string Nome { get; set; } = string.Empty;
         [Required(ErrorMessage = "Campo CPF é Obrigatório")]
         [Display(Name = "CPF", Prompt = "Ex: 000.000.000-00")]
@@ -21,9 +22,9 @@ namespace ModernSchoolWEB.Models
         [Required(ErrorMessage = "Campo CEP é Obrigatório")]
         public string Cep { get; set; } = string.Empty;
         [Display(Prompt = "Ex: Nome da Rua")]
-        public string Rua { get; set; } = string.Empty;
+        public string? Rua { get; set; }
         [Display(Prompt = "Ex: Nome do Bairro")]
-        public string Bairro { get; set; } = string.Empty;
+        public string? Bairro { get; set; }
         [Display(Name = "Número", Prompt = "Ex: 60")]
         public short? Numero { get; set; }
         [Display(Name = "E-mail", Prompt = "Ex: email@xemplo.com")]
@@ -42,12 +43,12 @@ namespace ModernSchoolWEB.Models
         [Display(Prompt = "Ex: Nome da Cidade")]
         public string Cidade { get; set; } = string.Empty;
         [Display(Prompt = "Ex: Ponto de referência")]
-        public string Complemento { get; set; } = string.Empty;
+        public string? Complemento { get; set; }
         [Display(Name = "Telefone 1", Prompt = "Ex: (99)99999-9999")]
         [Required(ErrorMessage = "Campo Telefone 1 é Obrigatório")]
         public string Telefone1 { get; set; } = string.Empty;
         [Display(Name = "Telefone 2", Prompt = "Ex: (99)99999-9999")]
-        public string Telefone2 { get; set; } = string.Empty;
+        public string? Telefone2 { get; set; }
         public List<IndexAlunoTurmaDTO> Alunos { get; set; }
     }
 

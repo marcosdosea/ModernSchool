@@ -1,7 +1,7 @@
 ﻿@model Core.DTO.AlunoComunicacaoIndexDTO
 
-<h6>Comunicado</h6>
-
+<label class="fs-4">Comunicado</label>
+<br />
 <label>Turma: @Model.NomeTurma</label>
 
 <table class="table table-sm table-striped table-bordered">
@@ -42,3 +42,8 @@
         }
     </tbody>
 </table>
+<div class="d-flex flex- py-4 col-4">
+    <div class="col-8 d-flex">
+        <a asp-action="Index" asp-controller="Aluno" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
+    </div>
+</div>

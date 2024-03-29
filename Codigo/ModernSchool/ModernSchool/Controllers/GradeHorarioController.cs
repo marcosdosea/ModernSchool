@@ -38,6 +38,7 @@ namespace ModernSchoolWEB.Controllers
             GradeHorarioDTOModel view = new();
             view.GradeHorarioDTOs = listaGrade.ToList();
             view.IdTurma = idTurma;
+            view.NomeTurma = _turmaService.Get(idTurma).Turma1;
             return View(view);
         }
 

@@ -1,5 +1,6 @@
 ﻿@model ModernSchoolWEB.Models.AlunoAvaliacaoNotasDTOViewModel
 
+
 <table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
@@ -39,6 +40,10 @@
                 <input type="submit" value="Registrar" class="btn cor-bg d-grid gap-2 col-5 text-white border border-0" />
             </div>
         </div>
+        <div>
+            <p><strong>Descrição</strong>: @Model.DescricaoAvaliacao</p>
+        </div>
+        <br />
         </form>
     </tbody>
 </table>

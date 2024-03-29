@@ -165,11 +165,36 @@ namespace Service
             return query.FirstOrDefault();
         }
 
-        public bool MatricularAlunoTurma(Alunoturma alunoTuram)
+        public bool MatricularAlunoTurma(Alunoturma alunoTurma)
         {
             try
             {
-                _context.Add(alunoTuram);
+                var aluno = _context.Alunoturmas.Find(alunoTurma.IdAluno, alunoTurma.IdTurma);
+                if(aluno != null)
+                {
+                    if (_context.Turmas.Find(alunoTurma.IdTurma).VagasDisponiveis == 0)
+                    {
+                        return false;
+                    }
+                    aluno.Status = "M";
+                    _context.Update(aluno);
+                    var turma = _context.Turmas.Find(alunoTurma.IdTurma);
+                    var quantidade = GetAlunosTurma(alunoTurma.IdTurma);
+                    turma.VagasDisponiveis = turma.Vagas - (quantidade.Count() + 1);
+
+                    _context.Update(turma);
+                    _context.SaveChanges();
+                    return true;
+                }
+                if (_context.Turmas.Find(alunoTurma.IdTurma).VagasDisponiveis == 0)
+                {
+                    return false;
+                }
+                _context.Add(alunoTurma);
+                var turmaNovoAluno = _context.Turmas.Find(alunoTurma.IdTurma);
+                var quantidadeNovoAluno = GetAlunosTurma(alunoTurma.IdTurma);
+                turmaNovoAluno.VagasDisponiveis = turmaNovoAluno.Vagas - (quantidadeNovoAluno.Count() + 1);
+                _context.Update(turmaNovoAluno);
                 _context.SaveChanges();
 
                 return true;
@@ -227,7 +252,7 @@ namespace Service
 
         public List<IndexAlunoTurmaDTO> GetAlunosTurma(int idTurma)
         {
-            var query = _context.Alunoturmas.Where(g => g.IdTurma == idTurma)
+            var query = _context.Alunoturmas.Where(g => g.IdTurma == idTurma && g.Status != "C")
                 .Select(g => new IndexAlunoTurmaDTO
                 {
                     IdAluno = g.IdAluno,
@@ -247,12 +272,20 @@ namespace Service
 
                     if (idAluno != -1)
                     {
+                        if(_context.Turmas.Find(idTurma).VagasDisponiveis == 0)
+                        {
+                            return false;
+                        }
                         Alunoturma alunoTurma = new Alunoturma()
                         {
                             IdAluno = idAluno,
                             IdTurma = idTurma
                         };
                         _context.Add(alunoTurma);
+                        var turma = _context.Turmas.Find(alunoTurma.IdTurma);
+                        var quantidade = GetAlunosTurma(alunoTurma.IdTurma);
+                        turma.VagasDisponiveis = turma.Vagas - (quantidade.Count() + 1);
+                        _context.Update(turma);
                         _context.SaveChanges();
                         transaction.Commit();
                         return true;
@@ -297,12 +330,21 @@ namespace Service
         }
         public void DeleteAlunoTurma(int idAluno, int idTurma)
         {
-            var _alunoTurma = _context.Alunoturmas.Find(idAluno, idTurma);
-            _context.Remove(_alunoTurma);
+            var alunoTurma = _context.Alunoturmas.Find(idAluno, idTurma);
+            alunoTurma.Status = "C";
+            var turma = _context.Turmas.Find(idTurma);
+            var quantidade = GetAlunosTurma(idTurma);
+            turma.VagasDisponiveis = turma.Vagas - (quantidade.Count() - 1);
+            _context.Update(turma);
+            _context.Update(alunoTurma);
             _context.SaveChanges();
-            var _pessoa = _context.Pessoas.Find(idAluno);
-            _context.Remove(_pessoa);
-            _context.SaveChanges();
+        }
+        public bool AlunoMatriculado(int idAluno)
+        {
+            var query = _context.Alunoturmas.Where(g => g.IdAluno == idAluno && g.Status == "M");
+
+            return query.Any();
+
         }
     }
 }

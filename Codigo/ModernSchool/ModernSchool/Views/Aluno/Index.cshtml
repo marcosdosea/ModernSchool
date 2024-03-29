@@ -29,7 +29,7 @@
                     @Html.DisplayFor(modelItem => Model.AlunosDisciplinas[i].Local)
                 </td>
                 <td class="align-middle">
-                    @for(int j = 0; j < Model.AlunosDisciplinas[i].Horas.Count(); j++)
+                    @for (int j = 0; j < Model.AlunosDisciplinas[i].Horas.Count(); j++)
                     {
                         <span> @Html.Raw(Model.AlunosDisciplinas[i].Horas[j])</span>
                         <br />
@@ -38,7 +38,7 @@
                 <td class="align-middle">
                     <a role="button" class="btn btn-sm cor-bg rounded-pill text-light" asp-action="AtividadesComponentes"
                        asp-route-idComponente=" @Model.AlunosDisciplinas[i].IdComponente" asp-route-idAluno="@Model.IdAluno"
-                        asp-route-idTurma="@Model.IdTurma">Selecionar</a>
+                       asp-route-idTurma="@Model.IdTurma">Selecionar</a>
                 </td>
             </tr>
         }
@@ -50,35 +50,47 @@
 <p>
     <label class="fs-5">Atividades</label>
 </p>
-
-<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                Data
-            </th>
-            <th>
-                Componente
-            </th>
-            <th>
-                Descricao
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.AlunosAtividade.Count(); i++)
-        {
+@if (Model.AlunosAtividade.Count() == 0)
+{
+    <p class="text-center mt-4 mb-0">Sem <strong>Atividades</strong> Cadastradas!!</p>
+}
+else
+{
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Componente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Descricao)
-                </td>
+                <th>
+                    Data de Entrega
+                </th>
+                <th>
+                    Horário de Entrega
+                </th>
+                <th>
+                    Componente
+                </th>
+                <th>
+                    Descricao
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AlunosAtividade.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        <span>@Model.AlunosAtividade[i].Data?.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td>
+                        <span>@Model.AlunosAtividade[i].Data?.ToString("HH:mm")</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Componente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Descricao)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

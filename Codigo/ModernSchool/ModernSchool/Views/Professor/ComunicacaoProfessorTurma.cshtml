@@ -6,7 +6,7 @@
 <form asp-action="ComunicacaoProfessorTurma" method="post">
     <input asp-for="IdTurma" type="hidden" />
     <input asp-for="IdComponente" type="hidden" />
-    <table>
+    <table class="table table-sm table-striped table-bordered">
         <thead>
             <tr>
                 <th>N°</th>
@@ -17,7 +17,7 @@
                     Nome
                 </th>
                 <th>
-                    <input id="checkAll" type="checkbox" />
+                    <input id="checkAll" type="checkbox" /> Todos
                 </th>
             </tr>
         </thead>

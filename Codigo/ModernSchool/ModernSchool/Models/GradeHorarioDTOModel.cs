@@ -7,6 +7,7 @@ namespace ModernSchoolWEB.Models
     {
         public List<GradeHorarioDTO> GradeHorarioDTOs { get; set; }
         public int IdTurma { get; set; }
+        public string? NomeTurma {  get; set; }
     }
 
 }

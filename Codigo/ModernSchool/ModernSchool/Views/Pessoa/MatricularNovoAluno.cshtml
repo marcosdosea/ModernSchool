@@ -93,3 +93,8 @@
         $("#telefone2").inputmask("(99)9 9999-9999");
     });
 </script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
