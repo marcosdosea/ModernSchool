@@ -120,7 +120,7 @@ namespace Service
                 {
                     Componente = g.IdAvaliacaoNavigation.IdComponenteNavigation.Nome,
                     Data = g.DataEntrega,
-                    Descricao = "Sem descricao"
+                    Descricao = g.IdAvaliacaoNavigation.Descricao
                 });
 
             return query.ToList();
@@ -133,8 +133,8 @@ namespace Service
                 && g.IdAvaliacaoNavigation.IdPeriodo == idPeriodo
                 && g.IdAvaliacaoNavigation.IdComponente == idComponente
                         )
-                .Select(g => g.Nota);
-            if (query.Count() > 0)
+                .Select(g => g.Nota).ToList();
+            if (query.Any())
             {
                 return query.Sum();
             }

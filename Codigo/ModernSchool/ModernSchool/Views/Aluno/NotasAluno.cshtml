@@ -31,7 +31,14 @@
                 {
                     if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo1].IdComponente)
                     {
-                        <th class="fs-6 fw-normal" style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
+                        if (@Model.PeriodosNotas[periodo1].Nota != -1)
+                        {
+                            <th class="fs-6 fw-normal" style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
+                        }
+                        else
+                        {
+                            <th class="fs-6 fw-normal" style="width: 120px">--,--</th>
+                        }
                     }
                 }
             </tr>
