@@ -64,6 +64,7 @@ namespace ModernSchoolWEB.Controllers
             viewModel.Idavaliacao = idAvaliacao;
             viewModel.IdTurma = idTurma;
             viewModel.IdComponente = idComponente;
+            viewModel.DescricaoAvaliacao = _avaliacaoService.Get(idAvaliacao).Descricao;
 
             return View(viewModel);
         }

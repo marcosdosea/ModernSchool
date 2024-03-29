@@ -82,7 +82,7 @@ namespace ModernSchoolWEB.Controllers
             cep = Regex.Replace(cep, @"(\d{5})(\d{3})", "$1-$2");
             pessoaModel.Cpf = cpf;
             pessoaModel.Cep = cep;
-            
+
             pessoaModel.IdTurma = idTurma;
             return View(pessoaModel);
         }
@@ -118,7 +118,7 @@ namespace ModernSchoolWEB.Controllers
             return View(pessoaCargo);
         }
         [HttpPost]
-        public async Task <ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
+        public async Task<ActionResult> AddPessoaCargo(AddPessoaCargoModel model)
         {
 
             int idPessoa = _pessoaService.GetById(model.Cpf);
@@ -176,10 +176,10 @@ namespace ModernSchoolWEB.Controllers
             }
             //if (ModelState.IsValid)
             //{
-                var pessoa = _mapper.Map<Pessoa>(pessoaViewModel);
-                _pessoaService.Edit(pessoa);
-           // }
-            return RedirectToAction("MatricularAlunoTurma", new {pessoaViewModel.IdTurma});
+            var pessoa = _mapper.Map<Pessoa>(pessoaViewModel);
+            _pessoaService.Edit(pessoa);
+            // }
+            return RedirectToAction("MatricularAlunoTurma", new { pessoaViewModel.IdTurma });
         }
 
         // GET: PessoaController/Delete/5
@@ -204,7 +204,7 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult MatricularAlunoTurma(int idTurma)
         {
-            Turma turma = _turmaService.Get(idTurma);  
+            Turma turma = _turmaService.Get(idTurma);
             AlunoTurmaViewModel alunoModel = new AlunoTurmaViewModel();
             alunoModel.Alunos = _pessoaService.GetAlunosTurma(idTurma);
             alunoModel.Turma = turma.Turma1;
@@ -236,9 +236,9 @@ namespace ModernSchoolWEB.Controllers
             }
             Turma turma = _turmaService.Get(model.IdTurma);
 
-            
+
             Pessoa aluno = _pessoaService.Get(model.Id);
-            if(aluno == null)
+            if (aluno == null)
             {
                 aluno = new Pessoa()
                 {
@@ -257,30 +257,37 @@ namespace ModernSchoolWEB.Controllers
                     Cidade = model.Cidade
 
                 };
-                
-                if(_pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma))
+
+                if (_pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma))
                 {
                     await _userRole.SeedUsersAsync(aluno, "Aluno");
                 }
             }
             else
             {
-                Alunoturma alunoTurma = new Alunoturma()
+                if (_pessoaService.AlunoMatriculado(aluno.Id))
                 {
-                    IdAluno = aluno.Id,
-                    IdTurma = model.IdTurma
-                };
+                    //add notificação de aluno ja matriculado
+                }
+                else
+                {
+                    Alunoturma alunoTurma = new Alunoturma()
+                    {
+                        IdAluno = aluno.Id,
+                        IdTurma = model.IdTurma
+                    };
 
-                _pessoaService.MatricularAlunoTurma(alunoTurma);
+                    _pessoaService.MatricularAlunoTurma(alunoTurma);
+                }
             }
 
-            return RedirectToAction("MatricularAlunoTurma", new {idTurma = model.IdTurma});
+            return RedirectToAction("MatricularAlunoTurma", new { idTurma = model.IdTurma });
         }
         [HttpPost]
         public IActionResult BuscarAlunoPorCPF(string cpf, int idTurma)
         {
 
-            if(cpf == null)
+            if (cpf == null)
             {
                 cpf = "";
             }

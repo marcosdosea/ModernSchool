@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using ModernSchoolWEB.Models;
+using System.Text.RegularExpressions;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -57,6 +58,10 @@ namespace ModernSchoolWEB.Controllers
                 {
                     if (horarios.NomeComponente == listaComponentes[j].NomeComponente)
                     {
+                        if (!string.IsNullOrEmpty(listaComponentes[j].DiaSemana))
+                        {
+                            listaComponentes[j].DiaSemana = char.ToUpper(listaComponentes[j].DiaSemana[0]) + listaComponentes[j].DiaSemana.Substring(1).ToLower();
+                        }
                         string horario = "<strong>" + (listaComponentes[j].DiaSemana ?? "") + "</strong>" + " - " +
                                          (listaComponentes[j].HoraInicio.Substring(0, 2) ?? "") + ":" +
                                          (listaComponentes[j].HoraInicio.Substring(2, 2) ?? "") + " - " +

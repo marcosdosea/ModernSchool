@@ -37,11 +37,11 @@ $(document).ready(function () {
                     $('#numero').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#email').val('').removeClass('text-secondary').prop('readonly', false);
                     $('#idAluno').val('').removeClass('text-secondary').prop('readonly', false);
-                    $('#telefone1').val(aluno.telefone1).removeClass('text-secondary !importants').prop('readonly', false);
-                    $('#telefone2').val(aluno.telefone2).removeClass('text-secondary !importants').prop('readonly', false);
-                    $('#estado').val(aluno.uf).removeClass('text-secondary !importants').prop('readonly', false);
-                    $('#cidade').val(aluno.cidade).removeClass('text-secondary !importants').prop('readonly', false);
-                    $('#complemento').val(aluno.complemento).removeClass('text-secondary !importants').prop('readonly', false);
+                    $('#telefone1').val(aluno.telefone1).removeClass('text-secondary').prop('readonly', false);
+                    $('#telefone2').val(aluno.telefone2).removeClass('text-secondary').prop('readonly', false);
+                    $('#estado').val(aluno.uf).removeClass('text-secondary').prop('readonly', false);
+                    $('#cidade').val(aluno.cidade).removeClass('text-secondary').prop('readonly', false);
+                    $('#complemento').val(aluno.complemento).removeClass('text-secondary').prop('readonly', false);
                 }
             },
         });

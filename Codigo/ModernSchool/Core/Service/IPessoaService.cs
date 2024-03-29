@@ -19,7 +19,7 @@ namespace Core.Service
 
         bool AdicionarCargo(Pessoa pessoa, int idCargo,int idGoverno);
 
-        bool MatricularAlunoTurma(Alunoturma alunoTuram);
+        bool MatricularAlunoTurma(Alunoturma alunoTurma);
         /// <summary>
         /// Caso um aluno não esteja cadastrado no sistema ele vai ser cadastrado e matriculado na turma selecionada
         /// </summary>
@@ -41,6 +41,7 @@ namespace Core.Service
         List<IndexAlunoTurmaDTO> GetAlunosTurma(int idTurma);
 
         public void DeleteAlunoTurma(int idAluno, int idTurma);
+        public bool AlunoMatriculado(int idAluno);
 
     }
 }

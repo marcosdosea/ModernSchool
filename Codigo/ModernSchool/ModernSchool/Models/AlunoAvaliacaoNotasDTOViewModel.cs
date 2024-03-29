@@ -8,6 +8,7 @@ namespace ModernSchoolWEB.Models
         public int Idavaliacao { get; set; }
         public int IdTurma { get; set; }
         public int IdComponente { get; set; }
+        public string DescricaoAvaliacao { get; set; }
         public List<AlunoAvaliacaoNotaDTO> ListaAluno { get; set; }
     }
 
