@@ -14,12 +14,14 @@ using Service;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Text.RegularExpressions;
+using static ModernSchoolWEB.Controllers.Notificacao;
+using System.Net;
 
 namespace ModernSchoolWEB.Controllers
 {
 
     [Authorize]
-    public class PessoaController : Controller
+    public class PessoaController : Notificacao
     {
         private readonly IPessoaService _pessoaService;
         private readonly ICargoService _cargoService;
@@ -174,11 +176,21 @@ namespace ModernSchoolWEB.Controllers
             {
                 pessoaViewModel.Telefone2 = pessoaViewModel.Telefone2.Replace("-", "").Replace("(", "").Replace(" ", "").Replace(")", "");
             }
-            //if (ModelState.IsValid)
-            //{
+
             var pessoa = _mapper.Map<Pessoa>(pessoaViewModel);
-            _pessoaService.Edit(pessoa);
-            // }
+            string mensagem = string.Empty;
+            switch (_pessoaService.Edit(pessoa))
+            {
+                case HttpStatusCode.InternalServerError:
+                    mensagem = "Erro ao <b>Editar</b> os dados  do Aluno(a).";
+                    Notificar(mensagem, Notifica.Erro);
+                    break;
+                case HttpStatusCode.OK:
+                    mensagem = "Dados do Aluno(a) <b>Editado</b> com Sucesso.";
+                    Notificar(mensagem, Notifica.Sucesso);
+                    break;
+
+            }
             return RedirectToAction("MatricularAlunoTurma", new { pessoaViewModel.IdTurma });
         }
 
@@ -197,6 +209,8 @@ namespace ModernSchoolWEB.Controllers
         {
             pessoaViewModel.IdTurma = idTurma;
             _pessoaService.DeleteAlunoTurma(id, pessoaViewModel.IdTurma);
+            string mensagem = "Aluno(a) <b>Cancelado</b> da Turma com Sucesso.";
+            Notificar(mensagem, Notifica.Sucesso);
             return RedirectToAction("MatricularAlunoTurma", new { pessoaViewModel.IdTurma });
         }
 
@@ -261,13 +275,16 @@ namespace ModernSchoolWEB.Controllers
                 if (_pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma))
                 {
                     await _userRole.SeedUsersAsync(aluno, "Aluno");
+                    string mensagem = "Aluno(a) <b>Matriculado</b> com Sucesso.";
+                    Notificar(mensagem, Notifica.Sucesso);
                 }
             }
             else
             {
                 if (_pessoaService.AlunoMatriculado(aluno.Id))
                 {
-                    //add notificação de aluno ja matriculado
+                    string mensagem = "O Aluno(a) já está <b>Matriculado</b> em uma Turma.";
+                    Notificar(mensagem, Notifica.Alerta);
                 }
                 else
                 {
@@ -278,6 +295,8 @@ namespace ModernSchoolWEB.Controllers
                     };
 
                     _pessoaService.MatricularAlunoTurma(alunoTurma);
+                    string mensagem = "Aluno(a) <b>Matriculado</b> com Sucesso.";
+                    Notificar(mensagem, Notifica.Sucesso);
                 }
             }
 
