@@ -86,7 +86,7 @@ namespace ModernSchoolWEB.Controllers
             pessoaModel.Cep = cep;
 
             pessoaModel.IdTurma = idTurma;
-            return View(pessoaModel);
+            return PartialView(pessoaModel);
         }
 
         // GET: PessoaController/Create

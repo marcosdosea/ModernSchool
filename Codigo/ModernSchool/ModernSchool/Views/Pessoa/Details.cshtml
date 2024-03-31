@@ -1,105 +1,124 @@
 ﻿@model ModernSchoolWEB.Models.PessoaViewModel
 
-<div>
-    <h4>Dados do Aluno</h4>
-    <dl class="row rounded border border-gray-30" style="background-color: whitesmoke">
-        <dt class="col-sm-2 d-flex justify-content-between">
+
+<dl class="border border-gray-30 rounded" style="background-color: whitesmoke">
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Nome)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Cpf)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             <span id="cpf">@Model.Cpf</span>
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Telefone1)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Telefone1)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Telefone2)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Telefone2)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             <label>Nascimento</label>
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
-            <span>@Model.DataNascimento.ToString().Substring(0,10)</span>
+        <dd>
+            <span>@Model.DataNascimento.ToString().Substring(0, 10)</span>
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Email)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Cep)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Cep)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Rua)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Rua)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Bairro)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Bairro)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Uf)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Uf)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Cidade)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Cidade)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Numero)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Numero)
         </dd>
-        <dt class="col-sm-2 d-flex justify-content-between">
+    </div>
+    <div class="d-flex">
+        <dt class="col-3 d-flex justify-content-between pl-1">
             @Html.DisplayNameFor(model => model.Complemento)
-            <span><strong>:</strong></span>
+            <span class="pr-2"><strong>:</strong></span>
         </dt>
-        <dd class="col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Complemento)
         </dd>
-    </dl>
-    <div class="d-flex flex- py-4 col-4">
-        <div class="col-8 d-flex">
-            <a asp-action="MatricularAlunoTurma" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
-        </div>
     </div>
-</div>
+</dl>
 
 

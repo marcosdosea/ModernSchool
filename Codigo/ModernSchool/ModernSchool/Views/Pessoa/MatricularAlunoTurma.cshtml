@@ -1,63 +1,82 @@
 ﻿@model ModernSchoolWEB.Models.AlunoTurmaViewModel
 <partial name="_Notificar">
-<h3 class="fs-5"><strong>@Model.NomeEscola</strong></h3>
-<h2 class="fs-5"><strong>Matricular Aluno</strong></h2>
-<div class="row">
-    <div class="col">Turma: @Model.Turma</div>
-    <div class="col">Sala: @Model.Sala</div>
-    <div class="col">Vagas Disponíveis: @Model.NumVagas </div>
-</div>
-<hr />
-<h4>Alunos </h4>
-<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                Código
-            </th>
-            <th>
-                Nome
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Alunos.Count(); i++)
-        {
-            <tr>
-                <td>@Model.Alunos[i].IdAluno</td>
-                <td>@Model.Alunos[i].NomeAluno</td>
-                <td>
-                    <div class="d-flex">
-                        <div>
-                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@Model.Alunos[i].IdAluno" asp-route-idTurma="@Model.IdTurma"><i class="fa-solid fa-pen-to-square"></i></a>
-                        </div>
-                        <div>
-                            <a role="button" asp-action="Details" class="fs-5 pl-5" asp-route-Id="@Model.Alunos[i].IdAluno" asp-route-idTurma="@Model.IdTurma"><i class="fa-solid fa-eye"></i></a>
-                        </div>
-                        <div>
-                            <form asp-action="Delete"
-                                  asp-route-Id="@Model.Alunos[i].IdAluno">
-                                  <input asp-for="IdTurma" type="hidden"/>
-                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                                    <i class="fa-solid text-danger fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div class="container py-4 col-4">
+    <h3 class="fs-5"><strong>@Model.NomeEscola</strong></h3>
+    <h2 class="fs-5"><strong>Matricular Aluno</strong></h2>
     <div class="row">
-        <div class="d-flex justify-content-end col-lg align-items-center">
-            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
-        </div>
-        <div class="d-flex justify-content-end col-lg-2">
-            <a class="display-4" role="button" asp-action="MatricularNovoAluno" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        <div class="col">Turma: @Model.Turma</div>
+        <div class="col">Sala: @Model.Sala</div>
+        <div class="col">Vagas Disponíveis: @Model.NumVagas </div>
+    </div>
+    <hr />
+    <h4>Alunos </h4>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Nome
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Alunos.Count(); i++)
+            {
+                <tr>
+                    <td>@Model.Alunos[i].IdAluno</td>
+                    <td>@Model.Alunos[i].NomeAluno</td>
+                    <td>
+                        <div class="d-flex">
+                            <div>
+                                <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@Model.Alunos[i].IdAluno" asp-route-idTurma="@Model.IdTurma"><i class="fa-solid fa-pen-to-square"></i></a>
+                            </div>
+                            <div>
+                                <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal border-0 text-primary-default bg-transparent" data-id="@Model.Alunos[i].IdAluno" data-idTurma="@Model.IdTurma"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <div>
+                                <form asp-action="Delete"
+                                      asp-route-Id="@Model.Alunos[i].IdAluno">
+                                    <input asp-for="IdTurma" type="hidden" />
+                                    <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                        <i class="fa-solid text-danger fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="container py-4 col-4">
+        <div class="row">
+            <div class="d-flex justify-content-end col-lg align-items-center">
+                <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
+            </div>
+            <div class="d-flex justify-content-end col-lg-2">
+                <a class="display-4" role="button" asp-action="MatricularNovoAluno" asp-controller="Pessoa" asp-route-idTurma="@Model.IdTurma"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Dados do Aluno</h5>
+                    <button type="button" class="close border-0 bg-white fs-3" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="infoAluno">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
