@@ -26,3 +26,17 @@ $(document).ready(function () {
         $('#mensagemModal').text(mensagem).addClass('fs-6');
     });
 });
+
+function showConfirmationModal(formId, view, idModal, nome) {
+    var modal = document.getElementById(idModal);
+    var modalForm = modal.querySelector('form');
+    modalForm.action = '/' + view + '/Delete/' + formId; // Define a ação do formulário com a rota correta
+    var modalBody = modal.querySelector('.modal-body');
+    var modalH5 = modal.querySelector('h5');
+    modalH5.innerHTML = 'Confirmar Exclusão do ' + view;
+    modalBody.innerHTML = 'Deseja <b>Excluir</b> o ' + view + ' <b>' + nome + '</b>?'; // Conteúdo do modal
+
+    // Exibe o modal
+    var modal = new bootstrap.Modal(modal);
+    modal.show();
+}

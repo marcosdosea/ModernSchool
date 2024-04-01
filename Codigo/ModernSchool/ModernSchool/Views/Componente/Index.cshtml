@@ -28,12 +28,10 @@
                             <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@item.id"><i class="fa-solid fa-pen-to-square"></i></a>
                         </div>
                         <div>
-                            <form asp-action="Delete"
-                                  asp-route-Id="@item.id">
-                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+
+                            <button onclick="showConfirmationModal('@item.id', 'Componente', 'componenteModal', '@item.nome')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
                                     <i class="fa-solid text-danger fa-trash-can"></i>
                                 </button>
-                            </form>
                         </div>
                     </div>
                 </td>
@@ -48,6 +46,23 @@
         </div>
         <div class="d-flex justify-content-end col-lg-2">
             <a class="display-4" role="button" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="componenteModal" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <form method="post" class="modal-footer">
+                <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn cor-bg text-white col-3">Confirmar</button>
+            </form>
         </div>
     </div>
 </div>
