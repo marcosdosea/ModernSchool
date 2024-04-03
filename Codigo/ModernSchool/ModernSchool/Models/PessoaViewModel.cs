@@ -33,7 +33,7 @@ namespace ModernSchoolWEB.Models
         [Display(Prompt = "Ex: Nome da Cidade")]
         public string Cidade { get; set; } = string.Empty;
         [Display(Prompt = "Ex: Ponto de referência")]
-        public string? Complemento { get; set; }
+        public string Complemento { get; set; } = string.Empty;
         [Display(Name = "Telefone 1", Prompt = "Ex: (99)9 9999-9999")]
         [Required(ErrorMessage = "Campo Telefone 1 é Obrigatório")]
         public string Telefone1 { get; set; } = string.Empty;
