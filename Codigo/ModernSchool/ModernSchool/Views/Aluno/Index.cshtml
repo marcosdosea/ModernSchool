@@ -69,7 +69,7 @@ else
                     Componente
                 </th>
                 <th>
-                    Descricao
+                    Descricão
                 </th>
             </tr>
         </thead>
@@ -77,20 +77,38 @@ else
             @for (int i = 0; i < Model.AlunosAtividade.Count(); i++)
             {
                 <tr>
-                    <td>
+                    <td class="col-3"> 
                         <span>@Model.AlunosAtividade[i].Data?.ToString("dd/MM/yyyy")</span>
                     </td>
-                    <td>
+                    <td class="col-3">
                         <span>@Model.AlunosAtividade[i].Data?.ToString("HH:mm")</span>
                     </td>
-                    <td>
+                    <td class="col-3">
                         @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Componente)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Descricao)
+                        <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal-comunicado border-0 text-primary-default bg-transparent" data-mensagem="@Model.AlunosAtividade[i].Descricao"><i class="fa-solid fa-eye"></i></button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded">
+            <div class="d-flex justify-content-between">
+                <span class="fs-4 mt-2 ml-3">Descrição</span>
+                <button type="button" class="close border-0 bg-white fs-3 rounded" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <hr />
+            <div class="modal-body">
+                <p id="mensagemModal"></p>
+            </div>
+        </div>
+    </div>
+</div>
