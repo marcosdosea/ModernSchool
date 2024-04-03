@@ -2,6 +2,7 @@ using Core;
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Service
 {
@@ -21,11 +22,21 @@ namespace Service
         /// <param name="gradehoraria">Dados do periodo</param>
         /// <returns>Id do Gradehoraria</returns>
 
-        public int Create(Gradehorario gradehorario)
+        public HttpStatusCode Create(Gradehorario gradehorario)
         {
-            _context.Add(gradehorario);
-            _context.SaveChanges();
-            return gradehorario.Id;
+
+
+            try
+            {
+                _context.Add(gradehorario);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch 
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
 
         }
         /// <summary>
@@ -34,21 +45,40 @@ namespace Service
         /// <param name="idGradeHoraria"></param>
 
 
-        public void Delete(int idGradehorario)
+        public HttpStatusCode Delete(int idGradehorario)
         {
-            var _governo = _context.Gradehorarios.Find(idGradehorario);
-            _context.Remove(_governo);
-            _context.SaveChanges();
+
+            try
+            {
+                var _governo = _context.Gradehorarios.Find(idGradehorario);
+                _context.Remove(_governo);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch 
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
 
         /// <summary>
         /// Editar uma Grade Horaria no banco de dados
         /// </summary>
         /// <param name="gradehoraria">Dados da grade horaria</param>
-        public void Edit(Gradehorario gradehorario)
+        public HttpStatusCode Edit(Gradehorario gradehorario)
         {
-            _context.Update(gradehorario);
-            _context.SaveChanges();
+            try
+            {
+                _context.Update(gradehorario);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
 
         /// <summary>
