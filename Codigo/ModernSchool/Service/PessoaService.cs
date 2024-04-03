@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Core.DTO;
-using System.Net;
 
 namespace Service
 {
@@ -134,18 +133,10 @@ namespace Service
         /// Editar uma pessoa no banco de dados
         /// </summary>
         /// <param name="pessoa">Dados da pessoa</param>
-        public HttpStatusCode Edit(Pessoa pessoa)
+        public void Edit(Pessoa pessoa)
         {
-            try
-            {
-                _context.Update(pessoa);
-                _context.SaveChanges();
-                return HttpStatusCode.OK;
-            }
-            catch
-            {
-                return HttpStatusCode.InternalServerError;
-            }
+            _context.Update(pessoa);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -174,7 +165,7 @@ namespace Service
             return query.FirstOrDefault();
         }
 
-        public HttpStatusCode MatricularAlunoTurma(Alunoturma alunoTurma)
+        public bool MatricularAlunoTurma(Alunoturma alunoTurma)
         {
             try
             {
@@ -183,7 +174,7 @@ namespace Service
                 {
                     if (_context.Turmas.Find(alunoTurma.IdTurma).VagasDisponiveis == 0)
                     {
-                        return HttpStatusCode.BadRequest;
+                        return false;
                     }
                     aluno.Status = "M";
                     _context.Update(aluno);
@@ -193,11 +184,11 @@ namespace Service
 
                     _context.Update(turma);
                     _context.SaveChanges();
-                    return HttpStatusCode.OK;
+                    return true;
                 }
                 if (_context.Turmas.Find(alunoTurma.IdTurma).VagasDisponiveis == 0)
                 {
-                    return HttpStatusCode.BadRequest;
+                    return false;
                 }
                 _context.Add(alunoTurma);
                 var turmaNovoAluno = _context.Turmas.Find(alunoTurma.IdTurma);
@@ -206,12 +197,12 @@ namespace Service
                 _context.Update(turmaNovoAluno);
                 _context.SaveChanges();
 
-                return HttpStatusCode.OK;
+                return true;
 
             }
             catch
             {
-                return HttpStatusCode.InternalServerError;
+                return false;
             }
         }
 

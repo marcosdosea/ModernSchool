@@ -14,7 +14,7 @@
                 Componente
             </th>
             <th>
-                Data
+               Data
             </th>
             <th>
                 Mensagem
@@ -35,7 +35,7 @@
                     @Model.Comunicados[i].Data.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal-comunicado border-0 text-primary-default bg-transparent" data-mensagem="@Model.Comunicados[i].Menssagem"><i class="fa-solid fa-eye"></i></button>
+                    @Model.Comunicados[i].Menssagem
                 </td>
 
             </tr>
@@ -47,23 +47,3 @@
         <a asp-action="Index" asp-controller="Aluno" class="btn bg-secondary text-white border border-0 col"> Voltar </a>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content rounded">
-            <div class="d-flex justify-content-between">
-                <span class="fs-4 mt-2 ml-3">Mensagem</span>
-                <button type="button" class="close border-0 bg-white fs-3 rounded" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <hr />
-            <div class="modal-body">
-                <p id="mensagemModal"></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-

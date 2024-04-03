@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Core.DTO;
@@ -12,7 +11,7 @@ namespace Core.Service
     public interface IPessoaService
     {
         int Create(Pessoa pessoa);
-        HttpStatusCode Edit(Pessoa pessoa);
+        void Edit(Pessoa pessoa);
         void Delete(int id);
         Pessoa Get(int id);
         IEnumerable<Pessoa> GetAll();
@@ -20,7 +19,7 @@ namespace Core.Service
 
         bool AdicionarCargo(Pessoa pessoa, int idCargo,int idGoverno);
 
-        HttpStatusCode MatricularAlunoTurma(Alunoturma alunoTurma);
+        bool MatricularAlunoTurma(Alunoturma alunoTurma);
         /// <summary>
         /// Caso um aluno não esteja cadastrado no sistema ele vai ser cadastrado e matriculado na turma selecionada
         /// </summary>
