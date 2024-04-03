@@ -17,7 +17,7 @@
                     {
                         if (Model.Componentes[componente].IdComponente == Model.PeriodosNotas[periodo].IdComponente)
                         {
-                            <th style="width: 90px"><strong>@Model.PeriodosNotas[periodo].PeriodoAvaliacao Período</strong></th>
+                            <th class="text-center" style="width: 90px"><strong>@Model.PeriodosNotas[periodo].PeriodoAvaliacao Período</strong></th>
                         }
                     }
                     flag = false;
@@ -33,11 +33,11 @@
                     {
                         if (@Model.PeriodosNotas[periodo1].Nota != -1)
                         {
-                            <th class="fs-6 fw-normal" style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
+                            <th class="fs-6 fw-normal text-center" style="width: 120px">@Model.PeriodosNotas[periodo1].Nota.ToString("0.00")</th>
                         }
                         else
                         {
-                            <th class="fs-6 fw-normal" style="width: 120px">--,--</th>
+                            <th class="fs-6 fw-normal text-center" style="width: 120px;">--</th>
                         }
                     }
                 }
