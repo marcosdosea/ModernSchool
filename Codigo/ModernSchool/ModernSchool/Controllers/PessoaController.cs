@@ -182,11 +182,11 @@ namespace ModernSchoolWEB.Controllers
             switch (_pessoaService.Edit(pessoa))
             {
                 case HttpStatusCode.InternalServerError:
-                    mensagem = "<b>Erro:</b> Não foi possével editar os dados  do Aluno(a).";
+                    mensagem = "<b>Erro:</b> Não foi possével editar os dados  do Aluno(a) " + pessoa.Nome + ".";
                     Notificar(mensagem, Notifica.Erro);
                     break;
                 case HttpStatusCode.OK:
-                    mensagem = "<b>Sucesso:</b> Os dados do Aluno(a) foram atualizados.";
+                    mensagem = "<b>Sucesso:</b> Os dados do Aluno(a) "+ pessoa.Nome +" foram atualizados.";
                     Notificar(mensagem, Notifica.Sucesso);
                     break;
 
@@ -208,8 +208,9 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id, int idTurma, PessoaViewModel pessoaViewModel)
         {
             pessoaViewModel.IdTurma = idTurma;
+            Pessoa p = _pessoaService.Get(id);
+            string mensagem = "<b>Sucesso:</b> Aluno(a) <b>" + p.Nome + "</b> foi Removido da turma.";
             _pessoaService.DeleteAlunoTurma(id, pessoaViewModel.IdTurma);
-            string mensagem = "<b>Sucesso:</b> Aluno(a) <b>Removido</b> da turma.";
             Notificar(mensagem, Notifica.Sucesso);
             return RedirectToAction("MatricularAlunoTurma", new { pessoaViewModel.IdTurma });
         }
@@ -275,7 +276,7 @@ namespace ModernSchoolWEB.Controllers
                 if (_pessoaService.MatricularNovoAlunoTurma(aluno, model.IdTurma))
                 {
                     await _userRole.SeedUsersAsync(aluno, "Aluno");
-                    string mensagem = "<b>Sucesso:</b> Aluno(a) foi <b>Matriculado</b> na turma";
+                    string mensagem = "<b>Sucesso:</b> Aluno(a) <b>" + aluno.Nome + "</b> foi Matriculado na turma";
                     Notificar(mensagem, Notifica.Sucesso);
                 }
             }
@@ -283,7 +284,7 @@ namespace ModernSchoolWEB.Controllers
             {
                 if (_pessoaService.AlunoMatriculado(aluno.Id))
                 {
-                    string mensagem = "<b>Alerta</b>: Aluno(a) já está <b>Matriculado</b> em uma Turma.";
+                    string mensagem = "<b>Alerta</b>: Aluno(a) <b>"+ aluno.Nome +"</b> já está Matriculado em uma Turma.";
                     Notificar(mensagem, Notifica.Alerta);
                 }
                 else
@@ -295,7 +296,7 @@ namespace ModernSchoolWEB.Controllers
                     };
 
                     _pessoaService.MatricularAlunoTurma(alunoTurma);
-                    string mensagem = "<b>Sucesso:</b> Aluno(a) foi <b>Matriculado</b> na turma";
+                    string mensagem = "<b>Sucesso:</b> Aluno(a) <b>" + aluno.Nome + "</b> foi Matriculado na turma";
                     Notificar(mensagem, Notifica.Sucesso);
                 }
             }
