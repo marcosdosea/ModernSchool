@@ -1,8 +1,14 @@
 ﻿﻿@if (TempData["alertText"] != null && TempData["alertType"] != null)
 {
-    <div class="alert alert-@TempData["alertType"] alert-dismissible fade show d-flex align-items-center" role="alert">
-        <i class="@TempData["alertIcon"] fs-5"></i>
-        <span class="ms-3">@(Html.Raw(TempData["alertText"]?.ToString()))</span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-@TempData["alertType"] d-flex justify-content-between rounded-0 border-0 altura-not">
+        <div class="d-flex justify-content-between align-items-center rounded-0 border-0" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="@TempData["alertIcon"] fs-5"></i>
+                <span class="text-dark ml-3">@(Html.Raw(TempData["alertText"]?.ToString()))</span>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="fs-3 fw-bolder my-custom-font-size @TempData["corClose"]" aria-hidden="true" role="button" data-bs-dismiss="alert" aria-label="Close">&times;</span> <!-- Substitua pelo ícone desejado -->
+        </div>
     </div>
 }
