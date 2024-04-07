@@ -364,7 +364,8 @@ namespace Service
 
             if (request.Search != null && request.Search.GetValueOrDefault("value") != null)
             {
-                alunosTurma = alunosTurma.Where(g => g.NomeAluno.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value"))).ToList();
+                alunosTurma = alunosTurma.Where(g => g.NomeAluno.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value"))
+                                             || g.IdAluno.ToString().Contains(request.Search.GetValueOrDefault("value"))).ToList();
             }
 
             if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("0"))
