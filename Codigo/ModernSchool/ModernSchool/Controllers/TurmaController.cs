@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class TurmaController : Controller
+    public class TurmaController : Notificacao
     {
         private readonly ITurmaService _turmaService;
         private readonly IMapper _mapper;
@@ -68,9 +68,37 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var turma = _mapper.Map<Turma>(turmaViewModel);
-                _turmaService.Create(turma);
+                string mensagem = string.Empty;
+                var anoLetivo = _anoLetivoService.GetAll();
+                turmaViewModel.ListaAnoLetivo = new SelectList(anoLetivo, "AnoLetivo", "AnoLetivo", null);
+                switch (_turmaService.Create(turma))
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        mensagem = "<b>Sucesso</b>: Turma <b>Cadastrada</b>";
+                        Notificar(mensagem, Notifica.Sucesso);
+
+                        return RedirectToAction(nameof(Index));
+
+                    case System.Net.HttpStatusCode.Ambiguous:
+                        mensagem = "<b>Aviso</b>: A sala já esta sendo usada";
+                        Notificar(mensagem, Notifica.Alerta);
+
+                        return View(turmaViewModel);
+                    case System.Net.HttpStatusCode.BadRequest:
+                        mensagem = "<b>Aviso</b>: Essa turma já Existe";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return View(turmaViewModel);
+
+                    case System.Net.HttpStatusCode.InternalServerError:
+                        mensagem = "<b>Erro</b>: Algo deu errado, não foi possivel cadastrar a turma";
+                        Notificar(mensagem, Notifica.Erro);
+
+                        return View(turmaViewModel);
+                }
             }
-            return RedirectToAction(nameof(Index));
+            string mensagemelse = "<b>Erro</b>: Algo deu errado, não foi possivel cadastrar a turma";
+            Notificar(mensagemelse, Notifica.Sucesso);
+            return View(turmaViewModel);
         }
 
         // GET: TurmaController/Edit/5

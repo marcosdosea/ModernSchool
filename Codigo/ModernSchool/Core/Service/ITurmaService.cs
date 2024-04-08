@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,9 @@ namespace Core.Service
 {
     public interface ITurmaService
     {
-        int Create(Turma turma);
-        void Edit(Turma turma);
-        void Delete(int id);
+        HttpStatusCode Create(Turma turma);
+        HttpStatusCode Edit(Turma turma);
+        HttpStatusCode Delete(int id);
         Turma Get(int id);
         IEnumerable<Turma> GetAll();
 

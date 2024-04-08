@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Core.DTO;
+using System.Net;
 
 namespace Service
 {
@@ -24,34 +25,61 @@ namespace Service
         /// </summary>
         /// <param name="turma"></param>
         /// <returns>Id da turma</returns>
-        int ITurmaService.Create(Turma turma)
+        public HttpStatusCode Create(Turma turma)
         {
-            turma.VagasDisponiveis = turma.Vagas;
-            turma.Status = "A";
-            _context.Add(turma);
-            _context.SaveChanges();
-            return turma.Id;
+
+            try
+           {
+                var turmaExiste = _context.Turmas.Where(g => g.AnoLetivo == turma.AnoLetivo && g.Sala == turma.Sala);
+
+                if (turmaExiste.Any())
+                {
+                    return HttpStatusCode.Ambiguous;
+                }
+
+                var nomeTurma = _context.Turmas.Where(g => g.AnoLetivo == turma.AnoLetivo && g.Turma1 == turma.Turma1);
+
+                if (nomeTurma.Any())
+                {
+                    return HttpStatusCode.BadRequest;
+                }
+
+                turma.VagasDisponiveis = turma.Vagas;
+                turma.Status = "A";
+                _context.Add(turma);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
 
         /// <summary>
         /// Deletar uma turma no banco de dados
         /// </summary>
         /// <param name="id"></param>
-        void ITurmaService.Delete(int id)
+        public HttpStatusCode Delete(int id)
         {
             var _turma = _context.Turmas.Find(id);
             _context.Remove(_turma);
             _context.SaveChanges();
+
+            return HttpStatusCode.OK;
         }
 
         /// <summary>
         /// Editar uma turma no banco de dados
         /// </summary>
         /// <param name="turma"></param>
-        void ITurmaService.Edit(Turma turma)
+        public HttpStatusCode Edit(Turma turma)
         {
             _context.Update(turma);
             _context.SaveChanges();
+
+            return HttpStatusCode.OK;
         }
 
         /// <summary>
