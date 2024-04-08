@@ -18,7 +18,7 @@ namespace Core.Service
         Gradehorario Get(int idGradehorario);
 
         IEnumerable<Gradehorario> GetAll();
-        IEnumerable<GradeHorarioDTO> GetAllGradeHorario();
+        IEnumerable<GradeHorarioDTO> GetAllGradeHorario(int idTurma);
         GradeHorarioDTO? GetAGradeHorario(int id);
 
         IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor(int idProfessor);

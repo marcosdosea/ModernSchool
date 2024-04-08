@@ -28,6 +28,23 @@ namespace Service
 
             try
             {
+                // verificar se uma turma tem aula no mesmo dia e hora  
+                var turma = _context.Gradehorarios.Where(g => g.IdTurma == gradehorario.IdTurma
+                   && g.DiaSemana == gradehorario.DiaSemana &&
+                   gradehorario.HoraInicio == g.HoraInicio);
+
+                if (turma.Any())
+                {
+                    return HttpStatusCode.BadRequest;
+                }
+
+                // verificar se professor tem horario em alguma grade no mesmo dia de aula
+                var professor = _context.Gradehorarios.Where(g => g.IdProfessor == gradehorario.IdProfessor && g.DiaSemana == gradehorario.DiaSemana &&
+                   gradehorario.HoraInicio == g.HoraInicio);
+                if(professor.Any())
+                {
+                    return HttpStatusCode.BadRequest;
+                }
                 _context.Add(gradehorario);
                 _context.SaveChanges();
                 return HttpStatusCode.OK;
@@ -99,10 +116,10 @@ namespace Service
             return _context.Gradehorarios.AsNoTracking();
         }
 
-        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario()
+        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario(int idTurma)
         {
 
-            var q = _context.Gradehorarios
+            var q = _context.Gradehorarios.Where(g => g.IdTurma == idTurma)
                 .OrderBy(g => g.IdComponenteNavigation.Nome)
                 .Select(g => 
                     new GradeHorarioDTO

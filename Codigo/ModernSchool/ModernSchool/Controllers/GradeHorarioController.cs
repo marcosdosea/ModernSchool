@@ -35,7 +35,7 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult Index(int idTurma)
         {
-            var listaGrade = _gradehorarioService.GetAllGradeHorario();
+            var listaGrade = _gradehorarioService.GetAllGradeHorario(idTurma);
             GradeHorarioDTOModel view = new();
             view.GradeHorarioDTOs = listaGrade.ToList();
             view.IdTurma = idTurma;
@@ -97,17 +97,25 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.OK:
 
-                        menssagem = "<b>Sucesso</b> Grade Horária <b>Cadastrada</b>";
+                        menssagem = "<b>Sucesso:</b> Grade Horária <b>Cadastrada</b>";
                         Notificar(menssagem, Notifica.Sucesso);
 
                         return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
 
                     case HttpStatusCode.InternalServerError:
 
-                        menssagem = "<b>Erro</b> Não foi possivel <b>Cadastrada</b> a Grade Horária ";
+                        menssagem = "<b>Erro:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária ";
                         Notificar(menssagem, Notifica.Erro);
 
-                        return View(gradeHorario);
+                        return View(gradehorarioModel);
+
+                    case HttpStatusCode.BadRequest:
+
+                        menssagem = "<b>Aviso:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária, verifique se o professor ja esta cadastrado em outra turma ou ja existe uma aula cadastrada nesta turma";
+                        Notificar(menssagem, Notifica.Informativo);
+                        return View(gradehorarioModel);
+
+
                 }
             }
             return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
