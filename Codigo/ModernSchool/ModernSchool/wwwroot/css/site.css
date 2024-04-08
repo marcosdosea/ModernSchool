@@ -1,23 +1,26 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 :root {
     --bs-bg-opacity: 0.5; /* Opacidade desejada, por exemplo, 50% */
 }
+
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 .form-select {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
@@ -33,6 +36,7 @@ body {
     border-bottom: 1px solid rgba(var(--bs-dark-rgb), 0.3);
     border-radius: 8px;
 }
+
 .form-control {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
@@ -55,11 +59,84 @@ body {
     border-radius: 8px;
 }
 
-#mensagemModal{
+#mensagemModal {
     opacity: 1;
 }
 
+.paginate_button {
+    color: black !important;
+    border: 0px solid #111;
+    border-radius: 0px;
+    background-color: #bebebe !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: .2em 1em !important;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: black !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
 
 
+.previous {
+    color: white !important;
+    border: 0px solid #111;
+    background-color: darkgray !important;
+    opacity: 100% !important;
+    border-radius: 2px !important;
+}
+.previous:hover {
+    color: white !important;
+    border: 1px solid dimgray !important; /* Corrigido para #RRGGBB */
+    background: dimgray !important;
+    opacity: 1 !important; /* Alterado para 1 (100%) */
+    border-radius: 2px !important;
+}
 
+.next {
+    color: white !important;
+    border: 0px solid #111;
+    background-color: darkgray !important;
+    opacity: 100% !important;
+    border-radius: 2px !important;
+}
+
+.next:hover {
+    color: white !important;
+    border: 1px solid dimgray !important; /* Corrigido para #RRGGBB */
+    background: dimgray !important;
+    opacity: 1 !important; /* Alterado para 1 (100%) */
+    border-radius: 2px !important;
+}
+
+
+.disabled:hover {
+    cursor: default;
+    color: black !important;
+    opacity: 100% !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.disabled {
+    cursor: default;
+    color: #666 !important;
+    opacity: 100% !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    border: 1px solid gray !important;
+    background-color: gray !important;
+    border-radius: 2px;
+    color: white !important;
+    opacity: 100% !important;
+}
 

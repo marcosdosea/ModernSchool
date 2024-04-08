@@ -42,10 +42,7 @@ function showModalCancelarAluno(idAluno, idTurma) {
     var modalForm = modal.querySelector('form');
     modalForm.action = '/Pessoa/Delete/' + idAluno + '?idTurma=' + idTurma; // Define a ação do formulário com a rota correta
     var modalBody = modal.querySelector('.modal-body');
-    var modalH5 = modal.querySelector('h5');
-    modalH5.innerHTML = 'Confirmar Cancelamento do Aluno';
     modalBody.innerHTML = 'Deseja <b>Cancelar</b> o Aluno(a) <b> </b>?'; // Conteúdo do modal
-
     // Exibe o modal
     var modal = new bootstrap.Modal(modal);
     modal.show();

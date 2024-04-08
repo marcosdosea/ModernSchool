@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th>
-                    Código
+                    Matrícula
                 </th>
                 <th>
                     Nome
@@ -60,8 +60,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Confirmar Cancelamento</h5>
+                    <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -87,7 +87,7 @@
                         [5, 10, 20, "Todos"]
                     ],
                     "ajax": {
-                        "url": "/Pessoa/GetDataPage",
+                        "url": "/Pessoa/GetDataPage/" + @Model.IdTurma,
                         "type": "POST",
                         "datatype": "json"
                     },
@@ -118,9 +118,17 @@
                         "lengthMenu": "Exibir _MENU_",
                         "info": "Exibindo de _START_ até _END_ de _TOTAL_ registros",
                         "search": "Buscar",
+                        "paginate": {
+                            "next": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-right\"></i>")',
+                            "previous": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-left\"></i>")',
+                            "first": "Primeiro",
+                            "last": "Último"
+                        },
                         url: "/js/DataTable/pt-br.json",
                     }
                 });
             });
         </script>
+
+
     }

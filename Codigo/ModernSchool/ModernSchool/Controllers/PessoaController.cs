@@ -325,10 +325,11 @@ namespace ModernSchoolWEB.Controllers
             }
         }
         [HttpPost]
+        [Route("/Pessoa/GetDataPage/{idTurma}")]
         public IActionResult GetDataPage(DatatableRequest request, int idTurma)
         {
             
-            var response = _pessoaService.GetDataPage(request, 1);
+            var response = _pessoaService.GetDataPage(request, idTurma);
             return Json(response);
         }
 
