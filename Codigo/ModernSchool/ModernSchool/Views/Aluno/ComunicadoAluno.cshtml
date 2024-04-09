@@ -84,7 +84,17 @@
                 "columns": [
                     { "data": "nomeRemetente", "name": "Professor", "autoWidth": true },
                     { "data": "nomeComponente", "name": "Componente", "autoWidth": true },
-                    { "data": "data", "name": "Data", "autoWidth": true, },
+                    {
+                        "data": "data", "name": "Data", "autoWidth": true,
+                        "render": function (data, type, row) {
+                            if (type === 'display') {
+                                var dateObject = new Date(data);
+                                var formattedDate = ("0" + dateObject.getDate()).slice(-2) + '/' + ("0" + (dateObject.getMonth() + 1)).slice(-2) + '/' + dateObject.getFullYear();
+                                return formattedDate;
+                            }
+                            return data;
+                        }
+                    },
                     {
                         "data": "menssagem", "name": "Mensagem", "autoWidth": true,
                         "render": function (data, type, full, meta) {

@@ -171,6 +171,16 @@ namespace Service
 
             int countRecordsFiltered = AlunoAtividades.Count();
 
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
+            }
+
             AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<AlunoAtividadeDTO>

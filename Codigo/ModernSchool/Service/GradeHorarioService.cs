@@ -212,6 +212,16 @@ namespace Service
 
             int countRecordsFiltered = gradeHorarios.Count();
 
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                gradeHorarios = gradeHorarios.Skip(request.Start).Take(request.Length).ToList();
+            }
+
             gradeHorarios = gradeHorarios.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<GradeHorarioDTO>

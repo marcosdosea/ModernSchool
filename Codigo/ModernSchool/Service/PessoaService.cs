@@ -399,6 +399,16 @@ namespace Service
 
             int countRecordsFiltered = alunosTurma.Count();
 
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
+            }
+
             alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<IndexAlunoTurmaDTO>

@@ -195,6 +195,16 @@ namespace Service
 
             int countRecordsFiltered = alunoComunicaoes.Count();
 
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
+            }
+
             alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<AlunoComunicacaoDTO>
