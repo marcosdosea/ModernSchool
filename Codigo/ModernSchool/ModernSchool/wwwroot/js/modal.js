@@ -37,6 +37,18 @@ function showConfirmationModal(formId, view, idModal, nome) {
     modal.show();
 }
 
+function showModalGradeHorario(idGrade, idTurma, nome, componente) {
+    var modal = document.getElementById('gradeHorarioProf');
+    var modalForm = modal.querySelector('form');
+    modalForm.action = '/GradeHorario/Delete/' + idGrade + '?idTurma=' + idTurma // Define a ação do formulário com a rota correta
+    var modalBody = modal.querySelector('.modal-body');
+    modalBody.innerHTML = 'Deseja <b>Excluir</b> a Grade Horário de <b>' + nome + '</b> do compoente <b>' + componente + ' </b>?'; // Conteúdo do modal
+
+    // Exibe o modal
+    var modal = new bootstrap.Modal(modal);
+    modal.show();
+}
+
 function showModalCancelarAluno(idAluno, idTurma) {
     var modal = document.getElementById('alunoTurma');
     var modalForm = modal.querySelector('form');
@@ -47,3 +59,4 @@ function showModalCancelarAluno(idAluno, idTurma) {
     var modal = new bootstrap.Modal(modal);
     modal.show();
 }
+

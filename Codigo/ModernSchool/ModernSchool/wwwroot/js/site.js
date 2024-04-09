@@ -53,3 +53,30 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('thead th').addClass('border-top');
 });
+
+function obterNomeDia(abreviacao) {
+    switch (abreviacao) {
+        case 'DOM':
+            return 'Domingo';
+        case 'SEG':
+            return 'Segunda-Feira';
+        case 'TER':
+            return 'Terça-Feira';
+        case 'QUA':
+            return 'Quarta-Feira';
+        case 'QUI':
+            return 'Quinta-Feira';
+        case 'SEX':
+            return 'Sexta-Feira';
+        case 'SAB':
+            return 'Sábado';
+        default:
+            return abreviacao;
+    }
+}
+function formatarHora(hora) {
+    var horas = hora.substring(0, 2);
+    var minutos = hora.substring(2);
+
+    return horas + ":" + minutos;
+}

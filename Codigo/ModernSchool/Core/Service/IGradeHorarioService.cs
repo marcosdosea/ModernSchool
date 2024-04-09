@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Core.Datatables;
 using Core.DTO;
 
 namespace Core.Service
@@ -22,5 +23,6 @@ namespace Core.Service
         GradeHorarioDTO? GetAGradeHorario(int id);
 
         IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor(int idProfessor);
+        DatatableResponse<GradeHorarioDTO> GetDataPage(DatatableRequest request, int idTurma);
     }
 }
