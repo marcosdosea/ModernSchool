@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Datatables;
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
@@ -139,6 +140,58 @@ namespace Service
                 return query.Sum();
             }
             return -1;
+        }
+
+        public DatatableResponse<AlunoAtividadeDTO> GetDataPage(DatatableRequest request, int idAluno, int idTurma)
+        {
+            var AlunoAtividades = GetAlunoAtividades(idTurma, idAluno);
+
+            var totalRecords = GetAlunoAtividades(idTurma, idAluno).Count();
+
+            if (request.Search != null && request.Search.GetValueOrDefault("value") != null)
+            {
+                AlunoAtividades = AlunoAtividades.Where(g => g.Componente.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value"))
+                                             || g.Data.ToString().Contains(request.Search.GetValueOrDefault("value").ToLower())).ToList();
+            }
+
+            if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("0"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    AlunoAtividades = AlunoAtividades.OrderBy(g => g.Data).ToList();
+                else
+                    AlunoAtividades = AlunoAtividades.OrderByDescending(g => g.Data).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("1"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    AlunoAtividades = AlunoAtividades.OrderBy(g => g.Componente).ToList();
+                else
+                    AlunoAtividades = AlunoAtividades.OrderByDescending(g => g.Componente).ToList();
+            }
+
+            int countRecordsFiltered = AlunoAtividades.Count();
+
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
+            }
+
+            AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
+
+            return new DatatableResponse<AlunoAtividadeDTO>
+            {
+                Data = AlunoAtividades.ToList(),
+                Draw = request.Draw,
+                RecordsFiltered = countRecordsFiltered,
+                RecordsTotal = totalRecords
+            };
+
+
         }
     }
 }

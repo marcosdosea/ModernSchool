@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using Core.Datatables;
+using Core.DTO;
 
 namespace Core.Service
 {
@@ -18,5 +19,7 @@ namespace Core.Service
         decimal GetNotaPeriodo(int idAluno, int idTurma, int idPeriodo, int idComponente);
         
         bool SalvarNotas(Alunoavaliacao alunoAvaliacao);
+        DatatableResponse<AlunoAtividadeDTO> GetDataPage(DatatableRequest request, int idAluno, int idTurma);
+
     }
 }

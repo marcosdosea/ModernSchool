@@ -14,14 +14,11 @@
 }
 
 
-$(document).ready(function () {
-    $('.open-modal-comunicado').click(function () {
-        var mensagem = $(this).data('mensagem'); // Obtém a mensagem do atributo data-mensagem do botão
+function exibirMensagemNoModal(mensagem) {
+    var msg = $('#mensagemModal').text(mensagem).addClass('fs-6');
+}
 
-        // Insere a mensagem no corpo do modal
-        $('#mensagemModal').text(mensagem).addClass('fs-6');
-    });
-});
+
 
 function showConfirmationModal(formId, view, idModal, nome) {
     var modal = document.getElementById(idModal);
@@ -31,6 +28,18 @@ function showConfirmationModal(formId, view, idModal, nome) {
     var modalH5 = modal.querySelector('h5');
     modalH5.innerHTML = 'Confirmar Exclusão do ' + view;
     modalBody.innerHTML = 'Deseja <b>Excluir</b> o ' + view + ' <b>' + nome + '</b>?'; // Conteúdo do modal
+
+    // Exibe o modal
+    var modal = new bootstrap.Modal(modal);
+    modal.show();
+}
+
+function showModalGradeHorario(idGrade, idTurma, nome, componente) {
+    var modal = document.getElementById('gradeHorarioProf');
+    var modalForm = modal.querySelector('form');
+    modalForm.action = '/GradeHorario/Delete/' + idGrade + '?idTurma=' + idTurma // Define a ação do formulário com a rota correta
+    var modalBody = modal.querySelector('.modal-body');
+    modalBody.innerHTML = 'Deseja <b>Excluir</b> a Grade Horário de <b>' + nome + '</b> do compoente <b>' + componente + ' </b>?'; // Conteúdo do modal
 
     // Exibe o modal
     var modal = new bootstrap.Modal(modal);
@@ -47,3 +56,4 @@ function showModalCancelarAluno(idAluno, idTurma) {
     var modal = new bootstrap.Modal(modal);
     modal.show();
 }
+

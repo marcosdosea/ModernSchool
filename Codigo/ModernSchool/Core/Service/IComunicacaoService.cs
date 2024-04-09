@@ -1,4 +1,5 @@
-﻿using Core.DTO;
+﻿using Core.Datatables;
+using Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Core.Service
         bool SalvarComunicacao(Comunicacao comunicacao, List<IndexAlunoTurmaDTO> alunos);
 
         List<AlunoComunicacaoDTO> ComunicacaoAluno(int idAluno, int idTurma);
+        DatatableResponse<AlunoComunicacaoDTO> GetDataPage(DatatableRequest request, int idAluno, int idTurma);
+
 
     }
 }

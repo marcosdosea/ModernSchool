@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Core;
+using Core.Datatables;
 using Core.DTO;
 using Core.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using ModernSchoolWEB.Models;
+using Service;
 using System.Text.RegularExpressions;
 
 namespace ModernSchoolWEB.Controllers
@@ -150,7 +152,6 @@ namespace ModernSchoolWEB.Controllers
             return View(model);
         }
 
-
         public ActionResult ComunicadoAluno(int idTurma)
         {
             int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
@@ -162,7 +163,23 @@ namespace ModernSchoolWEB.Controllers
             return View(comunicado);
         }
 
+        public IActionResult GetDataPage(DatatableRequest request)
+        {
+            int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            var aluno = _pessooaService.GetAlunoTurma(idAluno);
 
+            var response = _avaliacaoService.GetDataPage(request, idAluno, aluno.IdTurma);
+            return Json(response);
+        }
+        [Route("/Aluno/GetPageComunicado")]
+        public IActionResult GetPageComunicado(DatatableRequest request)
+        {
+            int idAluno = Convert.ToInt32(User.FindFirst("Id")?.Value);
+            var aluno = _pessooaService.GetAlunoTurma(idAluno);
+
+            var response = _comunicacaoService.GetDataPage(request, idAluno, aluno.IdTurma);
+            return Json(response);
+        }
 
     }
 }

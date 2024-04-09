@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Datatables;
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
@@ -156,6 +157,65 @@ namespace Service
                     NomeRemetente = g.IdComunicacaoNavigation.IdPessoaRemetenteNavigation.Nome,
                 });
             return query.ToList();
+        }
+
+        public DatatableResponse<AlunoComunicacaoDTO> GetDataPage(DatatableRequest request, int idAluno, int idTurma)
+        {
+            var alunoComunicaoes = ComunicacaoAluno(idAluno, idTurma);
+
+            var totalRecords = ComunicacaoAluno(idAluno, idTurma).Count();
+
+            if (request.Search != null && request.Search.GetValueOrDefault("value") != null)
+            {
+                alunoComunicaoes = alunoComunicaoes.Where(g => g.NomeRemetente.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value").ToLower())
+                                             || g.NomeComponente.ToString().ToLower().Contains(request.Search.GetValueOrDefault("value").ToLower())).ToList();
+            }
+
+            if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("0"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunoComunicaoes = alunoComunicaoes.OrderBy(g => g.NomeRemetente).ToList();
+                else
+                    alunoComunicaoes = alunoComunicaoes.OrderByDescending(g => g.NomeRemetente).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("1"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunoComunicaoes = alunoComunicaoes.OrderBy(g => g.NomeComponente).ToList();
+                else
+                    alunoComunicaoes = alunoComunicaoes.OrderByDescending(g => g.NomeComponente).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("2"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunoComunicaoes = alunoComunicaoes.OrderBy(g => g.Data).ToList();
+                else
+                    alunoComunicaoes = alunoComunicaoes.OrderByDescending(g => g.Data).ToList();
+            }
+
+            int countRecordsFiltered = alunoComunicaoes.Count();
+
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
+            }
+
+            alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
+
+            return new DatatableResponse<AlunoComunicacaoDTO>
+            {
+                Data = alunoComunicaoes.ToList(),
+                Draw = request.Draw,
+                RecordsFiltered = countRecordsFiltered,
+                RecordsTotal = totalRecords
+            };
+
+
         }
     }
 }

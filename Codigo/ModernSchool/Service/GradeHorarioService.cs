@@ -1,4 +1,5 @@
 using Core;
+using Core.Datatables;
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
@@ -173,6 +174,64 @@ namespace Service
                    
                });
             return query.AsNoTracking().ToList();
+
+        }
+        public DatatableResponse<GradeHorarioDTO> GetDataPage(DatatableRequest request, int idTurma)
+        {
+            var gradeHorarios = GetAllGradeHorario(idTurma);
+
+            var totalRecords = GetAllGradeHorario(idTurma).Count();
+
+            if (request.Search != null && request.Search.GetValueOrDefault("value") != null)
+            {
+                gradeHorarios = gradeHorarios.Where(g => g.Professor.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value"))
+                                             || g.Componente.ToString().ToLower().Contains(request.Search.GetValueOrDefault("value").ToLower())).ToList();
+            }
+
+            if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("0"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    gradeHorarios = gradeHorarios.OrderBy(g => g.Componente).ToList();
+                else
+                    gradeHorarios = gradeHorarios.OrderByDescending(g => g.Componente).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("1"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    gradeHorarios = gradeHorarios.OrderBy(g => g.Dia).ToList();
+                else
+                    gradeHorarios = gradeHorarios.OrderByDescending(g => g.Componente).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("4"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    gradeHorarios = gradeHorarios.OrderBy(g => g.Professor).ToList();
+                else
+                    gradeHorarios = gradeHorarios.OrderByDescending(g => g.Professor).ToList();
+            }
+
+            int countRecordsFiltered = gradeHorarios.Count();
+
+            if (request.Length == -1)
+            {
+                request.Start = 0;
+                request.Length = totalRecords;
+            }
+            else
+            {
+                gradeHorarios = gradeHorarios.Skip(request.Start).Take(request.Length).ToList();
+            }
+
+            gradeHorarios = gradeHorarios.Skip(request.Start).Take(request.Length).ToList();
+
+            return new DatatableResponse<GradeHorarioDTO>
+            {
+                Data = gradeHorarios.ToList(),
+                Draw = request.Draw,
+                RecordsFiltered = countRecordsFiltered,
+                RecordsTotal = totalRecords
+            };
+
 
         }
     }

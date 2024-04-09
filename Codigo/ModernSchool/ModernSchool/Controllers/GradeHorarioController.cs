@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.DTO;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Net;
+using Core.Datatables;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -210,6 +211,15 @@ namespace ModernSchoolWEB.Controllers
                     break;
             }
             return RedirectToAction(nameof(Index), new { gradehorarioModel.IdTurma });
+        }
+
+        [HttpPost]
+        [Route("/GradeHorario/GetDataPage/{idTurma}")]
+        public IActionResult GetDataPage(DatatableRequest request, int idTurma)
+        {
+
+            var response = _gradehorarioService.GetDataPage(request, idTurma);
+            return Json(response);
         }
     }
 }

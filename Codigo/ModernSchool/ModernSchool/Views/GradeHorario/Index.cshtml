@@ -1,101 +1,138 @@
 ﻿@model ModernSchoolWEB.Models.GradeHorarioDTOModel
 <partial name="_Notificar">
-<label class="fs-5">Grade Horário</label>
-<br />
-<label class="fs-6">Turma: @Model.NomeTurma</label>
-<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                <label>Componente</label>
-            </th>
-            <th>
-                <label>Dia</label>
-            </th>
-            <th>
-                <label>Hora Início</label>
-            </th>
-            <th>
-                <label>Hora Fim</label>
-            </th>
-            <th>
-                <label>Professor</label>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.GradeHorarioDTOs.Count(); i++)
-        {
+    <label class="fs-5">Grade Horário</label>
+    <br />
+    <label class="fs-6">Turma: @Model.NomeTurma</label>
+    <table class="table table-sm table-striped table-bordered" id="gradeHorario">
+        <thead>
             <tr>
-                <input type="hidden" asp-for="@Model.GradeHorarioDTOs[i].Id" />
-                <td>
-                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Componente)
-                </td>
-                <td>
-                    @{
-                        Dictionary<string, string> dias = new()
-                        {
-                            {"DOM","Domingo" },
-                            {"SEG","Segunda-Feira" },
-                            {"TER","Terça-Feira" },
-                            {"QUA","Quarta-Feira" },
-                            {"QUI","Quinta-Feira" },
-                            {"SEX","Sexta-Feira" },
-                            {"SAB","Sábado" }
-                        };
-                        foreach(var item in dias)
-                        {
-                            if (Model.GradeHorarioDTOs[i].Dia.Equals(item.Key))
-                            {
-                                <span>@item.Value</span>
-                            }
-                        }
-                    }
-                </td>
-                <td>
-                    @{
-                        string h = @Model.GradeHorarioDTOs[i].HoraInicio;
-                        string horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
-                    }
-                    <span>@horaFormatada</span>
-                </td>
-                <td>
-                    @{
-                        h = @Model.GradeHorarioDTOs[i].HoraFim;
-                        horaFormatada = h[0].ToString() + h[1] + ":" + h[2] + h[3];
-                    }
-                    <span>@horaFormatada</span>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => @Model.GradeHorarioDTOs[i].Professor)
-                </td>
-                <td>
-                    <div class="d-flex">
-                        <div>
-                            <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@Model.GradeHorarioDTOs[i].Id"><i class="fa-solid fa-pen-to-square"></i></a>
-                        </div>
-                        <div>
-                            <form asp-action="Delete"
-                                  asp-route-Id="@Model.GradeHorarioDTOs[i].Id" asp-route-idTurma="@Model.IdTurma">
-                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                                    <i class="fa-solid text-danger fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
+                <th>
+                    <label>Componente</label>
+                </th>
+                <th>
+                    <label>Dia</label>
+                </th>
+                <th>
+                    <label>Hora Início</label>
+                </th>
+                <th>
+                    <label>Hora Fim</label>
+                </th>
+                <th>
+                    <label>Professor</label>
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<div class="container py-4">
-    <div class="row">
-        <div class="d-flex justify-content-end col-lg align-items-center">
-            <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
-        </div>
-        <div class="d-flex justify-content-end col-lg-2">
-            <a class="display-4" role="button" asp-action="Create" asp-route-idTurma="@Model.IdTurma"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </thead>
+    </table>
+    <div class="container py-4">
+        <div class="row">
+            <div class="d-flex justify-content-end col-lg align-items-center">
+                <a class="btn bg-secondary text-white border border-0 d-grid gap-2 col-3" asp-controller="Turma" asp-action="Index"> Voltar </a>
+            </div>
+            <div class="d-flex justify-content-end col-lg-2">
+                <a class="display-4" role="button" asp-action="Create" asp-route-idTurma="@Model.IdTurma"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="gradeHorarioProf" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Grade Horário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <form method="post" class="modal-footer">
+                    <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-primary col-3">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <script src="~/js/DataTable/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#gradeHorario').DataTable({
+                    "processing": true, // for show progress bar
+                    "serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    "pageLength": 5,
+                    "lengthMenu": [
+                        [5, 10, 20, -1],
+                        [5, 10, 20, "Todos"]
+                    ],
+                    "ajax": {
+                        "url": "/GradeHorario/GetDataPage/" + @Model.IdTurma,
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columnDefs": [{
+                        "targets": [0],
+                        "visible": true,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [2],
+                        "visible": true,
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    {
+                        "targets": [3],
+                        "visible": true,
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    {
+                        "targets": [5],
+                        "visible": true,
+                        "searchable": false,
+                        "orderable": false
+                    }],
+                    "columns": [
+                        { "data": "componente", "name": "Componente", "autoWidth": true },
+                        { "data": "dia", "name": "Dia", "autoWidth": true,
+                            "render": function (data, type, row) {
+                                return obterNomeDia(data);
+                            }
+                        }, 
+                        { "data": "horaInicio", "name": "Hora Início", "autoWidth": true,
+                            "render": function (data, type, row) {
+                                return formatarHora(data);
+                            }
+                        },
+                        { "data": "horaFim", "name": "Hora Fim", "autoWidth": true,
+                            "render": function (data, type, row) {
+                                return formatarHora(data);
+                            }
+                        },
+                        { "data": "professor", "name": "Professor", "autoWidth": true },
+                        {
+                            "render": function (data, type, full, meta) {
+                                return '<a role="button" href="GradeHorario/Edit/'+ full.id +'" class="fs-5"><i class="fa-solid fa-pen-to-square"></i></a>' +
+                                    '<button onclick="showModalGradeHorario(' + full.id + ', ' + @Model.IdTurma + ', \'' + full.professor + '\', \'' + full.componente + '\')" class="border-0 fs-5 bg-transparent pl-5" role="button"><i class="fa-solid text-danger fa-trash-can"></i></button>'
+                            }
+                        },
+                    ],
+                    language: {
+                        "lengthMenu": "Exibir _MENU_",
+                        "info": "Exibindo de _START_ até _END_ de _TOTAL_ registros",
+                        "search": "Buscar",
+                        "paginate": {
+                            "next": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-right\"></i>")',
+                            "previous": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-left\"></i>")',
+                            "first": "Primeiro",
+                            "last": "Último"
+                        },
+                        url: "/js/DataTable/pt-br.json",
+                    }
+                });
+            });
+        </script>
+    }
