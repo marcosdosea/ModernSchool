@@ -14,14 +14,11 @@
 }
 
 
-$(document).ready(function () {
-    $('.open-modal-comunicado').click(function () {
-        var mensagem = $(this).data('mensagem'); // Obtém a mensagem do atributo data-mensagem do botão
+function exibirMensagemNoModal(mensagem) {
+    var msg = $('#mensagemModal').text(mensagem).addClass('fs-6');
+}
 
-        // Insere a mensagem no corpo do modal
-        $('#mensagemModal').text(mensagem).addClass('fs-6');
-    });
-});
+
 
 function showConfirmationModal(formId, view, idModal, nome) {
     var modal = document.getElementById(idModal);

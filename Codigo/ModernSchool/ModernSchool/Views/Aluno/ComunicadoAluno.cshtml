@@ -4,7 +4,7 @@
 <br />
 <label>Turma: @Model.NomeTurma</label>
 
-<table class="table table-sm table-striped table-bordered">
+<table class="table table-sm table-striped table-bordered" id="alunoComunicadoTurma">
     <thead>
         <tr>
             <th>
@@ -21,26 +21,6 @@
             </th>
         </tr>
     </thead>
-    <tbody>
-        @for (int i = 0; i < @Model.Comunicados.Count(); i++)
-        {
-            <tr>
-                <td>
-                    @Model.Comunicados[i].NomeRemetente
-                </td>
-                <td>
-                    @Model.Comunicados[i].NomeComponente
-                </td>
-                <td>
-                    @Model.Comunicados[i].Data.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal-comunicado border-0 text-primary-default bg-transparent" data-mensagem="@Model.Comunicados[i].Menssagem"><i class="fa-solid fa-eye"></i></button>
-                </td>
-
-            </tr>
-        }
-    </tbody>
 </table>
 <div class="d-flex flex- py-4 col-4">
     <div class="col-8 d-flex">
@@ -65,5 +45,67 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    <script src="~/js/DataTable/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#alunoComunicadoTurma').DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 5,
+                "lengthMenu": [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, "Todos"]
+                ],
+                "ajax": {
+                    "url": "/Aluno/GetPageComunicado",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": true,
+                    "searchable": false,
+                },
+                {
+                    "targets": [3],
+                    "visible": true,
+                    "searchable": false,
+                    "orderable": false
+                }
+                ],
+                "columns": [
+                    { "data": "nomeRemetente", "name": "Professor", "autoWidth": true },
+                    { "data": "nomeComponente", "name": "Componente", "autoWidth": true },
+                    { "data": "data", "name": "Data", "autoWidth": true, },
+                    {
+                        "data": "menssagem", "name": "Mensagem", "autoWidth": true,
+                        "render": function (data, type, full, meta) {
+                            return '<button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 border-0 text-primary-default bg-transparent" onclick="exibirMensagemNoModal(\'' + full.menssagem + '\')"><i class="fa-solid fa-eye"></i></button>';
+                        }
+                    }
+                ],
+                language: {
+                    "lengthMenu": "Exibir _MENU_",
+                    "info": "Exibindo de _START_ até _END_ de _TOTAL_ registros",
+                    "search": "Buscar",
+                    "paginate": {
+                        "next": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-right\"></i>")',
+                        "previous": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-left\"></i>")',
+                        "first": "Primeiro",
+                        "last": "Último"
+                    },
+                    url: "/js/DataTable/pt-br.json",
+                }
+            });
+        });
+    </script>
+}
 

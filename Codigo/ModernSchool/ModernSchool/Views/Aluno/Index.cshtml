@@ -13,9 +13,11 @@
                 Local
             </th>
             <th>
-                Horário
+                Data de Entrega
             </th>
-            <th></th>
+            <th>
+                Hora de Entrega
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -56,14 +58,14 @@
 }
 else
 {
-    <table class="table table-sm table-striped table-bordered">
+    <table class="table table-sm table-striped table-bordered" id="atividadeAlunoTurma">
         <thead>
             <tr>
                 <th>
-                    Data de Entrega
+                    Data Entrega
                 </th>
                 <th>
-                    Horário de Entrega
+                    Hora Entrega
                 </th>
                 <th>
                     Componente
@@ -73,25 +75,6 @@ else
                 </th>
             </tr>
         </thead>
-        <tbody>
-            @for (int i = 0; i < Model.AlunosAtividade.Count(); i++)
-            {
-                <tr>
-                    <td class="col-3"> 
-                        <span>@Model.AlunosAtividade[i].Data?.ToString("dd/MM/yyyy")</span>
-                    </td>
-                    <td class="col-3">
-                        <span>@Model.AlunosAtividade[i].Data?.ToString("HH:mm")</span>
-                    </td>
-                    <td class="col-3">
-                        @Html.DisplayFor(modelItem => Model.AlunosAtividade[i].Componente)
-                    </td>
-                    <td>
-                        <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal-comunicado border-0 text-primary-default bg-transparent" data-mensagem="@Model.AlunosAtividade[i].Descricao"><i class="fa-solid fa-eye"></i></button>
-                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 }
 
@@ -112,3 +95,85 @@ else
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/DataTable/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#atividadeAlunoTurma').DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 5,
+                "lengthMenu": [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, "Todos"]
+                ],
+                "ajax": {
+                    "url": "/Aluno/GetDataPage",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": true,
+                    "searchable": false,
+                    "orderable": false
+                },
+                {
+                    "targets": [3],
+                    "visible": true,
+                    "searchable": false,
+                    "orderable": false
+                }
+                ],
+                "columns": [
+                    { "data": "data", "name": "Data Entrega", "autoWidth": true,
+                        "render": function (data, type, row) {
+                            if (type === 'display') {
+                                var dateObject = new Date(data);
+                                var formattedDate = ("0" + dateObject.getDate()).slice(-2) + '/' + ("0" + (dateObject.getMonth() + 1)).slice(-2) + '/' + dateObject.getFullYear();
+                                return formattedDate;
+                            }
+                            return data;
+                        }
+                    },
+                    { "data": "data", "name": "Hora Entrega", "autoWidth": true,
+                        "render": function (data, type, row) {
+                            if (type === 'display') {
+                                var horaMinuto = data.substring(11, 16);
+                                return horaMinuto;
+                            }
+                            return data;
+                        }
+                    },
+                    { "data": "componente", "name": "Componente", "autoWidth": true, },
+                    {
+                        "data": "descricao", "name": "Descrição", "autoWidth": true,
+                        "render": function (data, type, full, meta) {
+                            return '<button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 border-0 text-primary-default bg-transparent" onclick="exibirMensagemNoModal(\'' + full.descricao + '\')"><i class="fa-solid fa-eye"></i></button>';
+                        }
+                    }
+                ],
+                language: {
+                    "lengthMenu": "Exibir _MENU_",
+                    "info": "Exibindo de _START_ até _END_ de _TOTAL_ registros",
+                    "search": "Buscar",
+                    "paginate": {
+                        "next": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-right\"></i>")',
+                        "previous": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-left\"></i>")',
+                        "first": "Primeiro",
+                        "last": "Último"
+                    },
+                    url: "/js/DataTable/pt-br.json",
+                }
+            });
+        });
+    </script>
+}
