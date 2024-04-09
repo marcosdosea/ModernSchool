@@ -2,6 +2,7 @@ using Core;
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Service
 {
@@ -21,11 +22,38 @@ namespace Service
         /// <param name="gradehoraria">Dados do periodo</param>
         /// <returns>Id do Gradehoraria</returns>
 
-        public int Create(Gradehorario gradehorario)
+        public HttpStatusCode Create(Gradehorario gradehorario)
         {
-            _context.Add(gradehorario);
-            _context.SaveChanges();
-            return gradehorario.Id;
+
+
+            try
+            {
+                // verificar se uma turma tem aula no mesmo dia e hora  
+                var turma = _context.Gradehorarios.Where(g => g.IdTurma == gradehorario.IdTurma
+                   && g.DiaSemana == gradehorario.DiaSemana &&
+                   gradehorario.HoraInicio == g.HoraInicio);
+
+                if (turma.Any())
+                {
+                    return HttpStatusCode.BadRequest;
+                }
+
+                // verificar se professor tem horario em alguma grade no mesmo dia de aula
+                var professor = _context.Gradehorarios.Where(g => g.IdProfessor == gradehorario.IdProfessor && g.DiaSemana == gradehorario.DiaSemana &&
+                   gradehorario.HoraInicio == g.HoraInicio);
+                if(professor.Any())
+                {
+                    return HttpStatusCode.BadRequest;
+                }
+                _context.Add(gradehorario);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch 
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
 
         }
         /// <summary>
@@ -34,21 +62,40 @@ namespace Service
         /// <param name="idGradeHoraria"></param>
 
 
-        public void Delete(int idGradehorario)
+        public HttpStatusCode Delete(int idGradehorario)
         {
-            var _governo = _context.Gradehorarios.Find(idGradehorario);
-            _context.Remove(_governo);
-            _context.SaveChanges();
+
+            try
+            {
+                var _governo = _context.Gradehorarios.Find(idGradehorario);
+                _context.Remove(_governo);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch 
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
 
         /// <summary>
         /// Editar uma Grade Horaria no banco de dados
         /// </summary>
         /// <param name="gradehoraria">Dados da grade horaria</param>
-        public void Edit(Gradehorario gradehorario)
+        public HttpStatusCode Edit(Gradehorario gradehorario)
         {
-            _context.Update(gradehorario);
-            _context.SaveChanges();
+            try
+            {
+                _context.Update(gradehorario);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
 
         /// <summary>
@@ -69,10 +116,10 @@ namespace Service
             return _context.Gradehorarios.AsNoTracking();
         }
 
-        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario()
+        public IEnumerable<GradeHorarioDTO> GetAllGradeHorario(int idTurma)
         {
 
-            var q = _context.Gradehorarios
+            var q = _context.Gradehorarios.Where(g => g.IdTurma == idTurma)
                 .OrderBy(g => g.IdComponenteNavigation.Nome)
                 .Select(g => 
                     new GradeHorarioDTO

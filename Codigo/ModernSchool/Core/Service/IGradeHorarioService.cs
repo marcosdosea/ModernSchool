@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Core.DTO;
 
@@ -8,16 +9,16 @@ namespace Core.Service
 {
     public interface IGradeHorarioService
     {
-        int Create(Gradehorario gradehorario);
+        HttpStatusCode Create(Gradehorario gradehorario);
 
-        void Edit(Gradehorario gradehorario);
+        HttpStatusCode Edit(Gradehorario gradehorario);
 
-        void Delete(int idGradehorario);
+        HttpStatusCode Delete(int idGradehorario);
 
         Gradehorario Get(int idGradehorario);
 
         IEnumerable<Gradehorario> GetAll();
-        IEnumerable<GradeHorarioDTO> GetAllGradeHorario();
+        IEnumerable<GradeHorarioDTO> GetAllGradeHorario(int idTurma);
         GradeHorarioDTO? GetAGradeHorario(int id);
 
         IEnumerable<GradeHorarioProfessor> GetAllGradeProfessor(int idProfessor);

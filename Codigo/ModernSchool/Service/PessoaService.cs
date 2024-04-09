@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Core.DTO;
 using System.Net;
+using Core.Datatables;
 
 namespace Service
 {
@@ -353,6 +354,61 @@ namespace Service
             var query = _context.Alunoturmas.Where(g => g.IdAluno == idAluno && g.Status == "M");
 
             return query.Any();
+
+        }
+        public DatatableResponse<IndexAlunoTurmaDTO> GetDataPage(DatatableRequest request, int idTurma)
+        {
+            var alunosTurma = GetAlunosTurma(idTurma);
+
+            var totalRecords = GetAlunosTurma(idTurma).Count();
+
+            if (request.Search != null && request.Search.GetValueOrDefault("value") != null)
+            {
+                alunosTurma = alunosTurma.Where(g => g.NomeAluno.ToLower().ToString().Contains(request.Search.GetValueOrDefault("value"))
+                                             || g.IdAluno.ToString().Contains(request.Search.GetValueOrDefault("value"))).ToList();
+            }
+
+            if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("0"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunosTurma = alunosTurma.OrderBy(g => g.NomeAluno).ToList();
+                else
+                    alunosTurma = alunosTurma.OrderByDescending(g => g.IdAluno).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("1"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunosTurma = alunosTurma.OrderBy(g => g.NomeAluno).ToList();
+                else
+                    alunosTurma = alunosTurma.OrderByDescending(g => g.NomeAluno).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("2"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunosTurma = alunosTurma.OrderBy(g => g.NomeAluno).ToList();
+                else
+                    alunosTurma = alunosTurma.OrderByDescending(g => g.NomeAluno).ToList();
+            }
+            else if (request.Order != null && request.Order[0].GetValueOrDefault("column").Equals("3"))
+            {
+                if (request.Order[0].GetValueOrDefault("dir").Equals("asc"))
+                    alunosTurma = alunosTurma.OrderBy(g => g.NomeAluno).ToList();
+                else
+                    alunosTurma = alunosTurma.OrderByDescending(g => g.NomeAluno).ToList();
+            }
+
+            int countRecordsFiltered = alunosTurma.Count();
+
+            alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
+
+            return new DatatableResponse<IndexAlunoTurmaDTO>
+            {
+                Data = alunosTurma.ToList(),
+                Draw = request.Draw,
+                RecordsFiltered = countRecordsFiltered,
+                RecordsTotal = totalRecords
+            };
+
 
         }
     }

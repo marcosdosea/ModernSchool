@@ -7,21 +7,22 @@ using Core;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.DTO;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Net;
 
 namespace ModernSchoolWEB.Controllers
 {
 
-    public class GradeHorarioController : Controller
+    public class GradeHorarioController : Notificacao
     {
         private readonly IGradeHorarioService _gradehorarioService;
         private readonly IMapper _mapper;
         private readonly IComponenteService _componenteService;
-        private readonly ITurmaService _turmaService; 
+        private readonly ITurmaService _turmaService;
         private readonly IPessoaService _pessoaService;
         private readonly IEscolaService _escolaService;
 
         public GradeHorarioController(IGradeHorarioService gradehorario, IMapper mapper
-            , IComponenteService componenteService, ITurmaService turmaService,IPessoaService pessoaService
+            , IComponenteService componenteService, ITurmaService turmaService, IPessoaService pessoaService
             , IEscolaService escolaService)
         {
             _gradehorarioService = gradehorario;
@@ -34,7 +35,7 @@ namespace ModernSchoolWEB.Controllers
 
         public ActionResult Index(int idTurma)
         {
-            var listaGrade = _gradehorarioService.GetAllGradeHorario();
+            var listaGrade = _gradehorarioService.GetAllGradeHorario(idTurma);
             GradeHorarioDTOModel view = new();
             view.GradeHorarioDTOs = listaGrade.ToList();
             view.IdTurma = idTurma;
@@ -56,12 +57,12 @@ namespace ModernSchoolWEB.Controllers
 
             var turma = _turmaService.Get(idTurma);
             string nomeEscola = _escolaService.GetNomeEscola(Convert.ToInt32(User.FindFirst("Id")?.Value));
-               
+
             IEnumerable<Componente> listaComponenstes = _componenteService.GetAll();
             IEnumerable<PessoaProfessorDTO> listaProfessor = _pessoaService.GetAllProfessor();
-            
-            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome",null);
-            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa",null);
+
+            gradehorarioViewModel.ListaComponentes = new SelectList(listaComponenstes, "Id", "Nome", null);
+            gradehorarioViewModel.ListaProfessor = new SelectList(listaProfessor, "IdPessoa", "NomePessoa", null);
             gradehorarioViewModel.Turma = turma.Turma1;
             gradehorarioViewModel.Sala = turma.Sala;
             gradehorarioViewModel.NomeEscola = nomeEscola;
@@ -91,9 +92,33 @@ namespace ModernSchoolWEB.Controllers
                 var gradeHorario = _mapper.Map<Gradehorario>(gradehorarioModel);
                 gradeHorario.HoraInicio = gradeHorario.HoraInicio.Replace(":", "");
                 gradeHorario.HoraFim = gradeHorario.HoraFim.Replace(":", "");
-                _gradehorarioService.Create(gradeHorario);
+                string menssagem = string.Empty;
+                switch (_gradehorarioService.Create(gradeHorario))
+                {
+                    case HttpStatusCode.OK:
+
+                        menssagem = "<b>Sucesso:</b> Grade Horária <b>Cadastrada</b>";
+                        Notificar(menssagem, Notifica.Sucesso);
+
+                        return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
+
+                    case HttpStatusCode.InternalServerError:
+
+                        menssagem = "<b>Erro:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária ";
+                        Notificar(menssagem, Notifica.Erro);
+
+                        return View(gradehorarioModel);
+
+                    case HttpStatusCode.BadRequest:
+
+                        menssagem = "<b>Aviso:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária, verifique se o professor ja esta cadastrado em outra turma ou ja existe uma aula cadastrada nesta turma";
+                        Notificar(menssagem, Notifica.Informativo);
+                        return View(gradehorarioModel);
+
+
+                }
             }
-            return RedirectToAction(nameof(Index),new {idTurma = gradehorarioModel.IdTurma});
+            return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
         }
 
         public ActionResult Edit(int id)
@@ -135,10 +160,24 @@ namespace ModernSchoolWEB.Controllers
             if (modelStateClone.IsValid)
             {
                 Gradehorario gradehorario = _mapper.Map<Gradehorario>(gradehorarioModel);
-                _gradehorarioService.Edit(gradehorario);
+                string menssagem = string.Empty;
+                switch (_gradehorarioService.Edit(gradehorario))
+                {
+
+                    case HttpStatusCode.OK:
+
+                        menssagem = "<b>Sucesso:</b> Grade de Horario <b>Editada</b>";
+                        Notificar(menssagem, Notifica.Sucesso);
+                        break;
+
+                    case HttpStatusCode.InternalServerError:
+                        menssagem = "<b>Erro:</b> Não foi possivel editar Grade de Horario";
+                        Notificar(menssagem, Notifica.Erro);
+                        break;
+                }
             }
 
-            return RedirectToAction(nameof(Index), new {gradehorarioModel.IdTurma});
+            return RedirectToAction(nameof(Index), new { gradehorarioModel.IdTurma });
 
         }
 
@@ -151,10 +190,26 @@ namespace ModernSchoolWEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id,GradehorarioViewModel gradehorarioModel )
+        public ActionResult Delete(int id, GradehorarioViewModel gradehorarioModel)
         {
-            _gradehorarioService.Delete(id);
-            return RedirectToAction(nameof(Index), new {gradehorarioModel.IdTurma}); 
+
+            string menssagem = string.Empty;
+            switch (_gradehorarioService.Delete(id))
+            {
+                case HttpStatusCode.OK:
+
+                    menssagem = "<b>Sucesso: </b> Grade de Horario <b>Removida</b>";
+                    Notificar(menssagem, Notifica.Sucesso);
+
+                    break;
+                case HttpStatusCode.InternalServerError:
+                    
+                    menssagem = "<b>Erro: </b> Grade de Horario <b>Removida</b>";
+                    Notificar(menssagem, Notifica.Erro);
+                   
+                    break;
+            }
+            return RedirectToAction(nameof(Index), new { gradehorarioModel.IdTurma });
         }
     }
 }

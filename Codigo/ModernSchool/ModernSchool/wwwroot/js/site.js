@@ -50,3 +50,6 @@ $(document).ready(function () {
         return texto.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); });
     }
 });
+$(document).ready(function () {
+    $('thead th').addClass('border-top');
+});

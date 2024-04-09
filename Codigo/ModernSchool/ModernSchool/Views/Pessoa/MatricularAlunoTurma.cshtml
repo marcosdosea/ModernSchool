@@ -9,45 +9,23 @@
     </div>
     <hr />
     <h4>Alunos </h4>
-    <table class="table table-sm table-striped table-bordered">
+    <table id="tabelaAluno" class="table table-sm table-striped table-bordered">
         <thead>
             <tr>
                 <th>
-                    Código
+                    Matrícula
                 </th>
                 <th>
                     Nome
                 </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Alunos.Count(); i++)
-            {
-                <tr>
-                    <td>@Model.Alunos[i].IdAluno</td>
-                    <td>@Model.Alunos[i].NomeAluno</td>
-                    <td>
-                        <div class="d-flex">
-                            <div>
-                                <a role="button" asp-action="Edit" class="fs-5" asp-route-Id="@Model.Alunos[i].IdAluno" asp-route-idTurma="@Model.IdTurma"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </div>
-                            <div>
-                                <button data-toggle="modal" data-target="#exampleModalCenter" class="fs-5 pl-5 open-modal border-0 text-primary-default bg-transparent" data-id="@Model.Alunos[i].IdAluno" data-idTurma="@Model.IdTurma"><i class="fa-solid fa-eye"></i></button>
-                            </div>
-                            <div>
-                                <form asp-action="Delete"
-                                      asp-route-Id="@Model.Alunos[i].IdAluno">
-                                    <input asp-for="IdTurma" type="hidden" />
-                                    <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                                        <i class="fa-solid text-danger fa-trash-can"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 
     <div class="container py-4 col-4">
@@ -61,8 +39,8 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal Details-->
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -77,3 +55,80 @@
         </div>
     </div>
 
+    <!--Modal Excluir-->
+    <div class="modal fade" id="alunoTurma" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Cancelamento</h5>
+                    <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <form method="post" class="modal-footer">
+                    <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-primary col-3">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <script src="~/js/DataTable/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#tabelaAluno').DataTable({
+                    "processing": true, // for show progress bar
+                    "serverSide": true, // for process server side
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    "pageLength": 5,
+                    "lengthMenu": [
+                        [5, 10, 20, -1],
+                        [5, 10, 20, "Todos"]
+                    ],
+                    "ajax": {
+                        "url": "/Pessoa/GetDataPage/" + @Model.IdTurma,
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columnDefs": [{
+                        "targets": [0],
+                        "visible": true,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [3],
+                        "visible": true,
+                        "searchable": false,
+                        "orderable": false
+                    }],
+                    "columns": [
+                        { "data": "idAluno", "name": "Código", "autoWidth": true },
+                        { "data": "nomeAluno", "name": "Nome", "autoWidth": true },
+                        { "data": null, "defaultContent": null, "autoWidth": true, "visible": false },
+                        {
+                            "render": function (data, type, full, meta) {
+                                return '<a role="button" href="/Pessoa/Edit?id=' + full.idAluno + '&idTurma=' + @Model.IdTurma + '" class="fs-5" "data-idTurma="' + @Model.IdTurma + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
+                                    '<button data-toggle="modal" data-target="#modalDetail"  onclick="openModal(' + full.idAluno + ', ' + @Model.IdTurma +')" class="open-modal fs-5 pl-5 border-0 text-primary-default bg-transparent" data-id="' + full.idAluno + '" data-idTurma="' + @Model.IdTurma + '"><i class="fa-solid fa-eye"></i></button>' +
+                                    '<button onclick="showModalCancelarAluno(' + full.idAluno + ', \'' + @Model.IdTurma + '\')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button"><i class="fa-solid text-danger fa-trash-can"></i></button>'
+                            }
+                        },
+                    ],
+                    language: {
+                        "lengthMenu": "Exibir _MENU_",
+                        "info": "Exibindo de _START_ até _END_ de _TOTAL_ registros",
+                        "search": "Buscar",
+                        "paginate": {
+                            "next": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-right\"></i>")',
+                            "previous": '@Html.Raw("<i class=\"fa fs-6 fa-chevron-left\"></i>")',
+                            "first": "Primeiro",
+                            "last": "Último"
+                        },
+                        url: "/js/DataTable/pt-br.json",
+                    }
+                });
+            });
+        </script>
+
+
+    }

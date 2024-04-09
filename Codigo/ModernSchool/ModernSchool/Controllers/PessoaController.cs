@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Text.RegularExpressions;
 using static ModernSchoolWEB.Controllers.Notificacao;
 using System.Net;
+using Core.Datatables;
 
 namespace ModernSchoolWEB.Controllers
 {
@@ -322,6 +323,14 @@ namespace ModernSchoolWEB.Controllers
                 //pessoa.Cep = pessoa.Cep.Replace("-", "");
                 return Json(pessoa);
             }
+        }
+        [HttpPost]
+        [Route("/Pessoa/GetDataPage/{idTurma}")]
+        public IActionResult GetDataPage(DatatableRequest request, int idTurma)
+        {
+            
+            var response = _pessoaService.GetDataPage(request, idTurma);
+            return Json(response);
         }
 
 

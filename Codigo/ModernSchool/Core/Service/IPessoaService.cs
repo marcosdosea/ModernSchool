@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Datatables;
 using Core.DTO;
 
 namespace Core.Service
@@ -43,6 +44,8 @@ namespace Core.Service
 
         public void DeleteAlunoTurma(int idAluno, int idTurma);
         public bool AlunoMatriculado(int idAluno);
+        DatatableResponse<IndexAlunoTurmaDTO> GetDataPage(DatatableRequest request, int idGrupo);
+
 
     }
 }
