@@ -1,82 +1,96 @@
 ﻿@model ModernSchoolWEB.Models.TurmaViewModel
 <partial name="_Notificar">
-<div class="d-flex justify-content-between align-items-end mb-5">
-    <div>
-        <label class="control-label fs-5">Turmas</label>
-    </div>
-    <div class="form-group">
-        <label asp-for="AnoLetivo" class="control-label"></label>
-        <select asp-for="AnoLetivo" class="form-select" asp-items="@Model.ListaAnoLetivo"></select>
-        <span asp-validation-for="AnoLetivo" class="text-danger"></span>
-    </div>
-</div>
-<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AnoLetivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Turma1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vagas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VagasDisponiveis)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ListaTurma)
-        {
-            <tr>
-                <input asp-for="Id" type="hidden" />
-                <td>
-                    @Html.DisplayFor(modelItem => item.AnoLetivo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Turma1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Vagas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VagasDisponiveis)
-                </td>
-                <td>
-                    <div class="d-flex justify-content-evenly">
-                        <div>
-                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="Pessoa" asp-action="MatricularAlunoTurma" asp-route-IdTurma="@item.Id">Matricular</a>
-                        </div>
-                        <div>
-                            <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="GradeHorario" asp-action="Index"
-                                asp-route-idTurma="@item.Id">Grade</a>
-                        </div>
-                        <div>
-                            <form asp-action="Delete"
-                                  asp-route-Id="@item.Id">
-                                <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                                    <i class="fa-solid text-danger fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<div class="d-flex justify-content-end">
-</div>
-<div class="container py-4">
-    <div class="row">
-        <div class="col-lg-6"></div>
-        <div class="d-flex justify-content-end col-lg-6">
-            <a class="display-4" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+    <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+            <label class="control-label fs-5">Turmas</label>
+        </div>
+        <div class="form-group">
+            <label asp-for="AnoLetivo" class="control-label"></label>
+            <select asp-for="AnoLetivo" class="form-select" asp-items="@Model.ListaAnoLetivo"></select>
+            <span asp-validation-for="AnoLetivo" class="text-danger"></span>
         </div>
     </div>
-</div>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnoLetivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Turma1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vagas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VagasDisponiveis)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListaTurma)
+            {
+                <tr>
+                    <input asp-for="Id" type="hidden" />
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnoLetivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Turma1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vagas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VagasDisponiveis)
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-evenly">
+                            <div>
+                                <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="Pessoa" asp-action="MatricularAlunoTurma" asp-route-IdTurma="@item.Id">Matricular</a>
+                            </div>
+                            <div>
+                                <a class="btn cor-bg text-light btn-sm rounded-pill" role="button" asp-controller="GradeHorario" asp-action="Index"
+                                   asp-route-idTurma="@item.Id">Grade</a>
+                            </div>
+                            <div>
+                                <button onclick="showConfirmationModal('@item.Id', 'Turma', 'turmaModal', '@item.Turma1')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                    <i class="fa-solid text-danger fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+    </div>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-lg-6"></div>
+            <div class="d-flex justify-content-end col-lg-6">
+                <a class="display-4" asp-action="Create"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="turmaModal" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <form method="post" class="modal-footer">
+                    <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-primary col-3">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 

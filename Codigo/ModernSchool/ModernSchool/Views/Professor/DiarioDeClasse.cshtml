@@ -42,16 +42,11 @@
                     <a role="button" asp-action="EditDiarioClasse" class="fs-5" asp-route-IdProfessor="@int.Parse(id.Value)"
                        asp-route-IdTurma="@Model.IdTurma" asp-route-IdComponente="@Model.IdComponente" asp-route-IdDiario="@item.IdDiarioClasse" asp-route-IdObjeto="@item.IdObjeto"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                    <form asp-action="DeleteDiarioClasse"
-                          asp-route-IdProfessor="@int.Parse(id.Value)"
-                          asp-route-IdTurma="@Model.IdTurma"
-                          asp-route-IdComponente="@Model.IdComponente"
-                          asp-route-IdDiario="@item.IdDiarioClasse"
-                          asp-route-IdObjeto="@item.IdObjeto">
-                        <button type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                            <i class="fa-solid text-danger fa-trash-can"></i>
-                        </button>
-                    </form>
+
+                    <button onclick="showConfirmationModalDiario('@item.IdObjeto', '@item.IdDiarioClasse', 'diarioModal', '@item.UnidadeTematica')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                        <i class="fa-solid text-danger fa-trash-can"></i>
+                    </button>
+
                 </td>
             </tr>
         }
@@ -64,6 +59,23 @@
             <a class="display-4" role="button" asp-action="CreateDiarioClasse" asp-route-idTurma="@Model.IdTurma"
                asp-route-idProfessor="@Model.IdProfessor"
                asp-route-idComponente="@Model.IdComponente"><i class="fa-sharp fa-solid fa-circle-plus"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="diarioModal" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <form method="post" class="modal-footer">
+                <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-primary col-3">Sim</button>
+            </form>
         </div>
     </div>
 </div>
