@@ -73,7 +73,7 @@ function showConfirmationModalDiario(idObjeto, idDiario, idTabela, uniTematica) 
     modalForm.action = '/Professor/DeleteDiarioClasse/?IdDiario=' + idDiario + '&IdObjeto=' + idObjeto;
     var modalBody = modal.querySelector('.modal-body');
     var modalH5 = modal.querySelector('h5');
-    modalBody.innerHTML = 'Deseja <b>Excluir</b> o Diário de Classe da unidade Temática <b>: ' + uniTematica + '</b>?'; // Conteúdo do modal
+    modalBody.innerHTML = 'Deseja <b>Excluir</b> o Diário de Classe da unidade Temática: <b>' + uniTematica + '</b>?'; // Conteúdo do modal
 
     // Exibe o modal
     var modal = new bootstrap.Modal(modal);
