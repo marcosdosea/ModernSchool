@@ -70,11 +70,9 @@ function removerAcentos(texto) {
 function showConfirmationModalDiario(idObjeto, idDiario, idTabela, uniTematica) {
     var modal = document.getElementById(idTabela);
     var modalForm = modal.querySelector('form');
-    view = removerAcentos(view);
-    modalForm.action = '/Professor/DeleteDiarioClasse /?IdDiario=' + idDiario + '&IdObjeto=' + idObjeto +; // Define a ação do formulário com a rota correta
+    modalForm.action = '/Professor/DeleteDiarioClasse/?IdDiario=' + idDiario + '&IdObjeto=' + idObjeto;
     var modalBody = modal.querySelector('.modal-body');
     var modalH5 = modal.querySelector('h5');
-    modalH5.innerHTML = 'Confirmar Exclusão do ' + view;
     modalBody.innerHTML = 'Deseja <b>Excluir</b> o Diário de Classe da unidade Temática <b>: ' + uniTematica + '</b>?'; // Conteúdo do modal
 
     // Exibe o modal
