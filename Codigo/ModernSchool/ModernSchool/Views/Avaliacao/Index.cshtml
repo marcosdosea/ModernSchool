@@ -36,12 +36,9 @@
 
                         </div>
                         <div>
-                            <form asp-action="Delete"
-                                  asp-route-Id="@Model.Avalicoes[i].Id" asp-route-idComponente="@Model.IdComponente" asp-route-idTurma="@Model.IdTurma">
-                                <button type="submit" class="border-0 bg-transparent pl-5" role="button">
-                                    <i class="fa-solid text-danger fa-trash-can fs-5"></i>
-                                </button>
-                            </form>
+                            <button onclick="showConfirmationModalAvaliacao('@Model.Avalicoes[i].Id', 'avaliacaoModal', '@ViewData["Componente"]', '@Model.Avalicoes[i].DataEntrega', '@Model.IdComponente', '@Model.IdComponente' )" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
+                                <i class="fa-solid text-danger fa-trash-can"></i>
+                            </button>
                         </div>
                     </div>
                 </td>
@@ -63,3 +60,19 @@
     </div>
 </div>
 
+<div class="modal fade" id="avaliacaoModal" tabindex="-1" aria-labelledby="ensaioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <form method="post" class="modal-footer">
+                <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-primary col-3">Sim</button>
+            </form>
+        </div>
+    </div>
+</div>

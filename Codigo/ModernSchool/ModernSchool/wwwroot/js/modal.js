@@ -73,6 +73,7 @@ function showConfirmationModalDiario(idObjeto, idDiario, idTabela, uniTematica) 
     modalForm.action = '/Professor/DeleteDiarioClasse/?IdDiario=' + idDiario + '&IdObjeto=' + idObjeto;
     var modalBody = modal.querySelector('.modal-body');
     var modalH5 = modal.querySelector('h5');
+    modalH5.innerHTML = 'Excluir Diário de Classe'
     modalBody.innerHTML = 'Deseja <b>Excluir</b> o Diário de Classe da unidade Temática: <b>' + uniTematica + '</b>?'; // Conteúdo do modal
 
     // Exibe o modal
@@ -80,3 +81,21 @@ function showConfirmationModalDiario(idObjeto, idDiario, idTabela, uniTematica) 
     modal.show();
 }
 
+function showConfirmationModalAvaliacao(idavaliacao, idTabela, componente, data, idTurma, idComponente) {
+    var modal = document.getElementById(idTabela);
+    var modalForm = modal.querySelector('form');
+    modalForm.action = '/Avaliacao/Delete/' + idavaliacao + '?idTurma=' + idTurma + '&idComponente=' + idComponente;
+    var modalBody = modal.querySelector('.modal-body');
+    modalBody.innerHTML = 'Deseja <b>Excluir</b> a Avaliação de <b>' + componente + '</b> marcada para a Data: <b>' + formatarData(data) + '</b> com Horário de entrega: <b>' + data.substring(11, 16) + '</b>?';
+
+    // Exibe o modal
+    var modal = new bootstrap.Modal(modal);
+    modal.show();
+}
+function formatarData(data) {
+    var dia = data.substring(0, 2);
+    var mes = data.substring(3, 5);
+    var ano = data.substring(6, 10);
+
+    return dia + '/' + mes + '/' + ano;
+}

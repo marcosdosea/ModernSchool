@@ -199,6 +199,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: AvaliacaoController1/Delete/5
         public ActionResult Delete(int id, int idTurma)
         {
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(id).Nome;
             Avaliacao avaliacao = _avaliacaoService.Get(id);
             AvaliacaoViewModel avaliacaoModel = _mapper.Map<AvaliacaoViewModel>(avaliacao);
             avaliacaoModel.IdTurma = idTurma;
