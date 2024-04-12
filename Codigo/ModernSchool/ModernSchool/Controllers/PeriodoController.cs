@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
+using System.Linq.Expressions;
+using System.Net;
+using static ModernSchoolWEB.Controllers.Notificacao;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class PeriodoController : Controller
+    public class PeriodoController : Notificacao
     {
         private readonly IPeriodoService _periodoService;
         private readonly IMapper _mapper;
@@ -50,14 +53,34 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PeriodoViewModel periodoModel)
         {
+            string mensagem;
             ModelState.Remove("listaAnoLetivo");
             if (ModelState.IsValid)
             {
                 var periodo = _mapper.Map<Periodo>(periodoModel);
-                _periodoService.Create(periodo);
-            }
-            return RedirectToAction(nameof(Index));
+                switch (_periodoService.Create(periodo))
+                {
+                    case HttpStatusCode.BadRequest:
 
+                        mensagem = "<b>Erro:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(Create), periodoModel);
+
+                    case HttpStatusCode.OK:
+
+
+                        mensagem = "<b>Sucesso:</b> Período <b>Cadastrada</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(Index));
+
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Erro ao <b>Cadastrada</b> Período.";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Create), periodoModel);
+                }
+            }
+            return RedirectToAction(nameof(Create), periodoModel);
         }
 
         // GET: PeriodoController/Edit/5
@@ -74,11 +97,32 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, PeriodoViewModel periodoViewModel)
         {
+            string mensagem;
             ModelState.Remove("listaAnoletivo");
             if (ModelState.IsValid)
             {
                 var periodo = _mapper.Map<Periodo>(periodoViewModel);
-                _periodoService.Edit(periodo);
+                
+                switch (_periodoService.Edit(periodo))
+                {
+                    case HttpStatusCode.BadRequest:
+
+                        mensagem = "<b>Erro:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(Edit), periodoViewModel.Id);
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Período <b>Editado</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(Index));
+
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Erro ao <b>Editar</b> Período.";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Edit), periodoViewModel.Id);
+                }
             }
             return RedirectToAction(nameof(Index));
         }
@@ -96,7 +140,22 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, PeriodoViewModel periodoViewModel)
         {
-            _periodoService.Delete(id);
+            string mensagem;
+            switch (_periodoService.Delete(id))
+            {
+                case HttpStatusCode.OK:
+
+
+                    mensagem = "<b>Sucesso:</b> Período <b>Apagado</b>.";
+                    Notificar(mensagem, Notifica.Sucesso);
+                    return RedirectToAction(nameof(Index));
+
+                case HttpStatusCode.InternalServerError:
+
+                    mensagem = "<b>Erro:</b> Erro ao <b>Apagar</b> Período.";
+                    Notificar(mensagem, Notifica.Erro);
+                    return RedirectToAction(nameof(Create), periodoViewModel);
+            }
             return RedirectToAction(nameof(Index));
         }
     }
