@@ -80,3 +80,10 @@ function formatarHora(hora) {
 
     return horas + ":" + minutos;
 }
+$(document).ready(function () {
+    $('#toggleSenha').on('click', function () {
+        var senhaInput = $('#senhaInput');
+        var tipo = senhaInput.attr('type') === 'password' ? 'text' : 'password';
+        senhaInput.attr('type', tipo);
+    });
+});

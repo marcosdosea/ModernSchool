@@ -48,10 +48,10 @@
 
                             <div class="d-flex align-items-center col">
                                 <i class="fa-solid fa-lock mx-2" style="color: #6c757d;"></i>
-                                <input asp-for="Input.Password" class="form-control fs-5  ps-1 border-0 rounded-0 bg-secondary bg-opacity-50 text-opacity-100" placeholder="Digite sua Senha..." autocomplete="current-password" aria-required="true" />
+                                <input asp-for="Input.Password" id="senhaInput" class="form-control fs-5 ps-1 border-0 rounded-0 bg-secondary bg-opacity-50 text-opacity-100" placeholder="Digite sua Senha..." autocomplete="current-password" aria-required="true" type="password" />
                             </div>
 
-                            <i class="fas fa-eye mx-2 pointer-cursor data-bs-toggle" tooltip" title="Mostrar senha" id="toggleSenha"></i>
+                            <i class="fas fa-eye mx-2 pointer-cursor" data-bs-toggle="tooltip" title="Mostrar senha" id="toggleSenha"></i>
 
                         </div>
                     </div>
