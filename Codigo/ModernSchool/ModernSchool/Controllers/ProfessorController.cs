@@ -305,6 +305,7 @@ namespace ModernSchoolWEB.Controllers
 
                 };
                 _comunicacaoService.SalvarComunicacao(comunicacao, alunos);
+                Notificar("<b>Sucesso:</b> Comunicado <b>Enviado</b>.", Notifica.Sucesso);
             }
 
             return RedirectToAction(nameof(ComunicacaoProfessorTurma), new { idTurma = model.IdTurma, idComponente = model.IdComponente });

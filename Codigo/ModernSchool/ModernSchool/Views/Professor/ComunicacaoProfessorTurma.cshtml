@@ -1,5 +1,5 @@
 ﻿@model ModernSchoolWEB.Models.ComunicarProfessorTurmaViewModel
-
+<partial name="_Notificar">
 <h3>Comunicado</h3>
 <label>Turma: @Model.Turma Componente: @Model.Componente</label>
 
@@ -43,6 +43,7 @@
             <div class="mb-3">
                 <label asp-for="Menssagem" class="form-label">Mensagem</label>
                 <textarea class="form-control" asp-for="Menssagem" rows="3" cols="5"></textarea>
+                <span asp-validation-for="Menssagem" class="text-danger"></span>
             </div>
         </tbody>
     </table>
@@ -65,3 +66,8 @@
         });
     });
 </script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
