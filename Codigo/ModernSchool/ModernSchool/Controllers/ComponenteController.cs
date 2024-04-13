@@ -57,7 +57,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.BadRequest:
 
-                        mensagem = "<b>Erro:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
+                        mensagem = "<b>Aviso:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
                         Notificar(mensagem, Notifica.Alerta);
                         return RedirectToAction(nameof(Create), componenteViewModel.id);
 
@@ -99,7 +99,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.BadRequest:
 
-                        mensagem = "<b>Erro:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
+                        mensagem = "<b>Aviso:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
                         Notificar(mensagem, Notifica.Alerta);
                         return RedirectToAction(nameof(Edit), componenteViewModel.id);
 
@@ -145,8 +145,8 @@ namespace ModernSchoolWEB.Controllers
 
                 case HttpStatusCode.InternalServerError:
 
-                    mensagem = "<b>Erro:</b> Componente já está em uso";
-                    Notificar(mensagem, Notifica.Erro);
+                    mensagem = "<b>Aviso:</b> Componente já está em uso";
+                    Notificar(mensagem, Notifica.Alerta);
                     return RedirectToAction(nameof(Index));
             }
             
