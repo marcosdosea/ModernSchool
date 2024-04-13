@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,10 +32,22 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public void Edit(Alunoavaliacao alunoavaliacao)
+        public HttpStatusCode Edit(Alunoavaliacao alunoavaliacao)
         {
-            _context.Update(alunoavaliacao);
-            _context.SaveChanges();
+            if(alunoavaliacao.Nota > 10) 
+            {
+                return HttpStatusCode.BadRequest;
+            }
+            try
+            {
+                _context.Update(alunoavaliacao);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         public Alunoavaliacao Get(int idAluno, int idAvaliacao)

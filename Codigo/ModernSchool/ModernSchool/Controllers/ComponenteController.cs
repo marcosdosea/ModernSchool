@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
 using Service;
+using static ModernSchoolWEB.Controllers.Notificacao;
+using System.Net;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class ComponenteController : Controller
+    public class ComponenteController : Notificacao
     {
         private readonly IComponenteService _componenteService;
         private readonly IMapper _mapper;
@@ -46,11 +48,32 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ComponenteViewModel componenteViewModel)
         {
+            string mensagem;
             ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
                 var componente = _mapper.Map<Componente>(componenteViewModel);
-                _componenteService.Create(componente);
+                switch (_componenteService.Create(componente))
+                {
+                    case HttpStatusCode.BadRequest:
+
+                        mensagem = "<b>Erro:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(Create), componenteViewModel.id);
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Componente <b>Cadastrado</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(Index));
+
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Erro ao <b>Cadastrar</b> Componente.";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Create), componenteViewModel.id);
+                }
+                
             }
             return RedirectToAction(nameof(Index));
         }
@@ -68,10 +91,31 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ComponenteViewModel componenteViewModel)
         {
+            string mensagem;
             if (ModelState.IsValid)
             {
                 var componente = _mapper.Map<Componente>(componenteViewModel);
-                _componenteService.Edit(componente);
+                switch (_componenteService.Edit(componente))
+                {
+                    case HttpStatusCode.BadRequest:
+
+                        mensagem = "<b>Erro:</b> Já existe Componente <b>Cadastrada</b> com esse nome.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(Edit), componenteViewModel.id);
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Componente <b>Editado</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(Index));
+
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Erro ao <b>Editar</b> Componente.";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Edit), componenteViewModel.id);
+                }
+
             }
             return RedirectToAction(nameof(Index));
         }
@@ -89,7 +133,23 @@ namespace ModernSchoolWEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, ComponenteViewModel componenteViewModel)
         {
-            _componenteService.Delete(id);
+            string mensagem;
+            switch (_componenteService.Delete(id))
+            {
+
+                case HttpStatusCode.OK:
+
+                    mensagem = "<b>Sucesso:</b> Componente <b>Apagado</b>.";
+                    Notificar(mensagem, Notifica.Sucesso);
+                    return RedirectToAction(nameof(Index));
+
+                case HttpStatusCode.InternalServerError:
+
+                    mensagem = "<b>Erro:</b> Componente já está em uso";
+                    Notificar(mensagem, Notifica.Erro);
+                    return RedirectToAction(nameof(Index));
+            }
+            
             return RedirectToAction(nameof(Index));
         }
     }

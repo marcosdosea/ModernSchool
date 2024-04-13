@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 using Service;
+using System.Net;
 using System.Text;
+using static ModernSchoolWEB.Controllers.Notificacao;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class AvaliacaoController : Controller
+    public class AvaliacaoController : Notificacao
     {
 
         private readonly IAvaliacaoService _avaliacaoService;
@@ -74,14 +76,33 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult AdicionarNotasAvaliacao(AlunoAvaliacaoNotasDTOViewModel viewModel)
         {
 
-
+            string mensagem;
             Alunoavaliacao alunoAvaliacao = new();
 
             foreach (var item in viewModel.ListaAluno)
             {
                 alunoAvaliacao = _alunoAvaliacaoService.Get(item.IdAluno, viewModel.Idavaliacao);
                 alunoAvaliacao.Nota = item.Notas;
-                _alunoAvaliacaoService.Edit(alunoAvaliacao);
+                
+                switch (_alunoAvaliacaoService.Edit(alunoAvaliacao))
+                {
+                    case HttpStatusCode.BadRequest:
+
+                        mensagem = "<b>Error:</b> Existe nota maior que 10.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(AdicionarNotasAvaliacao), viewModel);
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Notas <b>Registradas</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        continue;
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Não foi possivel Registrar as Notas";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Index), new { idTurma = viewModel.IdTurma, idComponente = viewModel.IdComponente });
+                }
 
             }
 
@@ -162,8 +183,17 @@ namespace ModernSchoolWEB.Controllers
                     }
 
                 }
+                Notificar("<b>Sucesso:</b> Avaliação <b>Cadastrada</b>.", Notifica.Sucesso);
+            }
+            else
+            {
+                Notificar("<b>Erro:</b> Não foi possivel <b>Cadastrada</b> Avaliação.", Notifica.Erro);
             }
 
+
+
+            
+            
             return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
         }
 
@@ -191,7 +221,23 @@ namespace ModernSchoolWEB.Controllers
             if (ModelState.IsValid)
             {
                 var avaliacao = _mapper.Map<Avaliacao>(avaliacaoModel);
-                _avaliacaoService.Edit(avaliacao);
+                string mensagem;
+                switch (_avaliacaoService.Edit(avaliacao))
+                {
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Avaliação <b>Editada</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
+
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Não foi possivel <b>Editar</b> Avaliação";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
+                }
+
             }
             return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
         }
@@ -199,6 +245,8 @@ namespace ModernSchoolWEB.Controllers
         // GET: AvaliacaoController1/Delete/5
         public ActionResult Delete(int id, int idTurma)
         {
+            ViewData["Turma"] = _turmaService.Get(idTurma).Turma1;
+            ViewData["Componente"] = _componenteService.Get(id).Nome;
             Avaliacao avaliacao = _avaliacaoService.Get(id);
             AvaliacaoViewModel avaliacaoModel = _mapper.Map<AvaliacaoViewModel>(avaliacao);
             avaliacaoModel.IdTurma = idTurma;
@@ -211,7 +259,22 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult Delete(int id, int idTurma, AvaliacaoViewModel avaliacaoModel)
         {
             avaliacaoModel.IdTurma = idTurma;
-            _avaliacaoService.Delete(id);
+            string mensagem;
+            switch (_avaliacaoService.Delete(id))
+            {
+
+                case HttpStatusCode.OK:
+
+                    mensagem = "<b>Sucesso:</b> Avaliação <b>Apagada</b>.";
+                    Notificar(mensagem, Notifica.Sucesso);
+                    return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
+
+                case HttpStatusCode.InternalServerError:
+
+                    mensagem = "<b>Erro:</b> Não foi possivel <b>Apagar</b> Avaliação";
+                    Notificar(mensagem, Notifica.Erro);
+                    return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });
+            }
 
 
             return RedirectToAction(nameof(Index), new { idTurma = avaliacaoModel.IdTurma, idComponente = avaliacaoModel.IdComponente });

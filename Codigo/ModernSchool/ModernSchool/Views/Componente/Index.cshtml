@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<partial name="_Notificar">
 <label class="control-label fs-5">Componentes</label>
 <table class="table table-sm table-striped table-bordered">
     <thead>
@@ -30,8 +30,8 @@
                         <div>
 
                             <button onclick="showConfirmationModal('@item.id', 'Componente', 'componenteModal', '@item.nome')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button">
-                                    <i class="fa-solid text-danger fa-trash-can"></i>
-                                </button>
+                                <i class="fa-solid text-danger fa-trash-can"></i>
+                            </button>
                         </div>
                     </div>
                 </td>
@@ -57,7 +57,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
             </div>
             <form method="post" class="modal-footer">
                 <button type="button" class="btn btn-danger col-3 me-4" data-bs-dismiss="modal">Não</button>

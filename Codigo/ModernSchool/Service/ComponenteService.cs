@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Service
 {
@@ -23,32 +24,64 @@ namespace Service
         /// </summary>
         /// <param name="componente">Dados do periodo</param>
         /// <returns>Id do componente</returns>
-        int IComponenteService.Create(Componente componente)
+        HttpStatusCode IComponenteService.Create(Componente componente)
         {
-            _context.Add(componente);
-            _context.SaveChanges();
-            return componente.Id;
+            var existingComponente = _context.Componentes.FirstOrDefault(c => c.Nome.ToLower() == componente.Nome.ToLower());
+            if (existingComponente != null)
+            {
+                return HttpStatusCode.BadRequest;
+            }
+            try
+            {
+                _context.Add(componente);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         /// <summary>
         /// Deletar um componente no banco de dados
         /// </summary>
         /// <param name="id"></param>
-        void IComponenteService.Delete(int id)
+        HttpStatusCode IComponenteService.Delete(int id)
         {
-            var _componente = _context.Componentes.Find(id);
-            _context.Remove(_componente);
-            _context.SaveChanges();
+            try
+            {
+                var _componente = _context.Componentes.Find(id);
+                _context.Remove(_componente);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         /// <summary>
         /// Editar um componente no banco de dados
         /// </summary>
         /// <param name="componente">Dados do periodo</param>
-        void IComponenteService.Edit(Componente componente)
+        HttpStatusCode IComponenteService.Edit(Componente componente)
         {
-            _context.Update(componente);
-            _context.SaveChanges();
+            var existingComponente = _context.Componentes.FirstOrDefault(c => c.Nome.ToLower() == componente.Nome.ToLower());
+            if (existingComponente != null)
+            {
+                return HttpStatusCode.BadRequest;
+            }
+            try
+            {
+                _context.Update(componente);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         /// <summary>

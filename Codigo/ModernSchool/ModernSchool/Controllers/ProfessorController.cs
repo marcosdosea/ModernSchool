@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
 using Org.BouncyCastle.Asn1.Mozilla;
 using Service;
+using static ModernSchoolWEB.Controllers.Notificacao;
+using System.Net;
 
 namespace ModernSchoolWEB.Controllers
 {
     [Authorize(Roles = "PROFESSOR")]
-    public class ProfessorController : Controller
+    public class ProfessorController : Notificacao
     {
 
         private readonly IGradeHorarioService _gradeHorario;
@@ -115,8 +117,22 @@ namespace ModernSchoolWEB.Controllers
                         TipoAula = diarioDeClasse.TipoAula,
                         Data = Convert.ToDateTime(diarioDeClasse.Data)
                     };
+                    string mensagem;
+                    switch (_diarioDeClasseService.CreateDiarioClasse(diario, list))
+                    {
 
-                    _diarioDeClasseService.CreateDiarioClasse(diario, list);
+                        case HttpStatusCode.OK:
+
+                            mensagem = "<b>Sucesso:</b> Diário de Classe <b>Cadastrado</b>.";
+                            Notificar(mensagem, Notifica.Sucesso);
+                            return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+
+                        case HttpStatusCode.InternalServerError:
+
+                            mensagem = "<b>Erro:</b> Não foi possivel <b>Cadastrar</b> Diário de Classe";
+                            Notificar(mensagem, Notifica.Erro);
+                            return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+                    }
                 }
             }
 
@@ -157,6 +173,7 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public ActionResult SalvarFrequencia(FrequenciaListaAlunoDTOViewModel frequenciaAluno)
         {
+            string mensagem;
 
             if (ModelState.IsValid)
             {
@@ -172,11 +189,37 @@ namespace ModernSchoolWEB.Controllers
                     };
                     if (!createNew)
                     {
-                        _frequenciaAlunoService.Create(freuqencia);
+                        switch (_frequenciaAlunoService.Create(freuqencia))
+                        {
+
+                            case HttpStatusCode.OK:
+
+                                mensagem = "<b>Sucesso:</b> Frequência <b>Registrada</b>.";
+                                Notificar(mensagem, Notifica.Sucesso);
+                                continue;
+                            case HttpStatusCode.InternalServerError:
+
+                                mensagem = "<b>Erro:</b> Não foi possivel Registrar a Frequência";
+                                Notificar(mensagem, Notifica.Erro);
+                                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
+                        }
                     }
                     else
                     {
-                        _frequenciaAlunoService.Edit(freuqencia);
+                        switch (_frequenciaAlunoService.Edit(freuqencia))
+                        {
+
+                            case HttpStatusCode.OK:
+
+                                mensagem = "<b>Sucesso:</b> Frequência <b>Registrada</b>.";
+                                Notificar(mensagem, Notifica.Sucesso);
+                                continue;
+                            case HttpStatusCode.InternalServerError:
+
+                                mensagem = "<b>Erro:</b> Não foi possivel Registrar a Frequência";
+                                Notificar(mensagem, Notifica.Erro);
+                                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
+                        }
                     }
                 }
             }
@@ -204,12 +247,27 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public ActionResult EditDiarioClasse(DiarioDeClasseViewModel diarioDeClasse)
         {
+            string mensagem;
             ModelState.Remove("Habilidade");
             if (ModelState.IsValid)
             {
                 Diariodeclasse diario = _mappers.Map<Diariodeclasse>(diarioDeClasse);
 
-                _diarioDeClasseService.Edit(diario);
+                switch (_diarioDeClasseService.Edit(diario))
+                {
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Diário de Classe <b>Editado</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Não foi possivel Editar o Diario de Classe";
+                        Notificar(mensagem, Notifica.Erro);
+                        return View(diarioDeClasse);
+                }
+
             }
             try
             {
@@ -217,7 +275,7 @@ namespace ModernSchoolWEB.Controllers
             }
             catch
             {
-                return View();
+                return View(diarioDeClasse);
             }
         }
 
@@ -227,7 +285,22 @@ namespace ModernSchoolWEB.Controllers
         {
 
             diarioDeClasse = _mappers.Map<DiarioDeClasseViewModel>(_diarioDeClasseService.Get(IdDiario));
-            _diarioDeClasseService.DeleteDiarioClasse(IdDiario, IdObjeto);
+            string mensagem;
+            switch (_diarioDeClasseService.DeleteDiarioClasse(IdDiario, IdObjeto))
+            {
+
+                case HttpStatusCode.OK:
+
+                    mensagem = "<b>Sucesso:</b> Diário de Classe <b>Apagado</b>.";
+                    Notificar(mensagem, Notifica.Sucesso);
+                    return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+                case HttpStatusCode.InternalServerError:
+
+                    mensagem = "<b>Erro:</b> Não foi possivel Apagar o Diario de Classe";
+                    Notificar(mensagem, Notifica.Erro);
+                    return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+            }
+
 
             return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
         }
@@ -276,6 +349,7 @@ namespace ModernSchoolWEB.Controllers
 
                 };
                 _comunicacaoService.SalvarComunicacao(comunicacao, alunos);
+                Notificar("<b>Sucesso:</b> Comunicado <b>Enviado</b>.", Notifica.Sucesso);
             }
 
             return RedirectToAction(nameof(ComunicacaoProfessorTurma), new { idTurma = model.IdTurma, idComponente = model.IdComponente });

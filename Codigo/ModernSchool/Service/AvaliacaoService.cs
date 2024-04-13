@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,27 +29,41 @@ namespace Service
             //throw new NotImplementedException();
         }
 
-        public void Delete(int idAvaliacao)
+        public HttpStatusCode Delete(int idAvaliacao)
         {
-            var _alunoAvaliacao = _context.Alunoavaliacaos.Where(a => a.IdAvaliacao == idAvaliacao);
-            foreach (var alunoAvaliacao in _alunoAvaliacao)
+            try
             {
-                _context.Alunoavaliacaos.Remove(alunoAvaliacao);
+                var _alunoAvaliacao = _context.Alunoavaliacaos.Where(a => a.IdAvaliacao == idAvaliacao);
+                foreach (var alunoAvaliacao in _alunoAvaliacao)
+                {
+                    _context.Alunoavaliacaos.Remove(alunoAvaliacao);
+                }
+                _context.SaveChanges();
+                var _avaliacao = _context.Avaliacaos.Find(idAvaliacao);
+                _context.Remove(_avaliacao);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
             }
-            _context.SaveChanges();
-            var _avaliacao = _context.Avaliacaos.Find(idAvaliacao);
-            _context.Remove(_avaliacao);
-            _context.SaveChanges();
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
 
-            //throw new NotImplementedException();
         }
 
-        public void Edit(Avaliacao avaliacao)
+        public HttpStatusCode Edit(Avaliacao avaliacao)
         {
 
-            _context.Update(avaliacao);
-            _context.SaveChanges();
-            //throw new NotImplementedException();
+            try
+            {
+                _context.Update(avaliacao);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         public Avaliacao Get(int idAvaliacao)

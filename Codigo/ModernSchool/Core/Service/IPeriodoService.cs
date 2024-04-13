@@ -1,10 +1,12 @@
-﻿namespace Core.Service
+﻿using System.Net;
+
+namespace Core.Service
 {
     public interface IPeriodoService
     {
-        int Create(Periodo periodo);
-        void Edit(Periodo periodo);
-        void Delete(int idPeriodo);
+        HttpStatusCode Create(Periodo periodo);
+        HttpStatusCode Edit(Periodo periodo);
+        HttpStatusCode Delete(int idPeriodo);
         Periodo Get(int idPeriodo);
         IEnumerable<Periodo> GetAll();
     }

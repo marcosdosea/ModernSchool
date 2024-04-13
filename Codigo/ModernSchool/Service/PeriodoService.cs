@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,37 +23,67 @@ namespace Service
         /// </summary>
         /// <param name="periodo">Dados do periodo</param>
         /// <returns>Id do periodo</returns>
-        public int Create(Periodo periodo)
+        public HttpStatusCode Create(Periodo periodo)
         {
-            _context.Add(periodo);
-            _context.SaveChanges();
-            return periodo.Id;
+            try
+            {
+                foreach (var item in _context.Periodos)
+                {
+                    if (periodo.Nome == item.Nome)
+                    {
+                        return HttpStatusCode.BadRequest;
+                    }
+                }
+                _context.Add(periodo);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
         /// <summary>
         /// Deletar um periodo no banco de dados
         /// </summary>
         /// <param name="idPeriodo">Id do periodo</param>
-        public void Delete(int idPeriodo)
+        public HttpStatusCode Delete(int idPeriodo)
         {
             try
             {
                 var _periodo = _context.Periodos.Find(idPeriodo);
                 _context.Remove(_periodo);
                 _context.SaveChanges();
+                return HttpStatusCode.OK;
             }
             catch
             {
-
+                return HttpStatusCode.InternalServerError;
             }
         }
         /// <summary>
         /// Editar um periodo no banco de dados
         /// </summary>
         /// <param name="periodo">Dados do periodo</param>
-        public void Edit(Periodo periodo)
+        public HttpStatusCode Edit(Periodo periodo)
         {
-            _context.Update(periodo);
-            _context.SaveChanges();
+            var periodos = _context.Periodos;
+            try
+            {
+                var existingPeriod = _context.Periodos.FirstOrDefault(p => p.Nome == periodo.Nome);
+                if (existingPeriod != null)
+                {
+                    return HttpStatusCode.BadRequest;
+                }
+                _context.Update(periodo);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
         }
         /// <summary>
         /// Consultar um periodo no banco
