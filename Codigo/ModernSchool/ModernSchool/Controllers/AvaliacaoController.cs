@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ModernSchoolWEB.Models;
 using Service;
+using System.Net;
 using System.Text;
+using static ModernSchoolWEB.Controllers.Notificacao;
 
 namespace ModernSchoolWEB.Controllers
 {
-    public class AvaliacaoController : Controller
+    public class AvaliacaoController : Notificacao
     {
 
         private readonly IAvaliacaoService _avaliacaoService;
@@ -74,14 +76,33 @@ namespace ModernSchoolWEB.Controllers
         public ActionResult AdicionarNotasAvaliacao(AlunoAvaliacaoNotasDTOViewModel viewModel)
         {
 
-
+            string mensagem;
             Alunoavaliacao alunoAvaliacao = new();
 
             foreach (var item in viewModel.ListaAluno)
             {
                 alunoAvaliacao = _alunoAvaliacaoService.Get(item.IdAluno, viewModel.Idavaliacao);
                 alunoAvaliacao.Nota = item.Notas;
-                _alunoAvaliacaoService.Edit(alunoAvaliacao);
+                
+                switch (_alunoAvaliacaoService.Edit(alunoAvaliacao))
+                {
+                    case HttpStatusCode.BadRequest:
+
+                        mensagem = "<b>Error:</b> Existe nota maior que 10.";
+                        Notificar(mensagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(AdicionarNotasAvaliacao), viewModel);
+
+                    case HttpStatusCode.OK:
+
+                        mensagem = "<b>Sucesso:</b> Notas <b>Registrada</b>.";
+                        Notificar(mensagem, Notifica.Sucesso);
+                        continue;
+                    case HttpStatusCode.InternalServerError:
+
+                        mensagem = "<b>Erro:</b> Não foi possivel Registrar as Notas";
+                        Notificar(mensagem, Notifica.Erro);
+                        return RedirectToAction(nameof(Index), new { idTurma = viewModel.IdTurma, idComponente = viewModel.IdComponente });
+                }
 
             }
 
