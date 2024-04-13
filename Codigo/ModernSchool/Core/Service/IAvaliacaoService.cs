@@ -1,13 +1,14 @@
 ﻿using Core.Datatables;
 using Core.DTO;
+using System.Net;
 
 namespace Core.Service
 {
     public interface IAvaliacaoService
     {
         int Create(Avaliacao avaliacao);
-        void Edit(Avaliacao avaliacao);
-        void Delete(int idAvaliacao);
+        HttpStatusCode Edit(Avaliacao avaliacao);
+        HttpStatusCode Delete(int idAvaliacao);
         Avaliacao Get(int idAvaliacao);
         List<AvaliacaoDTO> GetAllDTO(int idTurma, int IdComponente);
         IEnumerable<Avaliacao> GetAll();

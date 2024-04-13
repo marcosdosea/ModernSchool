@@ -9,6 +9,7 @@ namespace ModernSchoolWEB.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "Data Entrega")]
+        [Required(ErrorMessage = "Campo Data é obrigatório")]
         [DataType(DataType.Date, ErrorMessage = "Data válida requerida")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataEntrega{ get; set; }
@@ -31,7 +32,7 @@ namespace ModernSchoolWEB.Models
         [Display(Name = "Período")]
         [Required(ErrorMessage = "Campo período é obrigatório")]
         public int IdPeriodo { get; set;}
-        public IFormFile Arquivo { get; set; }
+        public IFormFile? Arquivo { get; set; }
         [Display(Name = "Descrição")]
         [Required(ErrorMessage = "Campo Descriçao é obrigatório")]
         public string Descricao { get; set; } = string.Empty;
