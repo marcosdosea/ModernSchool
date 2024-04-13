@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using ModernSchoolWEB.Models;
 using Org.BouncyCastle.Asn1.Mozilla;
 using Service;
+using static ModernSchoolWEB.Controllers.Notificacao;
+using System.Net;
 
 namespace ModernSchoolWEB.Controllers
 {
     [Authorize(Roles = "PROFESSOR")]
-    public class ProfessorController : Controller
+    public class ProfessorController : Notificacao
     {
 
         private readonly IGradeHorarioService _gradeHorario;
@@ -157,6 +159,7 @@ namespace ModernSchoolWEB.Controllers
         [HttpPost]
         public ActionResult SalvarFrequencia(FrequenciaListaAlunoDTOViewModel frequenciaAluno)
         {
+            string mensagem;
 
             if (ModelState.IsValid)
             {
@@ -172,11 +175,37 @@ namespace ModernSchoolWEB.Controllers
                     };
                     if (!createNew)
                     {
-                        _frequenciaAlunoService.Create(freuqencia);
+                        switch (_frequenciaAlunoService.Create(freuqencia))
+                        {
+
+                            case HttpStatusCode.OK:
+
+                                mensagem = "<b>Sucesso:</b> Frequência <b>Registrada</b>.";
+                                Notificar(mensagem, Notifica.Sucesso);
+                                continue;
+                            case HttpStatusCode.InternalServerError:
+
+                                mensagem = "<b>Erro:</b> Não foi possivel Registrar a Frequência";
+                                Notificar(mensagem, Notifica.Erro);
+                                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
+                        }
                     }
                     else
                     {
-                        _frequenciaAlunoService.Edit(freuqencia);
+                        switch (_frequenciaAlunoService.Edit(freuqencia))
+                        {
+
+                            case HttpStatusCode.OK:
+
+                                mensagem = "<b>Sucesso:</b> Frequência <b>Registrada</b>.";
+                                Notificar(mensagem, Notifica.Sucesso);
+                                continue;
+                            case HttpStatusCode.InternalServerError:
+
+                                mensagem = "<b>Erro:</b> Não foi possivel Registrar a Frequência";
+                                Notificar(mensagem, Notifica.Erro);
+                                return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = frequenciaAluno.IdTurma, idComponente = frequenciaAluno.IdComponente });
+                        }
                     }
                 }
             }

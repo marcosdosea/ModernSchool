@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,11 +19,18 @@ namespace Service
             _context = context;
         }
 
-        public int Create(Frequenciaaluno frequenciaaluno)
+        public HttpStatusCode Create(Frequenciaaluno frequenciaaluno)
         {
-            _context.Add(frequenciaaluno);
-            _context.SaveChanges();
-            return frequenciaaluno.IdAluno;
+            try
+            {
+                _context.Add(frequenciaaluno);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         public void Delete(Frequenciaaluno frequenciaaluno)
@@ -30,10 +38,18 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public void Edit(Frequenciaaluno frequenciaaluno)
+        public HttpStatusCode Edit(Frequenciaaluno frequenciaaluno)
         {
-            _context.Update(frequenciaaluno);
-            _context.SaveChanges();
+            try
+            {
+                _context.Update(frequenciaaluno);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         public bool ExistFrequencia(int idDiario)
