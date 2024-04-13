@@ -62,7 +62,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.BadRequest:
 
-                        mensagem = "<b>Erro:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
+                        mensagem = "<b>Aviso:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
                         Notificar(mensagem, Notifica.Alerta);
                         return RedirectToAction(nameof(Create), periodoModel);
 
@@ -107,7 +107,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.BadRequest:
 
-                        mensagem = "<b>Erro:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
+                        mensagem = "<b>Aviso:</b> Já existe Período <b>Cadastrada</b> com esse nome.";
                         Notificar(mensagem, Notifica.Alerta);
                         return RedirectToAction(nameof(Edit), periodoViewModel.Id);
 

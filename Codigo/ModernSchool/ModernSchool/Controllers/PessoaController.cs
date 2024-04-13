@@ -284,7 +284,7 @@ namespace ModernSchoolWEB.Controllers
             {
                 if (_pessoaService.AlunoMatriculado(aluno.Id))
                 {
-                    string mensagem = "<b>Alerta</b>: Aluno(a) já está <b>Matriculado</b> em uma Turma.";
+                    string mensagem = "<b>Aviso</b>: Aluno(a) já está <b>Matriculado</b> em uma Turma.";
                     Notificar(mensagem, Notifica.Alerta);
                 }
                 else

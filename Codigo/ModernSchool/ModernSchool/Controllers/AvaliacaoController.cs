@@ -88,7 +88,7 @@ namespace ModernSchoolWEB.Controllers
                 {
                     case HttpStatusCode.BadRequest:
 
-                        mensagem = "<b>Error:</b> Existe nota maior que 10.";
+                        mensagem = "<b>Aviso:</b> Existe nota maior que 10.";
                         Notificar(mensagem, Notifica.Alerta);
                         return RedirectToAction(nameof(AdicionarNotasAvaliacao), viewModel);
 
