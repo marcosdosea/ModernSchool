@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace Core.Service
 {
     public interface IDiarioDeClasseService
     {
-        int CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade);
-        void Edit(Diariodeclasse diariodeclasse);
+        HttpStatusCode CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade);
+        HttpStatusCode Edit(Diariodeclasse diariodeclasse);
         void Delete(int diariodeclasse);
         Diariodeclasse Get(int diariodeclasse);
         /// <summary>
@@ -20,7 +21,7 @@ namespace Core.Service
         IEnumerable<ObjetodeconhecimentodiariodeclasseDTO> GetAllDiarioTurmaComponete(int IdProfessor, int IdComponente, int idTurma);
         IEnumerable<DiarioClasseHabilidade> GetAllHabilidade(int idComponente, string anoFaixa);
         public DiarioObjeto GetObjetodeconhecimento(int idObjeto);
-        public int DeleteDiarioClasse(int IdDiario, int IdObjeto);
+        public HttpStatusCode DeleteDiarioClasse(int IdDiario, int IdObjeto);
 
         public List<DiarioAluno> GetDiarioAlunos(int idTurma, int idComponente);
         public int GetFaltaAluno(int idAluno, int idDiario);

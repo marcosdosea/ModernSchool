@@ -2,6 +2,7 @@
 using Core.DTO;
 using Core.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Service
@@ -21,25 +22,30 @@ namespace Service
         /// <param name="diariodeclasse"></param>
         /// <returns> Id de diário de classe </returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade)
+        public HttpStatusCode CreateDiarioClasse(Diariodeclasse diariodeclasse, DiarioClasseHabilidade listHabilidade)
         {
 
-
-            _context.Add(diariodeclasse);
-            _context.SaveChanges();
-
-            Objetodeconhecimentodiariodeclasse newObject = new Objetodeconhecimentodiariodeclasse
+            try
             {
-                IdDiarioDeClasse = diariodeclasse.Id,
-                IdObjetoDeConhecimento = listHabilidade.IdObjeto
-            };
+                _context.Add(diariodeclasse);
+                _context.SaveChanges();
+
+                Objetodeconhecimentodiariodeclasse newObject = new Objetodeconhecimentodiariodeclasse
+                {
+                    IdDiarioDeClasse = diariodeclasse.Id,
+                    IdObjetoDeConhecimento = listHabilidade.IdObjeto
+                };
 
 
-            _context.Add(newObject );
-            _context.SaveChanges(); 
+                _context.Add(newObject);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
 
-
-            return 1;
         }
 
         /// <summary>
@@ -62,10 +68,18 @@ namespace Service
         /// </summary>
         /// <param name="diariodeclasse"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Edit(Diariodeclasse diariodeclasse)
+        public HttpStatusCode Edit(Diariodeclasse diariodeclasse)
         {
-            _context.Update(diariodeclasse);
-            _context.SaveChanges();
+            try
+            {
+                _context.Update(diariodeclasse);
+                _context.SaveChanges();
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         /// <summary>
@@ -142,18 +156,25 @@ namespace Service
                 });
             return query.First();
         }
-        public int DeleteDiarioClasse(int IdDiario, int IdObjeto)
+        public HttpStatusCode DeleteDiarioClasse(int IdDiario, int IdObjeto)
         {
             var objetoDiario = _context.Objetodeconhecimentodiariodeclasses.Find(IdObjeto, IdDiario);
-            _context.Remove(objetoDiario);
-            _context.SaveChanges();
-            Delete(IdDiario);
-            return 1;
+            try
+            {
+                _context.Remove(objetoDiario);
+                _context.SaveChanges();
+                Delete(IdDiario);
+                return HttpStatusCode.OK;
+            }
+            catch
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
         public List<DiarioAluno> GetDiarioAlunos(int idTurma, int idComponente)
         {
-            var query = _context.Diariodeclasses.Where( g => g.IdTurma == idTurma && g.IdComponente == idComponente)
+            var query = _context.Diariodeclasses.Where(g => g.IdTurma == idTurma && g.IdComponente == idComponente)
                 .Select(g => new DiarioAluno
                 {
                     IdDiario = g.Id,
