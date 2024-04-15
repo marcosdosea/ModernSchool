@@ -205,7 +205,7 @@ namespace Service
                 alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
             }
 
-            alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
+            //alunoComunicaoes = alunoComunicaoes.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<AlunoComunicacaoDTO>
             {

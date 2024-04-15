@@ -409,7 +409,7 @@ namespace Service
                 alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
             }
 
-            alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
+            //alunosTurma = alunosTurma.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<IndexAlunoTurmaDTO>
             {

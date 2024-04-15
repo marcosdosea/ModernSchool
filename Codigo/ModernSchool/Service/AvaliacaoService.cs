@@ -197,7 +197,7 @@ namespace Service
                 AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
             }
 
-            AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
+            //AlunoAtividades = AlunoAtividades.Skip(request.Start).Take(request.Length).ToList();
 
             return new DatatableResponse<AlunoAtividadeDTO>
             {
