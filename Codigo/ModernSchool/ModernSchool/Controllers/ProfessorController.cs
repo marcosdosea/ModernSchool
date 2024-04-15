@@ -125,7 +125,7 @@ namespace ModernSchoolWEB.Controllers
 
                             mensagem = "<b>Sucesso:</b> Diário de Classe <b>Cadastrado</b>.";
                             Notificar(mensagem, Notifica.Sucesso);
-                            return RedirectToAction(nameof(DiarioDeClasse), new { idTurma = diarioDeClasse.IdTurma, idComponente = diarioDeClasse.IdComponente });
+                            continue;
 
                         case HttpStatusCode.InternalServerError:
 

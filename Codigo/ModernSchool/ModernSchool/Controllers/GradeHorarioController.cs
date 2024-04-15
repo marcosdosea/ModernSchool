@@ -108,13 +108,13 @@ namespace ModernSchoolWEB.Controllers
                         menssagem = "<b>Erro:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária ";
                         Notificar(menssagem, Notifica.Erro);
 
-                        return View(gradehorarioModel);
+                        return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
 
                     case HttpStatusCode.BadRequest:
 
                         menssagem = "<b>Aviso:</b> Não foi possivel <b>Cadastrada</b> a Grade Horária, verifique se o professor ja esta cadastrado em outra turma ou ja existe uma aula cadastrada nesta turma";
-                        Notificar(menssagem, Notifica.Informativo);
-                        return View(gradehorarioModel);
+                        Notificar(menssagem, Notifica.Alerta);
+                        return RedirectToAction(nameof(Index), new { idTurma = gradehorarioModel.IdTurma });
 
 
                 }

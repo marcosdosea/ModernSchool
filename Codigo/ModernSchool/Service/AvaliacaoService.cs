@@ -117,14 +117,15 @@ namespace Service
 
         public List<AlunoAvaliacaoNotaDTO> GetAllAlunosAvaliacao(int idTurma, int idAvaliacao)
         {
-            var query = _context.Alunoavaliacaos
-                .Where(g => g.IdAvaliacaoNavigation.IdTurmaNavigation.Id == idTurma && g.IdAvaliacao == idAvaliacao)
-                .Select(g => new AlunoAvaliacaoNotaDTO
-                {
-                    IdAluno = g.IdAluno,
-                    NomeAluno = g.IdAlunoNavigation.Nome,
-                    Notas = g.Nota
-                });
+            var query = (from aV in  _context.Alunoavaliacaos join aT in _context.Alunoturmas
+                        on aV.IdAluno equals aT.IdAluno
+                        where aV.IdAvaliacao == idAvaliacao && aV.IdAvaliacaoNavigation.IdTurma == idTurma && aT.Status == "M"
+                        select new AlunoAvaliacaoNotaDTO
+                        {
+                            IdAluno = aV.IdAluno,
+                            NomeAluno = aV.IdAlunoNavigation.Nome,
+                            Notas =aV.Nota
+                        }).ToList();
 
             return query.ToList();
         }

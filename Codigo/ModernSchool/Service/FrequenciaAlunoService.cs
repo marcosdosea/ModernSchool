@@ -94,6 +94,7 @@ namespace Service
             }
 
             var query = _context.Alunoturmas
+                .Where(g => g.Status == "M")
                 .Select(q =>
                     new FrequenciaAlunoDTO
                     {

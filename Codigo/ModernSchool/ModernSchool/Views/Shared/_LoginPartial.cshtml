@@ -9,7 +9,7 @@
 {
     <li class="nav-item">
             <span class="br-item text-uppercase text-bold text-white text-opacity-50"><i class="fa-solid fa-circle-user"></i>
-                @User.FindFirst("UserName")?.Value : @(Convert.ToString(User.FindFirst("UserRole")?.Value.ToLower()) == "responsavel" ? "responsável".ToUpper() : User.FindFirst("UserRole")?.Value.ToUpper())
+                @User.FindFirst("UserName")?.Value : @(Convert.ToString(User.FindFirst("UserRole")?.Value.ToLower()) == "responsavel" ? "responsável".ToUpper() : User.FindFirst("UserRole")?.Value.ToUpper() +" "+ "(a)")
                 </span>
     </li>
     <li class="nav-item">

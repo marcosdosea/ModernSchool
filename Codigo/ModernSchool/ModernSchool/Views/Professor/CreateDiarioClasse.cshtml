@@ -8,7 +8,8 @@
 <div class="row">
     <div class="col">
         <form asp-action="CreateDiarioClasse">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
+            <div class="overflow-auto" style="max-height: 300px;">
             <table class="table table-sm table-striped table-bordered">
                 <thead>
                     <tr>
@@ -34,7 +35,8 @@
                     }
                 </tbody>
             </table>
-
+            </div>
+            <br />
             <p><strong>Recursos Utilizados:</strong></p>
             <div class="d-flex justify-content-start">
                 <div class="form-group">
