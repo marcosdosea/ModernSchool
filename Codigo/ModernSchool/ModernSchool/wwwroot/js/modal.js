@@ -53,12 +53,12 @@ function showModalGradeHorario(idGrade, idTurma, nome, componente) {
     modal.show();
 }
 
-function showModalCancelarAluno(idAluno, idTurma) {
+function showModalCancelarAluno(idAluno, idTurma, nomeTurma) {
     var modal = document.getElementById('alunoTurma');
     var modalForm = modal.querySelector('form');
     modalForm.action = '/Pessoa/Delete/' + idAluno + '?idTurma=' + idTurma; // Define a ação do formulário com a rota correta
     var modalBody = modal.querySelector('.modal-body');
-    modalBody.innerHTML = 'Deseja <b>Cancelar</b> o Aluno(a) <b> </b>?'; // Conteúdo do modal
+    modalBody.innerHTML = 'Deseja <b>Desvincular</b> o Aluno(a) da Turma: <b>' + nomeTurma + '</b>?'; // Conteúdo do modal
     // Exibe o modal
     var modal = new bootstrap.Modal(modal);
     modal.show();

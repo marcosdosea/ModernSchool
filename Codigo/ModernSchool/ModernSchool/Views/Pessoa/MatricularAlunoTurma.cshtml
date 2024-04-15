@@ -60,7 +60,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirmar Cancelamento</h5>
+                    <h5 class="modal-title">Desvincular Aluno(a) da Turma</h5>
                     <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -108,9 +108,10 @@
                         { "data": null, "defaultContent": null, "autoWidth": true, "visible": false },
                         {
                             "render": function (data, type, full, meta) {
-                                return '<a role="button" href="/Pessoa/Edit?id=' + full.idAluno + '&idTurma=' + @Model.IdTurma + '" class="fs-5" "data-idTurma="' + @Model.IdTurma + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
-                                    '<button data-toggle="modal" data-target="#modalDetail"  onclick="openModal(' + full.idAluno + ', ' + @Model.IdTurma +')" class="open-modal fs-5 pl-5 border-0 text-primary-default bg-transparent" data-id="' + full.idAluno + '" data-idTurma="' + @Model.IdTurma + '"><i class="fa-solid fa-eye"></i></button>' +
-                                    '<button onclick="showModalCancelarAluno(' + full.idAluno + ', \'' + @Model.IdTurma + '\')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button"><i class="fa-solid text-danger fa-trash-can"></i></button>'
+                                return '<a role="button" href="/Pessoa/Edit?id=' + full.idAluno + '&idTurma=' + '@Model.IdTurma' + '" class="fs-5" data-idTurma="' + '@Model.IdTurma' + '"><i class="fa-solid fa-pen-to-square"></i></a>' +
+                                    '<button data-toggle="modal" data-target="#modalDetail"  onclick="openModal(' + full.idAluno + ', ' + '@Model.IdTurma' + ')" class="open-modal fs-5 pl-5 border-0 text-primary-default bg-transparent" data-id="' + full.idAluno + '" data-idTurma="' + '@Model.IdTurma' + '"><i class="fa-solid fa-eye"></i></button>' +
+                                    '<button onclick="showModalCancelarAluno(' + full.idAluno + ', \'' + '@Model.IdTurma' + '\', \'' + '@Model.Turma' + '\')" type="submit" class="border-0 fs-5 bg-transparent pl-5" role="button"><i class="fa-solid text-danger fa-trash-can"></i></button>'
+
                             }
                         },
                     ],
